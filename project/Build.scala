@@ -16,8 +16,7 @@ object OrgaRecBuild extends Build {
   lazy val liftProjectSettings = webSettings ++ Seq(
     libraryDependencies ++= Seq(
       "org.mortbay.jetty" % "jetty" % "6.1.22" % "container",
-      "net.liftweb" %% "lift-webkit" % liftVersion % "compile",
-      "ch.qos.logback" % "logback-classic" % "0.9.26"
+      "net.liftweb" %% "lift-webkit" % liftVersion % "compile"
     )) ++ runModeSettings
 
   lazy val storage_settings = Seq(
@@ -48,6 +47,6 @@ object OrgaRecBuild extends Build {
   lazy val view = Project(
   	id = "view",
 	base = file("view")
-  ) dependsOn(model)
+  ) settings(liftProjectSettings : _*) dependsOn(model)
 } 
 
