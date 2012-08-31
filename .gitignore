@@ -1,5 +1,9 @@
 target/
 */target/
+# Eclipse stuff
+.classpath
+.project
+
 # OS generated files #
 ######################
 .DS_Store
