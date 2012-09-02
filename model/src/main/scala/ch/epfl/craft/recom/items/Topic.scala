@@ -1,4 +1,5 @@
-package ch.epfl.craft.recom.model
+package ch.epfl.craft.recom.items
+import ch.epfl.craft.recom.util.Section
 
 
 /**
@@ -8,7 +9,8 @@ package ch.epfl.craft.recom.model
 class Topic(
     id: String,
     name: String,
-    section: Section
+    section: Section,
+    prerequisites: Set[Topic]
 ){
 
 }

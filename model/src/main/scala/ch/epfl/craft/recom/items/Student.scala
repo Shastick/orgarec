@@ -1,4 +1,6 @@
-package ch.epfl.craft.recom.model
+package ch.epfl.craft.recom.items
+import ch.epfl.craft.recom.util.Semester
+import ch.epfl.craft.recom.util.Section
 
 class Student(
     val arrival: Semester,
