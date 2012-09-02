@@ -31,7 +31,7 @@ object OrgaRecBuild extends Build {
 
   lazy val input = Project(
    	id = "input",
-	base = file("core")
+	base = file("input")
   ) dependsOn(model)
 
   lazy val model = Project(
