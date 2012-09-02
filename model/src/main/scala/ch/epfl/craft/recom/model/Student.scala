@@ -1,6 +1,7 @@
 package ch.epfl.craft.recom.model
 
 class Student(
+    val arrival: Semester,
     val section: Option[Section],
 	val currentSemester: Option[Semester],
 	

@@ -6,6 +6,7 @@ package ch.epfl.craft.recom.model
  * teacher or the year it is given
  */
 class Topic(
+    id: String,
     name: String,
     section: Section
 ){

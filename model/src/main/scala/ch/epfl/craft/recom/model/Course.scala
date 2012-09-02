@@ -6,10 +6,11 @@ package ch.epfl.craft.recom.model
  */
 
 class Course(
+    id: String,
     name: String,
     section: Section,
     semester: Semester
-) extends Topic(name, section){
+) extends Topic(id, name, section){
   
 }
 
