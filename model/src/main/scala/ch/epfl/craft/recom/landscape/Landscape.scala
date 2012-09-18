@@ -5,5 +5,8 @@ package ch.epfl.craft.recom.landscape
  * evaluations.
  */
 trait Landscape {
-
+	def coStudents
+	def socialGraph
+	def semanticDistance
+	def prerequisites
 }
