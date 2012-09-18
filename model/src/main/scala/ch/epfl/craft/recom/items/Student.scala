@@ -10,8 +10,13 @@ class Student(
 	val currentCourses: Set[CurrentCourse],
     val courseHistory: Set[TookCourse]
 ){
-
+    def courses = currentCourses ++ courseHistory
 }
 
-case class TookCourse(course: Course, semester: Semester, count: Int, grade: Int, evaluation: Int)
-case class CurrentCourse(course: Course, count: Int)
+trait StudentCourse
+
+case class TookCourse(course: Course, semester: Semester, count: Int, grade: Int, evaluation: Int) 
+	extends StudentCourse
+	
+case class CurrentCourse(course: Course, count: Int) 
+	extends StudentCourse
