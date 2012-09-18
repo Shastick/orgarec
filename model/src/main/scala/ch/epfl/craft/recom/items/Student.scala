@@ -3,20 +3,16 @@ import ch.epfl.craft.recom.util.Semester
 import ch.epfl.craft.recom.util.Section
 
 class Student(
+    val id: String,
     val arrival: Semester,
     val section: Option[Section],
 	val currentSemester: Option[Semester],
+	val semesterHistory: List[Semester],
 	
-	val currentCourses: Set[CurrentCourse],
-    val courseHistory: Set[TookCourse]
+	val courses: Set[TakenCourse]
 ){
-    def courses = currentCourses ++ courseHistory
+  
 }
 
-trait StudentCourse
+case class TakenCourse(course: Course, count: Int, grade: Option[Int], evaluation: Option[Int])
 
-case class TookCourse(course: Course, semester: Semester, count: Int, grade: Int, evaluation: Int) 
-	extends StudentCourse
-	
-case class CurrentCourse(course: Course, count: Int) 
-	extends StudentCourse

@@ -3,7 +3,7 @@ import ch.epfl.craft.recom.items.Student
 import ch.epfl.craft.recom.items.Topic
 
 /**
- * Regroup all the items on one place
+ * What the landscape will be based on.
  */
 class Population(
     students: Set[Student],

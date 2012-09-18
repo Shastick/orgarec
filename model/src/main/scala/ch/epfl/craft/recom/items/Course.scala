@@ -13,9 +13,10 @@ class Course(
     name: String,
     section: Section,
     prerequisites: Set[Topic],
+    description: Option[String],
     semester: Semester,
     head: Head
-) extends Topic(id, name, section, prerequisites){
+) extends Topic(id, name, section, prerequisites,description){
   
 }
 

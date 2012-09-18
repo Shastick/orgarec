@@ -10,7 +10,8 @@ class Topic(
     id: String,
     name: String,
     section: Section,
-    prerequisites: Set[Topic]
+    prerequisites: Set[Topic],
+    description: Option[String]
 ){
 
 }

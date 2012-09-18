@@ -10,10 +10,12 @@ object Administration {
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
  */
 
-abstract class Semester(year: Date)
+sealed trait Semester{
+  val year:Date
+}
 
-case class Spring(year: Date) extends Semester(year)
-case class Fall(year: Date) extends Semester(year)
+case class Spring(val year: Date) extends Semester
+case class Fall(val year: Date) extends Semester
 
 /**
  * Represent a section
