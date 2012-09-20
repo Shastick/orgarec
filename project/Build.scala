@@ -35,16 +35,16 @@ object OrgaRecBuild extends Build {
   lazy val root = Project(
   	id = "OrgaRec",
 	base = file(".")
-  ) aggregate(input,model,storage,view)
+  ) aggregate(import_proj,middle,storage,view)
 
-  lazy val input = Project(
-   	id = "input",
-	base = file("input")
-  ) dependsOn(model)
+  lazy val import_proj = Project(
+   	id = "import",
+	base = file("import")
+  ) dependsOn(middle)
 
-  lazy val model = Project(
-  	id = "model",
-	base = file("model")
+  lazy val middle = Project(
+  	id = "middle",
+	base = file("middle")
   ) dependsOn(storage)
 
   lazy val storage = Project(
@@ -55,6 +55,6 @@ object OrgaRecBuild extends Build {
   lazy val view = Project(
   	id = "view",
 	base = file("view")
-  ) settings(liftProjectSettings : _*) dependsOn(model)
+  ) settings(liftProjectSettings : _*) dependsOn(middle)
 } 
 
