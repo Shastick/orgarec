@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.util
+package ch.epfl.craft.recom.model
 import java.util.Date
 
 

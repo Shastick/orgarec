@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.items
+package ch.epfl.craft.recom.model
 
 trait TopicGroup {
   val topics: Set[Topic]

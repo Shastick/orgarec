@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.items
+package ch.epfl.craft.recom.model
 import ch.epfl.craft.recom.util.Semester
 import ch.epfl.craft.recom.util.Section
 

@@ -1,6 +1,6 @@
-package ch.epfl.craft.recom.landscape
-import ch.epfl.craft.recom.items.Student
-import ch.epfl.craft.recom.items.Topic
+package ch.epfl.craft.recom.processing
+import ch.epfl.craft.recom.model.Student
+import ch.epfl.craft.recom.model.Topic
 
 /**
  * What the landscape will be based on.
