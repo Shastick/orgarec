@@ -1,7 +1,7 @@
 package ch.epfl.craft.recom.model
 
 /**
- * A course is the instanciation of a topic. That is, it alos contains information about the year,
+ * A course is the instantiation of a topic. That is, it also contains information about the year,
  * the teacher and any 'concrete' contextual information.
  */
 

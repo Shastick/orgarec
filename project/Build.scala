@@ -29,6 +29,7 @@ object OrgaRecBuild extends Build {
 
   lazy val storage_settings = Seq(
   	libraryDependencies ++= Seq(
+	  "net.liftweb" %% "lift-mapper" % liftVersion,
 	  "postgresql" % "postgresql" % "9.1-901.jdbc4"
   ))
 

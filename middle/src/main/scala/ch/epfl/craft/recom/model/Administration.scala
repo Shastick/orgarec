@@ -28,5 +28,9 @@ case class Section(name: String)
  */
 case class Head(teachers: List[Teacher], assistants: List[Assistant])
 
-case class Teacher(name: String, section: Section)
-case class Assistant(name: String, section: Section)
+sealed trait Staff {
+  val name: String
+  val section: Section
+}
+case class Teacher(name: String, section: Section) extends Staff
+case class Assistant(name: String, section: Section) extends Staff
