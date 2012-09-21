@@ -27,7 +27,7 @@ object OrgaRecBuild extends Build {
   	"ch.qos.logback" % "logback-classic" % "0.9.26" % "compile->default" // Logging
      ))++ webSettings ++ runModeSettings
 
-  lazy val storage_settings = Seq(
+  lazy val core_settings = Seq(
   	libraryDependencies ++= Seq(
 	  "net.liftweb" %% "lift-mapper" % liftVersion,
 	  "postgresql" % "postgresql" % "9.1-901.jdbc4"
@@ -36,26 +36,21 @@ object OrgaRecBuild extends Build {
   lazy val root = Project(
   	id = "OrgaRec",
 	base = file(".")
-  ) aggregate(import_proj,middle,storage,view)
+  ) aggregate(import_proj,core,view)
 
   lazy val import_proj = Project(
    	id = "import",
 	base = file("import")
-  ) dependsOn(middle)
+  ) dependsOn(core)
 
-  lazy val middle = Project(
-  	id = "middle",
-	base = file("middle")
-  ) dependsOn(storage)
-
-  lazy val storage = Project(
-  	id = "storage",
-	base = file("storage")
-  ) settings(storage_settings : _*) 
+  lazy val core = Project(
+  	id = "core",
+	base = file("core")
+  ) settings(core_settings : _*)
 
   lazy val view = Project(
   	id = "view",
 	base = file("view")
-  ) settings(liftProjectSettings : _*) dependsOn(middle)
+  ) settings(liftProjectSettings : _*) dependsOn(core)
 } 
 
