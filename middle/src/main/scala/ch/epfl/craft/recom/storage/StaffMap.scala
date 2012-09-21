@@ -4,6 +4,7 @@ import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedString
 import net.liftweb.mapper.MappedLongForeignKey
+import net.liftweb.mapper.By
 
 /**
  * Regroups both teachers and assistants for simplicity's sake.
@@ -21,4 +22,13 @@ class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 	
 }
 
-object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap]
+object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
+  
+  def fill(s: Staff): StaffMap = {
+    StaffMap.findAll(By(StaffMap.name,s.))
+  }
+  
+  def fill(s: StaffMap): Staff = {
+    
+  }
+}
