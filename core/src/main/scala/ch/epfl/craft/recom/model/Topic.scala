@@ -7,11 +7,11 @@ import ch.epfl.craft.recom.model.administration.Section
  * teacher or the year it is given
  */
 class Topic(
-    id: String,
-    name: String,
-    section: Section,
-    prerequisites: Set[Topic],
-    description: Option[String]
+    val id: String,
+    val name: String,
+    val section: Section,
+    val prerequisites: Set[Topic],
+    val description: Option[String]
 ){
-
+	def equals(c: Course) = c.id == this.id
 }

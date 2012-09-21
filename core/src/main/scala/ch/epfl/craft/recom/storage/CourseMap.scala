@@ -9,6 +9,8 @@ import net.liftweb.mapper.HasManyThrough
 import ch.epfl.craft.recom.storage.assist.Prerequisite
 import ch.epfl.craft.recom.storage.assist.Teaches
 import ch.epfl.craft.recom.storage.assist.Assists
+import ch.epfl.craft.recom.model.Course
+import net.liftweb.mapper.By
 
 class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
@@ -32,6 +34,26 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	object teachers extends HasManyThrough(this, StaffMap, Teaches,
 	    Teaches.teacher, Teaches.course)
 	object assistants extends HasManyThrough(this, StaffMap, Assists, Assists.assistant, Assists.course)
+	
+	def read = CourseMap.fill(this)
 }
 
-object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap]
+object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
+  
+  def fill(c: CourseMap): Course = {
+    null
+  }
+  
+  def fill(c: Course): CourseMap = {
+	val cm = CourseMap.findAll(By(CourseMap.isa_id,c.id)).headOption.getOrElse(CourseMap.create.isa_id(c.id))
+	cm.name(c.name)
+	  .section(SectionMap.fill(c.section))
+	  .semester(SemesterMap.fill(c.semester))
+	
+	  //TODO HEAD
+	  // TODO prereqs
+	c.description.foreach(cm.description(_))
+	cm.save
+	cm
+  }
+}

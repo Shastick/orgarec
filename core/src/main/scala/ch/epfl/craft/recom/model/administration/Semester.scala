@@ -7,6 +7,11 @@ import java.util.Date
 
 sealed trait Semester{
   val year:Date
+  def equals(s: Semester) = //TODO check if equals should override something...
+    if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) ||
+        (this.isInstanceOf[Fall] && s.isInstanceOf[Fall]))
+    		this.year == s.year
+    else false
 }
 
 case class Spring(val year: Date) extends Semester

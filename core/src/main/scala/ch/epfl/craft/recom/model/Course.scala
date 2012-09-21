@@ -14,8 +14,8 @@ class Course(
     section: Section,
     prerequisites: Set[Topic],
     description: Option[String],
-    semester: Semester,
-    head: Head
+    val semester: Semester,
+    val head: Head
 ) extends Topic(id, name, section, prerequisites,description){
   
 }
