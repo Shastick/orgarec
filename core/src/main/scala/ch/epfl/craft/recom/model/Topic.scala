@@ -1,4 +1,5 @@
 package ch.epfl.craft.recom.model
+import ch.epfl.craft.recom.model.administration.Section
 
 
 /**

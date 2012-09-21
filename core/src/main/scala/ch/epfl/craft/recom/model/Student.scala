@@ -1,4 +1,6 @@
 package ch.epfl.craft.recom.model
+import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.Semester
 
 class Student(
     val id: String,
