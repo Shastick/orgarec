@@ -11,8 +11,8 @@ import net.liftweb.mapper.MappedLongForeignKey
 class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 	def getSingleton = StaffMap
 	
-	def name_len = 100
-	def title_len = 100
+	val name_len = 100
+	val title_len = 100
 	
 	object name extends MappedString(this, name_len)
 	object section extends MappedLongForeignKey(this, SectionMap)
