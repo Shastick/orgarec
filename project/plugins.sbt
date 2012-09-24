@@ -22,3 +22,5 @@ resolvers += Resolver.url(
 
 addSbtPlugin("com.untyped" %% "sbt-runmode" % "0.4") 
 
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.1.0")
+
