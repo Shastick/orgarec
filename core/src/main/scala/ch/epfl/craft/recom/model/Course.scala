@@ -12,11 +12,11 @@ class Course(
     id: String,
     name: String,
     section: Section,
-    prerequisites: Set[Topic],
+    prerequisites_id: Set[Topic.TopicID],
     description: Option[String],
     val semester: Semester,
     val head: Head
-) extends Topic(id, name, section, prerequisites,description){
+) extends Topic(id, name, section, prerequisites_id,description){
   
 }
 

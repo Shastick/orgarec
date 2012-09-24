@@ -1,5 +1,6 @@
 package ch.epfl.craft.recom.model
 import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.storage.TopicMap
 
 
 /**
@@ -10,8 +11,16 @@ class Topic(
     val id: String,
     val name: String,
     val section: Section,
-    val prerequisites: Set[Topic],
+    val prerequisites_id: Set[Topic.TopicID],
     val description: Option[String]
 ){
 	def equals(c: Course) = c.id == this.id
+	
+	lazy val prerequisites = prerequisites_id.flatMap{ tid =>
+	  TopicMap.read(tid)
+	}
+}
+
+object Topic{
+  type TopicID = String
 }

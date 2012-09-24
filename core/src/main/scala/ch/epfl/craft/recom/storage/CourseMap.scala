@@ -11,6 +11,9 @@ import ch.epfl.craft.recom.storage.assist.Teaches
 import ch.epfl.craft.recom.storage.assist.Assists
 import ch.epfl.craft.recom.model.Course
 import net.liftweb.mapper.By
+import ch.epfl.craft.recom.model.Topic
+import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.Head
 
 class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
@@ -20,17 +23,13 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	val isa_id_len = 20
 	val descr_len = 10000
 	val season_len = 10
-	
-	object isa_id extends MappedString(this, isa_id_len)
-	object name extends MappedString(this, name_len)
-	object section extends MappedLongForeignKey(this,SectionMap)
-	object description extends MappedString(this, descr_len)
+
 	object semester extends MappedLongForeignKey(this,SemesterMap)
 	object topic extends MappedLongForeignKey(this, TopicMap)
 
 	// Prerequisites
-	object prerequisites extends HasManyThrough(this, CourseMap, Prerequisite,
-	    Prerequisite.required,Prerequisite.course)
+	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
+	    Prerequisite.required,Prerequisite.topic)
 	// Head(s)
 	object teachers extends HasManyThrough(this, StaffMap, Teaches,
 	    Teaches.teacher, Teaches.course)
@@ -40,23 +39,28 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 }
 
 object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
-  
-  def fill(c: CourseMap): Course = {
-    null
-  }
+  //TODO @julien cleanup this pouerkzz
+  def fill(c: CourseMap): Course = 
+    c.topic.map{ tm => 
+      val t = TopicMap.fill(tm)
+      val s = c.semester.map(SemesterMap.fill(_)).getOrElse(throw new Exception("Undefined Semester"))
+      val teachers = c.teachers.get.map(_.read)
+      val assists = c.assistants.get.map(_.read)
+      new Course(t.id, t.name, t.section, t.prerequisites_id, t.description, s, Head(teachers, assists))
+  }.get
   
   def fill(c: Course): CourseMap = {
-	val cm = CourseMap.findAll(By(CourseMap.isa_id,c.id)).headOption.getOrElse(CourseMap.create.isa_id(c.id))
-	cm.name(c.name)
-	  .section(SectionMap.fill(c.section))
-	  .semester(SemesterMap.fill(c.semester))
+    val sm = SemesterMap.fill(c.semester)
+    val tm = TopicMap.bindFill(c)
+    
+	val cm = CourseMap.findOrCreate(By(CourseMap.semester,sm),By(CourseMap.topic,tm))
+
+	cm.semester(SemesterMap.fill(c.semester))
+	cm.topic(tm)
 	
 	Teaches.setTeachersFor(c, cm)
 	Assists.setAssistsFor(c, cm)
 	
-	Prerequisite.setPrerequisites(c)
-
-	c.description.foreach(cm.description(_))
 	cm.save
 	cm
   }

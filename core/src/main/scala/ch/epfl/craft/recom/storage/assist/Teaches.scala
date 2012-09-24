@@ -7,6 +7,7 @@ import net.liftweb.mapper.MappedLongForeignKey
 import ch.epfl.craft.recom.storage.CourseMap
 import ch.epfl.craft.recom.storage.StaffMap
 import ch.epfl.craft.recom.model.Course
+import net.liftweb.mapper.By
 
 /**
  * Mapper class representing the relation between courses and the staff 
