@@ -23,6 +23,8 @@ class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 	// What this staff's role 'normally' is (assistant, teacher,...)
 	object title extends MappedString(this,title_len)
 	
+	def read = StaffMap.fill(this)
+	
 }
 
 object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
@@ -41,5 +43,8 @@ object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
       case "teacher" => Teacher(s.name,s.section.map(_.read))
       case "assistant" => Assistant(s.name, s.section.map(_.read))
     }
+  
+  def read(name: String): Option[Staff] = 
+    StaffMap.findAll(By(StaffMap.name, name)).headOption.map(fill(_))
   
 }
