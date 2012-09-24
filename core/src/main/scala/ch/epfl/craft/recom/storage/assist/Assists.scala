@@ -5,6 +5,7 @@ import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedLongForeignKey
 import ch.epfl.craft.recom.storage.StaffMap
 import ch.epfl.craft.recom.storage.CourseMap
+import ch.epfl.craft.recom.model.Course
 
 /**
  * Relation between a course and the staff (teacher or assistant...) that assists it.
@@ -16,4 +17,14 @@ class Assists extends LongKeyedMapper[Assists] with IdPK{
 	object course extends MappedLongForeignKey(this, CourseMap)
 }
 
-object Assists extends Assists with LongKeyedMetaMapper[Assists]
+object Assists extends Assists with LongKeyedMetaMapper[Assists] {
+  
+  def setAssistsFor(c: Course, cm: CourseMap) = {
+    c.head.assistants.map{ a => 
+      val sm = StaffMap.fill(a)
+      val am = Assists.create.course(cm).assistant(sm)
+      sm.save
+      sm
+    }
+  }
+}

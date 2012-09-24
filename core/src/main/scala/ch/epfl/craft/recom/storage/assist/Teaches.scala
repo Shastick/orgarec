@@ -6,6 +6,7 @@ import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedLongForeignKey
 import ch.epfl.craft.recom.storage.CourseMap
 import ch.epfl.craft.recom.storage.StaffMap
+import ch.epfl.craft.recom.model.Course
 
 /**
  * Mapper class representing the relation between courses and the staff 
@@ -20,4 +21,12 @@ class Teaches extends LongKeyedMapper[Teaches] with IdPK {
 
 object Teaches extends Teaches with LongKeyedMetaMapper[Teaches] {
   
+  def setTeachersFor(c: Course, cm: CourseMap) = {
+    c.head.teachers.map{ t => 
+    	val sm = StaffMap.fill(t)
+    	val tm = Teaches.create.course(cm).teacher(sm)
+    	tm.save()
+    	tm
+    }
+  }
 }

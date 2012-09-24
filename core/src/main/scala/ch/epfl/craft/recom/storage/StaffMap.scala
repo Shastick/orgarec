@@ -42,4 +42,7 @@ object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
       case "assistant" => Assistant(s.name, s.section.map(_.read))
     }
   
+  def read(name: String): Option[Staff] = 
+    StaffMap.findAll(By(StaffMap.name, name)).headOption.map(fill(_))
+  
 }

@@ -26,6 +26,7 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	object section extends MappedLongForeignKey(this,SectionMap)
 	object description extends MappedString(this, descr_len)
 	object semester extends MappedLongForeignKey(this,SemesterMap)
+	object topic extends MappedLongForeignKey(this, TopicMap)
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, CourseMap, Prerequisite,
@@ -50,8 +51,11 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
 	  .section(SectionMap.fill(c.section))
 	  .semester(SemesterMap.fill(c.semester))
 	
-	  //TODO HEAD
-	  // TODO prereqs
+	Teaches.setTeachersFor(c, cm)
+	Assists.setAssistsFor(c, cm)
+	
+	Prerequisite.setPrerequisites(c)
+
 	c.description.foreach(cm.description(_))
 	cm.save
 	cm
