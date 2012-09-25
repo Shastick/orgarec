@@ -30,6 +30,9 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 
 object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
   
+  def fill(sl: TraversableOnce[Student]): TraversableOnce[StudentMap] =
+    sl.map(fill _)
+  
   def fill(s: Student): StudentMap = {
     val m = StudentMap.findAll(By(StudentMap.sciper,s.id)).headOption.getOrElse(StudentMap.create.sciper(s.id))
     m.arrival(SemesterMap.fill(s.arrival))

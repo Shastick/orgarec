@@ -18,6 +18,9 @@ class SectionMap extends LongKeyedMapper[SectionMap] with IdPK {
 
 object SectionMap extends SectionMap with LongKeyedMetaMapper[SectionMap]{
   
+  def fill(sl: TraversableOnce[Section]): TraversableOnce[SectionMap] = 
+    sl.map(fill _)
+  
   def fill(s: Section): SectionMap = {
     val m = SectionMap.findAll(By(SectionMap.name, s.name))
     		.headOption.getOrElse(SectionMap.create.name(s.name))

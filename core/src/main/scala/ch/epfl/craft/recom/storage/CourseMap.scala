@@ -39,6 +39,10 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 }
 
 object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
+  
+  def fill(cl: TraversableOnce[Course]): TraversableOnce[CourseMap] =
+    cl.map(fill _)
+  
   //TODO @julien cleanup this pouerkzz
   def fill(c: CourseMap): Course = 
     c.topic.map{ tm => 

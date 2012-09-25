@@ -29,6 +29,9 @@ class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 
 object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
   
+  def fill(sl: TraversableOnce[Staff]): TraversableOnce[StaffMap] =
+    sl.map(fill _)
+  
   def fill(s: Staff): StaffMap = {
     val m = StaffMap.findAll(By(StaffMap.name,s.name))
     		.headOption.getOrElse(StaffMap.create.name(s.name))

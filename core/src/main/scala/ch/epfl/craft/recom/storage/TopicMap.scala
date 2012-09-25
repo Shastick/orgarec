@@ -29,6 +29,9 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 
 object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
   
+  def fill(tl: TraversableOnce[Topic]): TraversableOnce[TopicMap] =
+    tl.map(fill _)
+  
   /**
    * Fill a topic and save it to DB WITHOUT setting the prerequisites !
    */

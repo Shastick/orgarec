@@ -23,6 +23,9 @@ class SemesterMap extends LongKeyedMapper[SemesterMap] with IdPK {
 
 object SemesterMap extends SemesterMap with LongKeyedMetaMapper[SemesterMap] {
   
+  def fill(sl: TraversableOnce[Semester]): TraversableOnce[SemesterMap] = 
+    sl.map(fill _)
+    
   def fill(s: Semester): SemesterMap = {
     val season = s match {
       case Spring(_) => "spring"
