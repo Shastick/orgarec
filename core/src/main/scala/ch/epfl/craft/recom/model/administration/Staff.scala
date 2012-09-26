@@ -3,6 +3,8 @@ package ch.epfl.craft.recom.model.administration
 sealed trait Staff {
   val name: String
   val section: Option[Section]
+  
+  def equals(s: Staff) = this.name.toLowerCase == s.name.toLowerCase
 }
 case class Teacher(name: String, section: Option[Section]) extends Staff
 case class Assistant(name: String, section: Option[Section]) extends Staff

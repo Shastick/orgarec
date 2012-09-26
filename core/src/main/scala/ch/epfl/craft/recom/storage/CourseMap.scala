@@ -14,16 +14,12 @@ import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.Topic
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.Head
+import ch.epfl.craft.recom.model.administration.Semester
 
 class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
 	def getSingleton = CourseMap
 	
-	val name_len = 200
-	val isa_id_len = 20
-	val descr_len = 10000
-	val season_len = 10
-
 	object semester extends MappedLongForeignKey(this,SemesterMap)
 	object topic extends MappedLongForeignKey(this, TopicMap)
 
@@ -68,4 +64,12 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
 	cm.save
 	cm
   }
+  
+  def read(id: Topic.TopicID, s: Semester): Option[Course] = 
+    TopicMap.readMap(id) match {
+    	case Some(tm) => CourseMap.findAll( By(CourseMap.topic,tm),
+    										By(CourseMap.semester,SemesterMap.readMap(s).getOrElse(SemesterMap.create)))
+    										.headOption.map(_.read)
+    	case None => None
+  	}  
 }

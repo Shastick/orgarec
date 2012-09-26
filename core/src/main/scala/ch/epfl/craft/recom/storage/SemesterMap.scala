@@ -27,15 +27,15 @@ object SemesterMap extends SemesterMap with LongKeyedMetaMapper[SemesterMap] {
     sl.map(fill _)
     
   def fill(s: Semester): SemesterMap = {
-    val season = s match {
-      case Spring(_) => "spring"
-      case Fall(_) => "fall"
-    }
-    val m = SemesterMap.findAll(By(SemesterMap.year,s.year),By(SemesterMap.semester, season))
-    .headOption.getOrElse(SemesterMap.create.year(s.year).semester(season))
+    val m = SemesterMap.findAll(By(SemesterMap.year,s.year),By(SemesterMap.semester, s.season))
+    .headOption.getOrElse(SemesterMap.create.year(s.year).semester(s.season))
     m.save
     m
   }
   
   def fill(s: SemesterMap):Semester = Semester(s.year,s.semester)
+  
+  def readMap(s: Semester): Option[SemesterMap] = 
+    SemesterMap.findAll(By(SemesterMap.year, s.year), By(SemesterMap.semester, s.season)).headOption
+  
 }

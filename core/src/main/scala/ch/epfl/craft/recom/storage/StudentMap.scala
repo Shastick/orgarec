@@ -50,4 +50,7 @@ object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
     val history = courses.map(_.course.semester).toSet
     new Student(s.sciper, s.arrival.map(_.read).get,s.section.map(_.read),s.currentSemester.map(_.read),history,courses)
   }
+  
+  def read(sid: Int): Option[Student] =
+    StudentMap.findAll(By(StudentMap.sciper, sid)).headOption.map(_.read)
 }

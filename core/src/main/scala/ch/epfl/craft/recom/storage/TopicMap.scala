@@ -62,6 +62,9 @@ object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
     new Topic(t.isa_id, t.name, section, prereqs_id, Option(t.description))
   }
   
-  def read(tid: Topic.TopicID):Option[Topic] = TopicMap.find(By(TopicMap.isa_id,tid)).map(fill _)
+  def read(tid: Topic.TopicID): Option[Topic] = TopicMap.find(By(TopicMap.isa_id,tid)).map(fill _)
+  
+  def readMap(tid: Topic.TopicID): Option[TopicMap] =
+    TopicMap.findAll(By(TopicMap.isa_id,tid)).headOption
 
 }

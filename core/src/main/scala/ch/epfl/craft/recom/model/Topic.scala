@@ -14,7 +14,11 @@ class Topic(
     val prerequisites_id: Set[Topic.TopicID],
     val description: Option[String]
 ){
-	def equals(c: Course) = c.id == this.id
+	def equals(c: Topic) = 	c.id == this.id && 
+							this.name == c.name &&
+							this.prerequisites_id == c.prerequisites_id &&
+							this.section == c.section &&
+							this.description == c.description
 	
 	lazy val prerequisites = prerequisites_id.flatMap{ tid =>
 	  TopicMap.read(tid)
