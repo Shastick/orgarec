@@ -6,4 +6,7 @@
 }
 
 .link { stroke: #ccc; }
-.nodetext { pointer-events: none; font: 10px sans-serif; }
+.nodetext {
+    pointer-events: none;
+    font: 10px sans-serif
+}

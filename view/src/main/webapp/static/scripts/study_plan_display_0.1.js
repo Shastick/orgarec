@@ -1,10 +1,11 @@
 /**
  * Created with IntelliJ IDEA.
  * User: christopher
- * Date: 25.09.12
- * Time: 17:29
+ * Date: 26.09.12
+ * Time: 15:19
  * To change this template use File | Settings | File Templates.
  */
+
 
 var w = 960,
     h = 500
@@ -13,12 +14,12 @@ var vis = d3.select("#graph-container").append("svg:svg")
     .attr("width", w)
     .attr("height", h);
 
-d3.json("static/scripts/simplified_graph.json", function(json) {
+d3.json("static/scripts/study_plan_0.1.json", function(json) {
     var force = self.force = d3.layout.force()
         .nodes(json.nodes)
         .links(json.links)
         .gravity(.05)
-        .distance(100)
+        .distance(300)
         .charge(-100)
         .size([w, h])
         .start();
@@ -61,20 +62,25 @@ d3.json("static/scripts/simplified_graph.json", function(json) {
         .enter().append("svg:g")
         .attr("class", "node")
         .call(node_drag);
-
+     /*
     node.append("svg:image")
         .attr("class", "circle")
         .attr("xlink:href", "https://d3nwyuy0nl342s.cloudfront.net/images/icons/public.png")
         .attr("x", "-8px")
         .attr("y", "-8px")
         .attr("width", "16px")
-        .attr("height", "16px");
+        .attr("height", "16px");  */
 
-    node.append("svg:text")
+    node.append("circle")
+        .attr("r", function(d){return d.credits *5+"px";})
+        .style("fill", "orange");
+
+    node.append("text")
         .attr("class", "nodetext")
-        .attr("dx", 12)
-        .attr("dy", ".35em")
-        .text(function(d) { return d.name });
+        .attr("dy", ".3em")
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d.order +" - " + d.name })
+        .style("max-width", function(d){return d.credits*10 +"px";});
 
     force.on("tick", tick);
 
