@@ -1,0 +1,52 @@
+{"nodes":[
+    {"order":0,  "name": "Modeles stochastiques \n pour les communications",    "credits":6},
+    {"order":1,  "name": "Principles of digital communications",                "credits": 6},
+    {"order":2,  "name": "Securité des réseaux",                                "credits": 4},
+    {"order":3,  "name": "Signal processing for communications",                "credits": 6},
+    {"order":4,  "name": "Compiler construction",                               "credits": 6},
+    {"order":5,  "name": "Electromagnétisme I : lignes et ondes",               "credits": 3},
+    {"order":6,  "name": "Electromagnétisme II : calcul des champs",            "credits": 3},
+    {"order":7,  "name": "Electronique II",                                     "credits": 4},
+    {"order":8,  "name": "Electronique III",                                    "credits": 3},
+    {"order":9,  "name": "Functional materials in communication systems",       "credits": 3},
+    {"order":10, "name": "Graph theory applications",                           "credits": 4},
+    {"order":11, "name": "Informatique du temps réel",                          "credits": 4},
+    {"order":12, "name": "Intelligence artificielle",                           "credits": 4},
+    {"order":13, "name": "Internet analytics",                                  "credits": 5},
+    {"order":14, "name": "Introduction to computer graphics",                   "credits": 6},
+    {"order":15, "name": "Introduction to database systems",                    "credits": 4},
+    {"order":16, "name": "Operating systems",                                   "credits": 4},
+    {"order":17, "name": "Ressources humaines dans les projets",                "credits": 2},
+    {"order":18, "name": "Software development project",                        "credits": 4},
+    {"order":19, "name": "Software engineering",                                "credits": 6}
+],
+"links": [
+    {"source":0, "target":1, "value":10},
+    {"source":0, "target":2, "value":3},
+    {"source":0, "target":3, "value":8},
+    {"source":0, "target":10, "value":5},
+    {"source":1, "target":2, "value":2},
+    {"source":1, "target":3, "value":6},
+    {"source":1, "target":5, "value":2},
+    {"source":2, "target":3, "value":5},
+    {"source":5, "target":6, "value":10},
+    {"source":7, "target":8, "value":10},
+    {"source":18, "target":19, "value":7},
+
+    {"source":14, "target":19, "value":10},
+    {"source":8, "target":9, "value":3},
+    {"source":5, "target":9, "value":4},
+    {"source":4, "target":19, "value":5},
+    {"source":2, "target":13, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5},
+    {"source":2, "target":3, "value":5}
+
+
+
+]
+}

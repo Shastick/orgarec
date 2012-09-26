@@ -22,7 +22,7 @@ class HelloWorld {
     </head> ++
     <h3>Graph test</h3> ++
     <div id="graph-container" width="500px" height="100px">
-      <script type="text/javascript" src="static/scripts/graphTest.js"></script>
+      <script type="text/javascript" src="static/scripts/study_plan_display_0.1.js"></script>
     </div>
 
   }
