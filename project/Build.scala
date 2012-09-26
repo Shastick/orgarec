@@ -30,7 +30,9 @@ object OrgaRecBuild extends Build {
   lazy val core_settings = Seq(
   	libraryDependencies ++= Seq(
 	  "net.liftweb" %% "lift-mapper" % liftVersion,
-	  "postgresql" % "postgresql" % "9.1-901.jdbc4"
+	  "postgresql" % "postgresql" % "9.1-901.jdbc4",
+          "org.specs2" %% "specs2" % "1.8.2" % "test"
+
   ))
 
   lazy val root = Project(
