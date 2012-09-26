@@ -23,12 +23,13 @@ class SemesterMap extends LongKeyedMapper[SemesterMap] with IdPK {
 
 object SemesterMap extends SemesterMap with LongKeyedMetaMapper[SemesterMap] {
   
-  def fill(sl: TraversableOnce[Semester]): TraversableOnce[SemesterMap] = 
-    sl.map(fill _)
+  def fill(sl: Iterable[Semester]): Iterable[SemesterMap] = 
+    sl.map(s => fill(s))
     
   def fill(s: Semester): SemesterMap = {
-    val m = SemesterMap.findAll(By(SemesterMap.year,s.year),By(SemesterMap.semester, s.season))
-    .headOption.getOrElse(SemesterMap.create.year(s.year).semester(s.season))
+    val m = SemesterMap.findOrCreate(By(SemesterMap.year,s.year),By(SemesterMap.semester, s.season))
+    m.year(s.year)
+    m.semester(s.season)
     m.save
     m
   }

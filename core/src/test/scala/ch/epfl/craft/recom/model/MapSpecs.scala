@@ -5,11 +5,13 @@ import ch.epfl.craft.recom.model.administration._
 import java.text.SimpleDateFormat
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.storage.db.PGDBFactory
+import net.liftweb.mapper.DB
+import net.liftweb.db.DefaultConnectionIdentifier
 
 class MapSpecs extends Specification {
 	
 	val dbf = new PGDBFactory("localhost","orgarec","julien","dorloter")
-	
+
 	args(sequential=true)
 	
 	val d = new SimpleDateFormat("yyyy")
@@ -39,9 +41,7 @@ class MapSpecs extends Specification {
 	    SemesterMap.fill(Set(s1,s2,s3,s4)); success
 	  }
 	  "read a Semester" in {
-	    SemesterMap
-	    	.findAll(By(SemesterMap.year,s1.year),By(SemesterMap.semester,"spring"))
-	    	.headOption.map(_.read) must beEqualTo(Some(s1))
+	    SemesterMap.readMap(s2).map(_.read) must beEqualTo(Some(s2))
 	  }
 	}
 	

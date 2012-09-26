@@ -12,8 +12,9 @@ class PGDBFactory (
 		pwd:	String
 ) {
   val db = new PostgresDB(host, dbname, uname, pwd)
+
   DB.defineConnectionManager(DefaultConnectionIdentifier, db)
- 
+
   Schemifier.schemify(	true,
 		  				Schemifier.infoF _,
 		  				CourseMap,

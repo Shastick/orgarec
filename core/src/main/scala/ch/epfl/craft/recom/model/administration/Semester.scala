@@ -14,10 +14,8 @@ sealed trait Semester{
     		this.year == s.year
     else false
     
-  def season: String = this match {
-      case Spring(_) => "spring"
-      case Fall(_) => "fall"
-    }
+  def season: String = 	if(this.isInstanceOf[Spring]) "spring" 
+	  					else "fall"
 }
 
 case class Spring(val year: Date) extends Semester

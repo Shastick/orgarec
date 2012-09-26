@@ -18,7 +18,7 @@ class SectionMap extends LongKeyedMapper[SectionMap] with IdPK {
 
 object SectionMap extends SectionMap with LongKeyedMetaMapper[SectionMap]{
   
-  def fill(sl: TraversableOnce[Section]): TraversableOnce[SectionMap] = 
+  def fill(sl: Iterable[Section]): Iterable[SectionMap] = 
     sl.map(fill _)
   
   def fill(s: Section): SectionMap = {

@@ -29,14 +29,14 @@ class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 
 object StaffMap extends StaffMap with LongKeyedMetaMapper[StaffMap] {
   
-  def fill(sl: TraversableOnce[Staff]): TraversableOnce[StaffMap] =
+  def fill(sl: Iterable[Staff]): Iterable[StaffMap] =
     sl.map(fill _)
   
   def fill(s: Staff): StaffMap = {
-    val m = StaffMap.findAll(By(StaffMap.name,s.name))
-    		.headOption.getOrElse(StaffMap.create.name(s.name))
-    m.section(section)
-     .title(s match {case Teacher(_,_) => "teacher" ; case Assistant(_,_) => "assistant"})
+    val m = StaffMap.findOrCreate(By(StaffMap.name,s.name))
+    m.name(s.name)
+    s.section.foreach(sec => m.section(SectionMap.fill(sec)))
+    m.title(s match {case Teacher(_,_) => "teacher" ; case Assistant(_,_) => "assistant"})
     m.save
     m
   }
