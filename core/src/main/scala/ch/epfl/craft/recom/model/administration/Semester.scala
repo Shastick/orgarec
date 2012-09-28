@@ -1,5 +1,6 @@
 package ch.epfl.craft.recom.model.administration
 import java.util.Date
+import java.util.Calendar
 
 /**
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
@@ -8,11 +9,14 @@ import java.util.Date
 sealed trait Semester{
   val year:Date
   
-  def equals(s: Semester) = //TODO check if equals should override something...
-    if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) ||
-        (this.isInstanceOf[Fall] && s.isInstanceOf[Fall]))
-    		this.year == s.year
-    else false
+  def equals(s: Semester) = {
+		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
+		  (this.isInstanceOf[Fall] && this.isInstanceOf[Fall])){
+    		val ct = Calendar.getInstance; ct.setTime(this.year)
+    		val cs = Calendar.getInstance; cs.setTime(s.year);
+    		ct.get(Calendar.YEAR) == cs.get(Calendar.YEAR)
+    } else false
+}
     
   def season: String = 	if(this.isInstanceOf[Spring]) "spring" 
 	  					else "fall"

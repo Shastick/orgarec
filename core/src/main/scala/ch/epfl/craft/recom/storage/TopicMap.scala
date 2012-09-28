@@ -29,7 +29,7 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 
 object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
   
-  def fill(tl: TraversableOnce[Topic]): TraversableOnce[TopicMap] =
+  def fill(tl: Iterable[Topic]): Iterable[TopicMap] =
     tl.map(fill _)
   
   /**

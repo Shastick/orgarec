@@ -30,7 +30,7 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 
 object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
   
-  def fill(sl: TraversableOnce[Student]): TraversableOnce[StudentMap] =
+  def fill(sl: Iterable[Student]): Iterable[StudentMap] =
     sl.map(fill _)
   
   def fill(s: Student): StudentMap = {

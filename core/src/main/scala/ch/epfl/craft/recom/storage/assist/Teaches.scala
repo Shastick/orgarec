@@ -25,7 +25,10 @@ object Teaches extends Teaches with LongKeyedMetaMapper[Teaches] {
   def setTeachersFor(c: Course, cm: CourseMap) = {
     c.head.teachers.map{ t => 
     	val sm = StaffMap.fill(t)
-    	val tm = Teaches.create.course(cm).teacher(sm)
+    	val tm = Teaches.findOrCreate(
+    		By(Teaches.course, cm),
+    		By(Teaches.teacher, sm))
+    	tm.course(cm).teacher(sm)
     	tm.save()
     	tm
     }

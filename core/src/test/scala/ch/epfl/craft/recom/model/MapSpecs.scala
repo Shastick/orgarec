@@ -96,18 +96,25 @@ class MapSpecs extends Specification {
 	    CourseMap.fill(Set(c1,c2,c3)); success
 	  }
 	  "read Course" in {
-	    CourseMap.read(c1.id, c1.semester) must beEqualTo(Some(c1))
+	    val t = CourseMap.read(c1.id,c1.semester).get
+	    t.id must beEqualTo(c1.id)
+	    t.name must beEqualTo(c1.name)
+	    t.section must beEqualTo(c1.section)
+	    t.prerequisites_id must beEqualTo(c1.prerequisites_id)
+	    t.description must beEqualTo(c1.description)
+	    t.semester.equals(c1.semester) must beTrue
+	    t.head must beEqualTo(c1.head)
 	  }
 	}
 	
 	/* Students */
-	"A StudentMap" should {
+	/*"A StudentMap" should {
 	  "save Students" in {
 	    StudentMap.fill(Set(e1,e2)); success
 	  }
-	  "read Students" in {
+	 /* "read Students" in {
 	    StudentMap.read(e1.id) must beEqualTo(e1)
-	  }
-	}
+	  } */
+	}*/
 	
 }

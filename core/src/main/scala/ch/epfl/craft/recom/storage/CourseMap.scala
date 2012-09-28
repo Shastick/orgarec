@@ -28,15 +28,15 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	    Prerequisite.required,Prerequisite.topic)
 	// Head(s)
 	object teachers extends HasManyThrough(this, StaffMap, Teaches,
-	    Teaches.teacher, Teaches.course)
-	object assistants extends HasManyThrough(this, StaffMap, Assists, Assists.assistant, Assists.course)
+	    Teaches.course, Teaches.teacher)
+	object assistants extends HasManyThrough(this, StaffMap, Assists, Assists.course, Assists.assistant)
 	
 	def read = CourseMap.fill(this)
 }
 
 object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
   
-  def fill(cl: TraversableOnce[Course]): TraversableOnce[CourseMap] =
+  def fill(cl: Iterable[Course]): Iterable[CourseMap] =
     cl.map(fill _)
   
   //TODO @julien cleanup this pouerkzz
