@@ -25,8 +25,8 @@ class MapSpecs extends Specification {
 	val (a1,a2) = (Assistant("Maxime",Some(f2)),Assistant("Acacio",Some(f1)))
 	val (h1,h2) = (Head(List(t1),List(a1)), Head(List(t2),List(a2)))
 	val (b1,b2,b3) = (new Topic("cs-3","algorithms",f1,Set("cs-2","cs-1"),Some("Cool Algorithms Design")),
-					new Topic("cs-2","programmation",f1,Set("cs-2","cs-1"),Some("Cool Program Design")),
-					new Topic("cs-1","concurrence",f2,Set("cs-2","cs-1"),Some("Cool Train Design")))
+					new Topic("cs-2","programmation",f1,Set("cs-1"),Some("Cool Program Design")),
+					new Topic("cs-1","concurrence",f2,Set.empty,Some("Cool Train Design")))
 	val topics = Set(b1,b2,b3)
 	val (c1,c2,c3) = (Course(b1,s3,h1), Course(b2,s2,h2), Course(b3,s1,h2))
 	
@@ -81,7 +81,12 @@ class MapSpecs extends Specification {
 	  }
 	  
 	  "retrieve a Topic" in {
-	    TopicMap.read(b1.id) must beEqualTo(Some(b1))
+	    val t = TopicMap.read(b1.id).get
+	    t.id must beEqualTo(b1.id)
+	    t.name must beEqualTo(b1.name)
+	    t.section must beEqualTo(b1.section)
+	    t.prerequisites_id must beEqualTo(b1.prerequisites_id)
+	    t.description must beEqualTo(b1.description)
 	  }
 	}
 	

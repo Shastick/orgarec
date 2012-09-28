@@ -27,7 +27,7 @@ object Prerequisite extends Prerequisite with LongKeyedMetaMapper[Prerequisite] 
     				.getOrElse(throw new Exception("Prerequisite not existing in DB. " +
     						"Have you imported every Topic before setting prerequisites ?"))
     	
-    	val pm = Prerequisite.findOrCreate(By(Prerequisite.topic,rtm))
+    	val pm = Prerequisite.findOrCreate(By(Prerequisite.topic,tm),By(Prerequisite.required,rtm))
     	pm.topic(tm)
     	  .required(rtm)
 

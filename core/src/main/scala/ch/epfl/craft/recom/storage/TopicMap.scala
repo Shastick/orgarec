@@ -24,7 +24,7 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
-	    Prerequisite.required,Prerequisite.topic)
+	    Prerequisite.topic,Prerequisite.required)
 }
 
 object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
@@ -57,7 +57,7 @@ object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
   }
   
   def fill(t: TopicMap): Topic = {
-    val section = t.section.map{SectionMap.fill(_)}.getOrElse(throw new Exception("Undefined section."))
+    val section = t.section.map(SectionMap.fill(_)).getOrElse(throw new Exception("Undefined section."))
     val prereqs_id = t.prerequisites.get.map(_.isa_id.get).toSet
     new Topic(t.isa_id, t.name, section, prereqs_id, Option(t.description))
   }
