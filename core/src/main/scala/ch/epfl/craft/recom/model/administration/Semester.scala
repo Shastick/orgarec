@@ -11,9 +11,9 @@ sealed trait Semester{
   
   def equals(s: Semester) = {
 		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
-		  (this.isInstanceOf[Fall] && this.isInstanceOf[Fall])){
+		  (this.isInstanceOf[Fall] && s.isInstanceOf[Fall])){
     		val ct = Calendar.getInstance; ct.setTime(this.year)
-    		val cs = Calendar.getInstance; cs.setTime(s.year);
+    		val cs = Calendar.getInstance; cs.setTime(s.year)
     		ct.get(Calendar.YEAR) == cs.get(Calendar.YEAR)
     } else false
 }

@@ -26,15 +26,14 @@ class Subscribed extends LongKeyedMapper[Subscribed] with IdPK {
 
 object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{
   
-	def subscribe(s: Student, t: TakenCourse) = {
-	  val sm = StudentMap.fill(s)
+	def subscribe(sm: StudentMap, t: TakenCourse) = {
+	  
 	  val cm = CourseMap.fill(t.course)
-	  val sub = Subscribed.findAll(By(Subscribed.course,cm.id),
+	  val sub = Subscribed.findOrCreate(
+			  			By(Subscribed.course,cm.id),
 	  	      			By(Subscribed.student,sm.id))
-	  	      			.headOption match {
-	  	      				case Some(m) => m
-	  	      				case _ => Subscribed.create.student(sm.id).course(cm.id)
-	  					}
+	  sub.student(sm.id)
+	  sub.course(cm.id)
 	  sub.counter(t.count)
 	  t.grade.foreach(sub.grade(_))
 	  t.evaluation.foreach(sub.evaluation(_))

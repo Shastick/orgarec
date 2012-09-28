@@ -22,8 +22,8 @@ object SectionMap extends SectionMap with LongKeyedMetaMapper[SectionMap]{
     sl.map(fill _)
   
   def fill(s: Section): SectionMap = {
-    val m = SectionMap.findAll(By(SectionMap.name, s.name))
-    		.headOption.getOrElse(SectionMap.create.name(s.name))
+    val m = SectionMap.findOrCreate(By(SectionMap.name, s.name))
+    m.name(s.name)
     m.save
     m
   }

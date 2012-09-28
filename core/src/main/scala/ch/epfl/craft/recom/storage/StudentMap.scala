@@ -34,11 +34,12 @@ object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
     sl.map(fill _)
   
   def fill(s: Student): StudentMap = {
-    val m = StudentMap.findAll(By(StudentMap.sciper,s.id)).headOption.getOrElse(StudentMap.create.sciper(s.id))
+    val m = StudentMap.findOrCreate(By(StudentMap.sciper,s.id))
+    m.sciper(s.id)
     m.arrival(SemesterMap.fill(s.arrival))
     s.section.foreach(o => m.section(SectionMap.fill(o)))
     s.currentSemester.foreach(o => m.currentSemester(SemesterMap.fill(o)))
-    s.courses.foreach(t => Subscribed.subscribe(s,t))
+    s.courses.foreach(t => Subscribed.subscribe(m,t))
     m.save
     m
   }
