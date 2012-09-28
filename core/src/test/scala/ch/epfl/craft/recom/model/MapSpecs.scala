@@ -1,17 +1,17 @@
 package ch.epfl.craft.recom.model
-import org.specs2.mutable.Specification
-import ch.epfl.craft.recom.storage._
-import ch.epfl.craft.recom.model.administration._
 import java.text.SimpleDateFormat
-import net.liftweb.mapper.By
+import org.specs2.mutable.Specification
+import ch.epfl.craft.recom.model.administration._
+import ch.epfl.craft.recom.model._
 import ch.epfl.craft.recom.storage.db.PGDBFactory
-import net.liftweb.mapper.DB
-import net.liftweb.db.DefaultConnectionIdentifier
+import ch.epfl.craft.recom.storage.maps._
+import net.liftweb.mapper.By
 
 class MapSpecs extends Specification {
 	
 	val dbf = new PGDBFactory("localhost","orgarec","julien","dorloter")
-
+	val s = dbf.store
+	
 	args(sequential=true)
 	
 	val d = new SimpleDateFormat("yyyy")
@@ -72,16 +72,12 @@ class MapSpecs extends Specification {
 		
 	/* Topics */
 	"A  TopicMap" should {
-	  "save Topics without setting prerequisites" in {
-	    TopicMap.fill(topics); success
-	  }
-	  
-	  "setting Topics prerequisites" in {
-	    topics.foreach(TopicMap.bindFill _); success
+	  "import & link Topics" in {
+	    s.saveTopics(topics); success
 	  }
 	  
 	  "retrieve a Topic" in {
-	    val t = TopicMap.read(b1.id).get
+	    val t = s.readTopic(b1.id).get
 	    t.id must beEqualTo(b1.id)
 	    t.name must beEqualTo(b1.name)
 	    t.section must beEqualTo(b1.section)
@@ -93,10 +89,10 @@ class MapSpecs extends Specification {
 	/* Courses */
 	"A CourseMap" should {
 	  "save Courses" in {
-	    CourseMap.fill(Set(c1,c2,c3)); success
+	    s.saveTopics(Set(c1,c2,c3)); success
 	  }
 	  "read Course" in {
-	    val t = CourseMap.read(c1.id,c1.semester).get
+	    val t = s.readCourse(c1.id,c1.semester).get
 	    t.id must beEqualTo(c1.id)
 	    t.name must beEqualTo(c1.name)
 	    t.section must beEqualTo(c1.section)
@@ -110,15 +106,15 @@ class MapSpecs extends Specification {
 	//Students 
 	"A StudentMap" should {
 	  "save Students" in {
-	    StudentMap.fill(Set(e1,e2)); success
+	    s.saveStudents(Set(e1,e2)); success
 	  }
 	  "read Students" in {
-	    val s = StudentMap.read(e1.id).get
-	    s.id must beEqualTo(e1.id)
-	    s.arrival.equals(e1.arrival) must beTrue
-	    s.section must beEqualTo(e1.section)
-	    s.currentSemester.get.equals(e1.currentSemester.get) must beTrue
-	    s.courses.map(_.course.id) must beEqualTo(e1.courses.map(_.course.id))
+	    val st = s.readStudent(e1.id).get
+	    st.id must beEqualTo(e1.id)
+	    st.arrival.equals(e1.arrival) must beTrue
+	    st.section must beEqualTo(e1.section)
+	    st.currentSemester.get.equals(e1.currentSemester.get) must beTrue
+	    st.courses.map(_.course.id) must beEqualTo(e1.courses.map(_.course.id))
 	  } 
 	}
 	

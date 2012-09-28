@@ -1,11 +1,11 @@
-package ch.epfl.craft.recom.storage
+package ch.epfl.craft.recom.storage.maps
 import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedLongForeignKey
 import net.liftweb.mapper.HasManyThrough
 import net.liftweb.mapper.MappedString
-import ch.epfl.craft.recom.storage.assist.Prerequisite
+import ch.epfl.craft.recom.storage.maps.assist.Prerequisite
 import ch.epfl.craft.recom.model.Topic
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.administration.Section
@@ -50,6 +50,8 @@ object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
    * bindFill actually populates the prerequisite table. It should only be called 
    * once the topics have been inserted, as the relation of a topic is on itself.
    */
+  def bindFill(tl: Iterable[Topic]): Iterable[TopicMap] = 
+    tl.map(bindFill _)
   def bindFill(t: Topic): TopicMap = {
     	val tm = fill(t)
     	Prerequisite.setPrerequisites(t, tm)

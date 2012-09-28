@@ -1,11 +1,11 @@
-package ch.epfl.craft.recom.storage.assist
+package ch.epfl.craft.recom.storage.maps.assist
 import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedLongForeignKey
-import ch.epfl.craft.recom.storage.CourseMap
+import ch.epfl.craft.recom.storage.maps.CourseMap
 import ch.epfl.craft.recom.model.Course
-import ch.epfl.craft.recom.storage.TopicMap
+import ch.epfl.craft.recom.storage.maps.TopicMap
 import ch.epfl.craft.recom.model.Topic
 import net.liftweb.mapper.By
 

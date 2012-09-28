@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.storage
+package ch.epfl.craft.recom.storage.maps
 import ch.epfl.craft.recom.model.administration.Fall
 import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.Spring

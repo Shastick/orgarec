@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.storage
+package ch.epfl.craft.recom.storage.maps
 import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedString
@@ -6,9 +6,9 @@ import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.MappedLongForeignKey
 import net.liftweb.mapper.MappedDate
 import net.liftweb.mapper.HasManyThrough
-import ch.epfl.craft.recom.storage.assist.Prerequisite
-import ch.epfl.craft.recom.storage.assist.Teaches
-import ch.epfl.craft.recom.storage.assist.Assists
+import ch.epfl.craft.recom.storage.maps.assist.Prerequisite
+import ch.epfl.craft.recom.storage.maps.assist.Teaches
+import ch.epfl.craft.recom.storage.maps.assist.Assists
 import ch.epfl.craft.recom.model.Course
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.Topic

@@ -24,7 +24,6 @@ class Course(
 }
 
 object Course{
-  
   def apply(t: Topic, s: Semester, h: Head) = 
     new Course(t.id, t.name,t.section,t.prerequisites_id, t.description, s, h)
   

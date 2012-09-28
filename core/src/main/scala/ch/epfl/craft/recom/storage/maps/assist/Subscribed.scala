@@ -1,6 +1,6 @@
-package ch.epfl.craft.recom.storage.assist
-import ch.epfl.craft.recom.storage.CourseMap
-import ch.epfl.craft.recom.storage.StudentMap
+package ch.epfl.craft.recom.storage.maps.assist
+import ch.epfl.craft.recom.storage.maps.CourseMap
+import ch.epfl.craft.recom.storage.maps.StudentMap
 import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.LongKeyedMetaMapper

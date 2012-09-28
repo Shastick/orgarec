@@ -14,6 +14,10 @@ class Student(
   
 }
 
+object Student {
+  type StudentID = Int
+}
+
 case class TakenCourse(course: Course, count: Int, grade: Option[Int], evaluation: Option[Int]) {
 
 }

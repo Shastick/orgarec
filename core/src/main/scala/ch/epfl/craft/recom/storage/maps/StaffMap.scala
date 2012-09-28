@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.storage
+package ch.epfl.craft.recom.storage.maps
 import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.IdPK
 import net.liftweb.mapper.LongKeyedMetaMapper

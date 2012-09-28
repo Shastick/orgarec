@@ -1,6 +1,6 @@
 package ch.epfl.craft.recom.model
 import ch.epfl.craft.recom.model.administration.Section
-import ch.epfl.craft.recom.storage.TopicMap
+import ch.epfl.craft.recom.storage.maps.TopicMap
 
 
 /**

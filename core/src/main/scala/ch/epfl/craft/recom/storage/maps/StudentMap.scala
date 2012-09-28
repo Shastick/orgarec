@@ -1,7 +1,7 @@
-package ch.epfl.craft.recom.storage
+package ch.epfl.craft.recom.storage.maps
 import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.TakenCourse
-import ch.epfl.craft.recom.storage.assist.Subscribed
+import ch.epfl.craft.recom.storage.maps.assist.Subscribed
 import net.liftweb.mapper.By
 import net.liftweb.mapper.HasManyThrough
 import net.liftweb.mapper.IdPK
