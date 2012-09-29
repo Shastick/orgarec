@@ -21,6 +21,7 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
         .gravity(.05)
         .distance(300)
         .charge(-100)
+        .linkDistance(function(d){return (100 - d.value*3)})
         .size([w, h])
         .start();
 
@@ -74,13 +75,20 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
     node.append("circle")
         .attr("r", function(d){return d.credits *5+"px";})
         .style("fill", "orange");
-
+    /*
     node.append("text")
         .attr("class", "nodetext")
         .attr("dy", ".3em")
         .attr("text-anchor", "middle")
         .text(function(d) { return d.order +" - " + d.name })
-        .style("max-width", function(d){return d.credits*10 +"px";});
+        .style("max-width", function(d){return d.credits*7 +"px";});
+    */
+
+    node.append("text")
+        .attr("class", "nodetext")
+        .attr("text-anchor", "middle")
+        .attr("dy", ".3em")
+        .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
 
     force.on("tick", tick);
 
