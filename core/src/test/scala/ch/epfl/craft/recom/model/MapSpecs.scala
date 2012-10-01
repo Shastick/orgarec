@@ -24,9 +24,9 @@ class MapSpecs extends Specification {
 	val (t1,t2) = (Teacher("André",Some(f2)), Teacher("Jamila",Some(f1)))
 	val (a1,a2) = (Assistant("Maxime",Some(f2)),Assistant("Acacio",Some(f1)))
 	val (h1,h2) = (Head(List(t1),List(a1)), Head(List(t2),List(a2)))
-	val (b1,b2,b3) = (new Topic("cs-3","algorithms",f1,Set("cs-2","cs-1"),Some("Cool Algorithms Design")),
-					new Topic("cs-2","programmation",f1,Set("cs-1"),Some("Cool Program Design")),
-					new Topic("cs-1","concurrence",f2,Set.empty,Some("Cool Train Design")))
+	val (b1,b2,b3) = (new Topic("cs-3","algorithms",f1,Set("cs-2","cs-1"),Some("Cool Algorithms Design"), Some(5)),
+					new Topic("cs-2","programmation",f1,Set("cs-1"),Some("Cool Program Design"), Some(6)),
+					new Topic("cs-1","concurrence",f2,Set.empty,Some("Cool Train Design"), Some(4)))
 	val topics = Set(b1,b2,b3)
 	val (c1,c2,c3) = (Course(b1,s3,h1), Course(b2,s2,h2), Course(b3,s1,h2))
 	

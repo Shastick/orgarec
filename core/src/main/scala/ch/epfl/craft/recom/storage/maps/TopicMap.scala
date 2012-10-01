@@ -9,6 +9,7 @@ import ch.epfl.craft.recom.storage.maps.assist.Prerequisite
 import ch.epfl.craft.recom.model.Topic
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.administration.Section
+import net.liftweb.mapper.MappedInt
 
 class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 	def getSingleton = TopicMap
@@ -21,6 +22,7 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 	object name extends MappedString(this, name_len)
 	object section extends MappedLongForeignKey(this,SectionMap)
 	object description extends MappedString(this, descr_len)
+	object credits extends MappedInt(this)
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
@@ -42,6 +44,7 @@ object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
     	  .name(t.name)
     	  .section(SectionMap.fill(t.section))
     t.description.foreach(tm.description(_))
+    t.credits.foreach(tm.credits(_))
     
     tm.save
     tm
@@ -61,7 +64,7 @@ object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {
   def fill(t: TopicMap): Topic = {
     val section = t.section.map(SectionMap.fill(_)).getOrElse(throw new Exception("Undefined section."))
     val prereqs_id = t.prerequisites.get.map(_.isa_id.get).toSet
-    new Topic(t.isa_id, t.name, section, prereqs_id, Option(t.description))
+    new Topic(t.isa_id, t.name, section, prereqs_id, Option(t.description), Option(t.credits))
   }
   
   def read(tid: Topic.TopicID): Option[Topic] = TopicMap.find(By(TopicMap.isa_id,tid)).map(fill _)

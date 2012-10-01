@@ -1,6 +1,7 @@
 package ch.epfl.craft.recom.model.administration
 import java.util.Date
 import java.util.Calendar
+import java.text.SimpleDateFormat
 
 /**
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
@@ -26,9 +27,14 @@ case class Spring(val year: Date) extends Semester
 case class Fall(val year: Date) extends Semester
 
 object Semester {
+  
+  val df = new SimpleDateFormat("yyyy")
+  
   def apply(y: Date, s: String): Semester = s.toLowerCase match {
     case "spring" => Spring(y)
     case "fall" => Fall(y)
     case _ => throw new Exception("Bad Semester Specification:" + s)
   }
+  
+  def apply(y: String, s: String): Semester = apply(df.parse(y),s)
 }
