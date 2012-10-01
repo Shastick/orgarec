@@ -27,7 +27,7 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
 
     var link = vis.selectAll("line.link")
         .data(json.links)
-        .enter().append("svg:line")
+        .enter().insert("svg:line", ".node")
         .attr("class", "link")
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
@@ -65,8 +65,12 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
 
 
     node.append("svg:circle")
-        .attr("r", function(d){return d.credits *5+"px";})
-        .attr("fill", "orange");
+        .attr("class", "node")
+        .style("fill","#c6dbef")
+        .attr("r", function(d){return d.credits *5+"px";}) ;
+        //.attr("fill", "orange")
+        //.attr("stroke", "blue")
+        //.attr("stroke-width", "1");
 
     /*
     node.append("text")

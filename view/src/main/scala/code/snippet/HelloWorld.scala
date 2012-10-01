@@ -23,7 +23,7 @@ class HelloWorld {
       <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
       <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
     </head> ++
-    <h3>Graph test</h3> ++
+    <h3>Bachelor 5/6 - Communication Systems</h3> ++
     <div id="graph-container" width="500px" height="100px">
       <script type="text/javascript" src="static/scripts/study_plan_display_0.1.js"></script>
     </div>
