@@ -14,9 +14,10 @@ class Course(
     section: Section,
     prerequisites_id: Set[Topic.TopicID],
     description: Option[String],
+    credits: Option[Int],
     val semester: Semester,
     val head: Head
-) extends Topic(id, name, section, prerequisites_id,description){
+) extends Topic(id, name, section, prerequisites_id, description, credits){
   
   def equals(c: Course) = 	super.equals(c) &&
 		  					this.semester == c.semester &&
@@ -25,7 +26,7 @@ class Course(
 
 object Course{
   def apply(t: Topic, s: Semester, h: Head) = 
-    new Course(t.id, t.name,t.section,t.prerequisites_id, t.description, s, h)
+    new Course(t.id, t.name,t.section,t.prerequisites_id, t.description, t.credits, s, h)
   
 }
 

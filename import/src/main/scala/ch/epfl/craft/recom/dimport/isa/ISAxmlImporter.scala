@@ -21,11 +21,12 @@ object ISAxmlImporter extends App {
   val sem = Semester("2012", "fall")
   
   val cl = items.map{ i => 
-    val f = (i \ "XCle").text.split("_").toList
+    val fstr = (i \ "XCle").text
+    val f = fstr.split("_").toList
   	val lib = (i \ "XLibelle").text.split(";").toIterator
 
   	val topic = f.find(s =>  s.size > 1 && s.substring(0,1) == "M").map(s =>
-  	  new Topic(s, lib.next, Section(""), Set.empty, None))
+  	  new Topic(s, lib.next, Section(""), Set.empty, None, None))
     
   	f.filter(s => s.size > 1 && s.substring(0,1) == "G").foreach(s => lib.next())
   	
@@ -34,7 +35,7 @@ object ISAxmlImporter extends App {
   	
   	val head = Head(teachers, List.empty)
   	
-  	topic.map(Course(_, sem, head))
+  	topic.map(t => (Course(t, sem, head), fstr))
   }.flatten
 	cl.foreach(println _)
 }

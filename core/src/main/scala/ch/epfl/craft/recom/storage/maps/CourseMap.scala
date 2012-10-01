@@ -46,7 +46,7 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
       val s = c.semester.map(SemesterMap.fill(_)).getOrElse(throw new Exception("Undefined Semester"))
       val teachers = c.teachers.get.map(_.read)
       val assists = c.assistants.get.map(_.read)
-      new Course(t.id, t.name, t.section, t.prerequisites_id, t.description, s, Head(teachers, assists))
+      Course(t, s, Head(teachers, assists))
   }.get
   
   def fill(c: Course): CourseMap = {

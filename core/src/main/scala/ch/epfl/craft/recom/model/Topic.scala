@@ -12,7 +12,8 @@ class Topic(
     val name: String,
     val section: Section,
     val prerequisites_id: Set[Topic.TopicID],
-    val description: Option[String]
+    val description: Option[String],
+    val credits: Option[Int]
 ){
 	def equals(c: Topic) = 	c.id == this.id && 
 							this.name == c.name &&
