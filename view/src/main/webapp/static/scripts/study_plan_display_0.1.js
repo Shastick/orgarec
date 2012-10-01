@@ -61,20 +61,13 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
     var node = vis.selectAll("g.node")
         .data(json.nodes)
         .enter().append("svg:g")
-        .attr("class", "node")
         .call(node_drag);
-     /*
-    node.append("svg:image")
-        .attr("class", "circle")
-        .attr("xlink:href", "https://d3nwyuy0nl342s.cloudfront.net/images/icons/public.png")
-        .attr("x", "-8px")
-        .attr("y", "-8px")
-        .attr("width", "16px")
-        .attr("height", "16px");  */
 
-    node.append("circle")
+
+    node.append("svg:circle")
         .attr("r", function(d){return d.credits *5+"px";})
-        .style("fill", "orange");
+        .attr("fill", "orange");
+
     /*
     node.append("text")
         .attr("class", "nodetext")
@@ -89,6 +82,24 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
         .attr("text-anchor", "middle")
         .attr("dy", ".3em")
         .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
+
+    /*
+    node.append("title")
+        .text(function(d) { return d.name; }); */
+
+    /*node.append("svg:circle")
+        .attr("stroke", "black"); */
+
+    $('svg circle').tipsy({
+        gravity: 'w',
+        html: true,
+        title: function() {
+            var d = this.__data__,
+                name = d.name,
+                order = d.order;
+            return order +' - ' +name;
+        }
+    });
 
     force.on("tick", tick);
 

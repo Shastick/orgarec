@@ -18,7 +18,10 @@ class HelloWorld {
   def showGraph = {
     <head>
       <script type="text/javascript" src="static/scripts/d3/d3.v2.js"></script>
+      <script type="text/javascript" src="static/scripts/jquery-1.8.2.min.js"></script>
+      <script type="text/javascript" src="static/scripts/jquery.tipsy.js"></script>
       <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
+      <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
     </head> ++
     <h3>Graph test</h3> ++
     <div id="graph-container" width="500px" height="100px">

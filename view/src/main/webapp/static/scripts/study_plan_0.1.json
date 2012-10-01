@@ -29,24 +29,13 @@
     {"source":1, "target":3, "value":6},
     {"source":1, "target":5, "value":2},
     {"source":2, "target":3, "value":5},
-    {"source":5, "target":6, "value":10},
-    {"source":7, "target":8, "value":10},
-    {"source":18, "target":19, "value":7},
-
-    {"source":14, "target":19, "value":10},
-    {"source":8, "target":9, "value":3},
-    {"source":5, "target":9, "value":4},
-    {"source":4, "target":19, "value":5},
     {"source":2, "target":13, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5},
-    {"source":2, "target":3, "value":5}
-
-
-
+    {"source":4, "target":19, "value":5},
+    {"source":5, "target":6, "value":10},
+    {"source":5, "target":9, "value":4},
+    {"source":7, "target":8, "value":10},
+    {"source":8, "target":9, "value":3},
+    {"source":14, "target":19, "value":10},
+    {"source":18, "target":19, "value":7}
 ]
 }
