@@ -3,10 +3,12 @@ import scala.io.Source
 import scala.xml.NodeSeq
 import scala.xml.Unparsed
 import scala.xml.XML
-import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.Topic
 import ch.epfl.craft.recom.model.administration.Teacher
-import ch.epf.craft.recom.
+import ch.epfl.craft.recom.model.administration.Head
+import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.Course
 
 object ISAxmlImporter extends App {
 	
@@ -16,46 +18,23 @@ object ISAxmlImporter extends App {
   var ss = new Array[Set[Array[String]]](5)
   ss = Array(Set.empty,Set.empty,Set.empty,Set.empty,Set.empty)
   
-  items.foreach{ i => 
+  val sem = Semester("2012", "fall")
+  
+  val cl = items.map{ i => 
     val f = (i \ "XCle").text.split("_").toList
   	val lib = (i \ "XLibelle").text.split(";").toIterator
 
-  	f.filter(_.substring(0,1) == "M").map{ s =>
-  	  new Topic(s, lib.next, Section(""), Set.empty, None)
-    }
+  	val topic = f.find(s =>  s.size > 1 && s.substring(0,1) == "M").map(s =>
+  	  new Topic(s, lib.next, Section(""), Set.empty, None))
     
-  	f.filter(_.substring(0,1) == "G").foreach(s => lib.next())
+  	f.filter(s => s.size > 1 && s.substring(0,1) == "G").foreach(s => lib.next())
   	
-  	f.filter(_.substring(0,1) == "P").foreach()
+  	val teachers = f.filter(s => s.size > 1 && s.substring(0,1) == "P").map(s =>
+  	  new Teacher(s, None)).toList
   	
-  	/*
-  	printf("%d elements: ",lib.size)
-
-  	lib.size match {
-  	  case 1 => ss(0) = ss(0) + lib
-  	    lib.foreach(printf("%s | ",_))
-  	  case 2 => ss(1) = ss(1) + lib
-  	    lib.foreach(printf("%s | ",_))
-  	  case 3 => ss(2) = ss(2) + lib
-  		val name = lib(0)
-  		val loc = lib(1).split(",")(0)
-  		val prof = lib(2)
-  		
-  		printf("%s | %s | %s ", name, loc, prof)
-  	  case 4 => ss(3) = ss(3) + lib
-  	  	lib.foreach(printf("%s | ",_))
-  	  case _ =>  ss(4) = ss(4) + lib
-  	    lib.foreach(printf("%s | ",_))
-
-  	}
-  	print("\n") */
-  }
-    	ss.foreach(s => printf("%d\n",s.size))
-
-  
-  
-  def makeCourses(il: NodeSeq) = il.map{
-    null
-  }
-	
+  	val head = Head(teachers, List.empty)
+  	
+  	topic.map(Course(_, sem, head))
+  }.flatten
+	cl.foreach(println _)
 }
