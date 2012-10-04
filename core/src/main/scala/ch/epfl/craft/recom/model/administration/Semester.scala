@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
  */
 
 sealed trait Semester{
-  val year:Date
+  val year: Date
   
   def equals(s: Semester) = {
 		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
