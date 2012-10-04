@@ -23,5 +23,4 @@ class TopicRelationMap extends LongKeyedMapper[TopicRelationMap] with IdPK{
 }
 
 object TopicRelationMap extends TopicRelationMap with LongKeyedMetaMapper[TopicRelationMap]{
-  
 }

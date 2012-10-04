@@ -1,8 +1,6 @@
 package ch.epfl.craft.recom.processing.graph
-import ch.epfl.craft.recom.processing.TopicRelation
 import ch.epfl.craft.recom.util.TimeRange
 import ch.epfl.craft.recom.model.administration.Section
-import ch.epfl.craft.recom.processing.TopicMeta
 
 /**
  * Represents the picture of the topics and what we can learn from the student's history and 

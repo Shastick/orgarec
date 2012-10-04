@@ -1,14 +1,10 @@
-package ch.epfl.craft.recom.processing
+package ch.epfl.craft.recom.processing.graph
 import ch.epfl.craft.recom.model.administration.Semester
 
 trait TopicRelation
 trait DirectedRelation extends TopicRelation
 
-trait CourseRelation extends TopicRelation {
-  val semester: Semester
-}
-
-case class CoStudents(c: Int, semester: Semester) extends CourseRelation
+case class CoStudents(c: Int, semester: Semester) extends TopicRelation
 case class SemanticDistance(d: Int) extends TopicRelation
 case class Complementary() extends TopicRelation
 case class Redundant() extends TopicRelation

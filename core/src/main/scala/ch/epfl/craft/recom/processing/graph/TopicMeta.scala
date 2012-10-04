@@ -1,11 +1,7 @@
-package ch.epfl.craft.recom.processing
+package ch.epfl.craft.recom.processing.graph
 import ch.epfl.craft.recom.model.administration.Semester
 
 trait TopicMeta
 
-trait CourseMeta extends TopicMeta {
-  val semester: Semester
-}
-
-case class StudentsQuantity(c: Int, semester: Semester) extends CourseMeta
-case class Difficulty(d: Double, semester: Semester) extends CourseMeta 
+case class StudentsQuantity(c: Int) extends TopicMeta
+case class Difficulty(d: Double) extends TopicMeta
