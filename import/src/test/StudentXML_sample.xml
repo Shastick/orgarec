@@ -1,0 +1,23 @@
+<item xsi:type="ns2:inscr_Tinscription">
+	<RGps xsi:type="ns2:inscr_Tgps">
+		<ROrientation xsi:type="ns2:inscr_Tunite">
+			<XCode xsi:type="xsd:string">SC_EPFL</XCode>
+			<XUnite xsi:type="xsd:string">Systèmes de communication - master</XUnite>
+		</ROrientation>
+		<RPeriodepedago xsi:type="ns2:inscr_Tperiode">
+			<XCode xsi:type="xsd:string">MA3</XCode>
+			<XPeriode xsi:type="xsd:string">Master semestre 3</XPeriode>
+		</RPeriodepedago>
+		<RSection xsi:type="ns2:inscr_Tunite">
+			<XCode xsi:type="xsd:string">SC</XCode>
+			<XUnite xsi:type="xsd:string">Systèmes de communication</XUnite>
+		</RSection>
+		<XGps xsi:type="xsd:string">Systèmes de communication - master, 2012-2013, Master semestre 3</XGps>
+		<XPeriodeacad xsi:type="xsd:string">2012-2013</XPeriodeacad>
+		<XTypesem xsi:type="xsd:string">HIVER</XTypesem>
+	</RGps>
+	
+	<XNom xsi:type="xsd:string">Perrochet</XNom>
+	<XPrenom xsi:type="xsd:string">Julien</XPrenom>
+	<XSciper xsi:type="xsd:string">179676</XSciper>
+</item>
