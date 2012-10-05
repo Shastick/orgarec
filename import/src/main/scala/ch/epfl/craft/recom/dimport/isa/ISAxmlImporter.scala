@@ -41,17 +41,54 @@ object ISAxmlImporter extends App {
   val rel = all.map(p => (p._1,p._2.filter(i => !i._2.isEmpty)))
   saveMe(rel, "2007-2012-dump")
 */
-  val o = readMe("2007-2012-dump").asInstanceOf[List[(String,Seq[(String, scala.collection.immutable.Seq[(String, String, 
+  /*val o = readMe("2007-2012-dump").asInstanceOf[List[(String,Seq[(String, scala.collection.immutable.Seq[(String, String, 
  String, String, String)])])]]
   
-  val fil1 = o.map(p => (p._1,p._2.filter(c => !c._2.filter(_._1 == "179676").isEmpty)))
+  // Get a list of all different sciper numbers...
+  val allScip = o.flatMap(_._2.flatMap(_._2.map(_._1))).toSet
+*/
+  // For each sciper number, recompose what course was taken, and only keep course data (not subscribed students)
+  /*
+  println("beginning to map...")
+  var c = 1
+  val cps = allScip.map{ s => 
+    val fil1 = o.map(p => (p._1,p._2.map(c => (c._1,c._2.filter(_._1 == s))).filter(c => !c._2.isEmpty)))
+    if (c % 100 == 0) printf("Done %d so far... current:%s \n",c,(s,fil1))
+
+    c+=1
+    (s,fil1)
+  }
+  println("saving...")
+  saveMe(cps,"2007-2012-courses-per-sciper")
+  println("saved.")
+  */
+  
   //o.filter{e => !e._2.filter(_._1 == "178684").isEmpty}.map(_._1).foreach(println(_))
-  val fil2 = fil1.map(e =>  (e._1,e._2.map(_._1)))
-  fil2.foreach{
+  //val fil2 = fil1.map(e =>  (e._1,e._2.map(_._1)))
+  /*fil2.foreach{
     p => println(p._1 + ":")
     		p._2.foreach(e => println("\t" + e))
     
-  }
+  }*/
+  /*
+  val cps = readMe("2007-2012-courses-per-sciper")
+  		.asInstanceOf[Set[(String,List[(String,
+  		    Seq[(String, scala.collection.immutable.Seq[
+  		          (String, String, String, String, String)])])])]]
+  
+  val cpsc = cps.map(s => (s._1,s._2.map(l => (l._1,l._2.map(c => (c._1,c._2.map(e => (e._2,e._3,e._5))))))))
+  
+  saveMe(cpsc,"2007-2012-cps-clean")
+  //cps.filter(_._1 == "179676").flatMap(_._2).foreach(println(_))
+  */
+  val data = readMe("2007-2012-cps-clean").asInstanceOf[Set[(String, List[(String, Seq[(String, 
+ scala.collection.immutable.Seq[(String, String, String)])])])]]
+  
+  data.filter(_._1 == "179676").foreach(_._2.foreach{
+    p => println(p._1 + ":")
+    p._2.foreach(println(_))
+  })
+  
   def grabSubscribed(key: String) = {
      val studs = grabSubscribedXML(key)
      val items = studs \\ "item"
