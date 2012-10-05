@@ -31,9 +31,12 @@ object ISAxmlImporter extends App {
   		"&wwXSection=" +
   		"&wwXTypesem=" +
   		"&wwXCle=%s"
-  	/*
-  val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
-  val all = periods.map{
+  	
+  /*val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
+  
+  val dict = periods.map(p => (p,courseKeyToName(p))).toMap
+  */
+  /*val all = periods.map{
     p => printf("mapping period %s...\n",p)
       (p,grabCourses(p).map( c => (c._2,grabSubscribed(c._2))))
   }
@@ -81,13 +84,39 @@ object ISAxmlImporter extends App {
   saveMe(cpsc,"2007-2012-cps-clean")
   //cps.filter(_._1 == "179676").flatMap(_._2).foreach(println(_))
   */
-  val data = readMe("2007-2012-cps-clean").asInstanceOf[Set[(String, List[(String, Seq[(String, 
+  		
+  		
+  /*val data = readMe("2007-2012-cps-clean").asInstanceOf[Set[(String, List[(String, Seq[(String, 
  scala.collection.immutable.Seq[(String, String, String)])])])]]
   
-  data.filter(_._1 == "179676").foreach(_._2.foreach{
+  val resolved = data.map(s =>
+    (s._1,s._2.map(p =>
+      (p._1,p._2.map(c =>
+        (dict(p._1)(c._1),c._2.head
+          ))))))
+  saveMe(resolved, "2007-2012-resolved")
+  */
+  val resolved = readMe("2007-2012-resolved").asInstanceOf[Set[(String, List[(String, Seq[(String, (String, String, 
+ String))])])]]
+  
+  resolved.filter(_._1 == "179676").foreach(_._2.foreach{
     p => println(p._1 + ":")
-    p._2.foreach(println(_))
+    p._2.foreach(s => println("\t" + s))
   })
+  
+  		
+  def courseKeyToName(yr: String): Map[String, String] = {
+    val xml = grabCoursesXML(yr)
+    val items = xml \\ "item" 
+    
+    val cl = items.map{ i => 
+	    val fstr = (i \ "XCle").text
+	    val ckey = fstr
+	  	val name = (i \ "XLibelle").text.split(";")(0)
+	  	(ckey, name)
+    }.toMap
+    cl
+  }
   
   def grabSubscribed(key: String) = {
      val studs = grabSubscribedXML(key)
