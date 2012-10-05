@@ -31,7 +31,7 @@ object ISAxmlImporter extends App {
   		"&wwXSection=" +
   		"&wwXTypesem=" +
   		"&wwXCle=%s"
-  	
+  	/*
   val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
   val all = periods.map{
     p => printf("mapping period %s...\n",p)
@@ -40,13 +40,13 @@ object ISAxmlImporter extends App {
   
   val rel = all.map(p => (p._1,p._2.filter(i => !i._2.isEmpty)))
   saveMe(rel, "2007-2012-dump")
-
+*/
   val o = readMe("2007-2012-dump").asInstanceOf[List[(String,Seq[(String, scala.collection.immutable.Seq[(String, String, 
  String, String, String)])])]]
   
   val fil1 = o.map(p => (p._1,p._2.filter(c => !c._2.filter(_._1 == "179676").isEmpty)))
   //o.filter{e => !e._2.filter(_._1 == "178684").isEmpty}.map(_._1).foreach(println(_))
-  val fil2 = rel.map(e =>  (e._1,e._2.map(_._1)))
+  val fil2 = fil1.map(e =>  (e._1,e._2.map(_._1)))
   fil2.foreach{
     p => println(p._1 + ":")
     		p._2.foreach(e => println("\t" + e))
