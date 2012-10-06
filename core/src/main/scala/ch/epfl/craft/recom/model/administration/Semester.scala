@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
  */
 
-sealed trait Semester{
+trait Semester{
   val year: Date
   
   def equals(s: Semester) = {
@@ -26,13 +26,14 @@ sealed trait Semester{
 case class Spring(val year: Date) extends Semester
 case class Fall(val year: Date) extends Semester
 
+
 object Semester {
   
   val df = new SimpleDateFormat("yyyy")
   
   def apply(y: Date, s: String): Semester = s.toLowerCase match {
-    case "spring" => Spring(y)
-    case "fall" => Fall(y)
+    case "spring" | "ete" => Spring(y)
+    case "fall" | "hiver" => Fall(y)
     case _ => throw new Exception("Bad Semester Specification:" + s)
   }
   
