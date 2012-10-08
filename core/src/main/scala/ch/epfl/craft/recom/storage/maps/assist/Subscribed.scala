@@ -9,6 +9,7 @@ import net.liftweb.mapper.MappedLongForeignKey
 import ch.epfl.craft.recom.model.TakenCourse
 import ch.epfl.craft.recom.model.Student
 import net.liftweb.mapper.By
+import ch.epfl.craft.recom.storage.maps.AcademicSemesterMap
 
 /**
  * Mapper class representing the relation between a student and the courses he takes.
@@ -18,6 +19,7 @@ class Subscribed extends LongKeyedMapper[Subscribed] with IdPK {
 	
 	object student extends MappedLongForeignKey(this, StudentMap)
 	object course extends MappedLongForeignKey(this, CourseMap)
+	object academicSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
 	
 	object counter extends MappedInt(this)
 	object grade extends MappedInt(this)
@@ -32,6 +34,7 @@ object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{
 	  val sub = Subscribed.findOrCreate(
 			  			By(Subscribed.course,cm.id),
 	  	      			By(Subscribed.student,sm.id))
+	  sub.academicSemester(AcademicSemesterMap.fill(t.semester))
 	  sub.student(sm.id)
 	  sub.course(cm.id)
 	  sub.counter(t.count)

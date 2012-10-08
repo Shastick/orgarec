@@ -2,8 +2,8 @@ package ch.epfl.craft.recom.model.administration
 import java.util.Date
 
 sealed trait AcademicSemester extends Semester {
-  val s: Semester
-  override def year = s.year
+  val semester: Semester
+  override def year = semester.year
 }
 case class BA1(s: Semester) extends AcademicSemester
 case class BA2(s: Semester) extends AcademicSemester
