@@ -22,6 +22,7 @@ class PGDBFactory (
 		  				CourseMap,
 		  				SectionMap,
 		  				SemesterMap,
+		  				AcademicSemesterMap,
 		  				StaffMap,
 		  				StudentMap,
 		  				TopicMap,

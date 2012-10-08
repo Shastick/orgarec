@@ -20,6 +20,7 @@ class MapSpecs extends Specification {
 	
 	/* Define test objects */
 	val (s1, s2, s3, s4) = (Spring(y1), Fall(y1), Spring(y2), Fall(y2))
+	val (as1,as2,as3,as4) = (AcademicSemester("BA1",s1),AcademicSemester("BA2",s2),AcademicSemester("BA3",s3),AcademicSemester("BA4",s4))
 	val (f1,f2) = (Section("Informatique"),Section("Syscom"))
 	val (t1,t2) = (Teacher("André",Some(f2)), Teacher("Jamila",Some(f1)))
 	val (a1,a2) = (Assistant("Maxime",Some(f2)),Assistant("Acacio",Some(f1)))
@@ -30,10 +31,10 @@ class MapSpecs extends Specification {
 	val topics = Set(b1,b2,b3)
 	val (c1,c2,c3) = (Course(b1,s3,h1), Course(b2,s2,h2), Course(b3,s1,h2))
 	
-	val tc = Set(TakenCourse(c1, 1, None, None), TakenCourse(c2,1,None,None), TakenCourse(c3,1,None,None))
+	val tc = Set(TakenCourse(c1, 1, None, None,as3), TakenCourse(c2,1,None,None,as2), TakenCourse(c3,1,None,None,as1))
 	
-	val (e1,e2) = (new Student(179767,s1,Some(f2),Some(s4),Set(s1,s2,s3,s4), tc),
-					new Student(200000,s1,Some(f1),Some(s4),Set(s1,s2,s3,s4), tc))
+	val (e1,e2) = (new Student(179767,as1,Some(f2),Some(as4),Set(as1,as2,as3,as4), tc),
+					new Student(200000,as1,Some(f1),Some(as4),Set(as1,as2,as3,as4), tc))
 	
 	/* Semesters */
 	"A SemesterMap" should {
@@ -115,6 +116,7 @@ class MapSpecs extends Specification {
 	    st.section must beEqualTo(e1.section)
 	    st.currentSemester.get.equals(e1.currentSemester.get) must beTrue
 	    st.courses.map(_.course.id) must beEqualTo(e1.courses.map(_.course.id))
+	    st.courses.map(_.semester) must beEqualTo(e1.courses.map(_.semester))
 	  } 
 	}
 	

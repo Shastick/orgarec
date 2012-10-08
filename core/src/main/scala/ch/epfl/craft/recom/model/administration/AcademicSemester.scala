@@ -1,25 +1,33 @@
 package ch.epfl.craft.recom.model.administration
 import java.util.Date
+import java.util.Calendar
 
-sealed trait AcademicSemester extends Semester {
+sealed trait AcademicSemester {
   val semester: Semester
-  override def year = semester.year
+  val year = semester.year
+  
+  def equals(s: AcademicSemester) = 
+		if(this.getClass.getSimpleName == s.getClass.getSimpleName){
+    		val ct = Calendar.getInstance; ct.setTime(this.year)
+    		val cs = Calendar.getInstance; cs.setTime(s.year)
+    		ct.get(Calendar.YEAR) == cs.get(Calendar.YEAR)
+    } else false
 }
-case class BA1(s: Semester) extends AcademicSemester
-case class BA2(s: Semester) extends AcademicSemester
-case class BA3(s: Semester) extends AcademicSemester
-case class BA4(s: Semester) extends AcademicSemester
-case class BA5(s: Semester) extends AcademicSemester
-case class BA6(s: Semester) extends AcademicSemester
+case class BA1(semester: Semester) extends AcademicSemester
+case class BA2(semester: Semester) extends AcademicSemester
+case class BA3(semester: Semester) extends AcademicSemester
+case class BA4(semester: Semester) extends AcademicSemester
+case class BA5(semester: Semester) extends AcademicSemester
+case class BA6(semester: Semester) extends AcademicSemester
 
-case class MA1(s: Semester) extends AcademicSemester
-case class MA2(s: Semester) extends AcademicSemester
-case class MA3(s: Semester) extends AcademicSemester
+case class MA1(semester: Semester) extends AcademicSemester
+case class MA2(semester: Semester) extends AcademicSemester
+case class MA3(semester: Semester) extends AcademicSemester
 
-case class H(s: Semester) extends AcademicSemester
+case class H(semester: Semester) extends AcademicSemester
 
 object AcademicSemester {
-  def apply(lvl: String, sem: Semester) = lvl.toUpperCase match {
+  def apply(lvl: String, sem: Semester): AcademicSemester = lvl.toUpperCase match {
     case "BA1" => BA1(sem)
     case "BA2" => BA2(sem)
     case "BA3" => BA3(sem)
@@ -30,5 +38,6 @@ object AcademicSemester {
     case "MA2" => MA2(sem)
     case "MA3" => MA3(sem)
     case "H" => H(sem)
+    case _ => throw new Exception("Unknown Academic Semester Definition.")
   }
 }

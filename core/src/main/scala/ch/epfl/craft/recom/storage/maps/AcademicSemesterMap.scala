@@ -23,7 +23,7 @@ object AcademicSemesterMap extends AcademicSemesterMap with LongKeyedMetaMapper[
   
   def fill(in: AcademicSemester): AcademicSemesterMap = {
     val s = SemesterMap.fill(in.semester)
-    val c = in.getClass.getName
+    val c = in.getClass.getSimpleName
     val am = AcademicSemesterMap.findOrCreate(
         By(this.semester, s),
         By(this.level, c))
