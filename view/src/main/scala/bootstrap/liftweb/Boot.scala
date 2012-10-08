@@ -22,8 +22,8 @@ class Boot {
     // Build SiteMap
     val entries = List(
       Menu.i("Home") / "index", // the simple way to declare a menu
-      Menu.i("Monk") / "index-monk"
-
+      //Menu.i("Monk") / "index-monk"
+      Menu.i("Lift Graph") / "graph_visualisation"
       // more complex because this menu allows anything in the
       // /static path to be visible
       /*Menu(Loc("Static", Link(List("static"), true, "/static/index"),

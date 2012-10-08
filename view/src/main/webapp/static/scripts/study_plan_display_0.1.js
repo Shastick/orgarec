@@ -68,31 +68,12 @@ d3.json("static/scripts/study_plan_0.1.json", function(json) {
         .attr("class", "node")
         .style("fill","#c6dbef")
         .attr("r", function(d){return d.credits *5+"px";}) ;
-        //.attr("fill", "orange")
-        //.attr("stroke", "blue")
-        //.attr("stroke-width", "1");
-
-    /*
-    node.append("text")
-        .attr("class", "nodetext")
-        .attr("dy", ".3em")
-        .attr("text-anchor", "middle")
-        .text(function(d) { return d.order +" - " + d.name })
-        .style("max-width", function(d){return d.credits*7 +"px";});
-    */
 
     node.append("text")
         .attr("class", "nodetext")
         .attr("text-anchor", "middle")
         .attr("dy", ".3em")
         .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
-
-    /*
-    node.append("title")
-        .text(function(d) { return d.name; }); */
-
-    /*node.append("svg:circle")
-        .attr("stroke", "black"); */
 
     $('svg circle').tipsy({
         gravity: 'w',
