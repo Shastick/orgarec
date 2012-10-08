@@ -29,6 +29,6 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   
   /* Students */
   def saveStudents(tl: Iterable[Student]) = StudentMap.fill(tl)
-  def readStudent(sid: Int): Option[Student] = StudentMap.read(sid)
+  def readStudent(sid: Student.StudentID): Option[Student] = StudentMap.read(sid)
   
 }

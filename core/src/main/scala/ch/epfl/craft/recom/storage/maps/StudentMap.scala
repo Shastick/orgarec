@@ -9,11 +9,14 @@ import net.liftweb.mapper.LongKeyedMapper
 import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedInt
 import net.liftweb.mapper.MappedLongForeignKey
+import net.liftweb.mapper.MappedString
 
 class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 	def getSingleton = StudentMap
 	
-	object sciper extends MappedInt(this)
+	val sciper_len = 6
+	
+	object sciper extends MappedString(this, sciper_len)
 	object arrival extends MappedLongForeignKey(this, AcademicSemesterMap)
 	object section extends MappedLongForeignKey(this,SectionMap)
 	object currentSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
@@ -55,6 +58,6 @@ object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
     new Student(s.sciper, s.arrival.map(_.read).get,s.section.map(_.read),s.currentSemester.map(_.read),history,courses)
   }
   
-  def read(sid: Int): Option[Student] =
+  def read(sid: Student.StudentID): Option[Student] =
     StudentMap.findAll(By(StudentMap.sciper, sid)).headOption.map(_.read)
 }

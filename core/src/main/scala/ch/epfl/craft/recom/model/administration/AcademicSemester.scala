@@ -27,6 +27,11 @@ case class MA3(semester: Semester) extends AcademicSemester
 case class H(semester: Semester) extends AcademicSemester
 
 object AcademicSemester {
+  
+  def apply(lvl: String, year: String, season: String): AcademicSemester = 
+    apply(lvl, Semester(year,season))
+  
+  
   def apply(lvl: String, sem: Semester): AcademicSemester = lvl.toUpperCase match {
     case "BA1" => BA1(sem)
     case "BA2" => BA2(sem)

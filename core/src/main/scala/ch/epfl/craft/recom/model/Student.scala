@@ -4,7 +4,7 @@ import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 class Student(
-    val id: Int,
+    val id: Student.StudentID,
     val arrival: AcademicSemester,
     val section: Option[Section],
 	val currentSemester: Option[AcademicSemester],
@@ -14,7 +14,7 @@ class Student(
 )
 
 object Student {
-  type StudentID = Int
+  type StudentID = String
 }
 
 case class TakenCourse(course: Course,

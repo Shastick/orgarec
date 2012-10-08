@@ -33,8 +33,8 @@ class MapSpecs extends Specification {
 	
 	val tc = Set(TakenCourse(c1, 1, None, None,as3), TakenCourse(c2,1,None,None,as2), TakenCourse(c3,1,None,None,as1))
 	
-	val (e1,e2) = (new Student(179767,as1,Some(f2),Some(as4),Set(as1,as2,as3,as4), tc),
-					new Student(200000,as1,Some(f1),Some(as4),Set(as1,as2,as3,as4), tc))
+	val (e1,e2) = (new Student("179767",as1,Some(f2),Some(as4),Set(as1,as2,as3,as4), tc),
+					new Student("200000",as1,Some(f1),Some(as4),Set(as1,as2,as3,as4), tc))
 	
 	/* Semesters */
 	"A SemesterMap" should {
