@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.model.administration.Spring
 import ch.epfl.craft.recom.model.Student
+import ch.epfl.craft.recom.model.TakenCourse
 
 object ISAxmlImporter extends App {
 	
@@ -121,9 +122,36 @@ object ISAxmlImporter extends App {
     val curr_sem = determineCurrent(last_yr)
     
     val sem_hist = extractSem(s._2)
+    
+    val courses = extractCourses(s._2)
           
   }
-  		
+  
+  def extractCourses(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
+	  Set[TakenCourse] = {
+		  yrs.flatMap{ y => 
+		    y._2.map{ c => 
+		      val cid = c._1
+		      val n = c._2
+		      val sect = c._3._1
+		      val pre = Set.empty[Topic.TopicID]
+		      val descr = None
+		      val creds = None
+		      val yt = y._1.split("-")
+		      val s = c._3._3 match {
+		        case "ETE" => Semester(yt(1),"ETE")
+		        case "HIVER" => Semester(yt(0),"HIVER")
+		      }
+		      val h = Head.empty
+		      
+		      val as = AcademicSemester(c._3._2,s)
+		      
+		      val cours = new Course(cid,n,Section(sect),pre,descr, creds, s, h)
+		      TakenCourse(cours,1,None,None,as)
+		    }
+		  }.toSet
+  }
+  
   def extractSem(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
 	  Set[AcademicSemester] = 
 		  yrs.flatMap{ y => 
@@ -148,14 +176,14 @@ object ISAxmlImporter extends App {
   def determineCurrent(c: (String,Seq[(String,String,(String,String,String))])): Option[AcademicSemester] = {
     if(c._2.isEmpty) None 
     else {
-	    val l = c._2.map(t => (t._3._2,t._3._3))
+	    val l = c._2.map(t => (t._3._2,t._3._3)).toSet
 	    val yrs = c._1.split("-")
 	    val h = l.head
 	    val lvl = h._1 match {
-	      case "BA1" => if(l.contains("BA2")) "BA2" else "BA1"
-	      case "BA3" => if(l.contains("BA4")) "BA4" else "BA3"
-	      case "BA5" => if(l.contains("BA6")) "BA6" else "BA5"
-	      case "MA1" => if(l.contains("MA2")) "MA2" else "MA1"
+	      case "BA1" => if(l.size == 2) "BA2" else "BA1"
+	      case "BA3" => if(l.size == 2) "BA4" else "BA3"
+	      case "BA5" => if(l.size == 2) "BA6" else "BA5"
+	      case "MA1" => if(l.size == 2) "MA2" else "MA1"
 	      case s: String => s
 	    }
 	    val yr = h._2 match {
