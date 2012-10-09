@@ -13,6 +13,11 @@ import java.io.ObjectOutputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
 import java.io.FileInputStream
+import ch.epfl.craft.recom.model.administration.Fall
+import java.text.SimpleDateFormat
+import ch.epfl.craft.recom.model.administration.AcademicSemester
+import ch.epfl.craft.recom.model.administration.Spring
+import ch.epfl.craft.recom.model.Student
 
 object ISAxmlImporter extends App {
 	
@@ -31,8 +36,8 @@ object ISAxmlImporter extends App {
   		"&wwXSection=" +
   		"&wwXTypesem=" +
   		"&wwXCle=%s"
-  	
-  /*val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
+  /*
+  val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
   
   val dict = periods.map(p => (p,courseKeyToName(p))).toMap
   */
@@ -85,18 +90,19 @@ object ISAxmlImporter extends App {
   //cps.filter(_._1 == "179676").flatMap(_._2).foreach(println(_))
   */
   		
-  		
-  /*val data = readMe("2007-2012-cps-clean").asInstanceOf[Set[(String, List[(String, Seq[(String, 
+  /*		
+  val data = readMe("2007-2012-cps-clean").asInstanceOf[Set[(String, List[(String, Seq[(String, 
  scala.collection.immutable.Seq[(String, String, String)])])])]]
   
   val resolved = data.map(s =>
     (s._1,s._2.map(p =>
       (p._1,p._2.map(c =>
-        (dict(p._1)(c._1),c._2.head
+        (c._1,dict(p._1)(c._1),c._2.head
           ))))))
   saveMe(resolved, "2007-2012-resolved")
   */
-  val resolved = readMe("2007-2012-resolved").asInstanceOf[Set[(String, List[(String, Seq[(String, (String, String, 
+  		
+  val resolved = readMe("2007-2012-resolved").asInstanceOf[Set[(String, List[(String, Seq[(String, String, (String, String, 
  String))])])]]
   
   resolved.filter(_._1 == "179676").foreach(_._2.foreach{
@@ -104,7 +110,62 @@ object ISAxmlImporter extends App {
     p._2.foreach(s => println("\t" + s))
   })
   
+  resolved.map{ s => 
+    val scip = s._1
+    val arrival_year = s._2.filter(!_._2.isEmpty).head._1.split("-")(0)
+    val arrival_lvl = s._2.filter(!_._2.isEmpty).head._2.headOption.map(c => c._3._2)
+    .map(determineStart(_)).get
+    
+    val sect = s._2.filter(!_._2.isEmpty).head._2.head._3._1
+    val last_yr = s._2.last
+    val curr_sem = determineCurrent(last_yr)
+    
+    val sem_hist = extractSem(s._2)
+          
+  }
   		
+  def extractSem(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
+	  Set[AcademicSemester] = 
+		  yrs.flatMap{ y => 
+		    val s = y._2.map(c => (c._3._2,c._3._3)).toSet
+		    val yr = y._1.split("-")
+				s.map{ 
+		      case (l,"HIVER") => AcademicSemester(l,yr(0),"HIVER")
+		      case (l,"ETE") => AcademicSemester(l,yr(1),"ETE")
+		    }
+  	}.toSet
+
+  
+  def determineStart(lvl: String) = lvl match {
+      case "BA1" | "BA2" => "BA1"
+      case "BA3" | "BA4" => "BA3"
+      case "BA5" | "BA6" => "BA5"
+
+      case "MA1" | "MA2" => "MA1"
+      case "H" => "H"
+  }
+    
+  def determineCurrent(c: (String,Seq[(String,String,(String,String,String))])): Option[AcademicSemester] = {
+    if(c._2.isEmpty) None 
+    else {
+	    val l = c._2.map(t => (t._3._2,t._3._3))
+	    val yrs = c._1.split("-")
+	    val h = l.head
+	    val lvl = h._1 match {
+	      case "BA1" => if(l.contains("BA2")) "BA2" else "BA1"
+	      case "BA3" => if(l.contains("BA4")) "BA4" else "BA3"
+	      case "BA5" => if(l.contains("BA6")) "BA6" else "BA5"
+	      case "MA1" => if(l.contains("MA2")) "MA2" else "MA1"
+	      case s: String => s
+	    }
+	    val yr = h._2 match {
+	      case "HIVER" => yrs(0)
+	      case "ETE" => yrs(1)
+	    }
+	    Some(AcademicSemester(lvl,yr,h._2))
+    }
+  }
+  
   def courseKeyToName(yr: String): Map[String, String] = {
     val xml = grabCoursesXML(yr)
     val items = xml \\ "item" 
