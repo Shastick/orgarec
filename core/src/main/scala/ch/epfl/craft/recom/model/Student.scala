@@ -11,7 +11,15 @@ class Student(
 	val semesterHistory: Set[AcademicSemester],
 	
 	val courses: Set[TakenCourse]
-)
+    
+) {
+      override def toString = ("Student: %s\n" +
+    		"\t arrival: %s\n" +
+    		"\t section: %s\n" +
+    		"\t currentSemester: %s\n" +
+    		"\t history: %s\n" +
+    		"\t courses: %s\n").format(id, arrival, section, currentSemester, semesterHistory, courses)
+}
 
 object Student {
   type StudentID = String

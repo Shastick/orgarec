@@ -19,8 +19,13 @@ import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.model.administration.Spring
 import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.TakenCourse
+import ch.epfl.craft.recom.storage.db.PGDBFactory
+import ch.epfl.craft.recom.storage.db.Storage
 
 object ISAxmlImporter extends App {
+	
+  val dbf = new PGDBFactory("localhost","orgarec","julien","dorloter")
+	val s = dbf.store
 	
   /* need to specify academic period in the form: 2012-2013 */
   val courses_url = "http://isa.epfl.ch/wsa/cles/ClesInscr?" +
@@ -102,20 +107,23 @@ object ISAxmlImporter extends App {
           ))))))
   saveMe(resolved, "2007-2012-resolved")
   */
-  		
+  
+  println("Reading data file...")
   val resolved = readMe("2007-2012-resolved").asInstanceOf[Set[(String, List[(String, Seq[(String, String, (String, String, 
  String))])])]]
-  
+  /*
   resolved.filter(_._1 == "179676").foreach(_._2.foreach{
     p => println(p._1 + ":")
     p._2.foreach(s => println("\t" + s))
-  })
-  
-  resolved.map{ s => 
+  })*/
+  println("Converting to objects...")
+  val objs = resolved.map{ s => 
     val scip = s._1
     val arrival_year = s._2.filter(!_._2.isEmpty).head._1.split("-")(0)
     val arrival_lvl = s._2.filter(!_._2.isEmpty).head._2.headOption.map(c => c._3._2)
     .map(determineStart(_)).get
+    
+    val arr_sem = AcademicSemester(arrival_lvl,arrival_year,"HIVER")
     
     val sect = s._2.filter(!_._2.isEmpty).head._2.head._3._1
     val last_yr = s._2.last
@@ -124,8 +132,12 @@ object ISAxmlImporter extends App {
     val sem_hist = extractSem(s._2)
     
     val courses = extractCourses(s._2)
-          
+    
+    new Student(scip, arr_sem, Some(Section(sect)), curr_sem, sem_hist, courses)
   }
+  println("saving objects...")
+  s.saveStudents(objs)
+  println("done.")
   
   def extractCourses(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
 	  Set[TakenCourse] = {
@@ -170,7 +182,7 @@ object ISAxmlImporter extends App {
       case "BA5" | "BA6" => "BA5"
 
       case "MA1" | "MA2" => "MA1"
-      case "H" => "H"
+      case s: String => s
   }
     
   def determineCurrent(c: (String,Seq[(String,String,(String,String,String))])): Option[AcademicSemester] = {

@@ -25,6 +25,10 @@ case class MA2(semester: Semester) extends AcademicSemester
 case class MA3(semester: Semester) extends AcademicSemester
 
 case class H(semester: Semester) extends AcademicSemester
+case class PMH(semester: Semester) extends AcademicSemester
+case class PME(semester: Semester) extends AcademicSemester
+case class E(semester: Semester) extends AcademicSemester
+
 
 object AcademicSemester {
   
@@ -43,6 +47,9 @@ object AcademicSemester {
     case "MA2" => MA2(sem)
     case "MA3" => MA3(sem)
     case "H" => H(sem)
-    case _ => throw new Exception("Unknown Academic Semester Definition.")
+    case "PMH" => PMH(sem)
+    case "PME" => PME(sem)
+    case "E" => E(sem)
+    case _ => throw new Exception("Unknown Academic Semester Definition: " + lvl)
   }
 }
