@@ -88,6 +88,8 @@ class GraphVisual {
     val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jedges)::Nil)
     JGraph
   }
+
+ def getJson = JsCrVar("graph",graph2Json).toJsCmd
   
   def showGraph = {
     <head>
@@ -98,10 +100,14 @@ class GraphVisual {
       <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
     </head> ++
       <h3>Bachelor 5/6 - Communication Systems</h3> ++
+      <!-- <div id="data-container">
+        <script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>
+      </div> -->
       <div id="graph-container" width="500px" height="100px">
         <!-- Insert Json data -->
+        <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>  -->
         <script type="text/javascript" src="static/scripts/study_plan_display_lift.js"></script>
-      </>
+      </div>
 
   }
 }
