@@ -10,6 +10,7 @@ import net.liftweb.common._
 import Helpers._
 import http._
 import js.JsCmds._
+import rest.RestHelper
 
 
 /**
@@ -19,7 +20,7 @@ import js.JsCmds._
  * Time: 13:39
  * To change this template use File | Settings | File Templates.
  */
-class GraphVisual {
+object GraphVisual {
   case class Graph(nodes:List[Node], edges:List[Edge])
   case class Node(order:Int, name:String, alias:String, credits:Int){
     val toJObject = JObject(List(
@@ -102,12 +103,27 @@ class GraphVisual {
       <h3>Bachelor 5/6 - Communication Systems</h3> ++
       <!-- <div id="data-container">
         <script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>
-      </div> -->
-      <div id="graph-container" width="500px" height="100px">
-        <!-- Insert Json data -->
-        <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>  -->
-        <script type="text/javascript" src="static/scripts/study_plan_display_lift.js"></script>
+      </div>  -->
+      <div id="graph_and_infos" class="graph_wrapper" width=" 800px">
+        <div id="controls-container" class="left_box">
+
+        </div>
+        <div id="graph-container" class="main_box">
+          <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>-->
+          <script type="text/javascript" src="static/scripts/study_plan_display_lift.js"></script>
+        </div>
+        <div id="info-container" class="right_box">
+          Bonjour!
+        </div>
       </div>
 
+  }
+}
+
+object MyGraphApi extends RestHelper {
+  serve {
+    case Req("graph" :: Nil, _, GetRequest)  => {
+      JsonResponse(GraphVisual.graph2Json)
+    }
   }
 }

@@ -8,6 +8,7 @@ import common._
 import http._
 import sitemap._
 import Loc._
+import code.snippet.MyGraphApi
 
 
 /**
@@ -21,14 +22,8 @@ class Boot {
 
     // Build SiteMap
     val entries = List(
-      Menu.i("Home") / "index", // the simple way to declare a menu
-      //Menu.i("Monk") / "index-monk"
-      Menu.i("Lift Graph") / "graph_visualisation"
-      // more complex because this menu allows anything in the
-      // /static path to be visible
-      /*Menu(Loc("Static", Link(List("static"), true, "/static/index"),
-	       "Static Content"))        */
-
+      Menu.i("Home") / "index",// the simple way to declare a menu
+      Menu.i("Monk") / "index-monk"
     )
 
     // set the sitemap.  Note if you don't want access control for
@@ -48,6 +43,8 @@ class Boot {
 
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
+
+    LiftRules.statelessDispatchTable.append(MyGraphApi)
 
   }
 }

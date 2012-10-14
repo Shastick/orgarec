@@ -9,7 +9,30 @@ circle.node {
     cursor: pointer;
 }
 
-line.link {
-    fill: none;
-    stroke: #9ecae1;
+
+div.graph_wrapper{
+    display: block;
+    width: 960px;
+}
+
+div.left_box{
+    float: left;
+    border: 1px solid gray;
+    width: 192px;
+    height: 500px;
+}
+div.main_box{
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid gray;
+    width: 550px;
+    height: 500px;
+}
+
+div.right_box{
+    float: left;
+    border: 1px solid gray;
+    width: 192px;
+    height: 500px;
 }
