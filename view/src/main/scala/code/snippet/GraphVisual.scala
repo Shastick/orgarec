@@ -78,6 +78,8 @@ object GraphVisual {
 
   val myGraph = Graph(nodes, edges) 
 
+
+  /* Get Json representation of the graph */
   def graph2Json = {
     val Jnodes = JArray(nodes.map(_.toJObject))
     val Jedges = JArray(edges.map(_.toJObject))
@@ -85,49 +87,21 @@ object GraphVisual {
     JGraph
   }
 
+  /* Get Json data to include on left side of screen, details about nodes for now */
   def details2Json(id:Int) = {
     val node = nodes.find(_.order == id)
     val name = if(node.isDefined) node.get.name else "node not defined"
     JString(name)
   }
 
- def getJson = JsCrVar("graph",graph2Json).toJsCmd
-  
-  def showGraph = {
-    <head>
-      <script type="text/javascript" src="static/scripts/d3/d3.v2.js"></script>
-      <script type="text/javascript" src="static/scripts/jquery-1.8.2.min.js"></script>
-      <script type="text/javascript" src="static/scripts/jquery.tipsy.js"></script>
-      <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
-      <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
-    </head> ++
-      <h3>Bachelor 5/6 - Communication Systems</h3> ++
-      <!-- <div id="data-container">
-        <script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>
-      </div>  -->
-      <div id="graph_and_infos" class="graph_wrapper" width=" 800px">
-        <div id="controls-container" class="left_box">
-
-        </div>
-        <div id="graph-container" class="main_box">
-          <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>-->
-          <script type="text/javascript" src="static/scripts/study_plan_display_lift.js"></script>
-        </div>
-        <div id="info-container" class="right_box">
-          Bonjour!
-        </div>
-      </div>
-
-  }
 }
 
 object MyGraphApi extends RestHelper {
   serve {
-    case Req("graph" :: Nil, _, GetRequest)  => {
+    case Req("graph" :: Nil, _, GetRequest)  =>
       JsonResponse(GraphVisual.graph2Json)
-    }
-    case Req("details"::id::Nil, _, GetRequest) => {
+
+    case Req("details"::id::Nil, _, GetRequest) =>
       JsonResponse(GraphVisual.details2Json(id.toInt))
-    }
   }
 }
