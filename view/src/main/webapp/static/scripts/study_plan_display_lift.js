@@ -92,7 +92,12 @@ d3.json("graph", function(json) {
         .attr("r", function(d){return d.credits *5+"px";})
         .attr("stroke", function(d){return "#3182bd";})
         .attr("stroke-width",function(d){return "1.5px";})
-        .on("mouseover", function(d){document.getElementById('info-container').innerHTML= d.name;});
+        .on("mouseover", function(d){
+            d3.json("details/"+ d.order, function(details){
+                document.getElementById('info-container').innerHTML= details;
+            })
+
+        });
 
     /* Add text in middle of circle */
     node.append("text")

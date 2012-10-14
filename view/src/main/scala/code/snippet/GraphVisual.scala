@@ -3,11 +3,6 @@ package code.snippet
 import net.liftweb._
 import json._
 import util._
-import http.js._
-
-import net.liftweb.util.JsonCmd
-import net.liftweb.common._
-import Helpers._
 import http._
 import js.JsCmds._
 import rest.RestHelper
@@ -90,6 +85,12 @@ object GraphVisual {
     JGraph
   }
 
+  def details2Json(id:Int) = {
+    val node = nodes.find(_.order == id)
+    val name = if(node.isDefined) node.get.name else "node not defined"
+    JString(name)
+  }
+
  def getJson = JsCrVar("graph",graph2Json).toJsCmd
   
   def showGraph = {
@@ -124,6 +125,9 @@ object MyGraphApi extends RestHelper {
   serve {
     case Req("graph" :: Nil, _, GetRequest)  => {
       JsonResponse(GraphVisual.graph2Json)
+    }
+    case Req("details"::id::Nil, _, GetRequest) => {
+      JsonResponse(GraphVisual.details2Json(id.toInt))
     }
   }
 }
