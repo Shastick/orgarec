@@ -6,12 +6,29 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var w = 500,
+var w = 550,
     h = 500
 
 var vis = d3.select("#graph-container").append("svg:svg")
     .attr("width", w)
-    .attr("height", h);
+    .attr("height", h)
+    .append('svg:g')
+    .call(d3.behavior.zoom().on("zoom", redraw))
+    .append('svg:g');
+
+vis.append('svg:rect')
+    .attr('width', w)
+    .attr('height', h)
+    .attr('fill', 'transparent');
+
+function redraw() {
+    trans=d3.event.translate;
+    scale=d3.event.scale;
+
+    vis.attr("transform",
+        "translate(" + trans + ")"
+            + " scale(" + scale + ")");
+}
 
 
 d3.json("graph", function(json) {
@@ -96,7 +113,6 @@ d3.json("graph", function(json) {
             d3.json("details/"+ d.order, function(details){
                 document.getElementById('info-container').innerHTML= details;
             })
-
         });
 
     /* Add text in middle of circle */
