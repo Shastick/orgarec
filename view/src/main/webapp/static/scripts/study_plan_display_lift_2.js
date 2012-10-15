@@ -15,16 +15,16 @@ function myGraph(el) {
 
     this.removeNode = function (id) {
         var i = 0;
-        //var n = findNode(id);
-        while (i < links.length) {
-            if ((links[i].source == id)||(links[i].target == id))
-            {
-                links.splice(i,1);
+        var n = findNode(id);
+        if(n != null){
+            while (i < links.length) {
+                if ((links[i]['source'] == n)||(links[i]['target'] == n))
+                    links.splice(i,1);
+                else i++;
             }
-            else i++;
+            nodes.splice(findNodeIndex(id),1);
+            update();
         }
-        nodes.splice(findNodeIndex(id),1);
-        update();
     };
 
     this.removeLink = function (source,target){
@@ -39,6 +39,7 @@ function myGraph(el) {
         update();
     };
 
+
     this.removeallLinks = function(){
         links.splice(0,links.length);
         update();
@@ -49,17 +50,16 @@ function myGraph(el) {
         update();
     };
 
-    this.addLink = function (link) {
-        links.push({"source":findNode(link.source),"target":findNode(link.target),"value":link.value});
+    this.addLink = function (source, target, value) {
+        links.push({"source":findNode(source),"target":findNode(target),"value":value});
         update();
     };
 
     var findNode = function(id) {
-        for (var i=0;i<nodes.length;i++) {
-            if (nodes[i].id == id) {
-                return nodes[i];
-            }
-        };
+        for (var i in nodes) {
+            if (nodes[i]["id"] === id) return nodes[i]
+        ;};
+        return null;
     };
 
     var findNodeIndex = function(id) {
@@ -90,12 +90,14 @@ function myGraph(el) {
 
     var update = function () {
 
-        var link = vis.selectAll("line.link")
-            .data(links)
+        var link = vis.selectAll("line")
+            .data(links, function(d) {
+                return d.source.id + "-" + d.target.id;
+            });
 
         link.enter().insert("svg:line", ".node")
-            .attr("id",function(d){return d.source + "-" + d.target;})
-            //.attr("class","link")
+            .attr("id",function(d){return d.source.id + "-" + d.target.id;})
+            .attr("class","link")
             .attr("stroke", "#9ecae1")
             .attr("stroke-width", 5);
 
@@ -104,6 +106,8 @@ function myGraph(el) {
                 return d.value;
             });
         link.exit().remove();
+
+
 
         /* Functions to drag nodes */
         var node_drag = d3.behavior.drag()
@@ -128,15 +132,17 @@ function myGraph(el) {
             tick();
             force.resume();
         }
+        /*
+        var node = vis.selectAll("g.node")
+            .data(nodes); */
 
         var node = vis.selectAll("g.node")
-            .data(nodes);
-
+            .data(nodes, function(d) {
+                return d.id;});
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
-            .call(node_drag);
-
+            .call(force.drag);
 
         /* Customize circle */
         nodeEnter.append("svg:circle")
@@ -203,9 +209,11 @@ function drawGraph()
         }
 
         for (var i = 0; i < links.length; i++)  {
-            graph.addLink(links[i])
+            graph.addLink(links[i].source, links[i].target, links[i].value)
         }
+
         //graph.removeNode(100);
+        //graph.removeLink(100, 1);
 
     });
 

@@ -1,4 +1,5 @@
-.link { stroke: #ccc; }
+.link {
+}
 .nodetext {
     pointer-events: none;
     font: 10px sans-serif

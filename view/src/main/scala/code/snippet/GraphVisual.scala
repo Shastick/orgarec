@@ -36,7 +36,7 @@ class GraphVisual {
     ))
   }
 
-  val n0 =  Node(0,"Modeles stochastiques pour les communications)", "Mod Stoch",6)
+  val n0 =  Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",6)
   val n1 =  Node(1,"Principles of digital communications","PDC",6)
   val n2 =  Node(2,"Securité des réseaux","Securité",4)
   val n3 =  Node(3,"Signal processing for communications","Signal proc.",6)
@@ -65,9 +65,9 @@ class GraphVisual {
     Edge(n0,n2, 3),
     Edge(n0, n3,8),
     Edge(n0,n10, 5),
-    Edge(n1,n2,2),
+    Edge(n1,n2,3),
     Edge(n1,n3,6),
-    Edge(n1,n5,2),
+    Edge(n1,n5,1),
     Edge(n2,n3,5),
     Edge(n2,n13,5),
     Edge(n4,n19,5),
@@ -85,7 +85,9 @@ class GraphVisual {
 
   def deleteNode = {
     //def delete = JsCmds.Alert("foo")
-    def delete = {println("delete called"); JE.JsFunc("removeNode",0).cmd} //JsCmds.Run("removeNode("+0+")")
+    //def delete = {println("delete called"); JE.JsFunc("removeNode",0).cmd} //JsCmds.Run("removeNode("+0+")")
+    //def delete = {println("delete called"); JE.JsFunc("graph.removeLink",100, 1).cmd}
+    def delete = {println("delete called"); JE.JsFunc("graph.removeNode",100).cmd}
     SHtml.ajaxButton("delete node", () => delete)
   }
 }
