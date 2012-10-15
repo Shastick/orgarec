@@ -1,9 +1,12 @@
 package code.snippet
 
+
 import net.liftweb._
 import json._
 import util._
 import http._
+import js.{JE, JsCmds}
+import SHtml._
 import js.JsCmds._
 import rest.RestHelper
 
@@ -15,11 +18,11 @@ import rest.RestHelper
  * Time: 13:39
  * To change this template use File | Settings | File Templates.
  */
-object GraphVisual {
+class GraphVisual {
   case class Graph(nodes:List[Node], edges:List[Edge])
-  case class Node(order:Int, name:String, alias:String, credits:Int){
+  case class Node(id:Int, name:String, alias:String, credits:Int){
     val toJObject = JObject(List(
-      JField("order", JInt(order)),
+      JField("id", JInt(id)),
       JField("name", JString(name)),
       JField("alias",JString(alias)),
       JField("credits", JInt(credits))
@@ -27,8 +30,8 @@ object GraphVisual {
   }
   case class Edge(source:Node, target:Node, value:Int){
     val toJObject = JObject(List(
-      JField("source", JInt(source.order)),
-      JField("target", JInt(target.order)),
+      JField("source", JInt(source.id)),
+      JField("target", JInt(target.id)),
       JField("value", JInt(value))
     ))
   }
@@ -79,6 +82,15 @@ object GraphVisual {
   val myGraph = Graph(nodes, edges) 
 
 
+
+  def deleteNode = {
+    //def delete = JsCmds.Alert("foo")
+    def delete = {println("delete called"); JE.JsFunc("removeNode",0).cmd} //JsCmds.Run("removeNode("+0+")")
+    SHtml.ajaxButton("delete node", () => delete)
+  }
+}
+
+object GraphVisual extends GraphVisual {
   /* Get Json representation of the graph */
   def graph2Json = {
     val Jnodes = JArray(nodes.map(_.toJObject))
@@ -89,19 +101,11 @@ object GraphVisual {
 
   /* Get Json data to include on left side of screen, details about nodes for now */
   def details2Json(id:Int) = {
-    val node = nodes.find(_.order == id)
+    val node = nodes.find(_.id == id)
     val name = if(node.isDefined) node.get.name else "node not defined"
     JString(name)
   }
 
-}
 
-object MyGraphApi extends RestHelper {
-  serve {
-    case Req("graph" :: Nil, _, GetRequest)  =>
-      JsonResponse(GraphVisual.graph2Json)
 
-    case Req("details"::id::Nil, _, GetRequest) =>
-      JsonResponse(GraphVisual.details2Json(id.toInt))
-  }
 }

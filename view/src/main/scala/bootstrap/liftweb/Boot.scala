@@ -8,7 +8,7 @@ import common._
 import http._
 import sitemap._
 import Loc._
-import code.snippet.MyGraphApi
+import code.snippet.GraphApi
 
 
 /**
@@ -44,7 +44,7 @@ class Boot {
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
-    LiftRules.statelessDispatchTable.append(MyGraphApi)
+    LiftRules.statelessDispatchTable.append(GraphApi)
 
   }
 }

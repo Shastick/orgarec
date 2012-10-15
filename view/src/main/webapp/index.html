@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
         <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
     </head>
-
+    <!--
     <script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery('svg title').parent().tipsy({
@@ -20,19 +20,16 @@
                 title: function() { return $(this).find('title').text()}
             });
         });
-    </script>
-    <!--<div class="lift:GraphVisual.showGraph"></div>   -->
+    </script> -->
     <h3>Bachelor 5/6 - Communication Systems</h3>
-    <!-- <div id="data-container">
-    <script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>
-  </div>  -->
     <div id="graph_and_infos" class="graph_wrapper" width=" 800px">
         <div id="controls-container" class="left_box">
-           Bonjour!
+           <h3>Settings</h3>
+           <lift:GraphVisual.deleteNode/>
         </div>
         <div id="graph-container" class="main_box">
             <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>-->
-            <script type="text/javascript" src="static/scripts/study_plan_display_lift.js"></script>
+            <script type="text/javascript" src="static/scripts/study_plan_display_lift_2.js"></script>
         </div>
         <div id="info-container" class="right_box">
             Bonjour!

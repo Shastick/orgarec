@@ -31,24 +31,10 @@ function redraw() {
 }
 
 
-d3.json("graph", function(json) {
-
-    /* Configure forces */
-    var force = self.force = d3.layout.force()
-        .nodes(json.nodes)
-        .links(json.links)
-        .gravity(.05)
-        .distance(300)
-        .charge(-100)
-        .linkDistance(function(d){return (100 - d.value*3)})
-        .size([w, h])
-        .start();
-
-    /* Create links */
+function createLinks(json, link){
     var link = vis.selectAll("line.link")
         .data(json.links)
         .enter().insert("svg:line", ".node")
-        //.attr("class", "link")
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
@@ -62,15 +48,64 @@ d3.json("graph", function(json) {
     // Setting title
     link.append("title")
         .text("bonjour!");
+    return link;
+}
 
-    /*
-     link.append("svg.g").insert("svg:circle")
-     .style("fill",function(d){return "#c6dbef"})
-     .attr("r", function(d){20+"px";});
-     //.attr("stroke", function(d){return "#3182bd";})
-     //.attr("stroke-width",function(d){return "1.5px";});
-     */
+function createNodes(json){
+    /* Create nodes */
+    var node = vis.selectAll("g.node")
+        .data(json.nodes)
+        .enter().append("svg:g");
+        //.call(node_drag);
 
+    /* Customize circle */
+    node.append("svg:circle")
+        .attr("cursor","pointer")
+        .style("fill",function(d){return "#c6dbef"})
+        .attr("r", function(d){return d.credits *5+"px";})
+        .attr("stroke", function(d){return "#3182bd";})
+        .attr("stroke-width",function(d){return "1.5px";})
+        .on("mouseover", function(d){
+            d3.json("details/"+ d.order, function(details){
+                document.getElementById('info-container').innerHTML= details;
+                //details;
+            })
+        });
+
+    /* Add text in middle of circle */
+    node.append("text")
+        .attr("class", "nodetext")
+        .attr("text-anchor", "middle")
+        .attr("dy", ".3em")
+        .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
+
+    /* Add title */
+    node.append("svg:title")
+        .text(function(d){ return d.order + ' - ' + d.name});
+
+    return node;
+}
+
+var force = d3.layout.force()
+    //.nodes(json.nodes)
+    //.links(json.links)
+    .gravity(.05)
+    .distance(300)
+    .charge(-100)
+    //.linkDistance(function(d){return (100 - d.value*3)})
+    .size([w, h])
+    //.start();
+
+function showGraph(json){
+
+    /* Configure forces */
+    force.nodes(json.nodes)
+        .links(json.links)
+        .linkDistance(function(d){return (100 - d.value*3)})
+        .start();
+
+
+    var link = createLinks(json);
 
     /* Functions to drag nodes */
     var node_drag = d3.behavior.drag()
@@ -96,59 +131,10 @@ d3.json("graph", function(json) {
         force.resume();
     }
 
-    /* Create nodes */
-    var node = vis.selectAll("g.node")
-        .data(json.nodes)
-        .enter().append("svg:g")
-        .call(node_drag);
 
-    /* Customize circle */
-    node.append("svg:circle")
-        .attr("cursor","pointer")
-        .style("fill",function(d){return "#c6dbef"})
-        .attr("r", function(d){return d.credits *5+"px";})
-        .attr("stroke", function(d){return "#3182bd";})
-        .attr("stroke-width",function(d){return "1.5px";})
-        .on("mouseover", function(d){
-            d3.json("details/"+ d.order, function(details){
-                document.getElementById('info-container').innerHTML= details;
-            })
-        });
+    var node = createNodes(json);
 
-    /* Add text in middle of circle */
-    node.append("text")
-        .attr("class", "nodetext")
-        .attr("text-anchor", "middle")
-        .attr("dy", ".3em")
-        .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
-
-    /* Add title */
-    node.append("svg:title")
-        .text(function(d){ return d.order + ' - ' + d.name});
-
-    /* Add image
-    node.append("image")
-        .attr("xlink:href", "https://github.com/favicon.ico")
-        .attr("x", -8)
-        .attr("y", -8)
-        .attr("width", 16)
-        .attr("height", 16);
-     */
-
-    /*
-     $('svg circle').tipsy({
-        gravity: 'w',
-        html: true,
-        title: function() {
-            var d = this.__data__,
-            name = d.name,
-            order = d.order;
-            return order +' - ' +name;
-        }
-     });
-     */
-
-    force.on("tick", tick);
+    node.call(node_drag);
 
     function tick() {
         link.attr("x1", function(d) { return d.source.x; })
@@ -158,5 +144,8 @@ d3.json("graph", function(json) {
 
         node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
     };
-});
 
+    force.on("tick", tick);
+}
+
+d3.json("graph", function(json) {showGraph(json);});
