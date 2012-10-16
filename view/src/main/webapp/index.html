@@ -10,22 +10,19 @@
         <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
         <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
     </head>
-    <!--
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            jQuery('svg title').parent().tipsy({
-                gravity: 'w',
-                hoverlock:true,
-                html: true,
-                title: function() { return $(this).find('title').text()}
-            });
-        });
-    </script> -->
     <h3>Bachelor 5/6 - Communication Systems</h3>
     <div id="graph_and_infos" class="graph_wrapper" width=" 800px">
         <div id="controls-container" class="left_box">
            <h3>Settings</h3>
-           <lift:GraphVisual.deleteNode/>
+            <div class="input-container">
+                Delete Node
+                <lift:GraphVisual.deleteNode/>
+            </div>
+            <div class="input-container">
+                Delete Edge
+                <lift:GraphVisual.deleteEdge/>
+            </div>
+
         </div>
         <div id="graph-container" class="main_box">
             <!--<script type="text/javascript">{JsCrVar("graph",graph2Json).toJsCmd}</script>-->

@@ -2,13 +2,14 @@ package code.snippet
 
 
 import net.liftweb._
+import common._
 import json._
 import util._
 import http._
-import js.{JE, JsCmds}
+import js._
 import SHtml._
-import js.JsCmds._
-import rest.RestHelper
+import JsCmds._
+import scala.None
 
 
 /**
@@ -58,9 +59,9 @@ class GraphVisual {
   val n19 = Node(19,"Software engineering","Sweng",6)
 
 
-  val nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
+  var nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
 
-  val edges = List(
+  var edges = List(
     Edge(n0,n1, 10),
     Edge(n0,n2, 3),
     Edge(n0, n3,8),
@@ -84,11 +85,102 @@ class GraphVisual {
 
 
   def deleteNode = {
-    //def delete = JsCmds.Alert("foo")
-    //def delete = {println("delete called"); JE.JsFunc("removeNode",0).cmd} //JsCmds.Run("removeNode("+0+")")
-    //def delete = {println("delete called"); JE.JsFunc("graph.removeLink",100, 1).cmd}
-    def delete = {println("delete called"); JE.JsFunc("graph.removeNode",100).cmd}
-    SHtml.ajaxButton("delete node", () => delete)
+    def delete(id:String):JsCmd = {
+      nodes = nodes.filterNot(_.id.toString == id);
+      JE.JsFunc("graph.removeNode",id.toInt).cmd  &
+      ReplaceOptions("node_delete", nodeList, Full(nodeList.head._1))
+    }
+
+    def call = ajaxCall(JE.JsRaw("this.value"), delete _)
+
+    def nodeList = ("", " - ")::nodes.map(n => (n.id.toString, n.name))
+
+    SHtml.untrustedSelect(nodeList, Full(nodeList.head._1), delete _,
+      "id" -> "node_delete",
+      "onchange" -> call._2.toJsCmd,
+      "class" -> "input"
+    )
+  }
+
+  def deleteEdge = {
+    val init = ("", " - ")
+    var source = ""
+    var target = ""
+
+    def isValidEdge(e:Edge, source:String, target:String):Boolean = {
+      (e.source.id.toString == source && e.target.id.toString == target)
+    }
+
+    def delete:JsCmd = {
+      edges = edges.filterNot(isValidEdge(_, source, target))
+      JE.JsFunc("graph.removeLink", source.toInt, target.toInt).cmd &
+      initializeElements
+    }
+
+    def initializeElements ={
+      target = ""
+      source = ""
+      ReplaceOptions("source_edge_delete", sourceNodes, Full(init._1)) &
+      ReplaceOptions("target_edge_delete", Nil, Full(init._1)) &
+      Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+    }
+
+    def sourceNodes: List[(String, String)] = {
+      init::nodes.filter(n=> edges.exists(e => e.source == n))
+                        .sortWith((x,y) => x.name < y.name)
+                        .map(n => (n.id.toString, n.name))
+    }
+
+    def targetNodes: List[(String, String)] = {
+      nodes.filter(n=> edges.exists(e => e.target == n ))
+        .sortWith((x,y) => x.name < y.name)
+        .map(n => (n.id.toString, n.name))
+    }
+
+    def oppositeSuggestions(source:String): List[(String, String)] = {
+      if(source isEmpty) Nil
+      else
+        init :: (targetNodes.filter(n => edges.exists(isValidEdge(_, source, n._1))))
+    }
+
+    def updatedSources(s:String) ={
+      source = s
+      if (s.nonEmpty){
+        ReplaceOptions("target_edge_delete", oppositeSuggestions(s), Full("")) &
+        Run("document.getElementById(\"target_edge_delete\").removeAttribute(\"disabled\", 0);")
+      } else{
+        Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+      }
+    }
+
+    def updatedTargets(t:String) = {
+      target = t;
+      if(t.isEmpty)
+        Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+      else
+        Noop
+    }
+
+    def callSource = ajaxCall(JE.JsRaw("this.value"), updatedSources _)
+    def callTarget = ajaxCall(JE.JsRaw("this.value"), updatedTargets _)
+
+    /* HTML Code  */
+    <span> "From: " </span> ++
+    SHtml.untrustedSelect(sourceNodes, Full(init._1), source = _,
+      "id" -> "source_edge_delete",
+      "onchange" -> callSource._2.toJsCmd,
+      "width" -> "40px",
+      "class" -> "input"
+    ) ++
+    <span>"To: "</span> ++
+    SHtml.untrustedSelect(List(init), Full(init._1) , target = _,
+      "id" -> "target_edge_delete",
+      "onchange" -> callTarget._2.toJsCmd,
+      "width" -> "40px",
+      "class" -> "input",
+      "disabled" -> "true"
+    ) ++
+    SHtml.ajaxButton("Confirm", () => delete)
   }
 }
 

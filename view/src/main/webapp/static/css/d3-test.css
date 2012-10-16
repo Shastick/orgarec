@@ -19,8 +19,9 @@ div.graph_wrapper{
 div.left_box{
     float: left;
     border: 1px solid gray;
-    width: 192px;
+    width: 182px;
     height: 500px;
+    padding: 5px;
 }
 div.main_box{
     float: left;
@@ -36,4 +37,10 @@ div.right_box{
     border: 1px solid gray;
     width: 192px;
     height: 500px;
+}
+.input_container{
+    width: 182px;
+}
+.input{
+    width: 182px;
 }
