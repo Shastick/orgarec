@@ -27,6 +27,14 @@ function myGraph(el) {
         }
     };
 
+    this.editNode = function(node) {
+        var n = findNodeIndex(node.id);
+        var initialNode = nodes[n];
+        initialNode["credits"] = node.credits;
+        nodes.splice(n, 1, initialNode);
+        update();
+    }
+
     this.removeLink = function (source,target){
         for(var i=0;i<links.length;i++)
         {
@@ -81,7 +89,25 @@ function myGraph(el) {
         .attr("pointer-events", "all")
         .attr("viewBox","0 0 "+w+" "+h)
         .attr("perserveAspectRatio","xMinYMid")
+        .append('svg:g')
+        .call(d3.behavior.zoom().on("zoom", redraw))
         .append('svg:g');
+
+    /* For zoom in non-occupied places */
+    vis.append('svg:rect')
+        .attr('width', w)
+        .attr('height', h)
+        .attr('fill', 'transparent');
+
+    function redraw() {
+        trans=d3.event.translate;
+        scale=d3.event.scale;
+
+        vis.attr("transform",
+            "translate(" + trans + ")"
+                + " scale(" + scale + ")");
+    }
+
 
     var force = d3.layout.force();
 
@@ -95,19 +121,17 @@ function myGraph(el) {
                 return d.source.id + "-" + d.target.id;
             });
 
-        link.enter().insert("svg:line", ".node")
+        var linkEnter = link.enter().insert("svg:line", ".node")
             .attr("id",function(d){return d.source.id + "-" + d.target.id;})
             .attr("class","link")
             .attr("stroke", "#9ecae1")
             .attr("stroke-width", 5);
 
-        link.append("title")
+        linkEnter.append("title")
             .text(function(d){
                 return d.value;
             });
         link.exit().remove();
-
-
 
         /* Functions to drag nodes */
         var node_drag = d3.behavior.drag()
@@ -116,7 +140,8 @@ function myGraph(el) {
             .on("dragend", dragend);
 
         function dragstart(d, i) {
-            force.stop() // stops the force auto positioning before you start dragging
+            d.fixed =true;
+            force.pause() // stops the force auto positioning before you start dragging
         }
 
         function dragmove(d, i) {
@@ -124,28 +149,35 @@ function myGraph(el) {
             d.py += d3.event.dy;
             d.x += d3.event.dx;
             d.y += d3.event.dy;
-            tick(); // this is the key to make it work together with updating both px,py,x,y on d !
+            //tick();
         }
 
         function dragend(d, i) {
-            d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-            tick();
             force.resume();
         }
+
+
+        var node = vis.selectAll("g.node")
+            .data(nodes, function(d) {return d.id;});
         /*
-        var node = vis.selectAll("g.node")
-            .data(nodes); */
-
-        var node = vis.selectAll("g.node")
-            .data(nodes, function(d) {
-                return d.id;});
-
+        node..append("svg:circle")
+            .attr("r", function(d){return d.credits *5+"px";});
+            */
+        /*
+        var nodeAction1 = vis.selectAll("svg:circle")
+            .attr("r", function(d){return d.credits *5+"px";});
+        */
+        /*
+        var circles = node.selectAll("svg:circle")
+            .attr("r", function(d){return d.credits *5+"px";});
+        */
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
-            .call(force.drag);
-
-        /* Customize circle */
+            .call(node_drag)
+            //.call(force.drag);
+        /* append circle */
         nodeEnter.append("svg:circle")
+            .attr("id", function(d){return "circle-node-"+ d.id})
             .attr("cursor","pointer")
             .style("fill",function(d){return "#c6dbef"})
             .attr("r", function(d){return d.credits *5+"px";})
@@ -153,23 +185,20 @@ function myGraph(el) {
             .attr("stroke-width",function(d){return "1.5px";})
             .on("mouseover", function(d){
                 d3.json("details/"+ d.id, function(details){
-                    document.getElementById('info-container').innerHTML= details;
-                    //details;
+                    document.getElementById('info-container').innerHTML= details + " - " + d.credits;
                 })
-            });
-
+            })
         /* Add text in middle of circle */
         nodeEnter.append("text")
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
             .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
-
         /* Add title */
         nodeEnter.append("svg:title")
             .text(function(d){ return d.id + ' - ' + d.name});
 
-        node.exit().remove();
+        node.exit().transition().remove();
 
         function tick() {
             link.attr("x1", function(d) { return d.source.x; })

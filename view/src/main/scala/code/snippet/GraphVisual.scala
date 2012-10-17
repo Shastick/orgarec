@@ -4,12 +4,10 @@ package code.snippet
 import net.liftweb._
 import common._
 import json._
-import util._
 import http._
 import js._
 import SHtml._
 import JsCmds._
-import scala.None
 
 
 /**
@@ -93,7 +91,7 @@ class GraphVisual {
 
     def call = ajaxCall(JE.JsRaw("this.value"), delete _)
 
-    def nodeList = ("", " - ")::nodes.map(n => (n.id.toString, n.name))
+    def nodeList = ("", " - ")::nodes.sortWith((x,y)=>x.name<y.name).map(n => (n.id.toString, n.name))
 
     SHtml.untrustedSelect(nodeList, Full(nodeList.head._1), delete _,
       "id" -> "node_delete",
@@ -182,6 +180,12 @@ class GraphVisual {
     ) ++
     SHtml.ajaxButton("Confirm", () => delete)
   }
+
+  def editNode = {
+    def func = Run("document.getElementById(\"circle-node-100\").setAttribute(\"r\", \"100\");")
+    SHtml.ajaxButton("Edit Node", () => func)
+  }
+
 }
 
 object GraphVisual extends GraphVisual {
