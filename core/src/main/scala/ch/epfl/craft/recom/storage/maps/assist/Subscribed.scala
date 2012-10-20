@@ -17,13 +17,25 @@ import ch.epfl.craft.recom.storage.maps.AcademicSemesterMap
 class Subscribed extends LongKeyedMapper[Subscribed] with IdPK {
 	def getSingleton = Subscribed
 	
-	object student extends MappedLongForeignKey(this, StudentMap)
-	object course extends MappedLongForeignKey(this, CourseMap)
-	object academicSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
+	object student extends MappedLongForeignKey(this, StudentMap){
+	  override def dbIndexed_? = true
+	}
+	object course extends MappedLongForeignKey(this, CourseMap){
+	  override def dbIndexed_? = true
+	}
+	object academicSemester extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
 	
-	object counter extends MappedInt(this)
-	object grade extends MappedInt(this)
-	object evaluation extends MappedInt(this)
+	object counter extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
+	object grade extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
+	object evaluation extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
 }
 
 object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{

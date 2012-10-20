@@ -11,7 +11,9 @@ class SectionMap extends LongKeyedMapper[SectionMap] with IdPK {
 	
 	def name_len = 200
 	
-	object name extends MappedString(this, name_len)
+	object name extends MappedString(this, name_len){
+	  override def dbIndexed_? = true
+	}
 	
 	def read: Section = SectionMap.fill(this)
 }

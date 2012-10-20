@@ -16,11 +16,19 @@ class CourseRelationMap extends LongKeyedMapper[CourseRelationMap] with IdPK{
 	
 	val cls_name_len = 64
 	
-	object from extends MappedLongForeignKey(this, CourseMap)
-	object to extends MappedLongForeignKey(this, CourseMap)
+	object from extends MappedLongForeignKey(this, CourseMap){
+	  override def dbIndexed_? = true
+	}
+	object to extends MappedLongForeignKey(this, CourseMap){
+	  override def dbIndexed_? = true
+	}
 	
-	object value extends MappedDouble(this)
-	object relation extends MappedString(this, cls_name_len)
+	object value extends MappedDouble(this){
+	  override def dbIndexed_? = true
+	}
+	object relation extends MappedString(this, cls_name_len){
+	  override def dbIndexed_? = true
+	}
 }
 
 object CourseRelationMap extends CourseRelationMap with LongKeyedMetaMapper[CourseRelationMap]{

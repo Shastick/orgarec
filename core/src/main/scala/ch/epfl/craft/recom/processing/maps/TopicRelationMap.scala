@@ -15,11 +15,19 @@ class TopicRelationMap extends LongKeyedMapper[TopicRelationMap] with IdPK{
 	
 	val cls_name_len = 64
 	
-	object from extends MappedLongForeignKey(this, TopicMap)
-	object to extends MappedLongForeignKey(this, TopicMap)
+	object from extends MappedLongForeignKey(this, TopicMap){
+	  override def dbIndexed_? = true
+	}
+	object to extends MappedLongForeignKey(this, TopicMap){
+	  override def dbIndexed_? = true
+	}
 	
-	object value extends MappedDouble(this)
-	object relation extends MappedString(this, cls_name_len)
+	object value extends MappedDouble(this){
+	  override def dbIndexed_? = true
+	}
+	object relation extends MappedString(this, cls_name_len){
+	  override def dbIndexed_? = true
+	}
 }
 
 object TopicRelationMap extends TopicRelationMap with LongKeyedMetaMapper[TopicRelationMap]{

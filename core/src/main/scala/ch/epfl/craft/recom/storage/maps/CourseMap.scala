@@ -20,8 +20,12 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
 	def getSingleton = CourseMap
 	
-	object semester extends MappedLongForeignKey(this,SemesterMap)
-	object topic extends MappedLongForeignKey(this, TopicMap)
+	object semester extends MappedLongForeignKey(this,SemesterMap){
+	  override def dbIndexed_? = true
+	}
+	object topic extends MappedLongForeignKey(this, TopicMap){
+	  override def dbIndexed_? = true
+	}
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,

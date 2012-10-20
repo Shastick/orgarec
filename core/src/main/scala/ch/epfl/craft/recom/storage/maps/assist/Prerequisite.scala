@@ -15,8 +15,12 @@ import net.liftweb.mapper.By
 class Prerequisite extends LongKeyedMapper[Prerequisite] with IdPK {
 	def getSingleton = Prerequisite
 	
-	object topic extends MappedLongForeignKey(this,TopicMap)
-	object required extends MappedLongForeignKey(this,TopicMap)
+	object topic extends MappedLongForeignKey(this,TopicMap){
+	  override def dbIndexed_? = true
+	}
+	object required extends MappedLongForeignKey(this,TopicMap){
+	  override def dbIndexed_? = true
+	}
 }
 
 object Prerequisite extends Prerequisite with LongKeyedMetaMapper[Prerequisite] {

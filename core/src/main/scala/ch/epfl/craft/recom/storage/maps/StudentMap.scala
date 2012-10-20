@@ -16,10 +16,18 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 	
 	val sciper_len = 6
 	
-	object sciper extends MappedString(this, sciper_len)
-	object arrival extends MappedLongForeignKey(this, AcademicSemesterMap)
-	object section extends MappedLongForeignKey(this,SectionMap)
-	object currentSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
+	object sciper extends MappedString(this, sciper_len){
+	  override def dbIndexed_? = true
+	}
+	object arrival extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
+	object section extends MappedLongForeignKey(this,SectionMap){
+	  override def dbIndexed_? = true
+	}
+	object currentSemester extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
 	
 	// Passed and current subscriptions to courses
 	// The semester history can be rebuilt from here,
