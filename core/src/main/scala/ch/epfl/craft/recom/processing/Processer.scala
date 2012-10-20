@@ -5,6 +5,9 @@ package ch.epfl.craft.recom.processing
  * what is not computed/analyzed/processed at insert or view time.
  */
 trait Processer {
-  def computeCoStudents
+  /**
+   * Compute and save the number co-students between each courses.
+   */
+  def computeCoStudents(): Unit
 
 }

@@ -4,6 +4,8 @@ import net.liftweb.db.DefaultConnectionIdentifier
 import net.liftweb.mapper.Schemifier
 import ch.epfl.craft.recom.storage.maps._
 import ch.epfl.craft.recom.storage.maps.assist._
+import ch.epfl.craft.recom.processing.Processer
+import ch.epfl.craft.recom.processing.SQLProcesser
 
 class PGDBFactory (
 		host: 	String,
@@ -13,7 +15,9 @@ class PGDBFactory (
 ) {
   
   val db = new PostgresDB(host, dbname, uname, pwd)
-  val store: Storage = new PGStorage(DefaultConnectionIdentifier, db)
+  
+  lazy val store: Storage = new PGStorage(DefaultConnectionIdentifier, db)
+  lazy val processer: Processer = new SQLProcesser(DefaultConnectionIdentifier, db)
   
   DB.defineConnectionManager(DefaultConnectionIdentifier, db)
 
