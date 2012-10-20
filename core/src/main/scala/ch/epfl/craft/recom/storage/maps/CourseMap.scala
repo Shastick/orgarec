@@ -33,7 +33,8 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	// Head(s)
 	object teachers extends HasManyThrough(this, StaffMap, Teaches,
 	    Teaches.course, Teaches.teacher)
-	object assistants extends HasManyThrough(this, StaffMap, Assists, Assists.course, Assists.assistant)
+	object assistants extends HasManyThrough(this, StaffMap, Assists,
+	    Assists.course, Assists.assistant)
 	
 	def read = CourseMap.fill(this)
 }
