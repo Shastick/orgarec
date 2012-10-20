@@ -1,4 +1,4 @@
-package ch.epfl.craft.recom.processing.graph
+package ch.epfl.craft.recom.graph
 
 import ch.epfl.craft.recom.util.TimeRange
 import ch.epfl.craft.recom.model.administration.Section
