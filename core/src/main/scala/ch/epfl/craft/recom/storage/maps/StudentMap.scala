@@ -50,8 +50,8 @@ object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
     m.arrival(AcademicSemesterMap.fill(s.arrival))
     s.section.foreach(o => m.section(SectionMap.fill(o)))
     s.currentSemester.foreach(o => m.currentSemester(AcademicSemesterMap.fill(o)))
-    s.courses.foreach(t => Subscribed.subscribe(m,t))
     m.save
+    s.courses.foreach(t => Subscribed.subscribe(m,t))
     m
   }
   
