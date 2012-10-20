@@ -32,11 +32,11 @@ object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{
 	  
 	  val cm = CourseMap.fill(t.course)
 	  val sub = Subscribed.findOrCreate(
-			  			By(Subscribed.course,cm.id),
-	  	      			By(Subscribed.student,sm.id))
+			  			By(Subscribed.course,cm),
+	  	      			By(Subscribed.student,sm))
 	  sub.academicSemester(AcademicSemesterMap.fill(t.semester))
-	  sub.student(sm.id)
-	  sub.course(cm.id)
+	  sub.student(sm)
+	  sub.course(cm)
 	  sub.counter(t.count)
 	  t.grade.foreach(sub.grade(_))
 	  t.evaluation.foreach(sub.evaluation(_))
