@@ -22,12 +22,17 @@ trait Storage {
   def readTopic(tid: Topic.TopicID): Option[Topic]
   
   /* Get Topics belonging to a given section */
-  def readTopics(cid: Option[Section]): Iterable[Topic]
+  def readTopics(s: Option[Section]): Iterable[Topic]
   
   /* Import Courses */
   def saveCourses(tl: Iterable[Course])
+  
   /* Read a Course */
   def readCourse(cid: String, s: Semester): Option[Course]
+  /* Get all the courses of a topic */
+  def readCourses(tid: Topic.TopicID): Iterable[Course]
+  /* Get all the courses of a section */
+  def readCourses(s: Option[Section]): Iterable[Course]
   
   /* Students */
   def saveStudents(tl: Iterable[Student])

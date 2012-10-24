@@ -25,8 +25,8 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   /* Read a Topic */
   def readTopic(tid: Topic.TopicID): Option[Topic] = TopicMap.read(tid)
   
-  def readTopics(cid: Option[Section]): Iterable[Topic] =
-	  cid.map{ s => 
+  def readTopics(se: Option[Section]) =
+	  se.map{ s => 
 	    val sm = SectionMap.fill(s)
 	    TopicMap.findAll(By(TopicMap.section,sm)).map(_.read)
 	  }.getOrElse(List.empty)
@@ -35,6 +35,18 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   def saveCourses(tl: Iterable[Course]) = CourseMap.fill(tl)
   /* Read a Course */
   def readCourse(cid: Topic.TopicID, s: Semester): Option[Course] = CourseMap.read(cid, s)
+  
+  def readCourses(tid: Topic.TopicID) = TopicMap.readMap(tid).map(
+	    tm => CourseMap.findAll(By(CourseMap.topic,tm)).map(_.read)
+	  ).getOrElse(List.empty)
+	  
+  def readCourses(se: Option[Section]) = 
+    se.map{ s => 
+	    val sm = SectionMap.fill(s)
+	    TopicMap.findAll(By(TopicMap.section,sm)).flatMap(
+	      t => CourseMap.findAll(By(CourseMap.topic,t)).map(_.read)
+	    )
+	  }.getOrElse(List.empty)
   
   /* Students */
   def saveStudents(tl: Iterable[Student]) = StudentMap.fill(tl)

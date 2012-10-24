@@ -72,7 +72,7 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
   
   def read(id: Topic.TopicID, s: Semester): Option[Course] = 
     TopicMap.readMap(id) match {
-    	case Some(tm) => CourseMap.findAll( By(CourseMap.topic,tm),
+    	case Some(tm) => CourseMap.findAll(By(CourseMap.topic,tm),
     										By(CourseMap.semester,SemesterMap.readMap(s).getOrElse(SemesterMap.create)))
     										.headOption.map(_.read)
     	case None => None
