@@ -10,7 +10,7 @@ import ch.epfl.craft.recom.model.administration.Section
 class Landscape(
     timerange: TimeRange, /* From when to when we want to observe data */
     section: Option[Section], /* Do we focus on a given section ? */
-    nodes: Set[TopicMeta],
+    nodes: Set[TopicMeta], 
     edges: Set[TopicRelation])
     
 object Landscape{

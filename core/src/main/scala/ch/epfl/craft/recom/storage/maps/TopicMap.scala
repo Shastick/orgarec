@@ -37,6 +37,8 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
 	    Prerequisite.topic,Prerequisite.required)
+	
+	def read = TopicMap.fill(this)
 }
 
 object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {

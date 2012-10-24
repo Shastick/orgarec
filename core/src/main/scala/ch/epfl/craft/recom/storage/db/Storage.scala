@@ -3,6 +3,7 @@ import ch.epfl.craft.recom.model.Topic
 import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.administration.Semester
+import ch.epfl.craft.recom.model.administration.Section
 
 trait Storage {
   
@@ -19,6 +20,9 @@ trait Storage {
   }
   /* Read a Topic */
   def readTopic(tid: Topic.TopicID): Option[Topic]
+  
+  /* Get Topics belonging to a given section */
+  def readTopics(cid: Option[Section]): Iterable[Topic]
   
   /* Import Courses */
   def saveCourses(tl: Iterable[Course])
