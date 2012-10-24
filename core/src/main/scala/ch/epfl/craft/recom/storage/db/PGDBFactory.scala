@@ -6,6 +6,8 @@ import ch.epfl.craft.recom.storage.maps._
 import ch.epfl.craft.recom.storage.maps.assist._
 import ch.epfl.craft.recom.processing.Processer
 import ch.epfl.craft.recom.processing.SQLProcesser
+import ch.epfl.craft.recom.processing.maps.CourseRelationMap
+import ch.epfl.craft.recom.processing.maps.TopicRelationMap
 
 class PGDBFactory (
 		host: 	String,
@@ -33,5 +35,7 @@ class PGDBFactory (
 		  				Assists,
 		  				Prerequisite,
 		  				Subscribed,
-		  				Teaches)
+		  				Teaches,
+		  				CourseRelationMap,
+		  				TopicRelationMap)
 }

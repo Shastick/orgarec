@@ -1,0 +1,3 @@
+INSERT INTO courserelationmap("value", to_c, from_c, relation)
+SELECT count,c2id,c1id,'costudents'
+FROM coursecostudentscount;

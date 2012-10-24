@@ -1,16 +1,15 @@
 package ch.epfl.craft.recom.processing.maps
-import net.liftweb.mapper.LongKeyedMapper
-import net.liftweb.mapper.IdPK
-import net.liftweb.mapper.LongKeyedMetaMapper
+import ch.epfl.craft.recom.storage.maps.TopicMap
+import net.liftweb.mapper.Mapper
+import net.liftweb.mapper.MetaMapper
 import net.liftweb.mapper.MappedLongForeignKey
 import net.liftweb.mapper.MappedDouble
-import ch.epfl.craft.recom.storage.maps.TopicMap
 import net.liftweb.mapper.MappedString
 
 /**
  * 'Meta' relation class to hold any relation fitting in one value between two topics.
  */
-class TopicRelationMap extends LongKeyedMapper[TopicRelationMap] with IdPK{
+class TopicRelationMap extends Mapper[TopicRelationMap]{
 	def getSingleton = TopicRelationMap
 	
 	val cls_name_len = 64
@@ -30,5 +29,5 @@ class TopicRelationMap extends LongKeyedMapper[TopicRelationMap] with IdPK{
 	}
 }
 
-object TopicRelationMap extends TopicRelationMap with LongKeyedMetaMapper[TopicRelationMap]{
+object TopicRelationMap extends TopicRelationMap with MetaMapper[TopicRelationMap]{
 }
