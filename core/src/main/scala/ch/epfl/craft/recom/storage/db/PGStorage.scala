@@ -11,6 +11,7 @@ import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.storage.maps._
 import net.liftweb.mapper.By
+import ch.epfl.craft.recom.util.TimeRange
 
 
 class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage {
@@ -36,15 +37,17 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   /* Read a Course */
   def readCourse(cid: Topic.TopicID, s: Semester): Option[Course] = CourseMap.read(cid, s)
   
-  def readCourses(tid: Topic.TopicID) = TopicMap.readMap(tid).map(
+  def readCourses(tid: Topic.TopicID, tr: TimeRange) = TopicMap.readMap(tid).map(
 	    tm => CourseMap.findAll(By(CourseMap.topic,tm)).map(_.read)
+	    	.filter(c => c.semester >= tr.from && c.semester <= tr.to)
 	  ).getOrElse(List.empty)
 	  
-  def readCourses(se: Option[Section]) = 
+  def readCourses(se: Option[Section], tr: TimeRange) = 
     se.map{ s => 
 	    val sm = SectionMap.fill(s)
 	    TopicMap.findAll(By(TopicMap.section,sm)).flatMap(
 	      t => CourseMap.findAll(By(CourseMap.topic,t)).map(_.read)
+	      		.filter(c => c.semester >= tr.from && c.semester <= tr.to)
 	    )
 	  }.getOrElse(List.empty)
   
