@@ -7,18 +7,44 @@ import java.text.SimpleDateFormat
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
  */
 
-trait Semester{
+sealed trait Semester extends Ordered[Semester]{
   val year: Date
   
+  lazy val year_int = {
+	val c = Calendar.getInstance()
+    c.setTime(this.year)
+    c.get(Calendar.YEAR)}
+    
   def equals(s: Semester) = {
 		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
 		  (this.isInstanceOf[Fall] && s.isInstanceOf[Fall])){
-    		val ct = Calendar.getInstance; ct.setTime(this.year)
-    		val cs = Calendar.getInstance; cs.setTime(s.year)
-    		ct.get(Calendar.YEAR) == cs.get(Calendar.YEAR)
+    		this.year_int == s.year_int
     } else false
 }
-    
+  /*
+   * Compare will give the 'semester' distance between two semesters :
+   * 	eg: Fall(2012) - Spring(2012) will be 1,
+   * 		Fall(2012) - Fall(2013) will be -1
+   */
+  def compare(that: Semester): Int = {
+    val d = this.year_int - that.year_int
+    if((this.isInstanceOf[Spring] && that.isInstanceOf[Spring]) ||
+      (this.isInstanceOf[Fall] && that.isInstanceOf[Fall]))
+    	return 2*d
+    else if(this.isInstanceOf[Fall]) 2*d + 1
+    else 2*d - 1
+  }
+  
+  def >=(that: Option[Semester]): Boolean = that match {
+    case None => true
+    case Some(s) => this >= s
+  }
+  
+  def <=(that: Option[Semester]): Boolean = that match{
+    case None => true
+    case Some(s) => this <= s
+  }
+  
   def season: String = 	if(this.isInstanceOf[Spring]) "spring" 
 	  					else "fall"
 }
