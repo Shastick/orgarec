@@ -5,7 +5,7 @@ import net.liftweb.mapper.Schemifier
 import ch.epfl.craft.recom.storage.maps._
 import ch.epfl.craft.recom.storage.maps.assist._
 import ch.epfl.craft.recom.processing.Processer
-import ch.epfl.craft.recom.processing.SQLProcesser
+import ch.epfl.craft.recom.processing.PSQLProcesser
 import ch.epfl.craft.recom.processing.maps.CourseRelationMap
 import ch.epfl.craft.recom.processing.maps.TopicRelationMap
 
@@ -19,7 +19,7 @@ class PGDBFactory (
   val db = new PostgresDB(host, dbname, uname, pwd)
   
   lazy val store: Storage = new PGStorage(DefaultConnectionIdentifier, db)
-  lazy val processer: Processer = new SQLProcesser(DefaultConnectionIdentifier, db)
+  lazy val processer: Processer = new PSQLProcesser(DefaultConnectionIdentifier, db)
   
   DB.defineConnectionManager(DefaultConnectionIdentifier, db)
 
