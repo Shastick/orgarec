@@ -18,7 +18,13 @@ class Student(
     		"\t section: %s\n" +
     		"\t currentSemester: %s\n" +
     		"\t history: %s\n" +
-    		"\t courses: %s\n").format(id, arrival, section, currentSemester, semesterHistory, courses)
+    		"\t courses: %s\n").format(id, arrival, section, currentSemester, semesterHistory, printCourses(courses))
+      
+      def printCourses(cs: Set[TakenCourse]): String = {
+        cs.map{ tc => 
+          "\n\t\t " + tc.course.name + ", " + tc.semester.toString
+        }.reduce(_ + _)
+      }
 }
 
 object Student {
