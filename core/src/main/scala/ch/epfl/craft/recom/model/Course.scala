@@ -23,6 +23,8 @@ class Course(
   def equivalent(c: Course) = super.equivalent(c) &&
 		  					this.semester == c.semester &&
 		  					this.head == c.head
+		  					
+  def topic = new Topic(id, name, section, prerequisites_id, description, credits)
 }
 
 object Course{
