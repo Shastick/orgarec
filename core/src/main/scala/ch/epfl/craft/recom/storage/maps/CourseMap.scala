@@ -56,7 +56,7 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
   
   def fill(c: Course): CourseMap = {
     val sm = SemesterMap.fill(c.semester)
-    val tm = TopicMap.bindFill(c)
+    val tm = TopicMap.fill(c)
     
 	val cm = CourseMap.findOrCreate(By(CourseMap.semester,sm),By(CourseMap.topic,tm))
 
