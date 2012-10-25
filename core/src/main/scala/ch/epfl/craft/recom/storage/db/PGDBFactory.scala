@@ -8,6 +8,7 @@ import ch.epfl.craft.recom.processing.Processer
 import ch.epfl.craft.recom.processing.PSQLProcesser
 import ch.epfl.craft.recom.processing.maps.CourseRelationMap
 import ch.epfl.craft.recom.processing.maps.TopicRelationMap
+import net.liftweb.mapper.MapperRules
 
 class PGDBFactory (
 		host: 	String,
@@ -22,7 +23,7 @@ class PGDBFactory (
   lazy val processer: Processer = new PSQLProcesser(DefaultConnectionIdentifier, db)
   
   DB.defineConnectionManager(DefaultConnectionIdentifier, db)
-
+  MapperRules.createForeignKeys_? = (_) => true
   Schemifier.schemify(	true,
 		  				Schemifier.infoF _,
 		  				CourseMap,
