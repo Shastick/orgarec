@@ -20,8 +20,12 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
 	def getSingleton = CourseMap
 	
-	object semester extends MappedLongForeignKey(this,SemesterMap)
-	object topic extends MappedLongForeignKey(this, TopicMap)
+	object semester extends MappedLongForeignKey(this,SemesterMap){
+	  override def dbIndexed_? = true
+	}
+	object topic extends MappedLongForeignKey(this, TopicMap){
+	  override def dbIndexed_? = true
+	}
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
@@ -29,7 +33,8 @@ class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	// Head(s)
 	object teachers extends HasManyThrough(this, StaffMap, Teaches,
 	    Teaches.course, Teaches.teacher)
-	object assistants extends HasManyThrough(this, StaffMap, Assists, Assists.course, Assists.assistant)
+	object assistants extends HasManyThrough(this, StaffMap, Assists,
+	    Assists.course, Assists.assistant)
 	
 	def read = CourseMap.fill(this)
 }
@@ -51,7 +56,7 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
   
   def fill(c: Course): CourseMap = {
     val sm = SemesterMap.fill(c.semester)
-    val tm = TopicMap.bindFill(c)
+    val tm = TopicMap.fill(c)
     
 	val cm = CourseMap.findOrCreate(By(CourseMap.semester,sm),By(CourseMap.topic,tm))
 
@@ -67,7 +72,7 @@ object CourseMap extends CourseMap with LongKeyedMetaMapper[CourseMap] {
   
   def read(id: Topic.TopicID, s: Semester): Option[Course] = 
     TopicMap.readMap(id) match {
-    	case Some(tm) => CourseMap.findAll( By(CourseMap.topic,tm),
+    	case Some(tm) => CourseMap.findAll(By(CourseMap.topic,tm),
     										By(CourseMap.semester,SemesterMap.readMap(s).getOrElse(SemesterMap.create)))
     										.headOption.map(_.read)
     	case None => None

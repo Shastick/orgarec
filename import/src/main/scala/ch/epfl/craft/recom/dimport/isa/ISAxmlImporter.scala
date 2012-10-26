@@ -21,12 +21,16 @@ import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.TakenCourse
 import ch.epfl.craft.recom.storage.db.PGDBFactory
 import ch.epfl.craft.recom.storage.db.Storage
+import ch.epfl.craft.recom.storage.maps.StudentMap
 
 object ISAxmlImporter extends App {
 	
   val dbf = new PGDBFactory("localhost","orgarec","julien","dorloter")
 	val s = dbf.store
-	
+	/*
+  val stud = s.readStudent("184229")
+  println(stud)
+	*/
   /* need to specify academic period in the form: 2012-2013 */
   val courses_url = "http://isa.epfl.ch/wsa/cles/ClesInscr?" +
   		"invoke=getlistecles" +
@@ -135,14 +139,16 @@ object ISAxmlImporter extends App {
     
     new Student(scip, arr_sem, Some(Section(sect)), curr_sem, sem_hist, courses)
   }
+
   println("saving objects...")
   s.saveStudents(objs)
   println("done.")
+ 
   
   def extractCourses(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
 	  Set[TakenCourse] = {
 		  yrs.flatMap{ y => 
-		    y._2.map{ c => 
+		    y._2.flatMap{ c => 
 		      val cid = c._1
 		      val n = c._2
 		      val sect = c._3._1
@@ -151,15 +157,17 @@ object ISAxmlImporter extends App {
 		      val creds = None
 		      val yt = y._1.split("-")
 		      val s = c._3._3 match {
-		        case "ETE" => Semester(yt(1),"ETE")
-		        case "HIVER" => Semester(yt(0),"HIVER")
+		        case "ETE" => Some(Semester(yt(1),"ETE"))
+		        case "HIVER" => Some(Semester(yt(0),"HIVER"))
+		        case _ => None
 		      }
 		      val h = Head.empty
 		      
-		      val as = AcademicSemester(c._3._2,s)
-		      
-		      val cours = new Course(cid,n,Section(sect),pre,descr, creds, s, h)
-		      TakenCourse(cours,1,None,None,as)
+		      // Only return something if the semester is defined.
+		      s.map{o => 
+		       	val as = AcademicSemester(c._3._2,o)
+		        val cours = new Course(cid,n,Section(sect),pre,descr, creds, o, h)
+		        TakenCourse(cours,1,None,None,as)}
 		    }
 		  }.toSet
   }
@@ -169,9 +177,10 @@ object ISAxmlImporter extends App {
 		  yrs.flatMap{ y => 
 		    val s = y._2.map(c => (c._3._2,c._3._3)).toSet
 		    val yr = y._1.split("-")
-				s.map{ 
-		      case (l,"HIVER") => AcademicSemester(l,yr(0),"HIVER")
-		      case (l,"ETE") => AcademicSemester(l,yr(1),"ETE")
+				s.flatMap{ 
+		      case (l,"HIVER") => Some(AcademicSemester(l,yr(0),"HIVER"))
+		      case (l,"ETE") => Some(AcademicSemester(l,yr(1),"ETE"))
+		      case _ => None
 		    }
   	}.toSet
 
@@ -196,13 +205,15 @@ object ISAxmlImporter extends App {
 	      case "BA3" => if(l.size == 2) "BA4" else "BA3"
 	      case "BA5" => if(l.size == 2) "BA6" else "BA5"
 	      case "MA1" => if(l.size == 2) "MA2" else "MA1"
-	      case s: String => s
+	      case "H" | "PMH" | "PME" | "E"  => h._1
+	      case _ => "Undef"
 	    }
 	    val yr = h._2 match {
-	      case "HIVER" => yrs(0)
-	      case "ETE" => yrs(1)
+	      case "HIVER" => Some(yrs(0))
+	      case "ETE" => Some(yrs(1))
+	      case _ => None
 	    }
-	    Some(AcademicSemester(lvl,yr,h._2))
+	    yr.map(o => AcademicSemester(lvl,o,h._2))
     }
   }
   

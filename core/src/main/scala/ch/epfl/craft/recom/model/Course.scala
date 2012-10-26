@@ -19,9 +19,12 @@ class Course(
     val head: Head
 ) extends Topic(id, name, section, prerequisites_id, description, credits){
   
-  def equals(c: Course) = 	super.equals(c) &&
+  def equals(c: Course) = this.id == c.id
+  def equivalent(c: Course) = super.equivalent(c) &&
 		  					this.semester == c.semester &&
 		  					this.head == c.head
+		  					
+  def topic = new Topic(id, name, section, prerequisites_id, description, credits)
 }
 
 object Course{

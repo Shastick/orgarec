@@ -18,10 +18,16 @@ class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {
 	val name_len = 100
 	val title_len = 100
 	
-	object name extends MappedString(this, name_len)
-	object section extends MappedLongForeignKey(this, SectionMap)
+	object name extends MappedString(this, name_len){
+	  override def dbIndexed_? = true
+	}
+	object section extends MappedLongForeignKey(this, SectionMap){
+	  override def dbIndexed_? = true
+	}
 	// What this staff's role 'normally' is (assistant, teacher,...)
-	object title extends MappedString(this,title_len)
+	object title extends MappedString(this,title_len){
+	  override def dbIndexed_? = true
+	}
 	
 	def read = StaffMap.fill(this)
 	

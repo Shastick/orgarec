@@ -17,13 +17,25 @@ import ch.epfl.craft.recom.storage.maps.AcademicSemesterMap
 class Subscribed extends LongKeyedMapper[Subscribed] with IdPK {
 	def getSingleton = Subscribed
 	
-	object student extends MappedLongForeignKey(this, StudentMap)
-	object course extends MappedLongForeignKey(this, CourseMap)
-	object academicSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
+	object student extends MappedLongForeignKey(this, StudentMap){
+	  override def dbIndexed_? = true
+	}
+	object course extends MappedLongForeignKey(this, CourseMap){
+	  override def dbIndexed_? = true
+	}
+	object academicSemester extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
 	
-	object counter extends MappedInt(this)
-	object grade extends MappedInt(this)
-	object evaluation extends MappedInt(this)
+	object counter extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
+	object grade extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
+	object evaluation extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
 }
 
 object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{
@@ -32,11 +44,11 @@ object Subscribed extends Subscribed with LongKeyedMetaMapper[Subscribed]{
 	  
 	  val cm = CourseMap.fill(t.course)
 	  val sub = Subscribed.findOrCreate(
-			  			By(Subscribed.course,cm.id),
-	  	      			By(Subscribed.student,sm.id))
+			  			By(Subscribed.course,cm),
+	  	      			By(Subscribed.student,sm))
 	  sub.academicSemester(AcademicSemesterMap.fill(t.semester))
-	  sub.student(sm.id)
-	  sub.course(cm.id)
+	  sub.student(sm)
+	  sub.course(cm)
 	  sub.counter(t.count)
 	  t.grade.foreach(sub.grade(_))
 	  t.evaluation.foreach(sub.evaluation(_))

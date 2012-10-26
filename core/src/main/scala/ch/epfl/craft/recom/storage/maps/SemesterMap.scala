@@ -15,8 +15,12 @@ class SemesterMap extends LongKeyedMapper[SemesterMap] with IdPK {
 	
 	val season_len = 10
 	
-	object year extends MappedDate(this)
-	object semester extends MappedString(this,season_len)
+	object year extends MappedDate(this){
+	  override def dbIndexed_? = true
+	}
+	object semester extends MappedString(this,season_len){
+	  override def dbIndexed_? = true
+	}
 	
 	def read = SemesterMap.fill(this)
 }

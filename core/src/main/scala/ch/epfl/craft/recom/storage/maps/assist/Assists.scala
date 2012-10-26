@@ -14,8 +14,12 @@ import net.liftweb.mapper.By
 class Assists extends LongKeyedMapper[Assists] with IdPK{
 	def getSingleton = Assists
 	
-	object assistant extends MappedLongForeignKey(this, StaffMap)
-	object course extends MappedLongForeignKey(this, CourseMap)
+	object assistant extends MappedLongForeignKey(this, StaffMap){
+	  override def dbIndexed_? = true
+	}
+	object course extends MappedLongForeignKey(this, CourseMap){
+	  override def dbIndexed_? = true
+	}
 }
 
 object Assists extends Assists with LongKeyedMetaMapper[Assists] {

@@ -16,10 +16,18 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 	
 	val sciper_len = 6
 	
-	object sciper extends MappedString(this, sciper_len)
-	object arrival extends MappedLongForeignKey(this, AcademicSemesterMap)
-	object section extends MappedLongForeignKey(this,SectionMap)
-	object currentSemester extends MappedLongForeignKey(this, AcademicSemesterMap)
+	object sciper extends MappedString(this, sciper_len){
+	  override def dbIndexed_? = true
+	}
+	object arrival extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
+	object section extends MappedLongForeignKey(this,SectionMap){
+	  override def dbIndexed_? = true
+	}
+	object currentSemester extends MappedLongForeignKey(this, AcademicSemesterMap){
+	  override def dbIndexed_? = true
+	}
 	
 	// Passed and current subscriptions to courses
 	// The semester history can be rebuilt from here,
@@ -33,7 +41,7 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 
 object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
   
-  def fill(sl: Iterable[Student]): Iterable[StudentMap] =
+  def fill(sl: Iterable[Student]): Iterable[StudentMap] = 
     sl.map(fill _)
   
   def fill(s: Student): StudentMap = {
@@ -42,8 +50,8 @@ object StudentMap extends StudentMap with LongKeyedMetaMapper[StudentMap] {
     m.arrival(AcademicSemesterMap.fill(s.arrival))
     s.section.foreach(o => m.section(SectionMap.fill(o)))
     s.currentSemester.foreach(o => m.currentSemester(AcademicSemesterMap.fill(o)))
-    s.courses.foreach(t => Subscribed.subscribe(m,t))
     m.save
+    s.courses.foreach(t => Subscribed.subscribe(m,t))
     m
   }
   

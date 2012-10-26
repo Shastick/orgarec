@@ -18,15 +18,27 @@ class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 	val isa_id_len = 200
 	val descr_len = 10000
 	
-	object isa_id extends MappedString(this, isa_id_len)
-	object name extends MappedString(this, name_len)
-	object section extends MappedLongForeignKey(this,SectionMap)
-	object description extends MappedString(this, descr_len)
-	object credits extends MappedInt(this)
+	object isa_id extends MappedString(this, isa_id_len){
+	  override def dbIndexed_? = true
+	}
+	object name extends MappedString(this, name_len){
+	  override def dbIndexed_? = true
+	}
+	object section extends MappedLongForeignKey(this,SectionMap){
+	  override def dbIndexed_? = true
+	}
+	object description extends MappedString(this, descr_len){
+	  override def dbIndexed_? = true
+	}
+	object credits extends MappedInt(this){
+	  override def dbIndexed_? = true
+	}
 
 	// Prerequisites
 	object prerequisites extends HasManyThrough(this, TopicMap, Prerequisite,
 	    Prerequisite.topic,Prerequisite.required)
+	
+	def read = TopicMap.fill(this)
 }
 
 object TopicMap extends TopicMap with LongKeyedMetaMapper[TopicMap] {

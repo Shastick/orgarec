@@ -15,7 +15,9 @@ class Topic(
     val description: Option[String],
     val credits: Option[Int]
 ){
-	def equals(c: Topic) = 	c.id == this.id && 
+	def equals(c: Topic) = this.id == c.id
+	
+	def equivalent(c: Topic) = 	c.id == this.id && 
 							this.name == c.name &&
 							this.prerequisites_id == c.prerequisites_id &&
 							this.section == c.section &&

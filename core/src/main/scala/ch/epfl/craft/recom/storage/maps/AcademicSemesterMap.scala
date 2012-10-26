@@ -12,8 +12,12 @@ class AcademicSemesterMap extends LongKeyedMapper[AcademicSemesterMap] with IdPK
 	
 	val lvl_str_len = 5
 	
-	object semester extends MappedLongForeignKey(this, SemesterMap)
-	object level extends MappedString(this, lvl_str_len)
+	object semester extends MappedLongForeignKey(this, SemesterMap){
+	  override def dbIndexed_? = true
+	}
+	object level extends MappedString(this, lvl_str_len){
+	  override def dbIndexed_? = true
+	}
 	
 	def read = AcademicSemesterMap.fill(this)
 	
