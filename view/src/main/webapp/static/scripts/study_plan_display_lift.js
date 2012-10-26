@@ -13,7 +13,7 @@ var vis = d3.select("#graph-container").append("svg:svg")
     .attr("width", w)
     .attr("height", h)
     .append('svg:g')
-    .call(d3.behavior.zoom().on("zoom", redraw))
+    //.call(d3.behavior.zoom().on("zoom", redraw))
     .append('svg:g');
 
 vis.append('svg:rect')

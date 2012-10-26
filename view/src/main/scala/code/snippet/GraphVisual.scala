@@ -8,6 +8,7 @@ import http._
 import js._
 import SHtml._
 import JsCmds._
+import js.jquery.JqJE._
 
 
 /**
@@ -120,7 +121,8 @@ class GraphVisual {
       source = ""
       ReplaceOptions("source_edge_delete", sourceNodes, Full(init._1)) &
       ReplaceOptions("target_edge_delete", Nil, Full(init._1)) &
-      Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+      (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd &
+      (JqId("button_edge_delete")~> JqAttr("disabled", "disabled")).cmd
     }
 
     def sourceNodes: List[(String, String)] = {
@@ -147,16 +149,17 @@ class GraphVisual {
         ReplaceOptions("target_edge_delete", oppositeSuggestions(s), Full("")) &
         Run("document.getElementById(\"target_edge_delete\").removeAttribute(\"disabled\", 0);")
       } else{
-        Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+        (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd
       }
     }
 
     def updatedTargets(t:String) = {
       target = t;
       if(t.isEmpty)
-        Run("document.getElementById(\"target_edge_delete\").setAttribute(\"disabled\", \"true\");")
+        (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd  &
+        (JqId("button_edge_delete")~> JqAttr("disabled", "disabled")).cmd
       else
-        Noop
+        Run("document.getElementById(\"button_edge_delete\").removeAttribute(\"disabled\", 0);")
     }
 
     def callSource = ajaxCall(JE.JsRaw("this.value"), updatedSources _)
@@ -178,12 +181,13 @@ class GraphVisual {
       "class" -> "input",
       "disabled" -> "true"
     ) ++
-    SHtml.ajaxButton("Confirm", () => delete)
+    SHtml.ajaxButton("Confirm", () => delete, "id" -> "button_edge_delete", "disabled" -> "true")
   }
 
   def editNode = {
-    def func = Run("document.getElementById(\"circle-node-100\").setAttribute(\"r\", \"100\");")
-    SHtml.ajaxButton("Edit Node", () => func)
+    def edit = JE.JsFunc("graph.editNode", Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",12).toJObject ).cmd
+    //SHtml.ajaxButton("Edit Node", () => (JqId("circle-node-100")~> JqAttr("r", "50")).cmd)
+    SHtml.ajaxButton("Edit Node", () => edit)
   }
 
 }

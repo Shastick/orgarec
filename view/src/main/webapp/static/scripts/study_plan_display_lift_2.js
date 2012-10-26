@@ -48,7 +48,7 @@ function myGraph(el) {
     };
 
 
-    this.removeallLinks = function(){
+    this.removeAllLinks = function(){
         links.splice(0,links.length);
         update();
     };
@@ -171,13 +171,23 @@ function myGraph(el) {
         var circles = node.selectAll("svg:circle")
             .attr("r", function(d){return d.credits *5+"px";});
         */
+
+        //var nodeEdit =
+         node.selectAll("circle")
+            .transition()
+            .attr("r", function(d){console.log("kikoo"); return d.credits *5+"px";});
+        /*
+        node = vis.selectAll("g.node")
+            .data(nodes, function(d) {return d.id;});
+        */
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
             .call(node_drag)
             //.call(force.drag);
         /* append circle */
-        nodeEnter.append("svg:circle")
+        nodeEnter.append("circle")
             .attr("id", function(d){return "circle-node-"+ d.id})
+            .attr("class", "circle-node")
             .attr("cursor","pointer")
             .style("fill",function(d){return "#c6dbef"})
             .attr("r", function(d){return d.credits *5+"px";})
