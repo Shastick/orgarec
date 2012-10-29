@@ -131,6 +131,7 @@ function myGraph(el) {
             .text(function(d){
                 return d.value;
             });
+
         link.exit().remove();
 
         /* Functions to drag nodes */
@@ -141,7 +142,7 @@ function myGraph(el) {
 
         function dragstart(d, i) {
             d.fixed =true;
-            force.pause() // stops the force auto positioning before you start dragging
+            //force.stop() //stops the force auto positioning before you start dragging
         }
 
         function dragmove(d, i) {
@@ -159,31 +160,15 @@ function myGraph(el) {
 
         var node = vis.selectAll("g.node")
             .data(nodes, function(d) {return d.id;});
-        /*
-        node..append("svg:circle")
-            .attr("r", function(d){return d.credits *5+"px";});
-            */
-        /*
-        var nodeAction1 = vis.selectAll("svg:circle")
-            .attr("r", function(d){return d.credits *5+"px";});
-        */
-        /*
-        var circles = node.selectAll("svg:circle")
-            .attr("r", function(d){return d.credits *5+"px";});
-        */
 
-        //var nodeEdit =
-         node.selectAll("circle")
+        node.selectAll("circle")
             .transition()
-            .attr("r", function(d){console.log("kikoo"); return d.credits *5+"px";});
-        /*
-        node = vis.selectAll("g.node")
-            .data(nodes, function(d) {return d.id;});
-        */
+            .attr("r", function(d){return d.credits *5+"px";});
+
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
             .call(node_drag)
-            //.call(force.drag);
+
         /* append circle */
         nodeEnter.append("circle")
             .attr("id", function(d){return "circle-node-"+ d.id})
@@ -193,11 +178,24 @@ function myGraph(el) {
             .attr("r", function(d){return d.credits *5+"px";})
             .attr("stroke", function(d){return "#3182bd";})
             .attr("stroke-width",function(d){return "1.5px";})
-            .on("mouseover", function(d){
-                d3.json("details/"+ d.id, function(details){
-                    document.getElementById('info-container').innerHTML= details + " - " + d.credits;
-                })
+            .on("contextmenu", function(data, index) {
+                d3.select('#my_custom_menu')
+                    .style('position', 'absolute')
+                    //.style('left', d3.event.x)
+                    .style('left', d3.event.x + "px")
+                    .style('top', d3.event.y + "px")
+                    .style('display', 'block');
+                    //.style()
+                d3.event.preventDefault();
+                alert(d3.event.x);
             })
+            .on("mouseover", function(d){
+                $.ajax({
+                    url: "node_mouseover/"+ d.id,
+                    type: "GET",
+                    dataType: "script"
+                });
+            });
         /* Add text in middle of circle */
         nodeEnter.append("text")
             .attr("class", "nodetext")
@@ -205,8 +203,10 @@ function myGraph(el) {
             .attr("dy", ".3em")
             .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
         /* Add title */
-        nodeEnter.append("svg:title")
+        nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
+
+
 
         node.exit().transition().remove();
 
@@ -238,30 +238,15 @@ function myGraph(el) {
 function drawGraph()
 {
     graph = new myGraph("#graph-container");
-
     d3.json("graph", function(json) {
         var nodes = json.nodes;
         var links = json.links;
-
         for (var i = 0; i < nodes.length; i++) {
             graph.addNode(nodes[i]);
         }
-
         for (var i = 0; i < links.length; i++)  {
             graph.addLink(links[i].source, links[i].target, links[i].value)
         }
-
-        //graph.removeNode(100);
-        //graph.removeLink(100, 1);
-
     });
-
-
-    /*graph.addNode('A');
-    graph.addNode('B');
-    graph.addNode('C');
-    graph.addLink('A','B','10');
-    graph.addLink('A','C','8');
-    graph.addLink('B','C','15');*/
 }
 drawGraph();

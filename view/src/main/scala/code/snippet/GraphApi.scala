@@ -1,7 +1,8 @@
 package code.snippet
 
 import net.liftweb.http.rest.RestHelper
-import net.liftweb.http.{JsonResponse, GetRequest, Req}
+import net.liftweb.http._
+import js.JsCmds.SetHtml
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,13 +15,7 @@ object GraphApi extends RestHelper {
   serve {
     case Req("graph" :: Nil, _, GetRequest)  =>
       JsonResponse(GraphVisual.graph2Json)
-
-    case Req("details"::id::Nil, _, GetRequest) =>{
-      //println("Got request")
-      //<h3>{GraphVisual.details2Json(id.toInt).values}</h3>
-      //XmlResponse(<h3>LOL</h3>)
-      //JavaScriptResponse(SetHtml("info-container", <h3>{GraphVisual.details2Json(id.toInt).values}</h3> ))
-      JsonResponse(GraphVisual.details2Json(id.toInt))
-    }
+    case Req("node_mouseover"::id::Nil, _, GetRequest) =>
+      JavaScriptResponse(SetHtml("info-container", <h3>{GraphVisual.details2Json(id.toInt).values}</h3> ))
   }
 }

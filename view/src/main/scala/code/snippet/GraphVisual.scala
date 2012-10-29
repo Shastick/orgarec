@@ -19,7 +19,7 @@ import js.jquery.JqJE._
  * To change this template use File | Settings | File Templates.
  */
 class GraphVisual {
-  case class Graph(nodes:List[Node], edges:List[Edge])
+  case class Graph(nodes:List[Node], links:List[Link])
   case class Node(id:Int, name:String, alias:String, credits:Int){
     val toJObject = JObject(List(
       JField("id", JInt(id)),
@@ -28,11 +28,12 @@ class GraphVisual {
       JField("credits", JInt(credits))
     ))
   }
-  case class Edge(source:Node, target:Node, value:Int){
+  case class Link(source:Node, target:Node, value:Int, showLink:Boolean=true){
     val toJObject = JObject(List(
       JField("source", JInt(source.id)),
       JField("target", JInt(target.id)),
-      JField("value", JInt(value))
+      JField("value", JInt(value)),
+      JField("showLink", JBool(showLink))
     ))
   }
 
@@ -60,26 +61,28 @@ class GraphVisual {
 
   var nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
 
-  var edges = List(
-    Edge(n0,n1, 10),
-    Edge(n0,n2, 3),
-    Edge(n0, n3,8),
-    Edge(n0,n10, 5),
-    Edge(n1,n2,3),
-    Edge(n1,n3,6),
-    Edge(n1,n5,1),
-    Edge(n2,n3,5),
-    Edge(n2,n13,5),
-    Edge(n4,n19,5),
-    Edge(n5,n6,10),
-    Edge(n5,n9,4),
-    Edge(n7,n8,10),
-    Edge(n8,n9,3),
-    Edge(n14,n19,10),
-    Edge(n18,n19,7)
+  var links = List(
+    Link(n0,n1, 10),
+    Link(n0,n2, 3),
+    Link(n0, n3,8),
+    Link(n0,n10, 5),
+    Link(n1,n2,3),
+    Link(n1,n3,6),
+    Link(n1,n5,1),
+    Link(n2,n3,5),
+    Link(n2,n13,5),
+    Link(n4,n19,5),
+    Link(n5,n6,10),
+    Link(n5,n9,4),
+    Link(n7,n8,10),
+    Link(n8,n9,3),
+    Link(n14,n19,10),
+    Link(n18,n19,7),
+
+    Link(n0, n19, 5, showLink=false)
   )
 
-  val myGraph = Graph(nodes, edges) 
+  val myGraph = Graph(nodes, links) 
 
 
 
@@ -101,17 +104,17 @@ class GraphVisual {
     )
   }
 
-  def deleteEdge = {
+  def deleteLink = {
     val init = ("", " - ")
     var source = ""
     var target = ""
 
-    def isValidEdge(e:Edge, source:String, target:String):Boolean = {
+    def isValidLink(e:Link, source:String, target:String):Boolean = {
       (e.source.id.toString == source && e.target.id.toString == target)
     }
 
     def delete:JsCmd = {
-      edges = edges.filterNot(isValidEdge(_, source, target))
+      links = links.filterNot(isValidLink(_, source, target))
       JE.JsFunc("graph.removeLink", source.toInt, target.toInt).cmd &
       initializeElements
     }
@@ -119,20 +122,20 @@ class GraphVisual {
     def initializeElements ={
       target = ""
       source = ""
-      ReplaceOptions("source_edge_delete", sourceNodes, Full(init._1)) &
-      ReplaceOptions("target_edge_delete", Nil, Full(init._1)) &
-      (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd &
-      (JqId("button_edge_delete")~> JqAttr("disabled", "disabled")).cmd
+      ReplaceOptions("source_link_delete", sourceNodes, Full(init._1)) &
+      ReplaceOptions("target_link_delete", Nil, Full(init._1)) &
+      (JqId("target_link_delete")~> JqAttr("disabled", "disabled")).cmd &
+      (JqId("button_link_delete")~> JqAttr("disabled", "disabled")).cmd
     }
 
     def sourceNodes: List[(String, String)] = {
-      init::nodes.filter(n=> edges.exists(e => e.source == n))
+      init::nodes.filter(n=> links.exists(e => e.source == n))
                         .sortWith((x,y) => x.name < y.name)
                         .map(n => (n.id.toString, n.name))
     }
 
     def targetNodes: List[(String, String)] = {
-      nodes.filter(n=> edges.exists(e => e.target == n ))
+      nodes.filter(n=> links.exists(e => e.target == n ))
         .sortWith((x,y) => x.name < y.name)
         .map(n => (n.id.toString, n.name))
     }
@@ -140,26 +143,26 @@ class GraphVisual {
     def oppositeSuggestions(source:String): List[(String, String)] = {
       if(source isEmpty) Nil
       else
-        init :: (targetNodes.filter(n => edges.exists(isValidEdge(_, source, n._1))))
+        init :: (targetNodes.filter(n => links.exists(isValidLink(_, source, n._1))))
     }
 
     def updatedSources(s:String) ={
       source = s
       if (s.nonEmpty){
-        ReplaceOptions("target_edge_delete", oppositeSuggestions(s), Full("")) &
-        Run("document.getElementById(\"target_edge_delete\").removeAttribute(\"disabled\", 0);")
+        ReplaceOptions("target_link_delete", oppositeSuggestions(s), Full("")) &
+        Run("document.getElementById(\"target_link_delete\").removeAttribute(\"disabled\", 0);")
       } else{
-        (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd
+        (JqId("target_link_delete")~> JqAttr("disabled", "disabled")).cmd
       }
     }
 
     def updatedTargets(t:String) = {
       target = t;
       if(t.isEmpty)
-        (JqId("target_edge_delete")~> JqAttr("disabled", "disabled")).cmd  &
-        (JqId("button_edge_delete")~> JqAttr("disabled", "disabled")).cmd
+        (JqId("target_link_delete")~> JqAttr("disabled", "disabled")).cmd  &
+        (JqId("button_link_delete")~> JqAttr("disabled", "disabled")).cmd
       else
-        Run("document.getElementById(\"button_edge_delete\").removeAttribute(\"disabled\", 0);")
+        Run("document.getElementById(\"button_link_delete\").removeAttribute(\"disabled\", 0);")
     }
 
     def callSource = ajaxCall(JE.JsRaw("this.value"), updatedSources _)
@@ -168,25 +171,24 @@ class GraphVisual {
     /* HTML Code  */
     <span> "From: " </span> ++
     SHtml.untrustedSelect(sourceNodes, Full(init._1), source = _,
-      "id" -> "source_edge_delete",
+      "id" -> "source_link_delete",
       "onchange" -> callSource._2.toJsCmd,
       "width" -> "40px",
       "class" -> "input"
     ) ++
     <span>"To: "</span> ++
     SHtml.untrustedSelect(List(init), Full(init._1) , target = _,
-      "id" -> "target_edge_delete",
+      "id" -> "target_link_delete",
       "onchange" -> callTarget._2.toJsCmd,
       "width" -> "40px",
       "class" -> "input",
       "disabled" -> "true"
     ) ++
-    SHtml.ajaxButton("Confirm", () => delete, "id" -> "button_edge_delete", "disabled" -> "true")
+    SHtml.ajaxButton("Confirm", () => delete, "id" -> "button_link_delete", "disabled" -> "true")
   }
 
   def editNode = {
     def edit = JE.JsFunc("graph.editNode", Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",12).toJObject ).cmd
-    //SHtml.ajaxButton("Edit Node", () => (JqId("circle-node-100")~> JqAttr("r", "50")).cmd)
     SHtml.ajaxButton("Edit Node", () => edit)
   }
 
@@ -196,8 +198,8 @@ object GraphVisual extends GraphVisual {
   /* Get Json representation of the graph */
   def graph2Json = {
     val Jnodes = JArray(nodes.map(_.toJObject))
-    val Jedges = JArray(edges.map(_.toJObject))
-    val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jedges)::Nil)
+    val Jlinks = JArray(links.map(_.toJObject))
+    val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
     JGraph
   }
 
@@ -207,7 +209,4 @@ object GraphVisual extends GraphVisual {
     val name = if(node.isDefined) node.get.name else "node not defined"
     JString(name)
   }
-
-
-
 }

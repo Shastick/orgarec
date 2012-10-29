@@ -44,3 +44,11 @@ div.right_box{
 .input{
     width: 182px;
 }
+
+#rightClickNode {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    background-color: #ddd;
+    border: 1px solid #000;
+}
