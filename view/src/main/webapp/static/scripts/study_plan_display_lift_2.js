@@ -58,8 +58,8 @@ function myGraph(el) {
         update();
     };
 
-    this.addLink = function (source, target, value) {
-        links.push({"source":findNode(source),"target":findNode(target),"value":value});
+    this.addLink = function (link) {
+        links.push({"source":findNode(link.source),"target":findNode(link.target),"value":link.value, "showLink": link.showLink});
         update();
     };
 
@@ -90,6 +90,7 @@ function myGraph(el) {
         .attr("viewBox","0 0 "+w+" "+h)
         .attr("perserveAspectRatio","xMinYMid")
         .append('svg:g')
+        //.on("click", d3.select('#context_menu').style("display", "none"))
         .call(d3.behavior.zoom().on("zoom", redraw))
         .append('svg:g');
 
@@ -97,12 +98,13 @@ function myGraph(el) {
     vis.append('svg:rect')
         .attr('width', w)
         .attr('height', h)
+        .on("click", function(d){d3.select('#context_menu').style("display", "none")})
         .attr('fill', 'transparent');
 
     function redraw() {
         trans=d3.event.translate;
         scale=d3.event.scale;
-
+        d3.select('#context_menu').style("display", "none")
         vis.attr("transform",
             "translate(" + trans + ")"
                 + " scale(" + scale + ")");
@@ -124,7 +126,11 @@ function myGraph(el) {
         var linkEnter = link.enter().insert("svg:line", ".node")
             .attr("id",function(d){return d.source.id + "-" + d.target.id;})
             .attr("class","link")
-            .attr("stroke", "#9ecae1")
+            .attr("stroke", function(d){
+                if (d.showLink)
+                    return "#9ecae1";
+                else return "transparent";
+            })
             .attr("stroke-width", 5);
 
         linkEnter.append("title")
@@ -141,7 +147,9 @@ function myGraph(el) {
             .on("dragend", dragend);
 
         function dragstart(d, i) {
+            d3.select('#context_menu').style("display", "none")
             d.fixed =true;
+            //force.friction(0);
             //force.stop() //stops the force auto positioning before you start dragging
         }
 
@@ -150,7 +158,7 @@ function myGraph(el) {
             d.py += d3.event.dy;
             d.x += d3.event.dx;
             d.y += d3.event.dy;
-            //tick();
+            tick();
         }
 
         function dragend(d, i) {
@@ -179,15 +187,17 @@ function myGraph(el) {
             .attr("stroke", function(d){return "#3182bd";})
             .attr("stroke-width",function(d){return "1.5px";})
             .on("contextmenu", function(data, index) {
-                d3.select('#my_custom_menu')
+                $.ajax({
+                    url: "context_menu/"+ data.id,
+                    type: "GET",
+                    dataType: "script"
+                });
+                d3.select('#context_menu')
                     .style('position', 'absolute')
-                    //.style('left', d3.event.x)
                     .style('left', d3.event.x + "px")
                     .style('top', d3.event.y + "px")
                     .style('display', 'block');
-                    //.style()
                 d3.event.preventDefault();
-                alert(d3.event.x);
             })
             .on("mouseover", function(d){
                 $.ajax({
@@ -224,7 +234,8 @@ function myGraph(el) {
         force
             .gravity(.05)
             .distance(300)
-            .charge(-100)
+            .charge(function(d){return -120- d.credits*10; })
+            //.friction(0.9)
             .linkDistance(function(d){return (100 - d.value*3)})
             .size([w, h])
             .start();
@@ -245,7 +256,7 @@ function drawGraph()
             graph.addNode(nodes[i]);
         }
         for (var i = 0; i < links.length; i++)  {
-            graph.addLink(links[i].source, links[i].target, links[i].value)
+            graph.addLink(links[i])
         }
     });
 }

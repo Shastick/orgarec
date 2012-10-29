@@ -17,5 +17,7 @@ object GraphApi extends RestHelper {
       JsonResponse(GraphVisual.graph2Json)
     case Req("node_mouseover"::id::Nil, _, GetRequest) =>
       JavaScriptResponse(SetHtml("info-container", <h3>{GraphVisual.details2Json(id.toInt).values}</h3> ))
+    case Req("context_menu"::id::Nil, _, GetRequest) =>
+      JavaScriptResponse(SetHtml("context_menu", <b>{"The node id is: "+ id}</b> ))
   }
 }
