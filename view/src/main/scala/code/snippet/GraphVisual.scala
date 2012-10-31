@@ -79,7 +79,7 @@ class GraphVisual {
     Link(n14,n19,10),
     Link(n18,n19,7),
 
-    Link(n0, n19, 5, showLink=false)
+    Link(n0, n19, 7, showLink=false)
   )
 
   val myGraph = Graph(nodes, links) 

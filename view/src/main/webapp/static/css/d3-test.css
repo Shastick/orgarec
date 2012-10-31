@@ -45,10 +45,12 @@ div.right_box{
     width: 182px;
 }
 
-#rightClickNode {
-    display: none;
-    position: absolute;
-    padding: 10px;
-    background-color: #ddd;
-    border: 1px solid #000;
+#context_menu{
+    /*position: absolute;  */
+    background-color: #FFCC99;
+    border-radius: 5px;
+    height: 120px;
+    width: 100px;
+    border: 1px solid black;
+    padding: 3px;
 }
