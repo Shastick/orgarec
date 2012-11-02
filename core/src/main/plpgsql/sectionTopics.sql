@@ -3,7 +3,7 @@
 CREATE OR REPLACE FUNCTION sectionTopics(
 	IN sid character varying[],
 	OUT t_name character varying,
-	OUT t_id character varying,
+	OUT t_id int,
 	OUT s_name character varying
 )
 RETURNS SETOF record AS
