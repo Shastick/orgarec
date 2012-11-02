@@ -4,9 +4,7 @@ CREATE OR REPLACE FUNCTION topicCostudents(
 	IN sid character varying[],
 	IN from_sem int,
 	IN to_sem int,
-	OUT t_name1 character varying,
 	OUT t_id1 int,
-	OUT t_name2 character varying,
 	OUT t_id2 int,
 	OUT t_sum int
 	)
@@ -64,9 +62,7 @@ BEGIN
 		AND tc2.id1 = tc1.id2
 		AND tc1.id2 < tc1.id1
   LOOP
-    t_name1 := retval.name1;
     t_id1  := retval.id1;
-    t_name2 := retval.name2;
     t_id2 := retval.id2;
     t_sum := retval.sum;
     RETURN NEXT;
