@@ -1,5 +1,7 @@
+-- get the costudents quantity between two topics
+-- usage : select topicCostudents('{SC,IN}'::varchar[],NULL,NULL)
 CREATE OR REPLACE FUNCTION topicCostudents(
-	IN sid character varying,
+	IN sid character varying[],
 	IN from_sem int,
 	IN to_sem int,
 	OUT t_name1 character varying,
@@ -38,8 +40,8 @@ BEGIN
 		AND cm2.topic = tm2.id
 		AND tm1.section_c = sm1.id
 		AND tm2.section_c = sm2.id
-		AND (sm1.name = 'IN' OR sm1.name = 'SC')
-		AND (sm2.name = 'IN' OR sm2.name = 'SC')
+		AND sm1.name ilike any(sid)
+		AND sm2.name ilike any(sid)
 	GROUP BY 
 		tm1.name,
 		tm1.id,
