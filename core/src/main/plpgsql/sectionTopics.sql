@@ -3,7 +3,7 @@
 CREATE OR REPLACE FUNCTION sectionTopics(
 	IN sname character varying[],
 	OUT t_name character varying,
-	OUT t_id long,
+	OUT t_isa_id character varying,
 	OUT s_name character varying
 )
 RETURNS SETOF record AS
@@ -13,7 +13,7 @@ DECLARE
 BEGIN
   FOR retval IN
 	SELECT
-		tm.name as tname, tm.id as tid, sm.name as sname
+		tm.name as tname, tm.isa_id as tid, sm.name as sname
 	FROM
 		topicmap tm,
 		sectionmap sm
@@ -22,7 +22,7 @@ BEGIN
 		AND sm.name ilike any(sname)
   LOOP
 	t_name:= retval.tname;
-	t_id:= retval.tid;
+	t_isa_id:= retval.tid;
 	s_name:= retval.sname;
 	RETURN NEXT;
   END LOOP;

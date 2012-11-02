@@ -4,8 +4,8 @@ CREATE OR REPLACE FUNCTION topicCostudents(
 	IN sname character varying[],
 	IN from_sem timestamp without time zone,
 	IN to_sem timestamp without time zone,
-	OUT t_id1 bigint,
-	OUT t_id2 bigint,
+	OUT t_isa_id1 character varying,
+	OUT t_isa_id2 character varying,
 	OUT t_sum bigint
 	)
 RETURNS SETOF record AS
@@ -19,9 +19,9 @@ BEGIN
 	SELECT 
 		sum(crm.value) AS sum,
 		tm1.name AS name1,
-		tm1.id AS id1,
+		tm1.isa_id AS id1,
 		tm2.name AS name2,
-		tm2.id AS id2
+		tm2.isa_id AS id2
 	FROM 
 		courserelationmap crm,
 		coursemap cm1,
@@ -62,8 +62,8 @@ BEGIN
 		AND tc2.id1 = tc1.id2
 		AND tc1.id2 < tc1.id1
   LOOP
-    t_id1  := retval.id1;
-    t_id2 := retval.id2;
+    t_isa_id1  := retval.id1;
+    t_isa_id2 := retval.id2;
     t_sum := retval.sum;
     RETURN NEXT;
   END LOOP;
