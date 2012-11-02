@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION topicCostudents(
 	IN sid character varying,
-	IN from_t timestamp without time zone,
-	IN to_t timestamp without time zone,
+	IN from_sem int,
+	IN to_sem int,
 	OUT t_name1 character varying,
 	OUT t_id1 int,
 	OUT t_name2 character varying,
