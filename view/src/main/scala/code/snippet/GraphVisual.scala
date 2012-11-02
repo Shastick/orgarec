@@ -9,6 +9,11 @@ import js._
 import SHtml._
 import JsCmds._
 import js.jquery.JqJE._
+import ch.epfl.craft.recom._
+import storage.db.PGDBFactory
+import graph.Landscape
+import model.administration.Section
+import ch.epfl.craft.recom.util.SemesterRange
 
 
 /**
@@ -36,6 +41,14 @@ class GraphVisual {
       JField("showLink", JBool(showLink))
     ))
   }
+
+  /* Pour pomper comme un porc dans la DB */
+  val dbf = new PGDBFactory("localhost", "orgarec", "julien", "blabla")
+  val s = dbf.store
+  val p = dbf.processer
+
+  val l = Landscape.build(s, p, SemesterRange.all, Set(Section("SC"), Section("IN")))
+  l.nodes.foreach(n => println(n.node.credits))
 
   val n0 =  Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",6)
   val n1 =  Node(1,"Principles of digital communications","PDC",6)
