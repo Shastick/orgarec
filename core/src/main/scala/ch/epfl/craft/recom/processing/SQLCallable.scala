@@ -53,6 +53,16 @@ trait SQLCallable {
   /** Returns a new jndi connection */
   protected def conn: Connection
   
+  /** Calls stored procedure that returns a 5-tuple list with types A,B,C,D,E */
+  protected def callS[A : Manifest, B : Manifest, C : Manifest, D : Manifest, E : Manifest]
+		  			(name: String)(args: Any*): List[(A,B,C,D,E)] = {
+    val call = conn.prepareCall("{call " + name + argstr(args :_*) + "}")
+    setArgs(call, 1, args :_*)
+    fetchRows(call) { rs =>
+      (sqlGet[A](rs,1),sqlGet[B](rs,2), sqlGet[C](rs,3), sqlGet[D](rs,4), sqlGet[E](rs,5))
+    }
+  }
+  
   /** Calls stored procedure that returns a 3-tuple list with types A,B,C */
   protected def callS[A : Manifest, B : Manifest, C : Manifest]
 		  		    (name: String)(args: Any*): List[(A,B,C)] = {
@@ -138,6 +148,7 @@ trait SQLCallable {
   private def sqlGet[T](call: RGet, i: Int = 1)
   					   (implicit m: Manifest[T]): T = {
          if (m.erasure.equals(classOf[Long]))    call.getLong(i)
+    else if (m.erasure.equals(classOf[Int]))	 call.getLong(i).toInt
     else if (m.erasure.equals(classOf[Double]))  call.getDouble(i)
     else if (m.erasure.equals(classOf[String]))  call.getString(i)
     else if (m.erasure.equals(classOf[Date]))    new java.util.Date(call.getDate(i).getTime())
@@ -151,7 +162,8 @@ trait SQLCallable {
   
   /** Returns a java.sql.Types type for a type T */
   private def sqlType[T](implicit m: ClassManifest[T]) = {
-    if (m.erasure.equals(classOf[Long]))    Types.BIGINT    else
+    if (m.erasure.equals(classOf[Long]))    Types.BIGINT    else 
+    if (m.erasure.equals(classOf[Int]))		Types.INTEGER	else
     if (m.erasure.equals(classOf[Double]))  Types.DOUBLE    else
     if (m.erasure.equals(classOf[String]))  Types.CHAR      else
     if (m.erasure.equals(classOf[Date]))    Types.TIMESTAMP else

@@ -22,10 +22,10 @@ trait Processer {
   def readCoStudents(c: Course, tr: SemesterRange = SemesterRange.all): Iterable[(Course, Int)]
   
   /**
-   * Get the short topic data belonging to the mentioned sections.
-   * A returned tuple is: (<Topic Name>,<Topic ISA ID>,<Section Name>)
+   * Get the short topic (prerequisites empty) data belonging to the mentioned sections.
+   * A returned tuple is: (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Descripption>)
    */
-  def readShortTopics(s: Set[Section]): Iterable[(String, String, String)]
+  def readShortTopics(s: Set[Section]): Iterable[(String, String, String, Int, String)]
   
   /**
    * A returned tuple is: (<Topic1 ISA ID>,<Topic2 ISA ID>,<costudents count>)

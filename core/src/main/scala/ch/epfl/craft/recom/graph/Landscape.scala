@@ -27,8 +27,15 @@ object Landscape{
 	  val costuds = p.readShortTopicCostudents(se, tr)
 	  
 	  val nodes = topics.map(t =>
-	      LandscapeNode(
-	          new Topic(t._2.toString, t._1, Section(t._3), Set.empty, None, None),
+	      LandscapeNode(new Topic(t._2.toString,
+	          t._1,
+	          Section(t._3),
+	          Set.empty,
+	          Option(t._5),
+	          t._4 match {
+	          	case 0 => None
+	          	case _ => Some(t._4)
+	          }),
 	          Set.empty))
 	  
 	  val edges = costuds.map(t =>
