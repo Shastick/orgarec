@@ -24,7 +24,6 @@ trait Storage {
   
   /* Get Topics belonging to a given section */
   def readTopics(s: Section): Iterable[Topic]
-  def readshortTopics(s: Set[Section]): Iterable[(String, String, String)]
   
   /* Import Courses */
   def saveCourses(tl: Iterable[Course])

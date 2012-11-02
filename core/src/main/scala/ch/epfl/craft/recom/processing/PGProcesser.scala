@@ -7,6 +7,7 @@ import ch.epfl.craft.recom.processing.maps.CourseRelationMap
 import ch.epfl.craft.recom.storage.maps.CourseMap
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.TimeRange
+import ch.epfl.craft.recom.model.administration.Section
 
 class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Processer {
 	
@@ -48,4 +49,10 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Proce
 			  					.map(rm => (rm.from.map(_.read).get, rm.value.toInt))
 	  (l1 ++ l2).filter(t => t._1.semester >= tr.from && t._1.semester <= tr.to)
 	}
+
+	def readShortTopics(s: Set[Section]): Iterable[(String,String,String)] = null
+  
+    def shortTopicCostudents(s: Set[Section], tr: TimeRange): Iterable[(String, String, String, String, String)]
+    		= null
+
 }
