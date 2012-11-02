@@ -8,7 +8,7 @@ import ch.epfl.craft.recom.storage.maps.CourseMap
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.TimeRange
 
-class PSQLProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Processer {
+class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Processer {
 	
 	def costudents_rel = "costudents"
   
