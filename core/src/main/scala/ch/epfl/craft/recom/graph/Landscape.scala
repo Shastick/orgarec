@@ -18,8 +18,10 @@ class Landscape(
     
 object Landscape{
   
-	def build(s: Storage, p: Processer, tr: TimeRange, se: Option[Section] = None): Landscape = {
-	  println("pulling data...")
+	def build(s: Storage, p: Processer, tr: TimeRange, se: Set[Section] = Set.empty): Landscape = {
+	  println("Pulling topics...")
+	  val topics = se.map(s.readTopics(_)).reduce(_ ++ _)
+	  /*
 	  val tl = s.readCourses(se, tr)
 	  // TODO : there's a lot of optimisation to do here because of redundant stuff being pulled out of the DB.
 	  println("filtering stuff...")
@@ -39,6 +41,7 @@ object Landscape{
 	    val nodes = tsg.map(t => LandscapeNode(t._1, Set.empty)).toSet
 	    val edges = tsg.flatMap(t => t._2.map(u => LandscapeEdge(t._1.id, u._1.id, Set(CoStudents(u._2))))).toSet
 	  
-	  new Landscape(tr,se, nodes, edges)
+	  new Landscape(tr,se, nodes, edges)*/
+	  null
 	}
 }

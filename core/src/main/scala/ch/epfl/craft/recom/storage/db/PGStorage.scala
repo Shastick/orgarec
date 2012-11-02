@@ -26,11 +26,9 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   /* Read a Topic */
   def readTopic(tid: Topic.TopicID): Option[Topic] = TopicMap.read(tid)
   
-  def readTopics(se: Option[Section]) =
-	  se.map{ s => 
-	    val sm = SectionMap.fill(s)
-	    TopicMap.findAll(By(TopicMap.section,sm)).map(_.read)
-	  }.getOrElse(List.empty)
+  def readTopics(se: Section) =
+	    TopicMap.findAll(By(TopicMap.section,SectionMap.fill(se))).map(_.read)
+
   
   /* Import Courses */
   def saveCourses(tl: Iterable[Course]) = CourseMap.fill(tl)
