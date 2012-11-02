@@ -2,11 +2,11 @@
 -- usage : select topicCostudents('{SC,IN}'::varchar[],NULL,NULL)
 CREATE OR REPLACE FUNCTION topicCostudents(
 	IN sname character varying[],
-	IN from_sem int,
-	IN to_sem int,
-	OUT t_id1 int,
-	OUT t_id2 int,
-	OUT t_sum int
+	IN from_sem timestamp without time zone,
+	IN to_sem timestamp without time zone,
+	OUT t_id1 bigint,
+	OUT t_id2 bigint,
+	OUT t_sum bigint
 	)
 RETURNS SETOF record AS
 $$
