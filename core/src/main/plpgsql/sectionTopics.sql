@@ -1,7 +1,7 @@
 -- return the topics teached by the specified sections
 -- usage: sectionTopics('{IN,SC}'::varchar[])
 CREATE OR REPLACE FUNCTION sectionTopics(
-	IN sid character varying[],
+	IN sname character varying[],
 	OUT t_name character varying,
 	OUT t_id int,
 	OUT s_name character varying
@@ -19,7 +19,7 @@ BEGIN
 		sectionmap sm
 	WHERE 
 		tm.section_c = sm.id
-		AND sm.name ilike any(sid)
+		AND sm.name ilike any(sname)
   LOOP
 	t_name:= retval.tname;
 	t_id:= retval.tid;
