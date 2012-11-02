@@ -4,7 +4,7 @@ import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.Section
-import ch.epfl.craft.recom.util.TimeRange
+import ch.epfl.craft.recom.util.SemesterRange
 
 trait Storage {
   
@@ -31,10 +31,10 @@ trait Storage {
   /* Read a Course */
   def readCourse(cid: String, s: Semester): Option[Course]
   /* Get all the courses of a topic */
-  def readCourses(tid: Topic.TopicID): Iterable[Course] = readCourses(tid, TimeRange.all)
-  def readCourses(tid: Topic.TopicID, tr: TimeRange): Iterable[Course]
+  def readCourses(tid: Topic.TopicID): Iterable[Course] = readCourses(tid, SemesterRange.all)
+  def readCourses(tid: Topic.TopicID, tr: SemesterRange): Iterable[Course]
   /* Get all the courses of a section */
-  def readCourses(s: Option[Section], tr: TimeRange = TimeRange.all): Iterable[Course]
+  def readCourses(s: Option[Section], tr: SemesterRange = SemesterRange.all): Iterable[Course]
   
   /* Students */
   def saveStudents(tl: Iterable[Student])

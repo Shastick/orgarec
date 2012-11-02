@@ -6,16 +6,23 @@ import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.processing.maps.CourseRelationMap
 import ch.epfl.craft.recom.storage.maps.CourseMap
 import net.liftweb.mapper.By
-import ch.epfl.craft.recom.util.TimeRange
+import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
 
-class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Processer {
+class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
+ extends Processer with SQLCallable{
 	
+	protected def conn = db.newConnection(ci).get
+
 	def costudents_rel = "costudents"
   
-	def computeCoStudents = {
-	  
-	}
+	def computeCoStudents = call("computeCoStudents")()
+	
+	def readShortTopics(s: Set[Section]): Iterable[(String,String,String)] = 
+	  callS[String, String, String]("sectionTopics")(s.toList)
+  
+    def readShortTopicCostudents(s: Set[Section], tr: SemesterRange): Iterable[(String, String, Long)] =
+      callS[String, String, Long]("topicCostudents")(s.toList, tr)
 	
 	def readCoStudents(c1: Course, c2: Course) = {
 	  val (cm1,cm2) = (CourseMap.fill(c1), CourseMap.fill(c2))
@@ -34,11 +41,11 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Proce
 	    case 0 => None
 	    case 1 => Some(rl.head.value.toInt)
 	    case 2 => throw new Exception("Double entries in the relation DB!") 
-	    // TODO : log this instead of throwing lame exceptions...
+	    // TODO : log this instead of throwing lame exceptions... ?
 	  }
 	}
 	
-	def readCoStudents(c: Course, tr: TimeRange = TimeRange.all) = {
+	def readCoStudents(c: Course, tr: SemesterRange = SemesterRange.all) = {
 	  val cm = CourseMap.fill(c)
 	  val l1 = CourseRelationMap.findAll(By(CourseRelationMap.from,cm),
 			  					By(CourseRelationMap.relation,costudents_rel))
@@ -49,10 +56,5 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager) extends Proce
 			  					.map(rm => (rm.from.map(_.read).get, rm.value.toInt))
 	  (l1 ++ l2).filter(t => t._1.semester >= tr.from && t._1.semester <= tr.to)
 	}
-
-	def readShortTopics(s: Set[Section]): Iterable[(String,String,String)] = null
-  
-    def shortTopicCostudents(s: Set[Section], tr: TimeRange): Iterable[(String, String, String, String, String)]
-    		= null
 
 }

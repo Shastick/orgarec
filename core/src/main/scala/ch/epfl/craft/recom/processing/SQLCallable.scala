@@ -8,6 +8,7 @@ import scala.collection.mutable.ListBuffer
 import java.sql.ResultSet
 import java.sql.Date
 import ch.epfl.craft.recom.util.SemesterRange
+import ch.epfl.craft.recom.model.administration.Section
 
 
 /**
@@ -102,6 +103,14 @@ trait SQLCallable {
     call.close()
     
     res
+  }
+  
+  /** Calls a stored procedure with no return value */
+  protected def call(name: String)(args: Any*) {
+    val call = conn.prepareCall("{? = call " + name + argstr(args :_*) + "}")
+    setArgs(call, 2, args :_*)
+    call.execute()
+    call.close()
   }
   
   /** Fetches rows from ResultSet, closes ResultSet */ 
@@ -200,6 +209,12 @@ trait SQLCallable {
   	case s: List[_] if s.head.isInstanceOf[String] => {
   	  val arr =
   	    conn.createArrayOf("varchar", s.asInstanceOf[List[Object]].toArray)
+  	  st.setArray(i,arr)
+  	  i + 1
+  	}
+  	case s: List[Section] if s.head.isInstanceOf[Section] => {
+  	  val arr =
+  	    conn.createArrayOf("varchar", s.map(_.name).asInstanceOf[List[Object]].toArray)
   	  st.setArray(i,arr)
   	  i + 1
   	}

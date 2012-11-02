@@ -1,47 +1,39 @@
 package ch.epfl.craft.recom.graph
 
-import ch.epfl.craft.recom.util.TimeRange
+import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.storage.db.Storage
 import ch.epfl.craft.recom.processing.Processer
 import ch.epfl.craft.recom.model.Course
+import ch.epfl.craft.recom.model.Topic
 
 /**
  * Represents the picture of the topics and what we can learn from the student's history and 
  * evaluations.
  */
 class Landscape(
-    timerange: TimeRange, /* From when to when we want to observe data */
-    section: Option[Section], /* Do we focus on a given section ? */
-    nodes: Set[LandscapeNode], 
-    edges: Set[LandscapeEdge])
+    val SemesterRange: SemesterRange, /* From when to when we want to observe data */
+    val section: Set[Section], /* Do we focus on certain sections ? (All sections if empty) */
+    val nodes: Set[LandscapeNode], 
+    val edges: Set[LandscapeEdge])
     
 object Landscape{
   
-	def build(s: Storage, p: Processer, tr: TimeRange, se: Set[Section] = Set.empty): Landscape = {
-	  println("Pulling topics...")
-	  val topics = se.map(s.readTopics(_)).reduce(_ ++ _)
-	  /*
-	  val tl = s.readCourses(se, tr)
-	  // TODO : there's a lot of optimisation to do here because of redundant stuff being pulled out of the DB.
-	  println("filtering stuff...")
-	  val tg = tl.map(c => 
-	    		(c,p.readCoStudents(c, tr)))
-	    		.groupBy(_._1.id)
-	    		.map(g =>
-	    		  (g._1,g._2.reduce((i,j) => (i._1,i._2 ++ i._2)))
-	    		 )
-	  println("merging stuff...")
-	  val tsg = tg.map(m =>
-	    (m._2._1.topic,m._2._2.groupBy(_._1.id)
-	        .map(_._2.reduce((i,j) => (i._1, i._2 + j._2)))
-	        .map(t => (t._1.topic,t._2)))
-	    )
-	  println("generating nodes and edges")
-	    val nodes = tsg.map(t => LandscapeNode(t._1, Set.empty)).toSet
-	    val edges = tsg.flatMap(t => t._2.map(u => LandscapeEdge(t._1.id, u._1.id, Set(CoStudents(u._2))))).toSet
+	def build(s: Storage, p: Processer, tr: SemesterRange,
+			se: Set[Section] = Set.empty):Landscape = {
 	  
-	  new Landscape(tr,se, nodes, edges)*/
-	  null
+	  val topics = p.readShortTopics(se)
+	  
+	  val costuds = p.readShortTopicCostudents(se, tr)
+	  
+	  val nodes = topics.map(t =>
+	      LandscapeNode(
+	          new Topic(t._2.toString, t._1, Section(t._3), Set.empty, None, None),
+	          Set.empty))
+	  
+	  val edges = costuds.map(t =>
+	    LandscapeEdge(t._1, t._2, Set(CoStudents(t._3.toInt))))
+	  
+	  new Landscape(tr, se, nodes.toSet, edges.toSet)
 	}
 }
