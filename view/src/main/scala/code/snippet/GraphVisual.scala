@@ -10,11 +10,7 @@ import SHtml._
 import JsCmds._
 import js.jquery.JqJE._
 import ch.epfl.craft.recom._
-import storage.db.PGDBFactory
-import graph.Landscape
-import model.administration.{Fall, Section}
-import ch.epfl.craft.recom.util.SemesterRange
-import java.util.Calendar
+import xml.NodeSeq
 
 
 /**
@@ -24,115 +20,33 @@ import java.util.Calendar
  * Time: 13:39
  * To change this template use File | Settings | File Templates.
  */
+
 class GraphVisual {
-  case class Graph(nodes:List[Node], links:List[Link])
-  case class Node(id:String, name:String, alias:String, credits:Int){
-    val toJObject = JObject(List(
-      JField("id", JString(id)),
-      JField("name", JString(name)),
-      JField("alias",JString(alias)),
-      JField("credits", JInt(credits))
-    ))
-  }
-  case class Link(sourceID:String, targetID:String, value:Int, showLink:Boolean=true){
-    val toJObject = JObject(List(
-      JField("source", JString(sourceID)),
-      JField("target", JString(targetID)),
-      JField("value", JInt(value)),
-      JField("showLink", JBool(showLink))
-    ))
-  }
 
-  var nodes:List[Node] = Nil
-  var links:List[Link] = Nil
+  var deletedNodes:List[Node] = Nil
+  var deletedLinks:List[Link] = Nil
 
-  /* Pour pomper comme un porc dans la DB */
+  //val myGraph = SampleGraph.graph
+  val myGraph =  StudyPlanCompleteGraph.graph
+  val nodes = myGraph.nodes
+  val links = myGraph.links
 
-  def getLandscape = {
-    val dbf = new PGDBFactory("localhost", "orgarec", "postgres", "hendrix")
-    val s = dbf.store
-    val p = dbf.processer
-    // Ces deux lignes sont présentes car le SemesterRange demande des Dates afin de les transformées en années dès
-    // la première ligne...
-    val from = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2011); c.getTime}
-    val to = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2012); c.getTime}
-
-    val l = Landscape.build(s, p, SemesterRange(Some(Fall(from)), Some(Fall(to))), Set(Section("SC")))
-    l
-  }
-
-  def LandscapeToGraph:Graph = {
-    val landscape = getLandscape
-    nodes= landscape.nodes.map(n => Node(n.node.id, n.node.name, n.node.name, n.node.credits.getOrElse(10))).toList
-    links =landscape.edges.map(e => Link(e.from, e.to, 5)).toList
-
-    println("Number of nodes computed: "+ nodes.length)
-    println("Number of links computed: "+ links.length)
-    println("Node1 : "+ nodes.head.toJObject.toString)
-    println("link1 : "+ links.head.toJObject.toString)
-    Graph(nodes, links)
-  }
-
-  val n0 =  Node("0","Modeles stochastiques pour les communications)", "Mod Stoch",6)
-  val n1 =  Node("1","Principles of digital communications","PDC",6)
-  val n2 =  Node("2","Securité des réseaux","Securité",4)
-  val n3 =  Node("3","Signal processing for communications","Signal proc.",6)
-  val n4 =  Node("4","Compiler construction","Compiler",6)
-  val n5 =  Node("5","Electromagnétisme I : lignes et ondes","EM 1",3)
-  val n6 =  Node("6","Electromagnétisme II : calcul des champs","EM 2",3)
-  val n7 =  Node("7","Electronique II","Elec 2",4)
-  val n8 =  Node("8","Electronique III","Elec 3",3)
-  val n9 =  Node("9","Functional materials in communication systems","FMCS",3)
-  val n10 = Node("10","Graph theory applications","GTA",4)
-  val n11 = Node("11","Informatique du temps réel","ITR",4)
-  val n12 = Node("12","Intelligence artificielle","IA",4)
-  val n13 = Node("13","Internet analytics","Internet",5)
-  val n14 = Node("14","Introduction to computer graphics","Comp Graph",6)
-  val n15 = Node("15","Introduction to database systems","DB",4)
-  val n16 = Node("16","Operating systems","OS",4)
-  val n17 = Node("17","Ressources humaines dans les projets","RES",2)
-  val n18 = Node("18","Software development project","SDP",4)
-  val n19 = Node("19","Software engineering","Sweng",6)
-
-
-  nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
-
-
-  links = List(
-    Link("0","1", 10),
-    /*Link(n0,n2, 3),
-    Link(n0, n3,8),
-    Link(n0,n10, 5),
-    Link(n1,n2,3),
-    Link(n1,n3,6),
-    Link(n1,n5,1),
-    Link(n2,n3,5),
-    Link(n2,n13,5),
-    Link(n4,n19,5),
-    Link(n5,n6,10),
-    Link(n5,n9,4),
-    Link(n7,n8,10),
-    Link(n8,n9,3),
-    Link(n14,n19,10),
-    Link(n18,n19,7),*/
-
-    Link("0", "19", 7, showLink=false)
-  )
-
-  //val myGraph = Graph(nodes, links)
-  val myGraph =  LandscapeToGraph
-
+  def displayableNodes = nodes.diff(deletedNodes)
+  def displayableLinks = links.diff(deletedLinks)
 
   def deleteNode = {
     def delete(id:String):JsCmd = {
-      nodes = nodes.filterNot(_.id == id);
+      //nodes = nodes.filterNot(_.id == id);
+      nodes.find(_.id==id).foreach(n => deletedNodes = n :: deletedNodes)
       JE.JsFunc("graph.removeNode",id).cmd  &
       ReplaceOptions("node_delete", nodeList, Full(nodeList.head._1))
     }
 
     def call = ajaxCall(JE.JsRaw("this.value"), delete _)
 
-    def nodeList = ("", " - ")::nodes.sortWith((x,y)=>x.name<y.name).map(n => (n.id, n.name))
+    def nodeList = ("", " - ")::displayableNodes
+        .sortWith((x,y)=>x.name<y.name)
+        .map(n => (n.id, n.name))
 
     SHtml.untrustedSelect(nodeList, Full(nodeList.head._1), delete _,
       "id" -> "node_delete",
@@ -151,8 +65,9 @@ class GraphVisual {
     }
 
     def delete:JsCmd = {
-      links = links.filterNot(isValidLink(_, source, target))
-      JE.JsFunc("graph.removeLink", source.toInt, target.toInt).cmd &
+      //links = links.filterNot(isValidLink(_, source, target))
+      displayableLinks.find(l => l.sourceID == source && l.targetID == target).foreach(l => deletedLinks = l :: deletedLinks)
+      JE.JsFunc("graph.removeLink", source, target).cmd &
       initializeElements
     }
 
@@ -166,13 +81,14 @@ class GraphVisual {
     }
 
     def sourceNodes: List[(String, String)] = {
-      init::nodes.filter(n=> links.exists(e => e.sourceID == n.id))
-                        .sortWith((x,y) => x.name < y.name)
-                        .map(n => (n.id, n.name))
+      init::displayableNodes
+        .filter(n=> links.exists(e => e.sourceID == n.id))
+        .sortWith((x,y) => x.name < y.name)
+        .map(n => (n.id, n.name))
     }
 
     def targetNodes: List[(String, String)] = {
-      nodes.filter(n=> links.exists(e => e.targetID == n.id ))
+      displayableNodes.filter(n=> links.exists(e => e.targetID == n.id ))
         .sortWith((x,y) => x.name < y.name)
         .map(n => (n.id, n.name))
     }
@@ -180,7 +96,7 @@ class GraphVisual {
     def oppositeSuggestions(source:String): List[(String, String)] = {
       if(source isEmpty) Nil
       else
-        init :: (targetNodes.filter(n => links.exists(isValidLink(_, source, n._1))))
+        init :: (targetNodes.filter(n => displayableLinks.exists(isValidLink(_, source, n._1))))
     }
 
     def updatedSources(s:String) ={
@@ -229,19 +145,26 @@ class GraphVisual {
     SHtml.ajaxButton("Edit Node", () => edit)
   }
 
+  def selectSemesters = {
+     NodeSeq.Empty
+  }
+
+
 }
 
 object GraphVisual extends GraphVisual {
+  def apply = new GraphVisual
+
   /* Get Json representation of the graph */
   def graph2Json = {
-    val Jnodes = JArray(nodes.map(_.toJObject))
-    val Jlinks = JArray(links.map(_.toJObject))
+    val Jnodes = JArray(displayableNodes.map(_.toJObject))
+    val Jlinks = JArray(displayableLinks.map(_.toJObject))
     val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
     JGraph
   }
 
   /* Get Json data to include on left side of screen, details about nodes for now */
-  def details2Json(id:Int) = {
+  def details2Json(id:String) = {
     val node = nodes.find(_.id == id)
     val name = if(node.isDefined) node.get.name else "node not defined"
     JString(name)

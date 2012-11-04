@@ -7,10 +7,14 @@ var graph;
 
 function myGraph(el) {
 
-// Add and remove elements on the graph object
+   /* Add and remove elements on the graph object
+    * Constraint: if a node with same id is already in the graph, the node is not added.
+    */
     this.addNode = function (node) {
-        nodes.push(node);
-        update();
+        if(findNode(node.id) ==null){
+            nodes.push(node);
+            update();
+        }
     };
 
     this.removeNode = function (id) {
@@ -131,7 +135,7 @@ function myGraph(el) {
                     return "#9ecae1";
                 else return "transparent";
             })
-            .attr("stroke-width", 5);
+            .attr("stroke-width", 2);
 
         linkEnter.append("title")
             .text(function(d){
@@ -232,9 +236,9 @@ function myGraph(el) {
 
         // Restart the force layout.
         force
-            .gravity(.05)
+            .gravity(.1)
             .distance(300)
-            .charge(function(d){return -120- d.credits*10; })
+            .charge(function(d){return -300- d.credits*10; })
             //.friction(0.9)
             .linkDistance(function(d){return (100 - d.value*3)})
             .size([w, h])
