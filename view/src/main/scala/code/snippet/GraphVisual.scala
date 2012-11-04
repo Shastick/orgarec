@@ -12,8 +12,9 @@ import js.jquery.JqJE._
 import ch.epfl.craft.recom._
 import storage.db.PGDBFactory
 import graph.Landscape
-import model.administration.Section
+import model.administration.{Fall, Section}
 import ch.epfl.craft.recom.util.SemesterRange
+import java.util.Calendar
 
 
 /**
@@ -25,58 +26,81 @@ import ch.epfl.craft.recom.util.SemesterRange
  */
 class GraphVisual {
   case class Graph(nodes:List[Node], links:List[Link])
-  case class Node(id:Int, name:String, alias:String, credits:Int){
+  case class Node(id:String, name:String, alias:String, credits:Int){
     val toJObject = JObject(List(
-      JField("id", JInt(id)),
+      JField("id", JString(id)),
       JField("name", JString(name)),
       JField("alias",JString(alias)),
       JField("credits", JInt(credits))
     ))
   }
-  case class Link(source:Node, target:Node, value:Int, showLink:Boolean=true){
+  case class Link(sourceID:String, targetID:String, value:Int, showLink:Boolean=true){
     val toJObject = JObject(List(
-      JField("source", JInt(source.id)),
-      JField("target", JInt(target.id)),
+      JField("source", JString(sourceID)),
+      JField("target", JString(targetID)),
       JField("value", JInt(value)),
       JField("showLink", JBool(showLink))
     ))
   }
 
+  var nodes:List[Node] = Nil
+  var links:List[Link] = Nil
+
   /* Pour pomper comme un porc dans la DB */
-  val dbf = new PGDBFactory("localhost", "orgarec", "julien", "blabla")
-  val s = dbf.store
-  val p = dbf.processer
 
-  val l = Landscape.build(s, p, SemesterRange.all, Set(Section("SC"), Section("IN")))
-  l.nodes.foreach(n => println(n.node.credits))
+  def getLandscape = {
+    val dbf = new PGDBFactory("localhost", "orgarec", "postgres", "hendrix")
+    val s = dbf.store
+    val p = dbf.processer
+    // Ces deux lignes sont présentes car le SemesterRange demande des Dates afin de les transformées en années dès
+    // la première ligne...
+    val from = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2011); c.getTime}
+    val to = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2012); c.getTime}
 
-  val n0 =  Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",6)
-  val n1 =  Node(1,"Principles of digital communications","PDC",6)
-  val n2 =  Node(2,"Securité des réseaux","Securité",4)
-  val n3 =  Node(3,"Signal processing for communications","Signal proc.",6)
-  val n4 =  Node(4,"Compiler construction","Compiler",6)
-  val n5 =  Node(5,"Electromagnétisme I : lignes et ondes","EM 1",3)
-  val n6 =  Node(6,"Electromagnétisme II : calcul des champs","EM 2",3)
-  val n7 =  Node(7,"Electronique II","Elec 2",4)
-  val n8 =  Node(8,"Electronique III","Elec 3",3)
-  val n9 =  Node(9,"Functional materials in communication systems","FMCS",3)
-  val n10 = Node(10,"Graph theory applications","GTA",4)
-  val n11 = Node(11,"Informatique du temps réel","ITR",4)
-  val n12 = Node(12,"Intelligence artificielle","IA",4)
-  val n13 = Node(13,"Internet analytics","Internet",5)
-  val n14 = Node(14,"Introduction to computer graphics","Comp Graph",6)
-  val n15 = Node(15,"Introduction to database systems","DB",4)
-  val n16 = Node(16,"Operating systems","OS",4)
-  val n17 = Node(17,"Ressources humaines dans les projets","RES",2)
-  val n18 = Node(18,"Software development project","SDP",4)
-  val n19 = Node(19,"Software engineering","Sweng",6)
+    val l = Landscape.build(s, p, SemesterRange(Some(Fall(from)), Some(Fall(to))), Set(Section("SC")))
+    l
+  }
+
+  def LandscapeToGraph:Graph = {
+    val landscape = getLandscape
+    nodes= landscape.nodes.map(n => Node(n.node.id, n.node.name, n.node.name, n.node.credits.getOrElse(10))).toList
+    links =landscape.edges.map(e => Link(e.from, e.to, 5)).toList
+
+    println("Number of nodes computed: "+ nodes.length)
+    println("Number of links computed: "+ links.length)
+    println("Node1 : "+ nodes.head.toJObject.toString)
+    println("link1 : "+ links.head.toJObject.toString)
+    Graph(nodes, links)
+  }
+
+  val n0 =  Node("0","Modeles stochastiques pour les communications)", "Mod Stoch",6)
+  val n1 =  Node("1","Principles of digital communications","PDC",6)
+  val n2 =  Node("2","Securité des réseaux","Securité",4)
+  val n3 =  Node("3","Signal processing for communications","Signal proc.",6)
+  val n4 =  Node("4","Compiler construction","Compiler",6)
+  val n5 =  Node("5","Electromagnétisme I : lignes et ondes","EM 1",3)
+  val n6 =  Node("6","Electromagnétisme II : calcul des champs","EM 2",3)
+  val n7 =  Node("7","Electronique II","Elec 2",4)
+  val n8 =  Node("8","Electronique III","Elec 3",3)
+  val n9 =  Node("9","Functional materials in communication systems","FMCS",3)
+  val n10 = Node("10","Graph theory applications","GTA",4)
+  val n11 = Node("11","Informatique du temps réel","ITR",4)
+  val n12 = Node("12","Intelligence artificielle","IA",4)
+  val n13 = Node("13","Internet analytics","Internet",5)
+  val n14 = Node("14","Introduction to computer graphics","Comp Graph",6)
+  val n15 = Node("15","Introduction to database systems","DB",4)
+  val n16 = Node("16","Operating systems","OS",4)
+  val n17 = Node("17","Ressources humaines dans les projets","RES",2)
+  val n18 = Node("18","Software development project","SDP",4)
+  val n19 = Node("19","Software engineering","Sweng",6)
 
 
-  var nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
+  nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19)
 
-  var links = List(
-    Link(n0,n1, 10),
-    Link(n0,n2, 3),
+
+  links = List(
+    Link("0","1", 10),
+    /*Link(n0,n2, 3),
     Link(n0, n3,8),
     Link(n0,n10, 5),
     Link(n1,n2,3),
@@ -90,25 +114,25 @@ class GraphVisual {
     Link(n7,n8,10),
     Link(n8,n9,3),
     Link(n14,n19,10),
-    Link(n18,n19,7),
+    Link(n18,n19,7),*/
 
-    Link(n0, n19, 7, showLink=false)
+    Link("0", "19", 7, showLink=false)
   )
 
-  val myGraph = Graph(nodes, links) 
-
+  //val myGraph = Graph(nodes, links)
+  val myGraph =  LandscapeToGraph
 
 
   def deleteNode = {
     def delete(id:String):JsCmd = {
-      nodes = nodes.filterNot(_.id.toString == id);
-      JE.JsFunc("graph.removeNode",id.toInt).cmd  &
+      nodes = nodes.filterNot(_.id == id);
+      JE.JsFunc("graph.removeNode",id).cmd  &
       ReplaceOptions("node_delete", nodeList, Full(nodeList.head._1))
     }
 
     def call = ajaxCall(JE.JsRaw("this.value"), delete _)
 
-    def nodeList = ("", " - ")::nodes.sortWith((x,y)=>x.name<y.name).map(n => (n.id.toString, n.name))
+    def nodeList = ("", " - ")::nodes.sortWith((x,y)=>x.name<y.name).map(n => (n.id, n.name))
 
     SHtml.untrustedSelect(nodeList, Full(nodeList.head._1), delete _,
       "id" -> "node_delete",
@@ -123,7 +147,7 @@ class GraphVisual {
     var target = ""
 
     def isValidLink(e:Link, source:String, target:String):Boolean = {
-      (e.source.id.toString == source && e.target.id.toString == target)
+      (e.sourceID== source && e.targetID == target)
     }
 
     def delete:JsCmd = {
@@ -142,15 +166,15 @@ class GraphVisual {
     }
 
     def sourceNodes: List[(String, String)] = {
-      init::nodes.filter(n=> links.exists(e => e.source == n))
+      init::nodes.filter(n=> links.exists(e => e.sourceID == n.id))
                         .sortWith((x,y) => x.name < y.name)
-                        .map(n => (n.id.toString, n.name))
+                        .map(n => (n.id, n.name))
     }
 
     def targetNodes: List[(String, String)] = {
-      nodes.filter(n=> links.exists(e => e.target == n ))
+      nodes.filter(n=> links.exists(e => e.targetID == n.id ))
         .sortWith((x,y) => x.name < y.name)
-        .map(n => (n.id.toString, n.name))
+        .map(n => (n.id, n.name))
     }
 
     def oppositeSuggestions(source:String): List[(String, String)] = {
@@ -201,7 +225,7 @@ class GraphVisual {
   }
 
   def editNode = {
-    def edit = JE.JsFunc("graph.editNode", Node(100,"Modeles stochastiques pour les communications)", "Mod Stoch",12).toJObject ).cmd
+    def edit = JE.JsFunc("graph.editNode", Node("100","Modeles stochastiques pour les communications)", "Mod Stoch",12).toJObject ).cmd
     SHtml.ajaxButton("Edit Node", () => edit)
   }
 
