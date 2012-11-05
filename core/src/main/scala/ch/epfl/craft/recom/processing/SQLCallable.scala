@@ -161,7 +161,8 @@ trait SQLCallable {
     else if (m.erasure.equals(classOf[Int]))	 call.getLong(i).toInt
     else if (m.erasure.equals(classOf[Double]))  call.getDouble(i)
     else if (m.erasure.equals(classOf[String]))  call.getString(i)
-    else if (m.erasure.equals(classOf[Date]))    new java.util.Date(call.getDate(i).getTime())
+    else if (m.erasure.equals(classOf[Date]))
+      new org.scala_tools.time.Imports.DateTime(call.getDate(i))
     else if (m.erasure.equals(classOf[Boolean])) call.getBoolean(i)
     else if (m.erasure.equals(classOf[List[_]])) 
       fetchRows(call.getArray(i).getResultSet()) { rs =>
