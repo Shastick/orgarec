@@ -2,6 +2,8 @@
 -- usage: sectionTopics('{IN,SC}'::varchar[])
 CREATE OR REPLACE FUNCTION sectionTopicsWStudentCount(
 	IN sname character varying[],
+	IN from_sem timestamp without time zone,
+        IN to_sem timestamp without time zone,
 	OUT t_name character varying,
 	OUT t_isa_id character varying,
 	OUT s_name character varying,
@@ -26,11 +28,13 @@ BEGIN
 		topicmap tm,
 		sectionmap sm,
 		coursemap cm,
-		subscribed s
+		subscribed s,
+		semestermap smm
 	WHERE 
 		tm.section_c = sm.id
 		AND cm.topic = tm.id
 		AND s.course = cm.id
+		AND cm.semester = smm.id
 		AND smm.year >= from_sem
 		AND smm.year <= to_sem
 		AND sm.name ilike any(sname)
@@ -49,4 +53,4 @@ BEGIN
  END;
  $$
  LANGUAGE plpgsql;
-	
+
