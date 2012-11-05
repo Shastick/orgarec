@@ -176,7 +176,8 @@ function myGraph(el) {
 
         node.selectAll("circle")
             .transition()
-            .attr("r", function(d){return d.radius+"px";});
+            .attr("r", function(d){return d.radius+"px";})
+            .attr("fill", function(d){return d.fill});
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
