@@ -53,6 +53,16 @@ trait SQLCallable {
   /** Returns a new jndi connection */
   protected def conn: Connection
   
+    /** Calls stored procedure that returns a 5-tuple list with types A,B,C,D,E,F */
+    protected def callS[A : Manifest, B : Manifest, C : Manifest, D : Manifest, E : Manifest, F: Manifest]
+		  			(name: String)(args: Any*): List[(A,B,C,D,E, F)] = {
+    val call = conn.prepareCall("{call " + name + argstr(args :_*) + "}")
+    setArgs(call, 1, args :_*)
+    fetchRows(call) { rs =>
+      (sqlGet[A](rs,1),sqlGet[B](rs,2), sqlGet[C](rs,3), sqlGet[D](rs,4), sqlGet[E](rs,5), sqlGet[F](rs,6))
+    }
+  }
+  
   /** Calls stored procedure that returns a 5-tuple list with types A,B,C,D,E */
   protected def callS[A : Manifest, B : Manifest, C : Manifest, D : Manifest, E : Manifest]
 		  			(name: String)(args: Any*): List[(A,B,C,D,E)] = {

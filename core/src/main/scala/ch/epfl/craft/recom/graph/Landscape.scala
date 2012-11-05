@@ -22,7 +22,7 @@ object Landscape{
 	def build(s: Storage, p: Processer, tr: SemesterRange,
 			se: Set[Section] = Set.empty):Landscape = {
 	  
-	  val topics = p.readShortTopics(se)
+	  val topics = p.readShortTopicsDetailed(se, tr)
 	  
 	  val costuds = p.readShortTopicCostudents(se, tr)
 	  
@@ -36,7 +36,7 @@ object Landscape{
 	          	case 0 => None
 	          	case _ => Some(t._4)
 	          }),
-	          Set.empty))
+	          Set(StudentsQuantity(t._6))))
 	  
 	  val edges = costuds.map(t =>
 	    LandscapeEdge(t._1, t._2, Set(CoStudents(t._3.toInt))))
