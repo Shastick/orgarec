@@ -1,6 +1,4 @@
 package ch.epfl.craft.recom.model.administration
-import java.util.Date
-
 
 /**
  * Represent a section

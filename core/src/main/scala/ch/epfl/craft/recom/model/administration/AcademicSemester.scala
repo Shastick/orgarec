@@ -1,6 +1,6 @@
 package ch.epfl.craft.recom.model.administration
-import java.util.Date
-import java.util.Calendar
+
+import org.scala_tools.time.Imports._
 
 sealed trait AcademicSemester {
   val semester: Semester
@@ -8,9 +8,7 @@ sealed trait AcademicSemester {
   
   def equals(s: AcademicSemester) = 
 		if(this.getClass.getSimpleName == s.getClass.getSimpleName){
-    		val ct = Calendar.getInstance; ct.setTime(this.year)
-    		val cs = Calendar.getInstance; cs.setTime(s.year)
-    		ct.get(Calendar.YEAR) == cs.get(Calendar.YEAR)
+    		this.year == s.year
     } else false
 }
 case class BA1(semester: Semester) extends AcademicSemester

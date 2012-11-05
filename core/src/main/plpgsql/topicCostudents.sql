@@ -29,7 +29,9 @@ BEGIN
 		topicmap tm1,
 		topicmap tm2,
 		sectionmap sm1,
-		sectionmap sm2
+		sectionmap sm2,
+		semestermap smm1,
+		semestermap smm2
 	WHERE 
 		crm.relation::text = 'costudents'::text 
 		AND crm.from_c = cm1.id 
@@ -38,6 +40,12 @@ BEGIN
 		AND cm2.topic = tm2.id
 		AND tm1.section_c = sm1.id
 		AND tm2.section_c = sm2.id
+		AND cm1.semester = smm1.id
+		AND cm2.semester = smm2.id
+		AND smm1.year >= from_sem
+		AND smm1.year <= to_sem
+		AND smm2.year >= from_sem
+		AND smm2.year <= to_sem
 		AND sm1.name ilike any(sname)
 		AND sm2.name ilike any(sname)
 	GROUP BY 

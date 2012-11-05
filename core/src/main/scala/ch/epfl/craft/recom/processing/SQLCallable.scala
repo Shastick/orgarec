@@ -161,7 +161,8 @@ trait SQLCallable {
     else if (m.erasure.equals(classOf[Int]))	 call.getLong(i).toInt
     else if (m.erasure.equals(classOf[Double]))  call.getDouble(i)
     else if (m.erasure.equals(classOf[String]))  call.getString(i)
-    else if (m.erasure.equals(classOf[Date]))    new java.util.Date(call.getDate(i).getTime())
+    else if (m.erasure.equals(classOf[Date]))
+      new org.scala_tools.time.Imports.DateTime(call.getDate(i))
     else if (m.erasure.equals(classOf[Boolean])) call.getBoolean(i)
     else if (m.erasure.equals(classOf[List[_]])) 
       fetchRows(call.getArray(i).getResultSet()) { rs =>
@@ -217,8 +218,8 @@ trait SQLCallable {
   private def setArg(st: CallableStatement)(arg: Any)(i: Int) = arg match {
   	case s: String => st.setString(i, s); i + 1
   	case r: SemesterRange => {
-  	  st.setDate(i, r.from.map(s => new Date(s.year.getTime)).orNull)
-  	  st.setDate(i+1, r.to.map(s => new Date(s.year.getTime)).orNull)
+  	  st.setDate(i, r.from.map(s => new Date(s.year.getMillis)).orNull)
+  	  st.setDate(i+1, r.to.map(s => new Date(s.year.getMillis)).orNull)
   	  i + 2
   	}
   	case l: Long => st.setLong(i, l); i + 1
