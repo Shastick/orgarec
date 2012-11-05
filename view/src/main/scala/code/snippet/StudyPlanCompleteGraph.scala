@@ -20,8 +20,6 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
     val dbf = new PGDBFactory("localhost", "orgarec", "postgres", "hendrix")
     val s = dbf.store
     val p = dbf.processer
-    // Ces deux lignes sont présentes car le SemesterRange demande des Dates afin de les transformées en années dès
-    // la première ligne...
     val from = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2011); c.getTime}
     val to = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2012); c.getTime}
 
