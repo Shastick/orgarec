@@ -4,7 +4,7 @@ import ch.epfl.craft.recom.storage.db.PGDBFactory
 import java.util.Calendar
 import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity, Landscape}
 import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.recom.model.administration.{Section, Fall}
+import ch.epfl.craft.recom.model.administration.{Semester, Section, Fall}
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,10 +20,11 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
     val dbf = new PGDBFactory("localhost", "orgarec", "postgres", "hendrix")
     val s = dbf.store
     val p = dbf.processer
-    val from = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2011); c.getTime}
-    val to = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2012); c.getTime}
-
-    val l = Landscape.build(s, p, SemesterRange(Some(Fall(from)), Some(Fall(to))), Set(Section("SC")))
+    //val from = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2011); c.getTime}
+    //val to = {val c = Calendar.getInstance(); c.set(Calendar.YEAR, 2012); c.getTime}
+    val fromS = Semester(2011, "spring")
+    val toS = Semester(2012, "fall")
+    val l = Landscape.build(s, p, SemesterRange(Some(fromS), Some(toS)), Set(Section("SC")))
     l
   }
 
