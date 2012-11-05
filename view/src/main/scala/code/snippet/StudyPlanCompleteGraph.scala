@@ -54,7 +54,7 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
 
     println("Number of nodes computed: "+ nodes.length)
     println("Number of links computed: "+ links.length)
-    println("link max: "+ links.map(_.distance).max)
+    //println("link max: "+ links.map(_.distance).max)
     Graph(nodes, links)
   }
 
