@@ -217,8 +217,8 @@ trait SQLCallable {
   private def setArg(st: CallableStatement)(arg: Any)(i: Int) = arg match {
   	case s: String => st.setString(i, s); i + 1
   	case r: SemesterRange => {
-  	  st.setDate(i, r.from.map(s => new Date(s.year.getTime)).orNull)
-  	  st.setDate(i+1, r.to.map(s => new Date(s.year.getTime)).orNull)
+  	  st.setDate(i, r.from.map(s => new Date(s.year.getMillis)).orNull)
+  	  st.setDate(i+1, r.to.map(s => new Date(s.year.getMillis)).orNull)
   	  i + 2
   	}
   	case l: Long => st.setLong(i, l); i + 1

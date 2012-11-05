@@ -1,19 +1,18 @@
 package ch.epfl.craft.recom.model.administration
-import java.util.Date
-import java.util.Calendar
-import java.text.SimpleDateFormat
+
+import org.scala_tools.time.Imports._
+
 
 /**
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
  */
 
+
 sealed trait Semester extends Ordered[Semester]{
-  val year: Date
+  val year: DateTime
   
-  lazy val year_int = {
-	val c = Calendar.getInstance()
-    c.setTime(this.year)
-    c.get(Calendar.YEAR)}
+  lazy val year_int = year.getYear()
+  
     
   def equals(s: Semester) = {
 		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
@@ -49,19 +48,21 @@ sealed trait Semester extends Ordered[Semester]{
 	  					else "fall"
 }
 
-case class Spring(val year: Date) extends Semester
-case class Fall(val year: Date) extends Semester
+case class Spring(val year: DateTime) extends Semester
+case class Fall(val year: DateTime) extends Semester
 
 
 object Semester {
   
-  val df = new SimpleDateFormat("yyyy")
+  val yr_format = "yyyy"
   
-  def apply(y: Date, s: String): Semester = s.toLowerCase match {
+  def apply(y: DateTime, s: String): Semester = s.toLowerCase match {
     case "spring" | "ete" => Spring(y)
-    case "fall" | "hiver" => Fall(y)
+    case "fall" | "hiver" => Fall(y + 6.months)
     case _ => throw new Exception("Bad Semester Specification:" + s)
   }
   
-  def apply(y: String, s: String): Semester = apply(df.parse(y),s)
+  def apply(y: Int, s: String): Semester = apply(new DateTime(y,1,1,0,0),s)
+  def apply(y: String, s: String): Semester = apply(new Integer(y),s)
+  def apply(y: java.util.Date, s: String): Semester = apply(new DateTime(y),s)
 }

@@ -31,8 +31,8 @@ object SemesterMap extends SemesterMap with LongKeyedMetaMapper[SemesterMap] {
     sl.map(s => fill(s))
     
   def fill(s: Semester): SemesterMap = {
-    val m = SemesterMap.findOrCreate(By(SemesterMap.year,s.year),By(SemesterMap.semester, s.season))
-    m.year(s.year)
+    val m = SemesterMap.findOrCreate(By(SemesterMap.year,s.year.toDate),By(SemesterMap.semester, s.season))
+    m.year(s.year.toDate)
     m.semester(s.season)
     m.save
     m
@@ -41,6 +41,6 @@ object SemesterMap extends SemesterMap with LongKeyedMetaMapper[SemesterMap] {
   def fill(s: SemesterMap):Semester = Semester(s.year.get,s.semester)
   
   def readMap(s: Semester): Option[SemesterMap] = 
-    SemesterMap.findAll(By(SemesterMap.year, s.year), By(SemesterMap.semester, s.season)).headOption
+    SemesterMap.findAll(By(SemesterMap.year, s.year.toDate), By(SemesterMap.semester, s.season)).headOption
   
 }
