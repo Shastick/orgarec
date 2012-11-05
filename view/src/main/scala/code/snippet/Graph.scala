@@ -11,19 +11,23 @@ import net.liftweb.json._
  */
 
 case class Graph(nodes:List[Node], links:List[Link])
-case class Node(id:String, name:String, alias:String, credits:Int){
+case class Node(id:String, name:String, alias:String, radius:Int, fill:RGBColor=RGBColor(255, 0,0)){
   val toJObject = JObject(List(
     JField("id", JString(id)),
     JField("name", JString(name)),
-    JField("alias",JString(alias)),
-    JField("credits", JInt(credits))
+    JField("radius", JInt(radius)),
+    JField("fill", fill.toJString)
   ))
 }
-case class Link(sourceID:String, targetID:String, value:Int, showLink:Boolean=true){
+case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean=true){
   val toJObject = JObject(List(
     JField("source", JString(sourceID)),
     JField("target", JString(targetID)),
-    JField("value", JInt(value)),
+    JField("distance", JInt(distance)),
     JField("showLink", JBool(showLink))
   ))
+}
+
+case class RGBColor(red:Int, green:Int, blue:Int, opacity:Double=1){
+  def toJString = JString("rgb("+red+","+green+","+blue+")")
 }

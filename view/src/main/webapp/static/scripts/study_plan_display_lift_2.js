@@ -34,7 +34,8 @@ function myGraph(el) {
     this.editNode = function(node) {
         var n = findNodeIndex(node.id);
         var initialNode = nodes[n];
-        initialNode["credits"] = node.credits;
+        initialNode["radius"] = node.radius;
+        initialNode["fill"] = node.fill;
         nodes.splice(n, 1, initialNode);
         update();
     }
@@ -63,7 +64,7 @@ function myGraph(el) {
     };
 
     this.addLink = function (link) {
-        links.push({"source":findNode(link.source),"target":findNode(link.target),"value":link.value, "showLink": link.showLink});
+        links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink});
         update();
     };
 
@@ -139,7 +140,7 @@ function myGraph(el) {
 
         linkEnter.append("title")
             .text(function(d){
-                return d.value;
+                return d.distance;
             });
 
         link.exit().remove();
@@ -175,7 +176,7 @@ function myGraph(el) {
 
         node.selectAll("circle")
             .transition()
-            .attr("r", function(d){return d.credits *5+"px";});
+            .attr("r", function(d){return d.radius+"px";});
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
@@ -186,9 +187,9 @@ function myGraph(el) {
             .attr("id", function(d){return "circle-node-"+ d.id})
             .attr("class", "circle-node")
             .attr("cursor","pointer")
-            .style("fill",function(d){return "#c6dbef"})
-            .attr("r", function(d){return d.credits *5+"px";})
-            .attr("stroke", function(d){return "#3182bd";})
+            .style("fill",function(d){return d.fill})
+            .attr("r", function(d){return d.radius+"px";})
+            .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return "1.5px";})
             .on("contextmenu", function(data, index) {
                 $.ajax({
@@ -215,7 +216,7 @@ function myGraph(el) {
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
-            .text(function(d) { return d.alias.substring(0, d.credits*5 / 3); });
+            .text(function(d) { return d.name.substring(0, d.radius / 3); });
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
@@ -238,9 +239,9 @@ function myGraph(el) {
         force
             .gravity(.1)
             .distance(300)
-            .charge(function(d){return -300- d.credits*10; })
-            //.friction(0.9)
-            .linkDistance(function(d){return (100 - d.value*3)})
+            .charge(function(d){return - d.radius*100; })
+            //.friction(0.01)
+            .linkDistance(function(d){return (110 - d.distance*3)})
             .size([w, h])
             .start();
     };

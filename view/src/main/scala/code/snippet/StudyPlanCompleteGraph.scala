@@ -2,7 +2,7 @@ package code.snippet
 
 import ch.epfl.craft.recom.storage.db.PGDBFactory
 import java.util.Calendar
-import ch.epfl.craft.recom.graph.Landscape
+import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity, Landscape}
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.{Section, Fall}
 
@@ -29,13 +29,32 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
 
   def LandscapeToGraph:Graph = {
     val landscape = getLandscape
-    val nodes= landscape.nodes.map(n => Node(n.node.id, n.node.name, n.node.name, n.node.credits.getOrElse(4))).toList
-    val links =landscape.edges.map(e => Link(e.from, e.to, 5)).toList
+    val nodes= landscape.nodes.map(n => Node(
+      n.node.id, name = n.node.name,
+      alias = n.node.name,
+      radius = 4*n.node.credits.getOrElse(4),
+      fill = {
+        val number = n.metadata.collectFirst {
+          case StudentsQuantity(c) => c
+        }.getOrElse(0)
+        val normNumber = 255 -  List(255,number*255/1000).min
+        RGBColor(normNumber,0,0)
+      }
+    )).toList
+    val links =landscape.edges.map(e => Link(
+      sourceID= e.from,
+      targetID = e.to,
+      distance =  {
+        val number = e.relations.collectFirst {
+          case CoStudents(c) => c
+        }.getOrElse(0)
+        20 - number*20/2300
+      }
+    )).toList
 
     println("Number of nodes computed: "+ nodes.length)
     println("Number of links computed: "+ links.length)
-    println("Node1 : "+ nodes.head.toJObject.toString)
-    println("link1 : "+ links.head.toJObject.toString)
+    println("link max: "+ links.map(_.distance).max)
     Graph(nodes, links)
   }
 
