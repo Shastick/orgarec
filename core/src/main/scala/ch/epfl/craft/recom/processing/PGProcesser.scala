@@ -20,6 +20,10 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
 	
 	def readShortTopics(s: Set[Section]): Iterable[(String, String, String, Int, String)] = 
 	  callS[String, String, String, Int, String]("sectionTopics")(s.toList)
+	  
+	def readShortTopicsDetailed(s: Set[Section], sr: SemesterRange):
+	  Iterable[(String, String, String, Int, String, Int)] =
+	    callS[String, String, String, Int, String, Int]("sectionTopicsWStudentCount")(s.toList, sr)
   
     def readShortTopicCostudents(s: Set[Section], tr: SemesterRange): Iterable[(String, String, Long)] =
       callS[String, String, Long]("topicCostudents")(s.toList, tr)

@@ -25,7 +25,11 @@ trait Processer {
    * Get the short topic (prerequisites empty) data belonging to the mentioned sections.
    * A returned tuple is: (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Descripption>)
    */
-  def readShortTopics(s: Set[Section]): Iterable[(String, String, String, Int, String)]
+  def readShortTopics(s: Set[Section]):
+	  Iterable[(String, String, String, Int, String)]
+  
+  def readShortTopicsDetailed(s: Set[Section], sr: SemesterRange):
+	  Iterable[(String, String, String, Int, String,Int)]
   
   /**
    * A returned tuple is: (<Topic1 ISA ID>,<Topic2 ISA ID>,<costudents count>)
