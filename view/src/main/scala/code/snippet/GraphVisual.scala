@@ -153,7 +153,6 @@ class GraphVisual {
 }
 
 object GraphVisual extends GraphVisual {
-  def apply = new GraphVisual
 
   /* Get Json representation of the graph */
   def graph2Json = {
