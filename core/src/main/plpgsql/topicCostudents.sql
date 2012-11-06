@@ -47,9 +47,9 @@ BEGIN
 		AND sm2.name ilike any(sname)
 	GROUP BY 
 		tm1.name,
-		tm1.id,
+		tm1.isa_id,
 		tm2.name,
-		tm2.id
+		tm2.isa_id
 ;
   FOR retval IN	
 	SELECT 
