@@ -42,10 +42,7 @@ BEGIN
 		AND tm2.section_c = sm2.id
 		AND cm1.semester = smm1.id
 		AND cm2.semester = smm2.id
-		AND smm1.year >= from_sem
-		AND smm1.year <= to_sem
-		AND smm2.year >= from_sem
-		AND smm2.year <= to_sem
+
 		AND sm1.name ilike any(sname)
 		AND sm2.name ilike any(sname)
 	GROUP BY 
@@ -60,17 +57,18 @@ BEGIN
 		tc1.id1,
 		tc1.name2,
 		tc1.id2,
-		(tc1.sum + tc2.sum) as sum
+		(tc1.sum + COALESCE(tc2.sum,0)) as sum
 	FROM 
-		topic_costudents tc1,
+		topic_costudents tc1
+		LEFT JOIN
 		topic_costudents tc2	
 
-	WHERE 
+	ON 
 		tc1.id1 = tc2.id2
 		AND tc2.id1 = tc1.id2
 		AND tc1.id2 < tc1.id1
   LOOP
-    t_isa_id1  := retval.id1;
+    t_isa_id1 := retval.id1;
     t_isa_id2 := retval.id2;
     t_sum := retval.sum;
     RETURN NEXT;
@@ -79,4 +77,3 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
-

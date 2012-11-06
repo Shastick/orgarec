@@ -7,6 +7,7 @@ import java.lang.StringBuffer
 import scala.collection.mutable.ListBuffer
 import java.sql.ResultSet
 import java.sql.Date
+import org.scala_tools.time.Imports._
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
 
