@@ -1,7 +1,7 @@
 -- return the topics teached by the specified sections
 -- usage: sectionTopics('{IN,SC}'::varchar[])
 CREATE OR REPLACE FUNCTION sectionTopicsWStudentCount(
-	IN sname character varying[],
+	IN i_sname character varying[],
 	IN from_sem timestamp without time zone,
         IN to_sem timestamp without time zone,
 	OUT t_name character varying,
@@ -37,7 +37,7 @@ BEGIN
 		AND cm.semester = smm.id
 		AND smm.year >= from_sem
 		AND smm.year <= to_sem
-		AND sm.name ilike any(sname)
+		AND sm.name ilike any(i_sname)
 	GROUP BY
 		tname, tid, sname, creds, descr
   LOOP
