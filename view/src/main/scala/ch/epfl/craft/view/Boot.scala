@@ -19,7 +19,7 @@ import ch.epfl.craft.view.snippet.GraphApi
 class Boot extends Bootable {
   def boot {
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("ch.epfl.craft.view")
 
     // Build SiteMap
     val entries = List(
