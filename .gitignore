@@ -1,11 +1,19 @@
+# Lift Properties (defaults are under RC, 
+# we don't want to add server stuff 
+# with passwords anymore, do we chris ? ;-))
+*.props
+
+# sbt compilation stuff
 target/
 */target/
+
 # Eclipse stuff
 .classpath
 .project
 .metadata
 */.cache
 */.settings
+
 # OS generated files #
 ######################
 .DS_Store
