@@ -1,4 +1,4 @@
-package code.snippet
+package ch.epfl.craft.view.snippet
 
 import ch.epfl.craft.recom.storage.db.PGDBFactory
 import java.util.Calendar

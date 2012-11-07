@@ -1,4 +1,4 @@
-package bootstrap.liftweb
+package ch.epfl.craft.view.liftweb
 
 import net.liftweb._
 import util._
@@ -7,9 +7,9 @@ import common._
 import http._
 import sitemap._
 import Loc._
-import code.snippet.GraphApi
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.storage.db.PGDBFactory
+import ch.epfl.craft.view.snippet.GraphApi
 
 
 /**

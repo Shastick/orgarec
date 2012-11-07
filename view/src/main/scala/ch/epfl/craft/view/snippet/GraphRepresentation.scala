@@ -1,4 +1,4 @@
-package code.snippet
+package ch.epfl.craft.view.snippet
 
 /**
  * Created with IntelliJ IDEA.
