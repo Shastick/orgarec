@@ -35,6 +35,11 @@ object OrgaRecBuild extends Build {
 	  "org.scalaj" %% "scalaj-time" % "0.6"
   ))
 
+  lazy val import_settings = Seq(
+	libraryDependencies ++= Seq(
+	  "org.scalaj" %% "scalaj-time" % "0.6"
+  ))
+
   lazy val root = Project(
   	id = "OrgaRec",
 	base = file(".")
@@ -43,7 +48,7 @@ object OrgaRecBuild extends Build {
   lazy val import_proj = Project(
    	id = "import",
 	base = file("import")
-  ) dependsOn(core)
+  ) settings(import_settings :_*) dependsOn(core)
 
   lazy val core = Project(
   	id = "core",
