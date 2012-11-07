@@ -1,4 +1,4 @@
-package ch.epfl.craft.view.liftweb
+package ch.epfl.craft.view
 
 import net.liftweb._
 import util._
@@ -16,7 +16,7 @@ import ch.epfl.craft.view.snippet.GraphApi
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
-class Boot {
+class Boot extends Bootable {
   def boot {
     // where to search snippet
     LiftRules.addToPackages("code")
