@@ -86,8 +86,8 @@ function myGraph(el) {
     };
 
 // set up the D3 visualisation in the specified element
-    var w = 550,
-        h = 500;
+    var w = 960,
+        h = 600;
     var vis = d3.select(el)
         .append("svg:svg")
         .attr("width", w)

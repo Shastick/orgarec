@@ -168,4 +168,12 @@ object GraphVisual extends GraphVisual {
     val name = if(node.isDefined) node.get.name else "node not defined"
     JString(name)
   }
+
+  def contextMenuContent(id:String) = {
+    val node = nodes.find(_.id ==id)
+    if(node.isDefined)
+      <h3>{node.get.name}</h3> ++
+      <span> <b>credits: </b>{node.get.radius}</span>
+    else NodeSeq.Empty
+  }
 }

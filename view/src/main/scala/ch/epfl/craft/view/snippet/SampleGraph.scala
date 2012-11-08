@@ -9,7 +9,7 @@ package ch.epfl.craft.view.snippet
  */
 object SampleGraph extends GraphRepresentation{
 
-  val n0 =  Node("0","Modeles stochastiques pour les communications)",6)
+  val n0 =  Node("0","Modeles stochastiques pour les communications)",6, strokeWidthCategory=3)
   val n1 =  Node("1","Principles of digital communications",6)
   val n2 =  Node("2","Securité des réseaux",4)
   val n3 =  Node("3","Signal processing for communications",6)
@@ -31,7 +31,7 @@ object SampleGraph extends GraphRepresentation{
   val n19 = Node("19","Software engineering", 6)
 
 
-  val nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19).map(n => Node(n.id,n.name,4*n.radius))
+  val nodes = List(n0,n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12,n13,n14,n15,n16,n17,n18,n19).map(n => Node(n.id,n.name,4*n.radius, strokeWidthCategory=n.strokeWidthCategory))
 
 
   val links = List(

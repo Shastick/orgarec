@@ -21,7 +21,7 @@ case class Graph(nodes:List[Node], links:List[Link])
  * @param fill the color of the inside of the node
  * @param strokeWidthCategory the stroke category (Integers between 1 and 3 will be treated)
  */
-case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(0, 0,0), strokeWidthCategory:Int=1){
+case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 255,255), strokeWidthCategory:Int=1){
   val toJObject = JObject(List(
     JField("id", JString(id)),
     JField("name", JString(name)),
