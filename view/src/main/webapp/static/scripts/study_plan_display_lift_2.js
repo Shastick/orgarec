@@ -64,13 +64,15 @@ function myGraph(el) {
     };
 
     this.addLink = function (link) {
-        links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink});
-        update();
+        if(findNode(link.source)!= null && findNode(link.target)!= null)  {
+            links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink});
+            update();
+        }
     };
 
     var findNode = function(id) {
         for (var i in nodes) {
-            if (nodes[i]["id"] === id) return nodes[i]
+            if (nodes[i]["id"] == id) return nodes[i]
         ;};
         return null;
     };
@@ -217,7 +219,7 @@ function myGraph(el) {
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
-            .text(function(d) { return d.name.substring(0, d.radius / 3); });
+            .text(function(d) { return d.name.substring(0, d.radius / 3); });*/
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
