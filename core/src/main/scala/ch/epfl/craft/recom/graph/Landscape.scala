@@ -27,7 +27,7 @@ object Landscape{
 	  
 	  val topics = p.readShortTopicsDetailed(se.map(_.name), tr)
 	  
-	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr)
+	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr, as)
 	  
 	  val nodes = topics.map(t =>
 	      LandscapeNode(new Topic(t._2.toString,
