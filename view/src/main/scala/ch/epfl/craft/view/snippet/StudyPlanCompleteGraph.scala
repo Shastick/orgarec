@@ -19,9 +19,12 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
 
   def getLandscape = {
     val dbf = DBFactory.get
-    val fromS = Semester(2011, "spring")
+    val fromS = Semester(2012, "fall")
     val toS = Semester(2012, "fall")
-    val l = Landscape.build(dbf.store, dbf.processer, SemesterRange(Some(fromS), Some(toS)), Set(Section("SC")))
+    val l = Landscape.build(dbf.store, dbf.processer,
+    						SemesterRange(Some(fromS), Some(toS)),
+    						Set(Section("SC"),Section("IN")),
+    						Set("MA1","MA3"))
     l
   }
 

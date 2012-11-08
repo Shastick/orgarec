@@ -6,6 +6,7 @@ import ch.epfl.craft.recom.storage.db.Storage
 import ch.epfl.craft.recom.processing.Processer
 import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.model.Topic
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 /**
  * Represents the picture of the topics and what we can learn from the student's history and 
@@ -19,12 +20,14 @@ class Landscape(
     
 object Landscape{
   
-	def build(s: Storage, p: Processer, tr: SemesterRange,
-			se: Set[Section] = Set.empty):Landscape = {
+	def build(s: Storage, p: Processer,
+			tr: SemesterRange,
+			se: Set[Section] = Set.empty,
+			as: Set[AcademicSemester.Identifier] = Set.empty):Landscape = {
 	  
-	  val topics = p.readShortTopicsDetailed(se, tr)
+	  val topics = p.readShortTopicsDetailed(se.map(_.name), tr)
 	  
-	  val costuds = p.readShortTopicCostudents(se, tr)
+	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr)
 	  
 	  val nodes = topics.map(t =>
 	      LandscapeNode(new Topic(t._2.toString,

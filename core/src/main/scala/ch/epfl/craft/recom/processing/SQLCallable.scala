@@ -236,12 +236,6 @@ trait SQLCallable {
   	  st.setArray(i,arr)
   	  i + 1
   	}
-  	case s: List[Section] if s.head.isInstanceOf[Section] => {
-  	  val arr =
-  	    conn.createArrayOf("varchar", s.map(_.name).asInstanceOf[List[Object]].toArray)
-  	  st.setArray(i,arr)
-  	  i + 1
-  	}
     case _ => sys.error(arg.getClass.toString + " not SQLSettable")
   }
   
