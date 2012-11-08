@@ -37,21 +37,18 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
       fill = {
         val number = n.metadata.collectFirst {
           case StudentsQuantity(c) => c
-        }.getOrElse(0)
-        val normNumber = 255 -  List(255,number*255/1000).min
+        }.getOrElse(0.0)
+        val normNumber = 255 -  List(255,(number*255/1000).round).min.toInt
         RGBColor(normNumber,0,0)
       }
     )).toList
     val links =landscape.edges.map(e => Link(
       sourceID= e.from,
       targetID = e.to,
-      distance =  {
-        val number = e.relations.collectFirst {
+      distance =  e.relations.collectFirst {
           case CoStudents(c) => c
         }.getOrElse(0)
-        20 - number*20/2300
-      }
-    )).toList
+    )).toList.filter(_.distance > 10)
 
     println("Number of nodes computed: "+ nodes.length)
     println("Number of links computed: "+ links.length)

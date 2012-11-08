@@ -19,17 +19,20 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
   
 	def computeCoStudents = call("computeCoStudents")()
 	
-	def readShortTopics(s: Set[Section.Identifier]): Iterable[(String, String, String, Int, String)] = 
-	  callS[String, String, String, Int, String]("sectionTopics")(s.toList)
+	def readShortTopics(s: Set[Section.Identifier]):
+	  Iterable[(String, String, String, Int, String)] = 
+	    callS[String, String, String, Int, String]("sectionTopics")(s.toList)
 	  
 	def readShortTopicsDetailed(s: Set[Section.Identifier], sr: SemesterRange):
-	  Iterable[(String, String, String, Int, String, Int)] =
-	    callS[String, String, String, Int, String, Int]("sectionTopicsWStudentCount")(s.toList, sr)
+	  Iterable[(String, String, String, Int, String, Double, Int)] =
+	    callS[String, String, String, Int, String, Double, Int]("sectionTopicsWStudentCount")(s.toList, sr)
   
-    def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange): Iterable[(String, String, Long)] =
+    def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange):
+      Iterable[(String, String, Long)] =
       callS[String, String, Long]("topicCostudents")(s.toList, tr)
   
-    def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange, as: Set[AcademicSemester.Identifier]):
+    def readShortTopicCostudents(s: Set[Section.Identifier],
+        tr: SemesterRange, as: Set[AcademicSemester.Identifier]):
 	  Iterable[(String, String, Long)] =
 	    callS[String, String, Long]("topicCostudents")(s.toList, as.toList, tr)
 	

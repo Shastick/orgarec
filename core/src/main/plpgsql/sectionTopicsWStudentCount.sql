@@ -9,7 +9,8 @@ CREATE OR REPLACE FUNCTION sectionTopicsWStudentCount(
 	OUT s_name character varying,
 	OUT t_creds integer,
 	OUT t_descr character varying,
-	OUT t_scount integer
+	OUT t_savg float,
+	OUT t_ccount integer
 )
 RETURNS SETOF record AS
 $$
@@ -17,9 +18,14 @@ DECLARE
 	retval RECORD;
 BEGIN
   FOR retval IN
-	SELECT
+	SELECT 	tname, tid, sname,
+		creds, descr, SUM(count)/COUNT(cid) as avg,
+		COUNT(cid) as ccount
+	FROM 
+	(SELECT
 		tm.name as tname,
 		tm.isa_id as tid,
+		cm.id as cid,
 		sm.name as sname,
 		tm.credits as creds,
 		tm.description as descr,
@@ -39,18 +45,21 @@ BEGIN
 		AND smm.year <= to_sem
 		AND sm.name ilike any(i_sname)
 	GROUP BY
-		tname, tid, sname, creds, descr
+		tname, tid, cid, sname, creds, descr
+	) AS per_course
+	GROUP BY tname, tid, sname, creds, descr
   LOOP
 	t_name:= retval.tname;
 	t_isa_id:= retval.tid;
 	s_name:= retval.sname;
 	t_creds:= retval.creds;
 	t_descr:= retval.descr;
-	t_scount:= retval.count;
+	t_savg:= retval.avg;
+	t_ccount:= retval.ccount;
 	RETURN NEXT;
   END LOOP;
   RETURN;
  END;
- $$
- LANGUAGE plpgsql;
+$$
 
+LANGUAGE plpgsql

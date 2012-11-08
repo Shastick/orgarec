@@ -29,10 +29,11 @@ trait Processer {
   def readShortTopics(s: Set[Section.Identifier]):
 	  Iterable[(String, String, String, Int, String)]
   /**
-   * A returned tuple is: (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Descripption>,<StudentCount>)
+   * A returned tuple is:
+   * (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Description>,<StudentAvg>,<# considered courses>)
    */
   def readShortTopicsDetailed(s: Set[Section.Identifier], sr: SemesterRange):
-	  Iterable[(String, String, String, Int, String,Int)]
+	  Iterable[(String, String, String, Int, String, Double, Int)]
   
   /**
    * A returned tuple is: (<Topic1 ISA ID>,<Topic2 ISA ID>,<costudents count>)
