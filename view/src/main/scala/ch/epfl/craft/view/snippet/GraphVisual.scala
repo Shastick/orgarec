@@ -26,8 +26,8 @@ class GraphVisual {
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
 
-  //val myGraph = SampleGraph.graph
-  val myGraph =  StudyPlanCompleteGraph.graph
+  val myGraph = SampleGraph.graph
+  //val myGraph =  StudyPlanCompleteGraph.graph
   val nodes = myGraph.nodes
   val links = myGraph.links
 
@@ -141,7 +141,7 @@ class GraphVisual {
   }
 
   def editNode = {
-    def edit = JE.JsFunc("graph.editNode", Node("100","Modeles stochastiques pour les communications)", "Mod Stoch",12).toJObject ).cmd
+    def edit = JE.JsFunc("graph.editNode", Node("100","Modeles stochastiques pour les communications)",12).toJObject ).cmd
     SHtml.ajaxButton("Edit Node", () => edit)
   }
 

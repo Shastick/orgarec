@@ -11,12 +11,23 @@ import net.liftweb.json._
  */
 
 case class Graph(nodes:List[Node], links:List[Link])
-case class Node(id:String, name:String, alias:String, radius:Int, fill:RGBColor=RGBColor(255, 0,0)){
+
+/**
+ * Class representing elements of graph, will be translated into a Json Object used by d3.js
+ *
+ * @param id the id of the node
+ * @param name the complete name of the node
+ * @param radius the radius of the circle representing the node
+ * @param fill the color of the inside of the node
+ * @param strokeWidthCategory the stroke category (Integers between 1 and 3 will be treated)
+ */
+case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(0, 0,0), strokeWidthCategory:Int=1){
   val toJObject = JObject(List(
     JField("id", JString(id)),
     JField("name", JString(name)),
     JField("radius", JInt(radius)),
-    JField("fill", fill.toJString)
+    JField("fill", fill.toJString),
+    JField("strokeWidthCategory", JInt(strokeWidthCategory))
   ))
 }
 case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean=true){

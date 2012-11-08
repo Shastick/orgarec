@@ -32,7 +32,6 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
     val landscape = getLandscape
     val nodes= landscape.nodes.map(n => Node(
       n.node.id, name = n.node.name,
-      alias = n.node.name,
       radius = 4*n.node.credits.getOrElse(4),
       fill = {
         val number = n.metadata.collectFirst {

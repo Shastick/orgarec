@@ -193,7 +193,7 @@ function myGraph(el) {
             .style("fill",function(d){return d.fill})
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
-            .attr("stroke-width",function(d){return "1.5px";})
+            .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
             .on("contextmenu", function(data, index) {
                 $.ajax({
                     url: "context_menu/"+ data.id,
@@ -219,7 +219,7 @@ function myGraph(el) {
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
-            .text(function(d) { return d.name.substring(0, d.radius / 3); });*/
+            .text(function(d) { return d.name.substring(0, d.radius / 3); });
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
