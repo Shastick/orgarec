@@ -2,6 +2,7 @@ package ch.epfl.craft.recom.processing
 import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 /** 
  * The processer trait holds everything that 'will probably take some time' to be done and, generally,
@@ -25,15 +26,23 @@ trait Processer {
    * Get the short topic (prerequisites empty) data belonging to the mentioned sections.
    * A returned tuple is: (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Descripption>)
    */
-  def readShortTopics(s: Set[Section]):
+  def readShortTopics(s: Set[Section.Identifier]):
 	  Iterable[(String, String, String, Int, String)]
-  
-  def readShortTopicsDetailed(s: Set[Section], sr: SemesterRange):
-	  Iterable[(String, String, String, Int, String,Int)]
+  /**
+   * A returned tuple is:
+   * (<Topic Name>,<Topic ISA ID>,<Section Name>,<Credits>,<Description>,<StudentAvg>,<# considered courses>)
+   */
+  def readShortTopicsDetailed(s: Set[Section.Identifier], sr: SemesterRange):
+	  Iterable[(String, String, String, Int, String, Double, Int)]
   
   /**
    * A returned tuple is: (<Topic1 ISA ID>,<Topic2 ISA ID>,<costudents count>)
    */
-  def readShortTopicCostudents(s: Set[Section], tr: SemesterRange): Iterable[(String, String, Long)]
-
+  def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange):
+	  Iterable[(String, String, Long)]
+  /**
+   * Variant with academic semester set to consider 
+   */
+  def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange, as: Set[AcademicSemester.Identifier]):
+	  Iterable[(String, String, Long)]
 }

@@ -1,4 +1,4 @@
-package code.snippet
+package ch.epfl.craft.view.snippet
 
 
 import net.liftweb._

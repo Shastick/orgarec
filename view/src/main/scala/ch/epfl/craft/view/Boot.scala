@@ -1,24 +1,25 @@
-package bootstrap.liftweb
+package ch.epfl.craft.view
 
 import net.liftweb._
 import util._
 import Helpers._
-
 import common._
 import http._
 import sitemap._
 import Loc._
-import code.snippet.GraphApi
+import ch.epfl.craft.recom.storage.db.DBFactory
+import ch.epfl.craft.recom.storage.db.PGDBFactory
+import ch.epfl.craft.view.snippet.GraphApi
 
 
 /**
  * A class that's instantiated early and run.  It allows the application
  * to modify lift's environment
  */
-class Boot {
+class Boot extends Bootable {
   def boot {
     // where to search snippet
-    LiftRules.addToPackages("code")
+    LiftRules.addToPackages("ch.epfl.craft.view")
 
     // Build SiteMap
     val entries = List(
@@ -30,6 +31,15 @@ class Boot {
     // each page, just comment this line out.
     LiftRules.setSiteMap(SiteMap(entries:_*))
 
+    
+    // Set default DB:
+    
+    DBFactory.setDefault(new PGDBFactory(
+        Props.get("pg-host").get,
+        Props.get("pg-dbname").get,
+        Props.get("pg-uname").get,
+        Props.get("pg-pwd").get
+    ))
     // Use jQuery 1.4
     //LiftRules.jsArtifacts = net.liftweb.http.js.jquery.JQuery14Artifacts
 

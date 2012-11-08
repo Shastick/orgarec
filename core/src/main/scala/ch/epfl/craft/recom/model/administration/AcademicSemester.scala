@@ -31,6 +31,8 @@ case class Undef(semester: Semester) extends AcademicSemester
 
 object AcademicSemester {
   
+  type Identifier = String
+  
   def apply(lvl: String, year: String, season: String): AcademicSemester = 
     apply(lvl, Semester(year,season))
   

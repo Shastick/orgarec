@@ -5,6 +5,9 @@ package ch.epfl.craft.recom.model.administration
  */
 case class Section(name: String)
 
+object Section {
+  type Identifier = String
+}
 /**
  * Represent whoever is responsible for a course (one or several teachers, assistants, etc)
  * Listing the assistants 'because we can' (or, can we ?)

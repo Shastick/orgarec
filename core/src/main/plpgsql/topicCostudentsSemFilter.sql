@@ -1,7 +1,8 @@
 -- get the costudents quantity between two topics
--- usage : select topicCostudents('{SC,IN}'::varchar[],NULL,NULL)
+-- usage : select topicCostudents('{SC,IN}'::varchar[],'{BA1}'::varchar[],NULL,NULL)
 CREATE OR REPLACE FUNCTION topicCostudents(
 	IN sname character varying[],
+	IN acad_sem character varying[],
 	IN from_sem timestamp without time zone,
 	IN to_sem timestamp without time zone,
 	OUT t_isa_id1 character varying,
@@ -10,6 +11,7 @@ CREATE OR REPLACE FUNCTION topicCostudents(
 	)
 RETURNS SETOF record AS
 $$
+
 DECLARE
   retval RECORD;
 BEGIN
@@ -28,26 +30,30 @@ BEGIN
 		coursemap cm2,
 		topicmap tm1,
 		topicmap tm2,
-		sectionmap sm1,
-		sectionmap sm2,
 		semestermap smm1,
-		semestermap smm2
+		semestermap smm2,
+		(SELECT DISTINCT course FROM "courseAcadYearSection"
+		WHERE level_c ilike any(acad_sem) AND section ilike any(sname)) coi1,
+		(SELECT DISTINCT course FROM "courseAcadYearSection"
+		WHERE level_c ilike any(acad_sem) AND section ilike any(sname)) coi2
+		
 	WHERE 
-		crm.relation::text = 'costudents'::text 
+		crm.relation::text = 'costudents'::text
 		AND crm.from_c = cm1.id 
 		AND cm1.topic = tm1.id 
 		AND crm.to_c = cm2.id 
 		AND cm2.topic = tm2.id
-		AND tm1.section_c = sm1.id
-		AND tm2.section_c = sm2.id
 		AND cm1.semester = smm1.id
 		AND cm2.semester = smm2.id
+		
 		AND smm2.year >= from_sem
 		AND smm2.year <= to_sem
 		AND smm1.year >= from_sem
 		AND smm2.year <= to_sem
-		AND sm1.name ilike any(sname)
-		AND sm2.name ilike any(sname)
+
+		AND coi1.course = cm1.id
+		AND coi2.course = cm2.id
+		
 	GROUP BY 
 		tm1.name,
 		tm1.isa_id,
@@ -78,5 +84,6 @@ BEGIN
   END LOOP;
   RETURN;
 END;
+
 $$
 LANGUAGE plpgsql;

@@ -15,7 +15,7 @@ class PGDBFactory (
 		dbname:	String,
 		uname:	String,
 		pwd:	String
-) {
+) extends DBFactory {
   
   val db = new PostgresDB(host, dbname, uname, pwd)
   

@@ -8,6 +8,7 @@ import ch.epfl.craft.recom.storage.maps.CourseMap
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
  extends Processer with SQLCallable{
@@ -18,15 +19,22 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
   
 	def computeCoStudents = call("computeCoStudents")()
 	
-	def readShortTopics(s: Set[Section]): Iterable[(String, String, String, Int, String)] = 
-	  callS[String, String, String, Int, String]("sectionTopics")(s.toList)
+	def readShortTopics(s: Set[Section.Identifier]):
+	  Iterable[(String, String, String, Int, String)] = 
+	    callS[String, String, String, Int, String]("sectionTopics")(s.toList)
 	  
-	def readShortTopicsDetailed(s: Set[Section], sr: SemesterRange):
-	  Iterable[(String, String, String, Int, String, Int)] =
-	    callS[String, String, String, Int, String, Int]("sectionTopicsWStudentCount")(s.toList, sr)
+	def readShortTopicsDetailed(s: Set[Section.Identifier], sr: SemesterRange):
+	  Iterable[(String, String, String, Int, String, Double, Int)] =
+	    callS[String, String, String, Int, String, Double, Int]("sectionTopicsWStudentCount")(s.toList, sr)
   
-    def readShortTopicCostudents(s: Set[Section], tr: SemesterRange): Iterable[(String, String, Long)] =
+    def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange):
+      Iterable[(String, String, Long)] =
       callS[String, String, Long]("topicCostudents")(s.toList, tr)
+  
+    def readShortTopicCostudents(s: Set[Section.Identifier],
+        tr: SemesterRange, as: Set[AcademicSemester.Identifier]):
+	  Iterable[(String, String, Long)] =
+	    callS[String, String, Long]("topicCostudents")(s.toList, as.toList, tr)
 	
 	def readCoStudents(c1: Course, c2: Course) = {
 	  val (cm1,cm2) = (CourseMap.fill(c1), CourseMap.fill(c2))
