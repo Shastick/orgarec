@@ -140,6 +140,7 @@ function myGraph(el) {
             })
             .attr("stroke-width", 2);
 
+
         linkEnter.append("title")
             .text(function(d){
                 return d.distance;
