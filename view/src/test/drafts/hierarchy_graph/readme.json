@@ -1,0 +1,5 @@
+[
+{"name":"bob.bob.rob","size":10000,"imports":["alice.red","alice.mat"]},
+{"name":"alice.red.pouet","size":10000,"imports":""},
+{"name":"alice.mat.pouet","size":10000,"imports":""}
+]
