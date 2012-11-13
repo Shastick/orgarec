@@ -10,6 +10,7 @@ import Loc._
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.storage.db.PGDBFactory
 import ch.epfl.craft.view.snippet.GraphApi
+import ch.epfl.craft.view.view.Site
 
 
 /**
@@ -22,15 +23,12 @@ class Boot extends Bootable {
     LiftRules.addToPackages("ch.epfl.craft.view")
 
     // Build SiteMap
-    val entries = List(
-      Menu.i("Home") / "index",// the simple way to declare a menu
-      Menu.i("Monk") / "index-monk"
+    def sitemap = SiteMap(
+      Menu.i("Home") / "index",
+      Site.topicDetailSimple
     )
 
-    // set the sitemap.  Note if you don't want access control for
-    // each page, just comment this line out.
-    LiftRules.setSiteMap(SiteMap(entries:_*))
-
+    LiftRules.setSiteMap(sitemap)
     
     // Set default DB:
     
