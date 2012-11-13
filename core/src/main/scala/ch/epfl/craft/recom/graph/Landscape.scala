@@ -15,8 +15,8 @@ import ch.epfl.craft.recom.model.administration.AcademicSemester
 class Landscape(
     val SemesterRange: SemesterRange, /* From when to when we want to observe data */
     val section: Set[Section], /* Do we focus on certain sections ? (All sections if empty) */
-    val nodes: Set[LandscapeNode], 
-    val edges: Set[LandscapeEdge])
+    val nodes: Map[Topic.TopicID,LandscapeNode], 
+    val edges: Map[(Topic.TopicID, Topic.TopicID),LandscapeEdge])
     
 object Landscape{
   
@@ -30,7 +30,8 @@ object Landscape{
 	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr, as)
 	  
 	  val nodes = topics.map(t =>
-	      LandscapeNode(new Topic(t._2.toString,
+	      (t._2,
+	          LandscapeNode(new Topic(t._2.toString,
 	          t._1,
 	          Section(t._3),
 	          Set.empty,
@@ -39,11 +40,11 @@ object Landscape{
 	          	case 0 => None
 	          	case _ => Some(t._4)
 	          }),
-	          Set(StudentsQuantity(t._6))))
+	          Set(StudentsQuantity(t._6)))))
 	  
 	  val edges = costuds.map(t =>
-	    LandscapeEdge(t._1, t._2, Set(CoStudents(t._3.toInt))))
+	    ((t._1,t._2),LandscapeEdge(t._1, t._2, Set(CoStudents(t._3.toInt)))))
 	  
-	  new Landscape(tr, se, nodes.toSet, edges.toSet)
+	  new Landscape(tr, se, nodes.toMap, edges.toMap)
 	}
 }

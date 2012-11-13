@@ -30,7 +30,7 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
 
   def LandscapeToGraph:Graph = {
     val landscape = getLandscape
-    val nodes= landscape.nodes.map(n => Node(
+    val nodes= landscape.nodes.values.map(n => Node(
       n.node.id, name = n.node.name,
       radius = 4*n.node.credits.getOrElse(4),
       /*fill = {
@@ -49,7 +49,7 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
         else 1
       }
     )).toList
-    val links =landscape.edges.map(e => {
+    val links =landscape.edges.values.map(e => {
       val coStudents = e.relations.collectFirst {
         case CoStudents(c) => c
       }.getOrElse(0)
