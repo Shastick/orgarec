@@ -54,6 +54,8 @@ case class Fall(val year: DateTime) extends Semester
 
 object Semester {
   
+  type Identifier = String
+  
   val yr_format = "yyyy"
   
   def apply(y: DateTime, s: String): Semester = s.toLowerCase match {
