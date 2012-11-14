@@ -10,11 +10,10 @@ import ch.epfl.craft.view.model.LandscapeHolder
 /**
  * Get the details of a topic in the context of a given landscape
  */
-class TopicDetail(a: Topic.TopicID) {
+class TopicDetail(a: (String, Landscape)) {
 
-  val tid = a
-  val l = LandscapeHolder.is
-  val (t,meta) = l.flatMap(_.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata)))
+  val (tid,l) = a
+  val (t,meta) = l.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata))
   			.getOrElse((None,Set.empty[TopicMeta]))
   
   def render = {

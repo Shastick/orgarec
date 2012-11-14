@@ -25,7 +25,7 @@ class Boot extends Bootable {
     // Build SiteMap
     def sitemap = SiteMap(
       Menu.i("Home") / "index",
-      Site.topicDetailSimple
+      Site.topicDetail
     )
 
     LiftRules.setSiteMap(sitemap)
