@@ -15,7 +15,7 @@ import ch.epfl.craft.view.model.LandscapeHolder
  * Time: 17:49
  * To change this template use File | Settings | File Templates.
  */
-object StudyPlanCompleteGraph extends GraphRepresentation{
+object StudyPlanCompleteGraph {
   val graph = LandscapeToGraph
 
   def getLandscape = {
