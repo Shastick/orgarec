@@ -18,7 +18,7 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
   val (t,meta) = l.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata))
   			.getOrElse((None,Set.empty[TopicMeta]))
   			
-  lazy val eoi = l.edges.collect{
+  lazy val eoi = l.edges.collect {
     case ((from,to),edge) if (from == tid) => (to,edge)
     case ((from,to),edge) if (to == tid) => (from,edge)
   }
@@ -28,7 +28,6 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
       					.toList.sortBy(_._2).reverse
   			
   def render = {
-    println(l.edges)
     "#topic-name *" #> t.map(_.name) &
     "#student-count *" #> meta.collectFirst{case StudentsQuantity(q) => q.toString} &
     "#costudents-bar-plot *" #> topCostudCourses(5).map(_.toString())

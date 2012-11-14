@@ -10,6 +10,7 @@ import SHtml._
 import JsCmds._
 import js.jquery.JqJE._
 import xml.NodeSeq
+import scala.xml.Text
 
 
 /**
@@ -121,21 +122,20 @@ class GraphVisual {
     def callTarget = ajaxCall(JE.JsRaw("this.value"), updatedTargets _)
 
     /* HTML Code  */
-    <span> "From: " </span> ++
-    SHtml.untrustedSelect(sourceNodes, Full(init._1), source = _,
+    <h3>
+    {SHtml.untrustedSelect(sourceNodes, Full(init._1), source = _,
       "id" -> "source_link_delete",
       "onchange" -> callSource._2.toJsCmd,
       "width" -> "40px",
       "class" -> "input"
-    ) ++
-    <span>"To: "</span> ++
-    SHtml.untrustedSelect(List(init), Full(init._1) , target = _,
+    )} From</h3><h3>
+    {SHtml.untrustedSelect(List(init), Full(init._1) , target = _,
       "id" -> "target_link_delete",
       "onchange" -> callTarget._2.toJsCmd,
       "width" -> "40px",
       "class" -> "input",
       "disabled" -> "true"
-    ) ++
+    )} To</h3> ++
     SHtml.ajaxButton("Confirm", () => delete, "id" -> "button_link_delete", "disabled" -> "true")
   }
 

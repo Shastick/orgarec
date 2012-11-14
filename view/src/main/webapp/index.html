@@ -1,39 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<body class="lift:content_id=main">
-<div id="main" class="lift:surround?with=default;at=content">
-    <head>
+<head>
         <script type="text/javascript" src="static/scripts/d3/d3.v2.js"></script>
         <script type="text/javascript" src="static/scripts/jquery-1.8.2.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="static/css/d3-test.css" />
-        <link rel="stylesheet" type="text/css" href="static/css/tipsy.css" />
-    </head>
-    <h3>Bachelor 5/6 - Communication Systems</h3>
-    <div id="controls-container" class="left_box">
-        <h3>Settings</h3>
+        <link rel="stylesheet" type="text/css" href="static/css/graph.css" />
+</head>
+<body>
+<div id="maincont">
+    <div id="controls-container" class="panel">
+        <h1>Settings</h1>
         <div class="input-container">
-            Delete Node
+            <h2>Delete Node</h2>
             <div class="lift:GraphVisual.deleteNode"></div>
         </div>
         <div class="input-container">
-            Delete Edge
-            <div class="lift:GraphVisual.deleteLink"></div>
+            <h2>Delete Edge</h2>
+            <h3><span class="lift:GraphVisual.deleteLink"></span></h3>
+            
         </div>
         <div class="input-container">
-            Edit Node
             <div class="lift:GraphVisual.editNode"></div>
         </div>
         <div class="input_container">
-            Select Semester
+            <h2>Select Semester</h2>
             <div class="lift:GraphVisual.selectSemesters"></div>
         </div>
     </div>
-    <div id="graph-container" class="main_box">
-        <div id="context_menu" style= "display:none;">Bonjour!</div>
+    <div id="graph-container">
+        <div id="context_menu" style="display:none;"></div>
         <script type="text/javascript" src="static/scripts/study_plan_display_lift_2.js"></script>
     </div>
-    <div id="info-container" class="right_box">
+    <div id="detail-container" class="panel">
+    <h1>Details</h1>
+    <div id="detail-data"></div>
     </div>
 
 </div>

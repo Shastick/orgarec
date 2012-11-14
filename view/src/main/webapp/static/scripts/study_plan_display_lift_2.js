@@ -86,12 +86,12 @@ function myGraph(el) {
     };
 
 // set up the D3 visualisation in the specified element
-    var w = 960,
-        h = 600;
+    var w = 4000,
+        h = 3000;
     var vis = d3.select(el)
         .append("svg:svg")
-        .attr("width", w)
-        .attr("height", h)
+        .attr("width", "100%")
+        .attr("height", "100%")
         .attr("id","svg")
         .attr("pointer-events", "all")
         .attr("viewBox","0 0 "+w+" "+h)
@@ -241,9 +241,9 @@ function myGraph(el) {
 
         // Restart the force layout.
         force
-            .gravity(.1)
-            .distance(300)
-            .charge(function(d){return - d.radius*100; })
+            .gravity(.5)
+            .distance(100)
+            .charge(function(d){return - d.radius*300; })
             //.friction(0.01)
             .linkDistance(function(d){return (110 - d.distance*3)})
             .size([w, h])

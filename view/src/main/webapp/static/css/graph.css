@@ -1,0 +1,85 @@
+body {
+	font-family: sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Graph Specific */
+
+#graph-container {
+	position: absolute;
+	width: 100%;
+    height: 99%;
+    padding: 0px;
+    margin: 0px;
+    z-index: 0;
+}
+
+.link {
+	
+}
+
+.nodetext {
+    pointer-events: none;
+    font: 10px sans-serif;
+}
+
+circle.node {
+    cursor: pointer;
+}
+
+#context_menu{
+    background-color: #FFCC99;
+    border-radius: 5px;
+    height: 120px;
+    width: 200px;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+/* Controls specific */
+#controls-container {
+	top:20px;
+	left:20px;
+	position: absolute;
+    width: 200px;
+    z-index: 2;
+}
+
+.input_container{
+}
+.input{
+    width: 150px;
+}
+
+/* Details specific */
+#detail-container{
+	float: right;
+    width: 200px;
+    margin-top:20px;
+    margin-right: 20px;
+    z-index:3;
+}
+
+/* Panel stuff */
+.panel {
+    padding: 5px;
+	
+}
+.panel h1 {
+	font-size:1em;
+	padding: 0;
+	margin: 0;
+}
+.panel h2 {
+	font-size:0.8em;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+}
+.panel h3 {
+	font-size: 0.7em;
+	font-weight: normal;
+	padding: 0;
+	margin: 0;
+}
