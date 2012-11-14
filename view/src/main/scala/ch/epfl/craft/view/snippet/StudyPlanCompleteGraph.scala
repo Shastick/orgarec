@@ -6,6 +6,7 @@ import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity, Landscape}
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.{Semester, Section, Fall}
 import ch.epfl.craft.recom.storage.db.DBFactory
+import ch.epfl.craft.view.model.LandscapeHolder
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +26,7 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
     						SemesterRange(Some(fromS), Some(toS)),
     						Set(Section("SC"),Section("IN")),
     						Set("MA1","MA3"))
+    LandscapeHolder.set(Some(l))
     l
   }
 
