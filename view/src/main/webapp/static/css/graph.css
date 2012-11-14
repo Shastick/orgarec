@@ -64,7 +64,8 @@ circle.node {
 /* Panel stuff */
 .panel {
     padding: 5px;
-	
+    background-color: rgba(245,245,245,0.8);
+    border-radius: 5px;
 }
 .panel h1 {
 	font-size:1em;
