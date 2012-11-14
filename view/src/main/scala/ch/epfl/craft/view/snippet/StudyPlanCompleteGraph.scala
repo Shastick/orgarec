@@ -22,11 +22,10 @@ object StudyPlanCompleteGraph extends GraphRepresentation{
     val dbf = DBFactory.get
     val fromS = Semester(2012, "fall")
     val toS = Semester(2012, "fall")
-    val l = Landscape.build(dbf.store, dbf.processer,
+    val l = LandscapeHolder.build(
     						SemesterRange(Some(fromS), Some(toS)),
     						Set(Section("SC"),Section("IN")),
     						Set("MA1","MA3"))
-    LandscapeHolder.set(Some(l))
     l
   }
 

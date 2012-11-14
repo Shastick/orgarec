@@ -10,6 +10,9 @@ object LandscapeHolder extends SessionVar[Option[Landscape]](None) {
 
   def dbf = DBFactory.get
   
-  def build(r: SemesterRange, sec: Set[Section], sem: Set[Semester.Identifier])
-   = set(Some(Landscape.build(dbf.store, dbf.processer,r, sec, sem)))
+  def build(r: SemesterRange, sec: Set[Section], sem: Set[Semester.Identifier]) = {
+    val l = Landscape.build(dbf.store, dbf.processer,r, sec, sem)
+    set(Some(l))
+    l
+  }
 }
