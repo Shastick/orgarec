@@ -7,36 +7,15 @@
 </head>
 <body>
 <div id="maincont">
-    <div id="controls-container" class="panel">
-        <h1>Settings</h1>
-        <div class="input-container">
-            <h2>Delete Node</h2>
-            <div class="lift:GraphVisual.deleteNode"></div>
-        </div>
-        <div class="input-container">
-            <h2>Delete Edge</h2>
-            <h3><span class="lift:GraphVisual.deleteLink"></span></h3>
-            
-        </div>
-        <div class="input-container">
-            <div class="lift:GraphVisual.editNode"></div>
-        </div>
-        <div class="input_container">
-            <h2>Select Semester</h2>
-            <div class="lift:GraphVisual.selectSemesters"></div>
-        </div>
-    </div>
     <div id="graph-container">
         <div id="context_menu" style="display:none;"></div>
         <script type="text/javascript" src="static/scripts/study_plan_display_lift_2.js"></script>
     </div>
-    <div id="detail-container" class="panel">
-    <h1>Details</h1>
-    <div id="detail-data"></div>
-    </div>
-
+    <div class="lift:embed?what=boxes/control-panel"></div>
+    
+    <div class="lift:embed?what=boxes/detail-panel"></div>
+    
+    <div class="lift:embed?what=boxes/subgraph-panel"></div>
 </div>
-
-
 </body>
 </html>
