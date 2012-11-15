@@ -1,11 +1,8 @@
 package ch.epfl.craft.view.snippet
 
-import ch.epfl.craft.recom.storage.db.PGDBFactory
-import java.util.Calendar
-import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity, Landscape}
+import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity}
 import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.recom.model.administration.{Semester, Section, Fall}
-import ch.epfl.craft.recom.storage.db.DBFactory
+import ch.epfl.craft.recom.model.administration.{Semester, Section}
 import ch.epfl.craft.view.model.LandscapeHolder
 
 /**
@@ -19,7 +16,6 @@ object StudyPlanCompleteGraph {
   val graph = LandscapeToGraph
 
   def getLandscape = {
-    val dbf = DBFactory.get
     val fromS = Semester(2012, "fall")
     val toS = Semester(2012, "fall")
     val l = LandscapeHolder.build(
