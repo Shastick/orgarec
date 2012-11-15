@@ -55,7 +55,7 @@ object StudyPlanCompleteGraph {
         targetID = e.to,
         distance =  List(0, 100-coStudents).max
         //showLink = coStudents>10
-    )}).toList.filter(_.distance <90)
+    )}).toList//.filter(_.distance <90)
 
     println("Number of nodes computed: "+ nodes.length)
     println("Number of links computed: "+ links.length)

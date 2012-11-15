@@ -34,6 +34,9 @@ class GraphVisual {
   def displayableNodes = nodes.diff(deletedNodes)
   def displayableLinks = links.diff(deletedLinks)
 
+  var currentLinkThreshold = 60
+  deletedLinks = links.filter(_.distance>currentLinkThreshold)
+
   def deleteNode = {
     def delete(id:String):JsCmd = {
       //nodes = nodes.filterNot(_.id == id);
@@ -147,22 +150,23 @@ class GraphVisual {
   def selectSemesters = {
      NodeSeq.Empty
   }
-  var currentLinkThreshold = 10
-  def updateLinkThreshold(threshold:Int) = {
-    def updateThresh(t:Int) = {
-      if(t> currentLinkThreshold) {
-        val toDelete = displayableLinks.filter(_.distance>t)
-        deletedLinks ++= toDelete
-      }
-      else {
-        val toAdd = deletedLinks.filter(_.distance<t)
-        deletedLinks = deletedLinks.diff(toAdd)
-      }
-      //JE.JsFunc("graph.removeLink", source, target).cmd &
-      _Noop
-    }
 
-    SHtml.ajaxSelectElem[Int](List(10,20), Full(10))(updateThresh(_))
+  def updateLinkThreshold = {
+    def updateThresh(t:Int) = {
+      val commands =
+        if( t < currentLinkThreshold) {
+          val toDelete = displayableLinks.filter(_.distance>t)
+          deletedLinks ++= toDelete
+          toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
+        } else {
+          val toAdd = deletedLinks.filter(_.distance<t)
+          deletedLinks = deletedLinks.diff(toAdd)
+          toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
+        }
+      currentLinkThreshold = t
+      commands
+    }
+    SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(currentLinkThreshold))(updateThresh(_))
   }
 
 
