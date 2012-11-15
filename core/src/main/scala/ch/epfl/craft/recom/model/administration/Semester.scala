@@ -56,7 +56,8 @@ object Semester {
   
   type Identifier = String
   
-  val yr_format = "yyyy"
+  val dateformat = "yyyy-MM-dd"
+  val f = DateTimeFormat.forPattern(dateformat)
   
   def apply(y: DateTime, s: String): Semester = s.toLowerCase match {
     case "spring" | "ete" => Spring(y)
@@ -64,7 +65,17 @@ object Semester {
     case _ => throw new Exception("Bad Semester Specification:" + s)
   }
   
+  def apply(y: LocalDate): Semester = 
+    if(y.getMonthOfYear() < 7) apply(y.getYear, "spring")
+    else apply(y.getYear(),"fall")
+  
   def apply(y: Int, s: String): Semester = apply(new DateTime(y,1,1,0,0),s)
   def apply(y: String, s: String): Semester = apply(new Integer(y),s)
   def apply(y: java.util.Date, s: String): Semester = apply(new DateTime(y),s)
+  def apply(y: LocalDate, s: String): Semester = apply(new DateTime(y),s)
+
+  
+  def fromDateString(d: String) = apply(f.parseLocalDate(d))
+  
+
 }

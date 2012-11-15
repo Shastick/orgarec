@@ -25,17 +25,21 @@ class AcademicSemesterMap extends LongKeyedMapper[AcademicSemesterMap] with IdPK
 
 object AcademicSemesterMap extends AcademicSemesterMap with LongKeyedMetaMapper[AcademicSemesterMap]{
   
-  def fill(in: AcademicSemester): AcademicSemesterMap = {
-    val s = SemesterMap.fill(in.semester)
-    val c = in.getClass.getSimpleName
-    val am = AcademicSemesterMap.findOrCreate(
-        By(this.semester, s),
-        By(this.level, c))
-   am.semester(s)
-   am.level(c)
-   am.save
-   am
+  def fill(in: AcademicSemester): AcademicSemesterMap = in.semester match {
+    case Some(sem) => 
+    	val s = SemesterMap.fill(sem)
+    	val c = in.getClass.getSimpleName
+    	val am = AcademicSemesterMap.findOrCreate(
+    			By(this.semester, s),
+    			By(this.level, c))
+    	 am.semester(s)
+    	 am.level(c)
+    	 am.save
+    	 am
+    case _ =>  throw new Exception("Academic Semesters needs a semester " +
+    		"to be stored. Semester was None.")
   }
+  
   
   def fill(m: AcademicSemesterMap): AcademicSemester = 
    AcademicSemester(m.level.get, m.semester.map(_.read).get)
