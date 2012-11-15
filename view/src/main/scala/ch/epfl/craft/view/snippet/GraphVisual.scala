@@ -147,6 +147,23 @@ class GraphVisual {
   def selectSemesters = {
      NodeSeq.Empty
   }
+  var currentLinkThreshold = 10
+  def updateLinkThreshold(threshold:Int) = {
+    def updateThresh(t:Int) = {
+      if(t> currentLinkThreshold) {
+        val toDelete = displayableLinks.filter(_.distance>t)
+        deletedLinks ++= toDelete
+      }
+      else {
+        val toAdd = deletedLinks.filter(_.distance<t)
+        deletedLinks = deletedLinks.diff(toAdd)
+      }
+      //JE.JsFunc("graph.removeLink", source, target).cmd &
+      _Noop
+    }
+
+    SHtml.ajaxSelectElem[Int](List(10,20), Full(10))(updateThresh(_))
+  }
 
 
 }
