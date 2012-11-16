@@ -13,7 +13,7 @@ import ch.epfl.craft.recom.util.SemesterRange
 class ControlPanel extends StatefulSnippet {
   import scala.collection.Seq
   
-  val ls = LandscapeHolder.is
+  def ls = LandscapeHolder.is
   
   protected var sections: Seq[Section] =
     ls.map(_.sections.toSeq).getOrElse(Seq.empty)
