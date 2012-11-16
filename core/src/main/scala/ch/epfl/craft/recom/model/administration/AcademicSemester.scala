@@ -11,7 +11,7 @@ sealed trait AcademicSemester {
     		this.year == s.year
     } else false
   
-  lazy val level = this.getClass.getSimpleName
+  lazy val level: AcademicSemester.Identifier = this.getClass.getSimpleName
 
 }
 case class BA1(semester: Option[Semester]) extends AcademicSemester

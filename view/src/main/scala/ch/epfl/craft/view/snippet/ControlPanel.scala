@@ -13,10 +13,16 @@ import ch.epfl.craft.recom.util.SemesterRange
 class ControlPanel extends StatefulSnippet {
   import scala.collection.Seq
   
-  protected var sections: Seq[Section] = Seq.empty
-  protected var startSem: Option[Semester] =  None
-  protected var endSem: Option[Semester] = None
-  protected var levels: Seq[AcademicSemester] = Seq.empty
+  val ls = LandscapeHolder.is
+  
+  protected var sections: Seq[Section] =
+    ls.map(_.sections.toSeq).getOrElse(Seq.empty)
+  protected var startSem: Option[Semester] =
+    ls.flatMap(l => l.semesterRange.from)
+  protected var endSem: Option[Semester] =
+    ls.flatMap(l => l.semesterRange.to)
+  protected var levels: Seq[AcademicSemester] =
+    ls.map(_.levels.toSeq).getOrElse(Seq.empty)
   
   lazy val semSeq = store.readAllSemesters
     				.map(s => (s, s.year_int.toString + "-" + s.season))
@@ -34,7 +40,7 @@ class ControlPanel extends StatefulSnippet {
   	
 		  		
   def refresh() = LandscapeHolder.build(SemesterRange(startSem, endSem),
-      sections.toSet, levels.map(_.level).toSet)
+      sections.toSet, levels.toSet)
   
   def sectionChoice(n: NodeSeq) = {
     val secSeq = store.readAllSections.map(s => (s, s.name)).toSeq

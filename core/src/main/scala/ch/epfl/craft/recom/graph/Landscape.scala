@@ -13,21 +13,24 @@ import ch.epfl.craft.recom.model.administration.AcademicSemester
  * evaluations.
  */
 class Landscape(
-    val SemesterRange: SemesterRange, /* From when to when we want to observe data */
-    val section: Set[Section], /* Do we focus on certain sections ? (All sections if empty) */
+    val semesterRange: SemesterRange, /* From when to when we want to observe data */
+    val sections: Set[Section], /* Do we focus on certain sections ? (All sections if empty) */
+    val levels: Set[AcademicSemester], /* Focus on certain levels only ? */
     val nodes: Map[Topic.TopicID,LandscapeNode], 
     val edges: Map[(Topic.TopicID, Topic.TopicID),LandscapeEdge])
     
 object Landscape{
   
+	def empty = new Landscape(SemesterRange.all, Set.empty, Set.empty, Map.empty, Map.empty)
+	
 	def build(s: Storage, p: Processer,
 			tr: SemesterRange,
 			se: Set[Section] = Set.empty,
-			as: Set[AcademicSemester.Identifier] = Set.empty):Landscape = {
+			as: Set[AcademicSemester] = Set.empty):Landscape = {
 	  
 	  val topics = p.readShortTopicsDetailed(se.map(_.name), tr)
 	  
-	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr, as)
+	  val costuds = p.readShortTopicCostudents(se.map(_.name), tr, as.map(_.level))
 	  
 	  val nodes = topics.map(t =>
 	      (t._2,
@@ -45,6 +48,6 @@ object Landscape{
 	  val edges = costuds.map(t =>
 	    ((t._1,t._2),LandscapeEdge(t._1, t._2, Set(CoStudents(t._3.toInt)))))
 	  
-	  new Landscape(tr, se, nodes.toMap, edges.toMap)
+	  new Landscape(tr, se, as, nodes.toMap, edges.toMap)
 	}
 }

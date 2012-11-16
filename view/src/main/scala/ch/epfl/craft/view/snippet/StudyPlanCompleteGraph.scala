@@ -4,6 +4,7 @@ import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity}
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.{Semester, Section}
 import ch.epfl.craft.view.model.LandscapeHolder
+import ch.epfl.craft.recom.model.administration._
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,17 +14,9 @@ import ch.epfl.craft.view.model.LandscapeHolder
  * To change this template use File | Settings | File Templates.
  */
 object StudyPlanCompleteGraph {
-  val graph = LandscapeToGraph
+  def graph = LandscapeToGraph
 
-  def getLandscape = {
-    val fromS = Semester(2012, "fall")
-    val toS = Semester(2012, "fall")
-    val l = LandscapeHolder.build(
-    						SemesterRange(Some(fromS), Some(toS)),
-    						Set(Section("SC"),Section("IN")),
-    						Set("MA1","MA3"))
-    l
-  }
+  def getLandscape = LandscapeHolder.current
 
   def LandscapeToGraph:Graph = {
     val landscape = getLandscape
