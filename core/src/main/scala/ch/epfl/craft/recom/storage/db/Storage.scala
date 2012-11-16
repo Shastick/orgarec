@@ -5,6 +5,7 @@ import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.util.SemesterRange
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 trait Storage {
   
@@ -39,6 +40,19 @@ trait Storage {
   /* Students */
   def saveStudents(tl: Iterable[Student])
   def readStudent(sid: Student.StudentID): Option[Student]
+  
+  /* Get all the existing sections */
+  def readAllSections: Iterable[Section]
+  
+  /* Get all the existing academic levels 
+   * (represented as academic semesters with no semester)*/
+  def readAllAcademicLevels: Iterable[AcademicSemester]
+  
+  /* Get all the existing semesters */
+  
+  def readAllSemesters: Iterable[Semester]
+  
+  
   
   
 }

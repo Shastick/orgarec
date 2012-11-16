@@ -10,6 +10,9 @@ sealed trait AcademicSemester {
 		if(this.getClass.getSimpleName == s.getClass.getSimpleName){
     		this.year == s.year
     } else false
+  
+  lazy val level = this.getClass.getSimpleName
+
 }
 case class BA1(semester: Option[Semester]) extends AcademicSemester
 case class BA2(semester: Option[Semester]) extends AcademicSemester

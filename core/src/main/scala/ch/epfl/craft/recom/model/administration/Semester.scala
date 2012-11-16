@@ -11,9 +11,8 @@ import org.scala_tools.time.Imports._
 sealed trait Semester extends Ordered[Semester]{
   val year: DateTime
   
-  lazy val year_int = year.getYear()
-  
-    
+  lazy val year_int = year.getYear
+      
   def equals(s: Semester) = {
 		if((this.isInstanceOf[Spring] && s.isInstanceOf[Spring]) || 
 		  (this.isInstanceOf[Fall] && s.isInstanceOf[Fall])){
@@ -44,8 +43,7 @@ sealed trait Semester extends Ordered[Semester]{
     case Some(s) => this <= s
   }
   
-  def season: String = 	if(this.isInstanceOf[Spring]) "spring" 
-	  					else "fall"
+  lazy val season = this.getClass.getSimpleName
 }
 
 case class Spring(val year: DateTime) extends Semester

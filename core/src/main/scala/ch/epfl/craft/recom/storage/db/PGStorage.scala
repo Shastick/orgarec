@@ -12,6 +12,7 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.storage.maps._
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.SemesterRange
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 
 class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage {
@@ -52,5 +53,14 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   /* Students */
   def saveStudents(tl: Iterable[Student]) = StudentMap.fill(tl)
   def readStudent(sid: Student.StudentID): Option[Student] = StudentMap.read(sid)
+  
+  /* Sections */
+  def readAllSections = SectionMap.findAll().map(_.read)
+  
+  /* Academic Levels */
+  def readAllAcademicLevels: Iterable[AcademicSemester] = throw new Exception("Not Implemented")
+	 
+  /* Semesters */
+  def readAllSemesters: Iterable[Semester] = throw new Exception("Not Implemented")
   
 }
