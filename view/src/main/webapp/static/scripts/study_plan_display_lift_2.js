@@ -138,7 +138,7 @@ function myGraph(el) {
                     return "#9ecae1";
                 else return "transparent";
             })
-            .attr("stroke-width", 2);
+            .attr("stroke-width", function(d){return 20 - d.distance/5});
 
 
         linkEnter.append("title")
