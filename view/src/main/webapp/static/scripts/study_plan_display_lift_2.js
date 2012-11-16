@@ -135,7 +135,7 @@ function myGraph(el) {
             .attr("class","link")
             .attr("stroke", function(d){
                 if (d.showLink)
-                    return "#9ecae1";
+                    return "rgba(200, 50, 255, 0.2)";
                 else return "transparent";
             })
             .attr("stroke-width", function(d){return 20 - d.distance/5});

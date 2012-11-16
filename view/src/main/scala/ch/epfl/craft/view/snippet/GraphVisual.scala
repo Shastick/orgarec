@@ -27,7 +27,8 @@ class GraphVisual {
   var deletedLinks:List[Link] = Nil
 
   //val myGraph = SampleGraph.graph
-  val myGraph =  StudyPlanCompleteGraph.graph
+  val studyPlan = new StudyPlanCompleteGraph
+  val myGraph =  studyPlan.graph
   val nodes = myGraph.nodes
   val links = myGraph.links
 
