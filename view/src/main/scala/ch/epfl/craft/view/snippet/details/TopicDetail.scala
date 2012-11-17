@@ -59,10 +59,10 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
       + studCount.map(d => t._2/d).getOrElse(0.0).toString)
     .reduce(_ + "\n" +_)
   
-  def barPlot(h: NodeSeq) = {println(tupList2RatioCsv(topCostudCourses(5)))
-    h ++ <head>{includes ++ Script(OnLoad(Call("drawBarPlot",
+  def barPlot(h: NodeSeq) = 
+  if(costuds.length > 0)
+    h ++ includes ++ Script(OnLoad(Call("drawBarPlot",
         "course,ratio\n" + tupList2RatioCsv(topCostudCourses(5)),
     	"#costudents-bar-plot")))
-    }</head>
- }
+  else h 
 }
