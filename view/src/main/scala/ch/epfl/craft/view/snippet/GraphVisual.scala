@@ -8,7 +8,7 @@ import js._
 import js.JE.{Call, JsVar, JsRaw}
 import JsCmds._
 import xml.NodeSeq
-
+import ch.epfl.craft.view.model._
 
 
 /**

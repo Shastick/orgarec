@@ -1,10 +1,7 @@
 package ch.epfl.craft.view.snippet
 
 import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity}
-import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.recom.model.administration.{Semester, Section}
-import ch.epfl.craft.view.model.LandscapeHolder
-import ch.epfl.craft.recom.model.administration._
+import ch.epfl.craft.view.model._
 
 /**
  * Created with IntelliJ IDEA.
