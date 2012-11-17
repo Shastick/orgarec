@@ -33,7 +33,7 @@ class GraphVisual {
   def displayableLinks = links.diff(deletedLinks)
 
   var currentCoStudThreshold = 60
-  deletedLinks = links.filter(_.coStudents>currentCoStudThreshold)
+  deletedLinks = links.filter(_.coStudents > currentCoStudThreshold)
 
   def updateLinkThreshold = {
     def updateThresh(cs:Int) = {
@@ -61,11 +61,11 @@ class GraphVisual {
     JGraph
   }
 
-  def getGraph = Script(JsRaw(
+  def getGraph = JsRaw(
     "function getGraph(succName) {" +
       SHtml.ajaxCall(JsVar("succName"), fname => Call(fname, graph2Json))._2.toJsCmd
       + "}"
-  ))
+  )
 
   /* Get Json data to include on left side of screen, details about nodes for now */
   def nodeDetails(id:String):NodeSeq = {
@@ -75,24 +75,25 @@ class GraphVisual {
     <span>{name}</span>
   }
 
-  def getDetails = Script(JsRaw(
+  def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("detail-data", nodeDetails(id)))._2.toJsCmd
       + "}"
-  ))
+  )
 
   def contextMenuContent(id:String) = {
     val node = nodes.find(_.id ==id)
     if(node.isDefined)
       <h3>{node.get.name}</h3> ++
-        <span> <b>credits: </b>{node.get.radius}</span>
+        <span> <b>credits: </b>{node.get.radius/4}</span>
     else NodeSeq.Empty
   }
 
-  def updateContextMenu = Script(JsRaw(
+  def updateContextMenu = JsRaw(
     "function updateContextMenu(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("context_menu", contextMenuContent(id)))._2.toJsCmd
       + "}"
-  ))
+  )
 
+  def getInteractions = Script(getGraph & getDetails & updateContextMenu)
 }

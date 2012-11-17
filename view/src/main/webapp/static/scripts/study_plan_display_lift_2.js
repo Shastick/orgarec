@@ -65,7 +65,7 @@ function myGraph(el) {
 
     this.addLink = function (link) {
         if(findNode(link.source)!= null && findNode(link.target)!= null)  {
-            links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink});
+            links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink, "coStudents":link.coStudents});
             update();
         }
     };
@@ -259,8 +259,6 @@ function makeGraph(json){
         graph.addLink(links[i])
     }
 }
-
-
 
 $(document).ready( function(){
     getGraph("makeGraph");

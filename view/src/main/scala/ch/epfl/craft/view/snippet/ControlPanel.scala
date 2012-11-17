@@ -32,11 +32,12 @@ class ControlPanel extends StatefulSnippet {
   
   def dispatch = {case "render" => render}
   
-  def render =	"#section-choice *" #> sectionChoice _ &
-		  		"#start-semester *" #> startSemester _ &
-		  		"#end-semester *" #> endSemester _ &
-		  		"#level-choice *" #> levelChoice _ &
-		  		"#update-graph" #> SHtml.onSubmitUnit(refresh)
+  def render =
+    "#section-choice *" #> sectionChoice _ &
+		"#start-semester *" #> startSemester _ &
+		"#end-semester *" #> endSemester _ &
+		"#level-choice *" #> levelChoice _ &
+		"#update-graph" #> SHtml.onSubmitUnit(refresh)
   	
 		  		
   def refresh() = LandscapeHolder.build(SemesterRange(startSem, endSem),

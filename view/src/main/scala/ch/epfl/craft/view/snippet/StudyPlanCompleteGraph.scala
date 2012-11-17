@@ -23,13 +23,6 @@ class StudyPlanCompleteGraph {
     val nodes= landscape.nodes.values.map(n => Node(
       n.node.id, name = n.node.name,
       radius = 4*n.node.credits.getOrElse(4),
-      /*fill = {
-        val number = n.metadata.collectFirst {
-          case StudentsQuantity(c) => c
-        }.getOrElse(0.0)
-        val normNumber = 255 -  List(255,(number*255/1000).round).min.toInt
-        RGBColor(normNumber,0,0)
-      },*/
       strokeWidthCategory = {
         val number = n.metadata.collectFirst {
           case StudentsQuantity(c) => c
@@ -47,7 +40,6 @@ class StudyPlanCompleteGraph {
         sourceID= e.from,
         targetID = e.to,
         distance =  List(0, 100-coStudentsN).max,
-        //showLink = coStudents>10
         coStudents = coStudentsN
     )}).toList
 
