@@ -10,7 +10,7 @@ import sitemap._
 import Loc._
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.storage.db.PGDBFactory
-import ch.epfl.craft.view.snippet.GraphApi
+//import ch.epfl.craft.view.snippet.GraphApi
 import ch.epfl.craft.view.view.Site
 
 
@@ -53,14 +53,14 @@ class Boot extends Bootable {
     // Force the request to be UTF-8
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
-    LiftRules.statelessDispatchTable.append(GraphApi)
-
+    //LiftRules.statelessDispatchTable.append(GraphApi)
+    /*
     LiftRules.dispatch.append {
       case r: Req if r.path(0) == "ajax_request" && r.path(1) == "test_fct" =>
         () =>
         println("Gotcha")
         Full(JsonResponse(JsArray("asdf","b")))
-    }
+    }   */
 
   }
 }

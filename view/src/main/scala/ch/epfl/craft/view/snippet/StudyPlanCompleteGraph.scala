@@ -13,7 +13,7 @@ import ch.epfl.craft.recom.model.administration._
  * Time: 17:49
  * To change this template use File | Settings | File Templates.
  */
-object StudyPlanCompleteGraph {
+class StudyPlanCompleteGraph {
   val graph = LandscapeToGraph
 
   def getLandscape = LandscapeHolder.current

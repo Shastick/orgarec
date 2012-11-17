@@ -196,11 +196,11 @@ function myGraph(el) {
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
             .on("contextmenu", function(data, index) {
-                $.ajax({
+                /*$.ajax({
                     url: "context_menu/"+ data.id,
                     type: "GET",
                     dataType: "script"
-                });
+                });     */
                 d3.select('#context_menu')
                     .style('position', 'absolute')
                     .style('left', d3.event.x + "px")
@@ -209,11 +209,12 @@ function myGraph(el) {
                 d3.event.preventDefault();
             })
             .on("mouseover", function(d){
+                /*
                 $.ajax({
                     url: "node_mouseover/"+ d.id,
                     type: "GET",
                     dataType: "script"
-                });
+                }); */
             });
         /* Add text in middle of circle */
         nodeEnter.append("text")
@@ -270,4 +271,23 @@ function drawGraph()
         }
     });
 }
-drawGraph();
+
+function makeGraph(json){
+    graph = new myGraph("#graph-container");
+
+    var nodes = json.nodes;
+    var links = json.links;
+    for (var i = 0; i < nodes.length; i++) {
+        graph.addNode(nodes[i]);
+    }
+    for (var i = 0; i < links.length; i++)  {
+        graph.addLink(links[i])
+    }
+}
+
+
+//drawGraph();
+$(document).ready( function(){
+    getGraph("makeGraph");
+    }
+)
