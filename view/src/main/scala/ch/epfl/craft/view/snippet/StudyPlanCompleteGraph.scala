@@ -14,7 +14,7 @@ import ch.epfl.craft.recom.model.administration._
  * To change this template use File | Settings | File Templates.
  */
 object StudyPlanCompleteGraph {
-  def graph = LandscapeToGraph
+  val graph = LandscapeToGraph
 
   def getLandscape = LandscapeHolder.current
 
