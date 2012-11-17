@@ -1,11 +1,11 @@
 package ch.epfl.craft.recom.model
-import java.text.SimpleDateFormat
 import org.specs2.mutable.Specification
 import ch.epfl.craft.recom.model.administration._
 import ch.epfl.craft.recom.model._
 import ch.epfl.craft.recom.storage.db.PGDBFactory
 import ch.epfl.craft.recom.storage.maps._
 import net.liftweb.mapper.By
+import org.scala_tools.time.Imports._
 
 class MapSpecs extends Specification {
 	
@@ -14,9 +14,8 @@ class MapSpecs extends Specification {
 	
 	args(sequential=true)
 	
-	val d = new SimpleDateFormat("yyyy")
-	val y1 = d.parse("2010")
-	val y2 = d.parse("2011")
+	val y1 = new DateTime(2010,1,1,0,0)
+	val y2 = new DateTime(2011,1,1,0,0)
 	
 	/* Define test objects */
 	val (s1, s2, s3, s4) = (Spring(y1), Fall(y1), Spring(y2), Fall(y2))
