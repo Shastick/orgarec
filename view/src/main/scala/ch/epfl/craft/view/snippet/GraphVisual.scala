@@ -67,13 +67,19 @@ class GraphVisual {
       + "}"
   ))
 
-
   /* Get Json data to include on left side of screen, details about nodes for now */
-  def details2Json(id:String) = {
+  def nodeDetails(id:String):NodeSeq = {
     val node = nodes.find(_.id == id)
+    println("-----> id: "+id)
     val name = if(node.isDefined) node.get.name else "node not defined"
-    JString(name)
+    <span>{name}</span>
   }
+
+  def getDetails = Script(JsRaw(
+    "function getDetails(nodeID) {" +
+      SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("detail-data", nodeDetails(id)))._2.toJsCmd
+      + "}"
+  ))
 
   def contextMenuContent(id:String) = {
     val node = nodes.find(_.id ==id)
@@ -82,4 +88,11 @@ class GraphVisual {
         <span> <b>credits: </b>{node.get.radius}</span>
     else NodeSeq.Empty
   }
+
+  def updateContextMenu = Script(JsRaw(
+    "function updateContextMenu(nodeID) {" +
+      SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("context_menu", contextMenuContent(id)))._2.toJsCmd
+      + "}"
+  ))
+
 }
