@@ -1,34 +1,30 @@
 package ch.epfl.craft.recom.dimport.isa
-import scala.io.Source
-import scala.xml.NodeSeq
-import scala.xml.Unparsed
-import scala.xml.XML
-import ch.epfl.craft.recom.model.administration.Semester
-import ch.epfl.craft.recom.model.Topic
-import ch.epfl.craft.recom.model.administration.Teacher
-import ch.epfl.craft.recom.model.administration.Head
-import ch.epfl.craft.recom.model.administration.Section
-import ch.epfl.craft.recom.model.Course
-import java.io.ObjectOutputStream
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.ObjectInputStream
-import java.io.FileInputStream
-import ch.epfl.craft.recom.model.administration.Fall
-import java.text.SimpleDateFormat
+import java.io.ObjectOutputStream
+import scala.Option.option2Iterable
+import scala.io.Source
+import scala.xml.XML
 import ch.epfl.craft.recom.model.administration.AcademicSemester
-import ch.epfl.craft.recom.model.administration.Spring
+import ch.epfl.craft.recom.model.administration.Head
+import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.Semester
+import ch.epfl.craft.recom.model.administration.Teacher
+import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.model.Student
 import ch.epfl.craft.recom.model.TakenCourse
+import ch.epfl.craft.recom.model.Topic
 import ch.epfl.craft.recom.storage.db.PGDBFactory
-import ch.epfl.craft.recom.storage.db.Storage
-import ch.epfl.craft.recom.storage.maps.StudentMap
+import ch.epfl.craft.recom.storage.maps.TopicMap
+
 
 object ISAxmlImporter extends App {
 	
   val dbf = new PGDBFactory("localhost","orgarec","julien","dorloter")
 	val s = dbf.store
 	/*
-  val stud = s.readStudent("184229")
+  val stud = s.readStudent("179676")
   println(stud)
 	*/
   /* need to specify academic period in the form: 2012-2013 */
@@ -46,25 +42,73 @@ object ISAxmlImporter extends App {
   		"&wwXSection=" +
   		"&wwXTypesem=" +
   		"&wwXCle=%s"
-  /*
-  val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
   
+  val fiche_url = "http://isa.epfl.ch/wsa/fiches/FichesCours?" +
+  		"invoke=getfiche" +
+  		"s&wwXMatiere=" +
+  		"&wwXAnneeacad=" +
+  		"&wwCSection=" +
+  		"&wwCNiveau=" +
+  		"&wwXCle=%s"
+  
+  /*val periods = List("2007-2008","2008-2009","2009-2010","2010-2011","2011-2012","2012-2013")
   val dict = periods.map(p => (p,courseKeyToName(p))).toMap
   */
-  /*val all = periods.map{
+  /*val ck = courseKeyToName("2011-2012").map(m => m._1)
+  println("Saving keys...")
+  saveMe(ck,"2011-2012-keys")
+  */
+  val ck = readMe("2011-2012-keys").asInstanceOf[Iterable[String]]
+ /* val all = periods.map{
     p => printf("mapping period %s...\n",p)
       (p,grabCourses(p).map( c => (c._2,grabSubscribed(c._2))))
   }
-  
+  println(all)
+  */
+  /*
   val rel = all.map(p => (p._1,p._2.filter(i => !i._2.isEmpty)))
   saveMe(rel, "2007-2012-dump")
 */
   /*val o = readMe("2007-2012-dump").asInstanceOf[List[(String,Seq[(String, scala.collection.immutable.Seq[(String, String, 
  String, String, String)])])]]
   
+  //Only filter out the XCles to grab the credits for courses
+  val keys = o.map(_._2).reduce(_ ++ _).map(_._1)
+  println("size: " + keys.size)
+  */
+ /* 
+  println("size: " + ck.size)
+  var co = 0
+  val keysncreds = ck.map{k => 
+    val xml = grabFicheXML(k)
+    val c = (xml \\ "creditsects").headOption.map(_.text).getOrElse("")
+    val t = (k,c)
+    co += 1
+    println(t + co.toString)
+    t
+  }
+  saveMe(keysncreds, "2007-2012-creds-head")
+  */
+  var cf = 0
+  var co = 0
+  val kc = readMe("2007-2012-creds-head").asInstanceOf[Iterable[(String,String)]]
+  kc.foreach{
+    t => val cred = t._2 match {
+      case "" => 0
+      case s: String => (new Integer(s)).toInt
+    }
+    val k = t._1.split("_")(0)
+    TopicMap.readMap(k).foreach{
+      m => m.credits(cred).save()
+      co += 1
+    }
+    cf += 1
+    println(cf.toString + " " + co.toString)
+  }
+  
   // Get a list of all different sciper numbers...
-  val allScip = o.flatMap(_._2.flatMap(_._2.map(_._1))).toSet
-*/
+  //val allScip = o.flatMap(_._2.flatMap(_._2.map(_._1))).toSet
+
   // For each sciper number, recompose what course was taken, and only keep course data (not subscribed students)
   /*
   println("beginning to map...")
@@ -81,7 +125,7 @@ object ISAxmlImporter extends App {
   println("saved.")
   */
   
-  //o.filter{e => !e._2.filter(_._1 == "178684").isEmpty}.map(_._1).foreach(println(_))
+  //o.filter{e => !e._2.filter(_._1 == "179676").isEmpty}.map(_._1).foreach(println(_))
   //val fil2 = fil1.map(e =>  (e._1,e._2.map(_._1)))
   /*fil2.foreach{
     p => println(p._1 + ":")
@@ -111,15 +155,17 @@ object ISAxmlImporter extends App {
           ))))))
   saveMe(resolved, "2007-2012-resolved")
   */
-  
+  /*
   println("Reading data file...")
   val resolved = readMe("2007-2012-resolved").asInstanceOf[Set[(String, List[(String, Seq[(String, String, (String, String, 
  String))])])]]
-  /*
+  
   resolved.filter(_._1 == "179676").foreach(_._2.foreach{
     p => println(p._1 + ":")
     p._2.foreach(s => println("\t" + s))
-  })*/
+  })
+  */
+  /*
   println("Converting to objects...")
   val objs = resolved.map{ s => 
     val scip = s._1
@@ -139,17 +185,24 @@ object ISAxmlImporter extends App {
     
     new Student(scip, arr_sem, Some(Section(sect)), curr_sem, sem_hist, courses)
   }
-
+  */
+  /*
+    objs.filter(_.id == "179676").foreach(_.courses.foreach{
+    p => println(p.course.id + ":")
+  })
+*/
+/*
   println("saving objects...")
   s.saveStudents(objs)
   println("done.")
  
-  
+  println(s.readStudent("179676"))
+  */
   def extractCourses(yrs: List[(String, Seq[(String, String, (String, String, String))])]):
 	  Set[TakenCourse] = {
 		  yrs.flatMap{ y => 
 		    y._2.flatMap{ c => 
-		      val cid = c._1
+		      val cid = c._1.split("_")(0)
 		      val n = c._2
 		      val sect = c._3._1
 		      val pre = Set.empty[Topic.TopicID]
@@ -278,6 +331,8 @@ object ISAxmlImporter extends App {
   def grabCoursesXML(yr: String) = XML.loadString(Source.fromURL(courses_url.format(yr)).mkString)
   
   def grabSubscribedXML(key: String) = XML.loadString(Source.fromURL(subscribed_url.format(key)).mkString)
+  
+  def grabFicheXML(key: String) = XML.loadString(Source.fromURL(fiche_url.format(key)).mkString)
   
   def saveMe(data: Object, fileName: String) = {
     val o = new ObjectOutputStream(new FileOutputStream(fileName))

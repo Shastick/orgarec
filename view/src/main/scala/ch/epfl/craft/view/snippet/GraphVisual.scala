@@ -9,6 +9,7 @@ import SHtml._
 import JsCmds._
 import js.jquery.JqJE._
 import xml.NodeSeq
+import ch.epfl.craft.view.snippet.StudyPlanCompleteGraph
 
 
 /**
@@ -24,8 +25,7 @@ class GraphVisual {
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
 
-  val studyPlan = new StudyPlanCompleteGraph
-  val myGraph =  studyPlan.graph
+  val myGraph =  StudyPlanCompleteGraph.graph
   val nodes = myGraph.nodes
   val links = myGraph.links
 

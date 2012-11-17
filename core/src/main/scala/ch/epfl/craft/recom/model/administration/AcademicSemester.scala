@@ -10,6 +10,9 @@ sealed trait AcademicSemester {
 		if(this.getClass.getSimpleName == s.getClass.getSimpleName){
     		this.year == s.year
     } else false
+  
+  lazy val level: AcademicSemester.Identifier = this.getClass.getSimpleName
+
 }
 case class BA1(semester: Option[Semester]) extends AcademicSemester
 case class BA2(semester: Option[Semester]) extends AcademicSemester
@@ -36,6 +39,7 @@ object AcademicSemester {
   def apply(lvl: String, year: String, season: String): AcademicSemester = 
     apply(lvl, Semester(year,season))
   
+  def apply(lvl: String): AcademicSemester = apply(lvl, None)
   def apply(lvl: String, sem: Semester): AcademicSemester = apply(lvl, Some(sem))
   def apply(lvl: String, sem: Option[Semester]): AcademicSemester = lvl.toUpperCase match {
     case "BA1" => BA1(sem)

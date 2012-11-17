@@ -55,6 +55,10 @@ circle.node {
     width: 150px;
 }
 
+select {
+	width: 150px;
+}
+
 /* Details specific */
 #detail-container{
 	float: right;

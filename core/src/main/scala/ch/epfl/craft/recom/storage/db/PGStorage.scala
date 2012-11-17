@@ -12,6 +12,8 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.storage.maps._
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.SemesterRange
+import ch.epfl.craft.recom.model.administration.AcademicSemester
+import net.liftweb.mapper.Distinct
 
 
 class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage {
@@ -52,5 +54,17 @@ class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage
   /* Students */
   def saveStudents(tl: Iterable[Student]) = StudentMap.fill(tl)
   def readStudent(sid: Student.StudentID): Option[Student] = StudentMap.read(sid)
+  
+  /* Sections */
+  def readAllSections: Iterable[Section] = SectionMap.findAll().map(_.read)
+  
+  /* Academic Levels */
+  def readAllAcademicLevels: Iterable[AcademicSemester] = 
+    AcademicSemesterMap.findAllFields(Seq(AcademicSemesterMap.level), Distinct())
+    .map(m => AcademicSemester(m.level))
+	 
+  /* Semesters */
+  def readAllSemesters: Iterable[Semester] = 
+    SemesterMap.findAll().map(s => s.read)
   
 }
