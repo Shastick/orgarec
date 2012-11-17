@@ -247,22 +247,6 @@ function myGraph(el) {
     update();
 }
 
-function drawGraph()
-{
-    graph = new myGraph("#graph-container");
-
-    d3.json("graph", function(json) {
-        var nodes = json.nodes;
-        var links = json.links;
-        for (var i = 0; i < nodes.length; i++) {
-            graph.addNode(nodes[i]);
-        }
-        for (var i = 0; i < links.length; i++)  {
-            graph.addLink(links[i])
-        }
-    });
-}
-
 function makeGraph(json){
     graph = new myGraph("#graph-container");
 
@@ -277,7 +261,7 @@ function makeGraph(json){
 }
 
 
-//drawGraph();
+
 $(document).ready( function(){
     getGraph("makeGraph");
     }
