@@ -5,11 +5,9 @@ import common._
 import json._
 import http._
 import js._
-import SHtml._
 import JsCmds._
-import js.jquery.JqJE._
 import xml.NodeSeq
-import ch.epfl.craft.view.snippet.StudyPlanCompleteGraph
+
 
 
 /**
@@ -34,7 +32,7 @@ class GraphVisual {
 
   var currentLinkThreshold = 60
   deletedLinks = links.filter(_.distance>currentLinkThreshold)
-
+  /*
   def deleteNode = {
     def delete(id:String):JsCmd = {
       //nodes = nodes.filterNot(_.id == id);
@@ -147,7 +145,7 @@ class GraphVisual {
 
   def selectSemesters = {
      NodeSeq.Empty
-  }
+  }  */
 
   def updateLinkThreshold = {
     def updateThresh(t:Int) = {
