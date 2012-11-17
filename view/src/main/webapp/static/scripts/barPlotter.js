@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-body {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: steelblue;
-}
-
-.x.axis path {
-  display: none;
-}
-
-</style>
-<body>
-<div id="drawMe"></div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-var str = "letter,frequency\nA,.08167\nB,.01492\nC,.02780"
-
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 660 - margin.left - margin.right,
     height = 200 - margin.top - margin.bottom;
@@ -50,9 +20,10 @@ var yAxis = d3.svg.axis()
     .tickFormat(formatPercent);
 
 
-function drawBarPlot(data,selector) {
+function drawBarPlot(csvStr,selector) {
+  var data = d3.csv.parse(csvStr);
   data.forEach(function(d) {
-    d.frequency = +d.frequency;
+    d.ratio = +d.ratio;
   });
 
   var svg = d3.select(selector).append("svg")
@@ -61,8 +32,9 @@ function drawBarPlot(data,selector) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  x.domain(data.map(function(d) { return d.course; }));
+  //y.domain([0, d3.max(data, function(d) { return d.ratio; })]);
+  y.domain([0,1]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -83,11 +55,9 @@ function drawBarPlot(data,selector) {
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.course); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
+      .attr("y", function(d) { return y(d.ratio); })
+      .attr("height", function(d) { return height - y(d.ratio); });
 
 };
-draw(d3.csv.parse(str),"#drawMe");
-</script>
