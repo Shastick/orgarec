@@ -5,6 +5,7 @@ import util._
 import Helpers._
 import common._
 import http._
+import js.JE.JsArray
 import sitemap._
 import Loc._
 import ch.epfl.craft.recom.storage.db.DBFactory
@@ -53,6 +54,13 @@ class Boot extends Bootable {
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
 
     LiftRules.statelessDispatchTable.append(GraphApi)
+
+    LiftRules.dispatch.append {
+      case r: Req if r.path(0) == "ajax_request" && r.path(1) == "test_fct" =>
+        () =>
+        println("Gotcha")
+        Full(JsonResponse(JsArray("asdf","b")))
+    }
 
   }
 }

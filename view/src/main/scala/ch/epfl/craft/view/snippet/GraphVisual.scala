@@ -1,6 +1,5 @@
 package ch.epfl.craft.view.snippet
 
-
 import net.liftweb._
 import common._
 import json._
@@ -10,7 +9,6 @@ import SHtml._
 import JsCmds._
 import js.jquery.JqJE._
 import xml.NodeSeq
-import scala.xml.Text
 
 
 /**
@@ -26,7 +24,6 @@ class GraphVisual {
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
 
-  //val myGraph = SampleGraph.graph
   val studyPlan = new StudyPlanCompleteGraph
   val myGraph =  studyPlan.graph
   val nodes = myGraph.nodes
@@ -156,11 +153,11 @@ class GraphVisual {
     def updateThresh(t:Int) = {
       val commands =
         if( t < currentLinkThreshold) {
-          val toDelete = displayableLinks.filter(_.distance>t)
+          val toDelete = displayableLinks.filter(_.coStudents<t)
           deletedLinks ++= toDelete
           toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
         } else {
-          val toAdd = deletedLinks.filter(_.distance<t)
+          val toAdd = deletedLinks.filter(_.coStudents>t)
           deletedLinks = deletedLinks.diff(toAdd)
           toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
         }
@@ -170,11 +167,9 @@ class GraphVisual {
     SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(currentLinkThreshold))(updateThresh(_))
   }
 
-
 }
 
-object GraphVisual extends GraphVisual {
-
+object GraphVisualisationObj extends GraphVisual {
   /* Get Json representation of the graph */
   def graph2Json = {
     val Jnodes = JArray(displayableNodes.map(_.toJObject))
@@ -194,7 +189,8 @@ object GraphVisual extends GraphVisual {
     val node = nodes.find(_.id ==id)
     if(node.isDefined)
       <h3>{node.get.name}</h3> ++
-      <span> <b>credits: </b>{node.get.radius}</span>
+        <span> <b>credits: </b>{node.get.radius}</span>
     else NodeSeq.Empty
   }
+
 }

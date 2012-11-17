@@ -47,15 +47,16 @@ class StudyPlanCompleteGraph {
       }
     )).toList
     val links =landscape.edges.values.map(e => {
-      val coStudents = e.relations.collectFirst {
+      val coStudentsN = e.relations.collectFirst {
         case CoStudents(c) => c
       }.getOrElse(0)
       Link(
         sourceID= e.from,
         targetID = e.to,
-        distance =  List(0, 100-coStudents).max
+        distance =  List(0, 100-coStudentsN).max,
         //showLink = coStudents>10
-    )}).toList//.filter(_.distance <90)
+        coStudents = coStudentsN
+    )}).toList
 
     println("Number of nodes computed: "+ nodes.length)
     println("Number of links computed: "+ links.length)

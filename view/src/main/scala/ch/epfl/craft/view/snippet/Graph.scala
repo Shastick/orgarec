@@ -30,15 +30,16 @@ case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 
     JField("strokeWidthCategory", JInt(strokeWidthCategory))
   ))
 }
-case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean=true){
+case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean=true, coStudents:Int){
   val toJObject = JObject(List(
     JField("source", JString(sourceID)),
     JField("target", JString(targetID)),
     JField("distance", JInt(distance)),
-    JField("showLink", JBool(showLink))
+    JField("showLink", JBool(showLink)),
+    JField("coStudents", JInt(coStudents))
   ))
 }
 
 case class RGBColor(red:Int, green:Int, blue:Int, opacity:Double=1){
-  def toJString = JString("rgb("+red+","+green+","+blue+")")
+  def toJString = JString("rgba("+red+","+green+","+blue+","+opacity+")")
 }

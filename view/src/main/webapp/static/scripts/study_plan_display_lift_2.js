@@ -143,7 +143,7 @@ function myGraph(el) {
 
         linkEnter.append("title")
             .text(function(d){
-                return d.distance;
+                return d.coStudents + " students followed both courses";
             });
 
         link.exit().remove();
@@ -258,6 +258,7 @@ function myGraph(el) {
 function drawGraph()
 {
     graph = new myGraph("#graph-container");
+
     d3.json("graph", function(json) {
         var nodes = json.nodes;
         var links = json.links;
