@@ -18,7 +18,7 @@ case class D3Graph(nodes:List[Node], links:List[Link]) {
     JGraph
   }
   
-  lazy val maxCostuds = links.maxBy(_.coStudents)
+  lazy val maxCostuds = links.maxBy(_.coStudents).coStudents
 }
 
 /**
@@ -49,7 +49,7 @@ case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 
  *                 in computation, as soon as the link is created it will be computed (distance constraint)
  * @param coStudents The number of co-students of both nodes. This variable is for now somehow similar to the distance.
  */
-case class Link(sourceID:String, targetID:String, distance:Int, coStudents:Int, showLink:Boolean=true){
+case class Link(sourceID:String, targetID:String, distance:Int, val coStudents:Int, showLink:Boolean=true){
   val toJObject = JObject(List(
     JField("source", JString(sourceID)),
     JField("target", JString(targetID)),

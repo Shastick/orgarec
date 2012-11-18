@@ -14,6 +14,7 @@ import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
 import net.liftweb.common.Full
 import scala.xml.Elem
+import ch.epfl.craft.view.model.UserDisplay
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,8 +34,7 @@ class GraphInteractions extends StatefulSnippet {
   
   var coStudThreshold = 80
   
-  var shownNodes: List[Node] = nodes
-  var shownLinks: List[Link] = links.filter(_.coStudents > coStudThreshold)
+  UserDisplay.set(nodes,links.filter(_.coStudents > coStudThreshold))
     
   def dispatch = {case "render" => render}
 
@@ -46,25 +46,25 @@ class GraphInteractions extends StatefulSnippet {
     def updateThresh(cs: Int) = {
       val commands =
         if(cs > coStudThreshold) {
-          val toDelete = shownLinks.filter(_.coStudents < cs)
-          shownLinks = shownLinks.diff(toDelete)
+          val toDelete = UserDisplay.links.filter(_.coStudents < cs)
+          UserDisplay.removeLinks(toDelete)
           toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
         } else {
-          val toAdd = links.filter(_.coStudents > cs).diff(shownLinks)
-          shownLinks = shownLinks ++ toAdd
+          val toAdd = links.filter(_.coStudents > cs).diff(UserDisplay.links)
+          UserDisplay.addLinks(toAdd)
           toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
         }
       coStudThreshold = cs
       commands
     }
-    SHtml.ajaxSelectElem[Int](Range(0,101,10).toList, Full(coStudThreshold))(updateThresh(_))
+    SHtml.ajaxSelectElem[Int](Range(0,graph.maxCostuds,10).toList, Full(coStudThreshold))(updateThresh(_))
   }
 
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
       SHtml.ajaxCall(JsVar("succName"),
-          fname => Call(fname, D3Graph(shownNodes,shownLinks).toJson
-              ))._2.toJsCmd
+          fname => Call(fname, UserDisplay.render))
+          ._2.toJsCmd
       + "}"
   )
 
