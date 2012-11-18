@@ -18,16 +18,12 @@ import ch.epfl.craft.recom.util.SemesterRange
 class ControlPanel extends StatefulSnippet {
   import scala.collection.Seq
   
-  def ls = LandscapeHolder.is
+  def ls = LandscapeHolder.landscape
   
-  protected var sections: Seq[Section] =
-    ls.map(_.sections.toSeq).getOrElse(Seq.empty)
-  protected var startSem: Option[Semester] =
-    ls.flatMap(l => l.semesterRange.from)
-  protected var endSem: Option[Semester] =
-    ls.flatMap(l => l.semesterRange.to)
-  protected var levels: Seq[AcademicSemester] =
-    ls.map(_.levels.toSeq).getOrElse(Seq.empty)
+  protected var sections: Seq[Section] = ls.sections.toSeq
+  protected var startSem: Option[Semester] = ls.semesterRange.from
+  protected var endSem: Option[Semester] = ls.semesterRange.to
+  protected var levels: Seq[AcademicSemester] = ls.levels.toSeq
   
   lazy val semSeq = store.readAllSemesters
     				.map(s => (s, s.year_int.toString + "-" + s.season))

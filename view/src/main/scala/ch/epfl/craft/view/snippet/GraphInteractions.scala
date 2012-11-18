@@ -25,7 +25,9 @@ import scala.xml.Elem
 
 class GraphInteractions extends StatefulSnippet {
   
-  var graph = LandscapeHolder.getD3Graph
+  def graph = LandscapeHolder.d3Graph
+  def ls = LandscapeHolder.landscape
+
   def nodes = graph.nodes
   def links = graph.links
   
@@ -33,9 +35,7 @@ class GraphInteractions extends StatefulSnippet {
   
   var shownNodes: List[Node] = nodes
   var shownLinks: List[Link] = links.filter(_.coStudents > coStudThreshold)
-  
-  def ls = LandscapeHolder.current
-  
+    
   def dispatch = {case "render" => render}
 
   
@@ -47,9 +47,11 @@ class GraphInteractions extends StatefulSnippet {
       val commands =
         if(cs > coStudThreshold) {
           val toDelete = shownLinks.filter(_.coStudents < cs)
+          shownLinks = shownLinks.diff(toDelete)
           toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
         } else {
           val toAdd = links.filter(_.coStudents > cs).diff(shownLinks)
+          shownLinks = shownLinks ++ toAdd
           toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
         }
       coStudThreshold = cs

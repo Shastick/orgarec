@@ -25,7 +25,7 @@ object Site {
 
 
   def detailParamExt(args: List[String]): Box[(Topic.TopicID, Landscape)] =
-	if(args.size==1) LandscapeHolder.is.map(l => (args(0),l))
+	if(args.size==1) LandscapeHolder.is.map(l => (args(0),l._1))
 	else Empty
   
     
