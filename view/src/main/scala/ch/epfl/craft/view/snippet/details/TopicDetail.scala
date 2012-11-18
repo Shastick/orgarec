@@ -63,6 +63,6 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
   if(costuds.length > 0)
     h ++ <head>{includes}</head> ++ Script(OnLoad(Call("drawBarPlot",
         "course,ratio\n" + tupList2RatioCsv(topCostudCourses(5)),
-    	"#costudents-bar-plot")))
+    	"#costudents-bar-plot",660,200)))
   else h 
 }

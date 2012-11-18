@@ -77,7 +77,12 @@ class GraphVisual {
 
   def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
-      SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("detail-data", nodeDetails(id)))._2.toJsCmd
+      SHtml.ajaxCall(JsVar("nodeID"), id => {
+        SetHtml("detail-data", nodeDetails(id)) &
+        SetHtml("subgraph-data", Script(OnLoad(Call("drawBarPlot",
+        "course,ratio\n" + "ADC,0.5",
+    	"#subgraph-data",500,200))))
+        })._2.toJsCmd
       + "}"
   )
 
