@@ -17,7 +17,23 @@ class Landscape(
     val sections: Set[Section], /* Do we focus on certain sections ? (All sections if empty) */
     val levels: Set[AcademicSemester], /* Focus on certain levels only ? */
     val nodes: Map[Topic.TopicID,LandscapeNode], 
-    val edges: Map[(Topic.TopicID, Topic.TopicID),LandscapeEdge])
+    val edges: Map[(Topic.TopicID, Topic.TopicID),LandscapeEdge]){
+  
+  /* Get Edges connected to given topic */
+  def connectedEdges(tid: Topic.TopicID) = edges.collect {
+    case ((from,to),edge) if (from == tid) => (to,edge)
+    case ((from,to),edge) if (to == tid) => (from,edge)
+  }
+  
+  def coStudents(tid: Topic.TopicID, lim: Int): List[(Topic.TopicID,Int)] = 
+    coStudents(tid).slice(0,lim)
+    
+  def coStudents(tid: Topic.TopicID): List[(Topic.TopicID,Int)] = 
+    connectedEdges(tid).flatMap(t => t._2.relations
+      					.collectFirst{case CoStudents(c) => (t._1,c)})
+      					.toList.sortBy(_._2).reverse
+  
+}
     
 object Landscape{
   

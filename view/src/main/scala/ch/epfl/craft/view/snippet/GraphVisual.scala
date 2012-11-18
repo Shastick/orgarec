@@ -9,6 +9,8 @@ import js.JE.{Call, JsVar, JsRaw}
 import JsCmds._
 import xml.NodeSeq
 import ch.epfl.craft.view.model._
+import ch.epfl.craft.recom.graph.StudentsQuantity
+import ch.epfl.craft.view.util.ViewUtils
 
 
 /**
@@ -24,6 +26,8 @@ class GraphVisual {
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
 
+  def ls = LandscapeHolder.current
+  
   val SGraph = new StudyPlanCompleteGraph
   val myGraph = SGraph.graph
   val nodes = myGraph.nodes
@@ -74,14 +78,21 @@ class GraphVisual {
     val name = if(node.isDefined) node.get.name else "node not defined"
     <span>{name}</span>
   }
+  
+  def nodeSubGraph(id: String): NodeSeq = {
+    val lim = ls.nodes(id).metadata.collectFirst{case StudentsQuantity(q) => q}
+    Script(OnLoad(Call("drawBarPlot",
+        "course,ratio\n" + 
+          ViewUtils.tupList2RatioCsv(lim.getOrElse(1.0),
+              ls.coStudents(id,5).map(t => (ls.nodes(t._1).node.name,t._2))),
+    	"#subgraph-data",500,200)))
+  }
 
   def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => {
         SetHtml("detail-data", nodeDetails(id)) &
-        SetHtml("subgraph-data", Script(OnLoad(Call("drawBarPlot",
-        "course,ratio\n" + "ADC,0.5",
-    	"#subgraph-data",500,200))))
+        SetHtml("subgraph-data", nodeSubGraph(id))
         })._2.toJsCmd
       + "}"
   )

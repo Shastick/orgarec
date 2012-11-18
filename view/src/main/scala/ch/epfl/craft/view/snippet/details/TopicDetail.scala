@@ -13,6 +13,7 @@ import net.liftweb.http.js.JE.Call
 import net.liftweb.http.js.JsCmds.OnLoad
 import net.liftweb.http.js.JsCmds.Script
 import net.liftweb.http.js.JsCmds.jsExpToJsCmd
+import ch.epfl.craft.view.util.ViewUtils
 
 /**
  * Get the details of a topic in the context of a given landscape
@@ -31,15 +32,8 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
   val (tid,l) = a
   val (t,meta) = l.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata))
   			.getOrElse((None,Set.empty[TopicMeta]))
-  			
-  lazy val eoi = l.edges.collect {
-    case ((from,to),edge) if (from == tid) => (to,edge)
-    case ((from,to),edge) if (to == tid) => (from,edge)
-  }
-  
-  lazy val costuds = eoi.flatMap(t => t._2.relations
-      					.collectFirst{case CoStudents(c) => (t._1,c)})
-      					.toList.sortBy(_._2).reverse
+  			  
+  lazy val costuds = l.coStudents(tid)
       					
   lazy val studCount = meta.collectFirst{case StudentsQuantity(q) => q}
   			
@@ -49,20 +43,10 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
     "#costudents-bar-plot *" #> barPlot _
   }
   
-  private def topCostudCourses(q: Int) = if(costuds.size > q) costuds.slice(0,q)
-		  						 else costuds
-		  						 
-  //TODO @ julien handle cases where several courses are considered and the ratio might get over 1
-  def tupList2RatioCsv(tl: List[(String, Int)]) = 
-    tl.map(t => 
-      l.nodes.get(t._1).map(_.node.name).getOrElse(t._1) + ","
-      + studCount.map(d => t._2/d).getOrElse(0.0).toString)
-    .reduce(_ + "\n" +_)
-  
   def barPlot(h: NodeSeq) = 
   if(costuds.length > 0)
     h ++ <head>{includes}</head> ++ Script(OnLoad(Call("drawBarPlot",
-        "course,ratio\n" + tupList2RatioCsv(topCostudCourses(5)),
+        "course,ratio\n" + ViewUtils.tupList2RatioCsv(studCount.getOrElse(1.0),l.coStudents(tid,5)),
     	"#costudents-bar-plot",660,200)))
   else h 
 }
