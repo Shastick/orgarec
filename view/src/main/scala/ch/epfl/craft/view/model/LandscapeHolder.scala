@@ -33,7 +33,7 @@ object LandscapeHolder extends SessionVar[Option[Landscape]](None) {
     l
   }
   
-  def getJsGraph(): D3Graph = {
+  def getD3Graph(): D3Graph = {
     val ls = current
     val nodes = ls.nodes.values.map(n =>
       Node(n.node.id,n.node.name, 4*n.node.credits.getOrElse(4),

@@ -10,6 +10,11 @@ import net.liftweb.util.Helpers._
 import ch.epfl.craft.view.model.LandscapeHolder
 import ch.epfl.craft.recom.util.SemesterRange
 
+/**
+ * Panel to control the parameters used to generate the underlying landscape object.
+ * When the form is submitted, the LandscapeHolder is updated
+ * with the new generated landscape.
+ */
 class ControlPanel extends StatefulSnippet {
   import scala.collection.Seq
   
@@ -52,11 +57,9 @@ class ControlPanel extends StatefulSnippet {
   def startSemester(n: NodeSeq) =  
     SHtml.selectObj[Semester](semSeq, startSem, s => startSem = Some(s))
   
-  
   def endSemester(n: NodeSeq) = 
     SHtml.selectObj[Semester](semSeq, startSem, s => endSem = Some(s))
   
- 
   def levelChoice(n: NodeSeq) = {
 	val lvlSeq = store.readAllAcademicLevels.map(l => (l,l.level)).toSeq
 	def upd(l: Seq[AcademicSemester]) = {levels = l}
