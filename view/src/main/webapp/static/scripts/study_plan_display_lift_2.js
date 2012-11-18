@@ -97,7 +97,6 @@ function myGraph(el) {
         .attr("viewBox","0 0 "+w+" "+h)
         .attr("perserveAspectRatio","xMinYMid")
         .append('svg:g')
-        //.on("click", d3.select('#context_menu').style("display", "none"))
         .call(d3.behavior.zoom().on("zoom", redraw))
         .append('svg:g');
 
@@ -157,8 +156,6 @@ function myGraph(el) {
         function dragstart(d, i) {
             d3.select('#context_menu').style("display", "none")
             d.fixed =true;
-            //force.friction(0);
-            //force.stop() //stops the force auto positioning before you start dragging
         }
 
         function dragmove(d, i) {

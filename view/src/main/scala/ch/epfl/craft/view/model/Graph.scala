@@ -30,6 +30,16 @@ case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 
     JField("strokeWidthCategory", JInt(strokeWidthCategory))
   ))
 }
+
+/**
+ * Case Class representing relation between two elements in graph
+ * @param sourceID The ID of the source node
+ * @param targetID the ID of the target node
+ * @param distance the distance between nodes (length of the link)
+ * @param showLink To know if the link has to be shown or not (default is true), this is just related to the visualisation,
+ *                 in computation, as soon as the link is created it will be computed (distance constraint)
+ * @param coStudents The number of co-students of both nodes. This variable is for now somehow similar to the distance.
+ */
 case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean=true, coStudents:Int){
   val toJObject = JObject(List(
     JField("source", JString(sourceID)),
@@ -39,6 +49,14 @@ case class Link(sourceID:String, targetID:String, distance:Int, showLink:Boolean
     JField("coStudents", JInt(coStudents))
   ))
 }
+
+/** Utilitary class to represent colors
+  *
+  * @param red between 0 and 255
+  * @param green between 0 and 255
+  * @param blue between 0 and 255
+  * @param opacity between 0 and 1, set by default to 1
+  */
 
 case class RGBColor(red:Int, green:Int, blue:Int, opacity:Double=1){
   def toJString = JString("rgba("+red+","+green+","+blue+","+opacity+")")

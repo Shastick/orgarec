@@ -43,7 +43,7 @@ function drawBarPlot(csvStr,selector,w,h) {
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
-    .append("text")
+      .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
@@ -52,7 +52,7 @@ function drawBarPlot(csvStr,selector,w,h) {
 
   svg.selectAll(".bar")
       .data(data)
-    .enter().append("rect")
+      .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.course); })
       .attr("width", x.rangeBand())
