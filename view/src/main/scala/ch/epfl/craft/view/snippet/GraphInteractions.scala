@@ -24,23 +24,18 @@ import scala.xml.Elem
  */
 
 class GraphInteractions extends StatefulSnippet {
-
-  var deletedNodes:List[Node] = Nil
-  var deletedLinks:List[Link] = Nil
-
-  def lsh = LandscapeHolder
-  def ls = lsh.current
   
-  val myGraph = lsh.getD3Graph
-  val nodes = myGraph.nodes
-  val links = myGraph.links
-
-  def displayableNodes = nodes.diff(deletedNodes)
-  def displayableLinks = links.diff(deletedLinks)
-
-  var coStudThreshold = 60
-  deletedLinks = links.filter(_.coStudents > coStudThreshold)
-
+  var graph = LandscapeHolder.getD3Graph
+  def nodes = graph.nodes
+  def links = graph.links
+  
+  var coStudThreshold = 80
+  
+  var shownNodes: List[Node] = nodes
+  var shownLinks: List[Link] = links.filter(_.coStudents > coStudThreshold)
+  
+  def ls = LandscapeHolder.current
+  
   def dispatch = {case "render" => render}
 
   
@@ -48,27 +43,25 @@ class GraphInteractions extends StatefulSnippet {
     "#threshold-updater *" #> (updateLinkThreshold ++ <head>{getInteractions}</head>)
     
   def updateLinkThreshold: Elem = {
-    def updateThresh(cs:Int) = {
+    def updateThresh(cs: Int) = {
       val commands =
-        if( cs > coStudThreshold) {
-          val toDelete = displayableLinks.filter(_.coStudents<cs)
-          deletedLinks ++= toDelete
+        if(cs > coStudThreshold) {
+          val toDelete = shownLinks.filter(_.coStudents < cs)
           toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
         } else {
-          val toAdd = deletedLinks.filter(_.coStudents>cs)
-          deletedLinks = deletedLinks.diff(toAdd)
+          val toAdd = links.filter(_.coStudents > cs).diff(shownLinks)
           toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
         }
       coStudThreshold = cs
       commands
     }
-    SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(coStudThreshold))(updateThresh(_))
+    SHtml.ajaxSelectElem[Int](Range(0,101,10).toList, Full(coStudThreshold))(updateThresh(_))
   }
 
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
       SHtml.ajaxCall(JsVar("succName"),
-          fname => Call(fname, D3Graph(displayableNodes,displayableLinks).toJson
+          fname => Call(fname, D3Graph(shownNodes,shownLinks).toJson
               ))._2.toJsCmd
       + "}"
   )
