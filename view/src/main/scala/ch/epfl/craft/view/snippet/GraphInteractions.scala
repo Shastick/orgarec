@@ -1,17 +1,19 @@
 package ch.epfl.craft.view.snippet
 
-import net.liftweb._
-import common._
-import json._
-import http._
-import js._
-import js.JE.{Call, JsVar, JsRaw}
-import JsCmds._
-import xml.NodeSeq
-import ch.epfl.craft.view.model._
+import scala.xml.NodeSeq
 import ch.epfl.craft.recom.graph.StudentsQuantity
+import ch.epfl.craft.view.model._
 import ch.epfl.craft.view.util.ViewUtils
-
+import net.liftweb.http.SHtml
+import net.liftweb.http.StatefulSnippet
+import net.liftweb.util.Helpers._
+import net.liftweb.http.js.JE.Call
+import net.liftweb.http.js.JE.JsRaw
+import net.liftweb.http.js.JE.JsVar
+import net.liftweb.http.js.JsCmds._
+import net.liftweb.http.js._
+import net.liftweb.common.Full
+import scala.xml.Elem
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,7 +23,7 @@ import ch.epfl.craft.view.util.ViewUtils
  * To change this template use File | Settings | File Templates.
  */
 
-class GraphInteractions {
+class GraphInteractions extends StatefulSnippet {
 
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
@@ -36,13 +38,19 @@ class GraphInteractions {
   def displayableNodes = nodes.diff(deletedNodes)
   def displayableLinks = links.diff(deletedLinks)
 
-  var currentCoStudThreshold = 60
-  deletedLinks = links.filter(_.coStudents > currentCoStudThreshold)
+  var coStudThreshold = 60
+  deletedLinks = links.filter(_.coStudents > coStudThreshold)
 
-  def updateLinkThreshold = {
+  def dispatch = {case "render" => render}
+
+  
+  def render = 
+    "#threshold-updater *" #> (updateLinkThreshold ++ <head>{getInteractions}</head>)
+    
+  def updateLinkThreshold: Elem = {
     def updateThresh(cs:Int) = {
       val commands =
-        if( cs > currentCoStudThreshold) {
+        if( cs > coStudThreshold) {
           val toDelete = displayableLinks.filter(_.coStudents<cs)
           deletedLinks ++= toDelete
           toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
@@ -51,10 +59,10 @@ class GraphInteractions {
           deletedLinks = deletedLinks.diff(toAdd)
           toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
         }
-      currentCoStudThreshold = cs
+      coStudThreshold = cs
       commands
     }
-    SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(currentCoStudThreshold))(updateThresh(_))
+    SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(coStudThreshold))(updateThresh(_))
   }
 
   def getGraph = JsRaw(
