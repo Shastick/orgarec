@@ -22,7 +22,7 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
 
   val includes = {
         <script language="javascript" type="text/javascript"
-		    src="/static/scripts/jquery-1.8.2.min.js"></script>
+		    src="/static/scripts/jquery-1.8.3.min.js"></script>
         <script language="javascript" type="text/javascript"
 		    src="/static/scripts/d3/d3.v2.min.js"></script>
         <script language="javascript" type="text/javascript"
