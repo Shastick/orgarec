@@ -1,17 +1,11 @@
 package ch.epfl.craft.view
 
-import net.liftweb._
-import util._
-import Helpers._
-import common._
-import http._
-import js.JE.JsArray
-import sitemap._
-import Loc._
+import net.liftweb.sitemap._
+import net.liftweb.http._
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.storage.db.PGDBFactory
-//import ch.epfl.craft.view.snippet.GraphApi
 import ch.epfl.craft.view.view.Site
+import net.liftweb.util.Props
 
 
 /**
