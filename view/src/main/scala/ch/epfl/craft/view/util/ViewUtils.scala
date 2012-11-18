@@ -12,11 +12,4 @@ object ViewUtils {
 	      t._1 + "," +  Math.min(1.0,t._2/norm).toString)
 	    .reduce(_ + "\n" +_)
 	else ""
-	 
-  def graph2Json(g: D3Graph) = {
-    val Jnodes = JArray(g.nodes.map(_.toJObject))
-    val Jlinks = JArray(g.links.map(_.toJObject))
-    val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
-    JGraph
-  }
 }

@@ -60,7 +60,7 @@ class GraphInteractions {
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
       SHtml.ajaxCall(JsVar("succName"),
-          fname => Call(fname, ViewUtils.graph2Json(D3Graph(displayableNodes,displayableLinks))
+          fname => Call(fname, D3Graph(displayableNodes,displayableLinks).toJson
               ))._2.toJsCmd
       + "}"
   )

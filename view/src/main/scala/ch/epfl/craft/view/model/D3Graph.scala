@@ -10,7 +10,14 @@ import net.liftweb.json._
  * To change this template use File | Settings | File Templates.
  */
 
-case class D3Graph(nodes:List[Node], links:List[Link])
+case class D3Graph(nodes:List[Node], links:List[Link]) {
+  def toJson = {
+    val Jnodes = JArray(nodes.map(_.toJObject))
+    val Jlinks = JArray(links.map(_.toJObject))
+    val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
+    JGraph
+  }
+}
 
 /**
  * Class representing elements of graph, will be translated into a Json Object used by d3.js
