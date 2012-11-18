@@ -1,10 +1,7 @@
 package ch.epfl.craft.view.snippet
 
 import ch.epfl.craft.recom.graph.{CoStudents, StudentsQuantity}
-import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.recom.model.administration.{Semester, Section}
-import ch.epfl.craft.view.model.LandscapeHolder
-import ch.epfl.craft.recom.model.administration._
+import ch.epfl.craft.view.model._
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,7 +10,7 @@ import ch.epfl.craft.recom.model.administration._
  * Time: 17:49
  * To change this template use File | Settings | File Templates.
  */
-object StudyPlanCompleteGraph {
+class StudyPlanCompleteGraph {
   val graph = LandscapeToGraph
 
   def getLandscape = LandscapeHolder.current
@@ -23,13 +20,6 @@ object StudyPlanCompleteGraph {
     val nodes= landscape.nodes.values.map(n => Node(
       n.node.id, name = n.node.name,
       radius = 4*n.node.credits.getOrElse(4),
-      /*fill = {
-        val number = n.metadata.collectFirst {
-          case StudentsQuantity(c) => c
-        }.getOrElse(0.0)
-        val normNumber = 255 -  List(255,(number*255/1000).round).min.toInt
-        RGBColor(normNumber,0,0)
-      },*/
       strokeWidthCategory = {
         val number = n.metadata.collectFirst {
           case StudentsQuantity(c) => c
@@ -47,7 +37,6 @@ object StudyPlanCompleteGraph {
         sourceID= e.from,
         targetID = e.to,
         distance =  List(0, 100-coStudentsN).max,
-        //showLink = coStudents>10
         coStudents = coStudentsN
     )}).toList
 

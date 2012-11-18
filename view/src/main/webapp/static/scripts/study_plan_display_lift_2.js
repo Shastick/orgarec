@@ -65,7 +65,7 @@ function myGraph(el) {
 
     this.addLink = function (link) {
         if(findNode(link.source)!= null && findNode(link.target)!= null)  {
-            links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink});
+            links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink, "coStudents":link.coStudents});
             update();
         }
     };
@@ -195,12 +195,8 @@ function myGraph(el) {
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
-            .on("contextmenu", function(data, index) {
-                $.ajax({
-                    url: "context_menu/"+ data.id,
-                    type: "GET",
-                    dataType: "script"
-                });
+            .on("contextmenu", function(d) {
+                updateContextMenu(d.id)
                 d3.select('#context_menu')
                     .style('position', 'absolute')
                     .style('left', d3.event.x + "px")
@@ -209,11 +205,7 @@ function myGraph(el) {
                 d3.event.preventDefault();
             })
             .on("mouseover", function(d){
-                $.ajax({
-                    url: "node_mouseover/"+ d.id,
-                    type: "GET",
-                    dataType: "script"
-                });
+                getDetails(d.id)
             });
         /* Add text in middle of circle */
         nodeEnter.append("text")
@@ -255,19 +247,20 @@ function myGraph(el) {
     update();
 }
 
-function drawGraph()
-{
+function makeGraph(json){
     graph = new myGraph("#graph-container");
 
-    d3.json("graph", function(json) {
-        var nodes = json.nodes;
-        var links = json.links;
-        for (var i = 0; i < nodes.length; i++) {
-            graph.addNode(nodes[i]);
-        }
-        for (var i = 0; i < links.length; i++)  {
-            graph.addLink(links[i])
-        }
-    });
+    var nodes = json.nodes;
+    var links = json.links;
+    for (var i = 0; i < nodes.length; i++) {
+        graph.addNode(nodes[i]);
+    }
+    for (var i = 0; i < links.length; i++)  {
+        graph.addLink(links[i])
+    }
 }
-drawGraph();
+
+$(document).ready( function(){
+    getGraph("makeGraph");
+    }
+)
