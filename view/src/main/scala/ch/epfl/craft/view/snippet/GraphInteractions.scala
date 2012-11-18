@@ -21,7 +21,7 @@ import ch.epfl.craft.view.util.ViewUtils
  * To change this template use File | Settings | File Templates.
  */
 
-class GraphVisual {
+class GraphInteractions {
 
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
@@ -29,7 +29,7 @@ class GraphVisual {
   def lsh = LandscapeHolder
   def ls = lsh.current
   
-  val myGraph = lsh.getJsGraph()
+  val myGraph = lsh.getD3Graph
   val nodes = myGraph.nodes
   val links = myGraph.links
 
