@@ -91,17 +91,16 @@ class GraphInteractions {
       + "}"
   )
 
-  def contextMenuContent(id:String) = {
-    val node = nodes.find(_.id ==id)
-    if(node.isDefined)
-      <h3>{node.get.name}</h3> ++
-        <span> <b>credits: </b>{node.get.radius/4}</span>
-    else NodeSeq.Empty
-  }
+  def contextMenuContent(id:String) =
+    ls.nodes.get(id).map{
+      t => <h3>{t.node.name}</h3>
+        <span><b>credits: </b>{t.node.credits}</span>
+    }.getOrElse(NodeSeq.Empty)
 
   def updateContextMenu = JsRaw(
     "function updateContextMenu(nodeID) {" +
-      SHtml.ajaxCall(JsVar("nodeID"), id => SetHtml("context_menu", contextMenuContent(id)))._2.toJsCmd
+      SHtml.ajaxCall(JsVar("nodeID"), id =>
+        SetHtml("context_menu", contextMenuContent(id)))._2.toJsCmd
       + "}"
   )
 
