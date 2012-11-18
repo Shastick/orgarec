@@ -57,17 +57,11 @@ class GraphVisual {
     SHtml.ajaxSelectElem[Int](List(10,20, 30, 40, 50, 60, 70, 80, 90, 100), Full(currentCoStudThreshold))(updateThresh(_))
   }
 
-  /* Get Json representation of the graph */
-  def graph2Json = {
-    val Jnodes = JArray(displayableNodes.map(_.toJObject))
-    val Jlinks = JArray(displayableLinks.map(_.toJObject))
-    val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
-    JGraph
-  }
-
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
-      SHtml.ajaxCall(JsVar("succName"), fname => Call(fname, graph2Json))._2.toJsCmd
+      SHtml.ajaxCall(JsVar("succName"),
+          fname => Call(fname, ViewUtils.graph2Json(D3Graph(displayableNodes,displayableLinks))
+              ))._2.toJsCmd
       + "}"
   )
 

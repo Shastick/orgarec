@@ -10,7 +10,7 @@ import net.liftweb.json._
  * To change this template use File | Settings | File Templates.
  */
 
-case class Graph(nodes:List[Node], links:List[Link])
+case class D3Graph(nodes:List[Node], links:List[Link])
 
 /**
  * Class representing elements of graph, will be translated into a Json Object used by d3.js

@@ -33,7 +33,7 @@ object LandscapeHolder extends SessionVar[Option[Landscape]](None) {
     l
   }
   
-  def getJsGraph(): Graph = {
+  def getJsGraph(): D3Graph = {
     val ls = current
     val nodes = ls.nodes.values.map(n =>
       Node(n.node.id,n.node.name, 4*n.node.credits.getOrElse(4),
@@ -54,6 +54,6 @@ object LandscapeHolder extends SessionVar[Option[Landscape]](None) {
       Link(e.from, e.to, Math.max(0,100-coStudentsN), coStudentsN)
     }).toList
 
-    Graph(nodes, links)
+    D3Graph(nodes, links)
   }
 }
