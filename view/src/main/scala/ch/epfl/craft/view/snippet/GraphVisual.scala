@@ -26,10 +26,10 @@ class GraphVisual {
   var deletedNodes:List[Node] = Nil
   var deletedLinks:List[Link] = Nil
 
-  def ls = LandscapeHolder.current
+  def lsh = LandscapeHolder
+  def ls = lsh.current
   
-  val SGraph = new StudyPlanCompleteGraph
-  val myGraph = SGraph.graph
+  val myGraph = lsh.getJsGraph()
   val nodes = myGraph.nodes
   val links = myGraph.links
 
