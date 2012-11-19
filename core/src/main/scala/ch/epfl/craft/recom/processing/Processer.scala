@@ -3,6 +3,7 @@ import ch.epfl.craft.recom.model.Course
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.AcademicSemester
+import ch.epfl.craft.recom.model.Topic
 
 /** 
  * The processer trait holds everything that 'will probably take some time' to be done and, generally,
@@ -45,4 +46,9 @@ trait Processer {
    */
   def readShortTopicCostudents(s: Set[Section.Identifier], tr: SemesterRange, as: Set[AcademicSemester.Identifier]):
 	  Iterable[(String, String, Long)]
+  /**
+   * Get the sections present in a topic and the corresponding ratio, plus the number of 
+   * considered courses.
+   */
+  def readTopicSectionRatio(id: Topic.TopicID, r: SemesterRange): Iterable[(Section, Double, Int)]
 }

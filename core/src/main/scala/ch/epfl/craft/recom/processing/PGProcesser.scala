@@ -9,6 +9,7 @@ import net.liftweb.mapper.By
 import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.AcademicSemester
+import ch.epfl.craft.recom.model.Topic
 
 class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
  extends Processer with SQLCallable{
@@ -68,5 +69,9 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
 			  					.map(rm => (rm.from.map(_.read).get, rm.value.toInt))
 	  (l1 ++ l2).filter(t => t._1.semester >= tr.from && t._1.semester <= tr.to)
 	}
+
+	def readTopicSectionRatio(id: Topic.TopicID, r: SemesterRange):
+		Iterable[(Section, Double, Int)] =
+	  callS[Section, Double, Int]("topicSectionRatio")(id,r)
 
 }
