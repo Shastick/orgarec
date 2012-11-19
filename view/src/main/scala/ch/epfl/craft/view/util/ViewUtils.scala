@@ -12,10 +12,23 @@ import ch.epfl.craft.recom.graph._
 
 object ViewUtils {
 
-  def tupList2RatioCsv(norm: Double, tl: List[(String, Int)]) =
+  def tupListDouble2RatioCsv(norm: Double, tl: List[(String, Double)]): String =
     if(tl.size > 0)
 	    tl.map(t => 
-	      t._1 + "," +  Math.min(1.0,t._2/norm).toString)
+	      (t._1 match{
+	        case "" => "_"
+	        case s: String => s
+	      }) + "," +  Math.min(1.0,t._2/norm).toString)
+	    .reduce(_ + "\n" +_)
+	else ""
+  
+  def tupListInt2RatioCsv(norm: Double, tl: List[(String, Int)]): String =
+    if(tl.size > 0)
+	    tl.map(t => 
+	      (t._1 match{
+	        case "" => "_"
+	        case s: String => s
+	      }) + "," +  Math.min(1.0,t._2/norm).toString)
 	    .reduce(_ + "\n" +_)
 	else ""
 

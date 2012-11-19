@@ -31,7 +31,7 @@ function drawBarPlot(csvStr,selector,w,h) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  x.domain(data.map(function(d) { return d.course; }));
+  x.domain(data.map(function(d) { return d.name; }));
   //y.domain([0, d3.max(data, function(d) { return d.ratio; })]);
   y.domain([0,1]);
 
@@ -54,7 +54,7 @@ function drawBarPlot(csvStr,selector,w,h) {
       .data(data)
       .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.course); })
+      .attr("x", function(d) { return x(d.name); })
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.ratio); })
       .attr("height", function(d) { return height - y(d.ratio); });

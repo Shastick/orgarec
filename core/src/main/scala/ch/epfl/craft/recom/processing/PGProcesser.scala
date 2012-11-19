@@ -72,6 +72,6 @@ class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
 
 	def readTopicSectionRatio(id: Topic.TopicID, r: SemesterRange):
 		Iterable[(Section, Double, Int)] =
-	  callS[Section, Double, Int]("topicSectionRatio")(id,r)
+	  callS[Section, Double, Int]("topicSectionRatio")(id,r).toList
 
 }
