@@ -177,6 +177,7 @@ trait SQLCallable {
     else if (m.erasure.equals(classOf[Date]))
       new org.scala_tools.time.Imports.DateTime(call.getDate(i))
     else if (m.erasure.equals(classOf[Boolean])) call.getBoolean(i)
+    else if (m.erasure.equals(classOf[Section])) Section(call.getString(i))
     else if (m.erasure.equals(classOf[List[_]])) 
       fetchRows(call.getArray(i).getResultSet()) { rs =>
         sqlGet(rs, 2)(m.typeArguments.head)
@@ -193,6 +194,7 @@ trait SQLCallable {
     if (m.erasure.equals(classOf[Date]))    Types.TIMESTAMP else
     if (m.erasure.equals(classOf[Boolean])) Types.BOOLEAN   else
     if (m.erasure.equals(classOf[List[_]])) Types.ARRAY     else
+    if (m.erasure.equals(classOf[Section])) Types.CHAR		else
     Types.OTHER
   }
   
@@ -236,6 +238,7 @@ trait SQLCallable {
   	  i + 2
   	}
   	case l: Long => st.setLong(i, l); i + 1
+  	case Section(name) => st.setString(i,name); i + 1
   	case s: List[_] if s.head.isInstanceOf[Double] => {
   	  val arr =
   	    conn.createArrayOf("double", s.asInstanceOf[List[Object]].toArray)
