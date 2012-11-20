@@ -15,6 +15,7 @@ import net.liftweb.http.js._
 import net.liftweb.common.Full
 import scala.xml.Elem
 import ch.epfl.craft.view.model.UserDisplay
+import ch.epfl.craft.view.snippet.details.BarPlot
 
 /**
  * Created with IntelliJ IDEA.
@@ -78,11 +79,10 @@ class GraphInteractions extends StatefulSnippet {
   
   def nodeSubGraph(id: String): NodeSeq = {
     val lim = ls.nodes(id).metadata.collectFirst{case StudentsQuantity(q) => q}
-    Script(OnLoad(Call("drawBarPlot",
-        "name,ratio\n" + 
-          ViewUtils.tupListInt2RatioCsv(lim.getOrElse(1.0),
-              ls.coStudents(id,5).map(t => (ls.nodes(t._1).node.name,t._2))),
-    	"#subgraph-data",500,200)))
+    BarPlot.ratioFromIntTup(lim.getOrElse(1.0),
+              ls.coStudents(id,5).map(t => (ls.nodes(t._1).node.name,t._2)),
+              "#subgraph-data",
+              500,200).draw
   }
 
   def getDetails = JsRaw(
