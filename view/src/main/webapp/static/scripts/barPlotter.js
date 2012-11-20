@@ -47,8 +47,8 @@ function drawBarPlot(csvStr,selector,w,h) {
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Proportion");
+      .style("text-anchor", "end");
+      /*.text("Proportion");*/
 
   svg.selectAll(".bar")
       .data(data)
