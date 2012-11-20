@@ -79,7 +79,7 @@ class GraphInteractions extends StatefulSnippet {
   def nodeSubGraph(id: String): NodeSeq = {
     val lim = ls.nodes(id).metadata.collectFirst{case StudentsQuantity(q) => q}
     Script(OnLoad(Call("drawBarPlot",
-        "course,ratio\n" + 
+        "name,ratio\n" + 
           ViewUtils.tupListInt2RatioCsv(lim.getOrElse(1.0),
               ls.coStudents(id,5).map(t => (ls.nodes(t._1).node.name,t._2))),
     	"#subgraph-data",500,200)))
