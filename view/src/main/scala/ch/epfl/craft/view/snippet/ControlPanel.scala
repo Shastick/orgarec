@@ -27,7 +27,7 @@ class ControlPanel extends StatefulSnippet {
   
   lazy val semSeq = store.readAllSemesters
     				.map(s => (s, s.year_int.toString + "-" + s.season))
-    				.toSeq
+    				.toSeq.sortBy(_._2)
     				
   val store = DBFactory.store
   
@@ -45,7 +45,7 @@ class ControlPanel extends StatefulSnippet {
       sections.toSet, levels.toSet)
   
   def sectionChoice(n: NodeSeq) = {
-    val secSeq = store.readAllSections.map(s => (s, s.name)).toSeq
+    val secSeq = store.readAllSections.map(s => (s, s.name)).toSeq.sortBy(_._2)
     def upd(l: Seq[Section]) = {sections = l}
     SHtml.multiSelectObj[Section](secSeq, sections, upd _)
   }
@@ -57,7 +57,7 @@ class ControlPanel extends StatefulSnippet {
     SHtml.selectObj[Semester](semSeq, startSem, s => endSem = Some(s))
   
   def levelChoice(n: NodeSeq) = {
-	val lvlSeq = store.readAllAcademicLevels.map(l => (l,l.level)).toSeq
+	val lvlSeq = store.readAllAcademicLevels.map(l => (l,l.level)).toSeq.sortBy(_._2)
 	def upd(l: Seq[AcademicSemester]) = {levels = l}
     SHtml.multiSelectObj[AcademicSemester](lvlSeq, levels, upd _)
   }

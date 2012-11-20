@@ -69,7 +69,11 @@ object Semester {
   
   def apply(y: Int, s: String): Semester = apply(new DateTime(y,1,1,0,0),s)
   def apply(y: String, s: String): Semester = apply(new Integer(y),s)
-  def apply(y: java.util.Date, s: String): Semester = apply(new DateTime(y),s)
+  def apply(y: java.util.Date, s: String): Semester = {
+      val c = java.util.Calendar.getInstance
+      c.setTime(y)
+      apply(new DateTime(c.get(java.util.Calendar.YEAR),1,1,0,0),s)
+  }
   def apply(y: LocalDate, s: String): Semester = apply(new DateTime(y),s)
 
   

@@ -35,13 +35,14 @@ class GraphInteractions extends StatefulSnippet {
   def links = graph.links
   
   var coStudThreshold = 80
-  
-  UserDisplay.set(nodes,links.filter(_.coStudents > coStudThreshold))
+
 
   def dispatch = {case "render" => render}
   
-  def render = 
+  def render =  {
+    UserDisplay.reset(nodes,links.filter(_.coStudents > coStudThreshold))
     "#threshold-updater *" #> (updateLinkThreshold ++ <head>{getInteractions}</head>)
+  }
     
   def updateLinkThreshold: Elem = {
     def updateThresh(cs: Int) = {
