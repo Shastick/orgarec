@@ -4,6 +4,7 @@ import net.liftweb.http.js.JE.Call
 import net.liftweb.http.js.JsCmds.OnLoad
 import net.liftweb.http.js.JsCmds.Script
 import net.liftweb.http.js.JsCmds.jsExpToJsCmd
+import scala.xml.NodeSeq
 
 class BarPlot(csv: String, elemSelector: String, w: Int, h: Int) {
   
@@ -14,7 +15,7 @@ class BarPlot(csv: String, elemSelector: String, w: Int, h: Int) {
 
 object BarPlot {
   
-  val includes = {
+  val includes: NodeSeq = {
         <script language="javascript" type="text/javascript"
 		    src="/static/scripts/jquery-1.8.3.min.js"></script>
         <script language="javascript" type="text/javascript"
