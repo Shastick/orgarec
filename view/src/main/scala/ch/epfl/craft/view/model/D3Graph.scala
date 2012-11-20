@@ -18,7 +18,8 @@ case class D3Graph(nodes:List[Node], links:List[Link]) {
     JGraph
   }
   
-  lazy val maxCostuds = links.maxBy(_.coStudents).coStudents
+  lazy val maxCostuds = if(links.length > 0) links.maxBy(_.coStudents).coStudents
+		  				else 0
 }
 
 /**
