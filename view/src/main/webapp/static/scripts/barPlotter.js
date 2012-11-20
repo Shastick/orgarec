@@ -1,5 +1,5 @@
 function drawBarPlot(csvStr,selector,w,h) {
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+  var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = w - margin.left - margin.right,
     height = h - margin.top - margin.bottom;
 

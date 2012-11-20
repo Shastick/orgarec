@@ -1,7 +1,7 @@
 package ch.epfl.craft.view.snippet
 
 import scala.xml.NodeSeq
-import ch.epfl.craft.recom.graph.StudentsQuantity
+import ch.epfl.craft.recom.graph.{TopicMeta, StudentsQuantity}
 import ch.epfl.craft.view.model._
 import ch.epfl.craft.view.util.ViewUtils
 import net.liftweb.http.SHtml
@@ -16,6 +16,7 @@ import net.liftweb.common.Full
 import scala.xml.Elem
 import ch.epfl.craft.view.model.UserDisplay
 import ch.epfl.craft.view.snippet.details.BarPlot
+import ch.epfl.craft.recom.storage.db.DBFactory
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,9 +37,8 @@ class GraphInteractions extends StatefulSnippet {
   var coStudThreshold = 80
   
   UserDisplay.set(nodes,links.filter(_.coStudents > coStudThreshold))
-    
-  def dispatch = {case "render" => render}
 
+  def dispatch = {case "render" => render}
   
   def render = 
     "#threshold-updater *" #> (updateLinkThreshold ++ <head>{getInteractions}</head>)
@@ -77,19 +77,40 @@ class GraphInteractions extends StatefulSnippet {
     <span>{name}</span>
   }
   
-  def nodeSubGraph(id: String): NodeSeq = {
+  def coStudSubGraph(id: String): NodeSeq = {
     val lim = ls.nodes(id).metadata.collectFirst{case StudentsQuantity(q) => q}
     BarPlot.ratioFromIntTup(lim.getOrElse(1.0),
               ls.coStudents(id,5).map(t => (ls.nodes(t._1).node.name,t._2)),
-              "#subgraph-data",
+              "#costudents-subgraph-data",
               500,200).draw
+  }
+
+  def sectionSubGraph(id: String): NodeSeq = {
+    val tid = ls.nodes(id).node.id
+    val l = ls
+    //val (tid,l) = a
+    val (t,meta) = l.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata))
+      .getOrElse((None,Set.empty[TopicMeta]))
+    val proc = DBFactory.processer
+
+    lazy val sectionRatio = proc.readTopicSectionRatio(tid, l.semesterRange)
+    lazy val studCount = meta.collectFirst{case StudentsQuantity(q) => q}
+    lazy val srNormalized =
+      sectionRatio.map(t => (t._1.name, (t._3*t._2)/sectionRatio.maxBy(_._3)._3))
+        .toList.sortBy(_._2).reverse//.slice(0,5)
+
+    BarPlot.ratioFromDoubleTup(studCount.getOrElse(1.0),
+      srNormalized,
+      "#sectionratio-subgraph-data",
+      500, 200).draw
   }
 
   def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => {
         SetHtml("detail-data", nodeDetails(id)) &
-        SetHtml("subgraph-data", nodeSubGraph(id))
+        SetHtml("costudents-subgraph-data", coStudSubGraph(id))  &
+        SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
         })._2.toJsCmd
       + "}"
   )

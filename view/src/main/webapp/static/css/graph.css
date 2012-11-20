@@ -70,17 +70,6 @@ select {
     z-index:2;
 }
 
-/* Subgraph Specific */
-#subgraph-container {
-	position: fixed;
-    bottom: 20px;
-	left:20px;
-	width: 500px;
-	height: 230px;
-	z-index: 2;
-	
-}
-
 /* Panel stuff */
 .panel {
     padding: 5px;
@@ -103,4 +92,42 @@ select {
 	font-weight: normal;
 	padding: 0;
 	margin: 0;
+}
+
+#subgraph-container {
+    background: transparent;
+    border: none;
+    position: fixed;
+    bottom: 30px;
+    left:20px;
+    width: 500px;
+    height: 230px;
+    z-index: 2;
+    background-color: rgba(248,248,248,0.7);
+}
+#subgraph-container .ui-widget-header {
+    background: transparent;
+    border: none;
+    /*border-bottom: 1px solid #c0c0c0; */
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+#subgraph-container .ui-state-default {
+    background: transparent;
+    border: none;
+}
+#subgraph-container .ui-state-active {
+    border: none;
+    /*background: transparent url(smoothness/images/uiTabsArrow.png) no-repeat bottom center; */
+}
+#subgraph-container .ui-state-default a {
+    color: #c0c0c0;
+}
+#subgraph-container .ui-state-active a {
+    color: black;
+}
+
+#subgraph-container .ui-tabs-panel {
+
 }
