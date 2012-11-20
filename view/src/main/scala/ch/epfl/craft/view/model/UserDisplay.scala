@@ -9,6 +9,8 @@ object UserDisplay extends SessionVar[(List[Node], List[Link])](List.empty, List
 	def nodes = is._1
 	def links = is._2
 	
+	def reset(nl: List[Node], ll: List[Link]) = performAtomicOperation(set(nl,ll))
+	
 	def setLinks(ll: List[Link]) = performAtomicOperation(set(nodes, ll))
 	def setNodes(nl: List[Node]) = performAtomicOperation(set(nl,links))
 	
