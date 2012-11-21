@@ -14,7 +14,7 @@ import ch.epfl.craft.recom.model.Topic
 class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
  extends Processer with SQLCallable{
 	
-	protected def conn = db.newConnection(ci).get
+	protected val conn = db.newConnection(ci).get
 
 	def costudents_rel = "costudents"
   
