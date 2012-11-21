@@ -32,15 +32,6 @@ circle.node {
     cursor: pointer;
 }
 
-#context_menu{
-    background-color: #FFCC99;
-    border-radius: 5px;
-    height: 120px;
-    width: 200px;
-    border: 1px solid black;
-    padding: 3px;
-}
-
 /* Controls specific */
 #controls-container {
 	top:20px;

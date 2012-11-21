@@ -71,11 +71,12 @@ class GraphInteractions extends StatefulSnippet {
   )
 
   /* Get Json data to include on left side of screen, details about nodes for now */
-  def nodeDetails(id:String):NodeSeq = {
-    val node = nodes.find(_.id == id)
-    println("-----> id: "+id)
-    val name = if(node.isDefined) node.get.name else "node not defined"
-    <span>{name}</span>
+  def nodeDetails(id:String): NodeSeq = {
+    ls.nodes.get(id).map{ n => 
+    <h1>{n.node.name}</h1>
+    <span>{n.node.section.name} section</span><br/>
+    ++ n.node.credits.map(c => <span>{c} Credits</span>)
+    }.getOrElse(NodeSeq.Empty)
   }
   
   def coStudSubGraph(id: String): NodeSeq = {
@@ -116,18 +117,5 @@ class GraphInteractions extends StatefulSnippet {
       + "}"
   )
 
-  def contextMenuContent(id:String) =
-    ls.nodes.get(id).map{
-      t => <h3>{t.node.name}</h3>
-        <span><b>credits: </b>{t.node.credits}</span>
-    }.getOrElse(NodeSeq.Empty)
-
-  def updateContextMenu = JsRaw(
-    "function updateContextMenu(nodeID) {" +
-      SHtml.ajaxCall(JsVar("nodeID"), id =>
-        SetHtml("context_menu", contextMenuContent(id)))._2.toJsCmd
-      + "}"
-  )
-
-  def getInteractions = Script(getGraph & getDetails & updateContextMenu)
+  def getInteractions = Script(getGraph & getDetails)
 }
