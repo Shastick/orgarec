@@ -1,9 +1,18 @@
 <div id="controls-container" class="panel">
-        <h1>Settings</h1>
-        <div class="lift:GraphInteractions">
-        	<div id="threshold-updater"></div>
-        </div>
-        <div class="lift:ControlPanel">
+    <!--<head>
+        <script type="text/javascript">
+            $('costudents-threshold-select').ready(function() {
+                    $('costudents-threshold-select').selectToUISlider();
+            })
+        </script>
+    </head>  -->
+
+    <h1>Settings</h1>
+    <div class="lift:GraphInteractions">
+        <div id="threshold-updater"></div>
+    </div>
+    <div id="threshold-slider"></div>
+    <div class="lift:ControlPanel">
         <form method="POST">
             <div id="section-choice"></div>
             <div id="start-semester"></div>
@@ -11,5 +20,5 @@
             <div id="level-choice"></div>
             <input id="update-graph" type="submit" value="Update"/>
         </form>
-        </div>
+    </div>
 </div>

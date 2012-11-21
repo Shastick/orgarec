@@ -41,26 +41,79 @@ class GraphInteractions extends StatefulSnippet {
   
   def render =  {
     UserDisplay.reset(nodes,links.filter(_.coStudents > coStudThreshold))
-    "#threshold-updater *" #> (updateLinkThreshold ++ <head>{getInteractions}</head>)
+    "#generated-ajax *" #> <head>{getInteractions}</head>   &
+    "#threshold-updater *" #>
+      (/*<head><script>{"$(document).ready(customSlider(threshold-slider,0, "+graph.maxCostuds +", false, updateThreholdSlider))"}</script></head ++ */
+      <span>Update Threshold</span> ++
+      updateLinkThreshold)
   }
     
-  def updateLinkThreshold: Elem = {
-    def updateThresh(cs: Int) = {
-      val commands =
-        if(cs > coStudThreshold) {
-          val toDelete = UserDisplay.links.filter(_.coStudents < cs)
-          UserDisplay.removeLinks(toDelete)
-          toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
-        } else {
-          val toAdd = links.filter(_.coStudents > cs).diff(UserDisplay.links)
-          UserDisplay.addLinks(toAdd)
-          toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
-        }
-      coStudThreshold = cs
-      commands
-    }
+  def updateLinkThreshold = {
     SHtml.ajaxSelectElem[Int](Range(0,graph.maxCostuds,10).toList, Full(coStudThreshold))(updateThresh(_))
   }
+
+  def updateThresholdSlider = JsRaw(
+    "function updateThreholdSlider(value) {" +
+      SHtml.ajaxCall(JsVar("value"), value =>
+        //SetHtml("context_menu", contextMenuContent(value)))._2.toJsCmd
+        updateThresh(value.toInt)
+      )
+      + "}"
+  )
+
+  def sliderThresh = {
+    val id= "threshold-slider"
+    val min =0
+    val max = graph.maxCostuds
+    val cb = SHtml.ajaxCall(JsRaw("ui.values[0]"), value => updateThresh(value.toInt))
+    val script = Script(new JsCmd {
+      def toJsCmd = "$(function() {"+
+        "$(\"#"+ id +"\").slider({ "+
+          "range: false, "+
+          "min: "+ 0 +", "+
+          "max: "+ graph.maxCostuds +", " +
+          "values: ["+ min +"," + max + "], " +
+          "change: function(event, ui) {" +
+            "updateValues(event,ui);" +
+            cb._2.toJsCmd +
+          "}," +
+          "slide: function(event, ui) {" +
+            "updateValues(event,ui);" +
+          "}" +
+        "});" +
+        "});"
+    })
+    if (max>min) {
+      //{script} ++ <div style="margin-top: 10px;"><input id={inputHtmlId} type="slider" value={init} /></div>
+      val labelDiv = {<div style="height: 10px"><span id="value1" class="sliderLabel">{min}</span><span id="value2" class="sliderLabel" style="left: 96%">{max}</span></div>}
+      val sliderDiv = {<div style="margin-top: 10px;" id={id}></div>}
+      {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
+    } else {
+      <i> {min} </i>
+    }
+  }
+
+
+
+
+
+  def updateThresh(cs: Int) = {
+    val commands =
+      if(cs > coStudThreshold) {
+        val toDelete = UserDisplay.links.filter(_.coStudents < cs)
+        UserDisplay.removeLinks(toDelete)
+        toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
+      } else {
+        val toAdd = links.filter(_.coStudents > cs).diff(UserDisplay.links)
+        UserDisplay.addLinks(toAdd)
+        toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
+      }
+    coStudThreshold = cs
+    commands
+  }
+
+
+
 
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
@@ -129,5 +182,5 @@ class GraphInteractions extends StatefulSnippet {
       + "}"
   )
 
-  def getInteractions = Script(getGraph & getDetails & updateContextMenu)
+  def getInteractions = Script(getGraph & getDetails & updateContextMenu & updateThresholdSlider)
 }
