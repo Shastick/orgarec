@@ -32,21 +32,12 @@ circle.node {
     cursor: pointer;
 }
 
-#context_menu{
-    background-color: #FFCC99;
-    border-radius: 5px;
-    height: 120px;
-    width: 200px;
-    border: 1px solid black;
-    padding: 3px;
-}
-
 /* Controls specific */
 #controls-container {
-	top:20px;
-	left:20px;
-	position: absolute;
-    width: 200px;
+	position: relative;
+	float:left;
+    width: 160px;
+    margin:20px;
     z-index: 2;
 }
 
@@ -62,16 +53,18 @@ select {
 
 /* Details specific */
 #detail-container{
-	float: right;
-    position: fixed;
-    bottom: 20px;
-    right:20px;-
+	float: left;
+    position: relative;
     width: 200px;
-    margin-top:20px;
-    margin-right: 20px;
+    margin: 20px;
     z-index:2;
+    font-size: 1.1em;
+    text-align: right;
 }
 
+#detail-container h1{
+	margin-bottom:5px;
+}
 /* Panel stuff */
 .panel {
     padding: 5px;
