@@ -88,7 +88,7 @@ class GraphInteractions extends StatefulSnippet {
         "});"
     })
     val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
-    val sliderDiv = <div id={id}></div>
+    val sliderDiv = {<div id={id}></div>}
     {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
   }
 
