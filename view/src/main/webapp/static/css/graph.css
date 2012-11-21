@@ -63,7 +63,9 @@ select {
 /* Details specific */
 #detail-container{
 	float: right;
-    position: relative;
+    position: fixed;
+    bottom: 30px;
+    right:20px;
     width: 200px;
     margin-top:20px;
     margin-right: 20px;
