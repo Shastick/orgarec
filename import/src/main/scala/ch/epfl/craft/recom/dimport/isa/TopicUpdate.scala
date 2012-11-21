@@ -28,9 +28,11 @@ object TopicUpdate extends App {
 			  val code = (e \ "code").text
 			  val name = (e \ "name").text
 			  val lang = (e \ "language").text
+			  val exam = (e \ "examinations" \ "examination" \ "credit-value")
+			  val cred = exam.headOption.map(_.text.toDouble.round.toInt)
 				  
 			  TopicMap.read(isa_id).foreach{ t => 
-			    val n = new Topic(isa_id, name, sect, t.prerequisites_id, t.description, t.credits)
+			    val n = new Topic(isa_id, name, sect, t.prerequisites_id, t.description, cred)
 			    TopicMap.fill(n)
 			  }
 			}
