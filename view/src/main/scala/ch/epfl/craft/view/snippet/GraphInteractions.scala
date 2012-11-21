@@ -59,34 +59,37 @@ class GraphInteractions extends StatefulSnippet {
   )
 
   def sliderThresh = {
-    val id= "threshold-slider"
+    val id= "thresholdSlider"
+    val valueID = "threshVal"
     val min =0
     val max = graph.maxCostuds
     val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updateThresh(value.toInt))
     val script = Script(new JsCmd {
       def toJsCmd = "$(function() {"+
-        "$(\"#"+ id +"\").slider({ "+
+        "var thresholdSlider = $(\"#"+id+"\");"+
+        "var updateValue = function (event, ui) { "+
+          "var slider = $('.ui-slider-handle:first');"+
+          "var position = slider.offset(); "+
+          "var value = $('#"+id+"').slider('value');  "+
+          "var val = $('#"+valueID+"');  "+
+          "val.text(value).css({'left':position.left - ((slider.width() + val.width()) /2), 'top':position.top -35 }); "+
+         "};"+
+        "thresholdSlider.slider({ "+
           //"range: false, "+
-          "min: "+ 0 +", "+
-          "max: "+ graph.maxCostuds +", " +
+          "min: "+ min +", "+
+          "max: "+ max +", " +
           "value: " + coStudThreshold + ", " +
           "change: function(event, ui) {" +
-            //"updateValues(event,ui);" +
+            "updateValue(event,ui);" +
             cb._2.toJsCmd +
           "}," +
-          "slide: function(event, ui) {" +
-            //"updateValues(event,ui);" +
-          "}" +
+          "slide: updateValue"+
         "});" +
         "});"
     })
-    if (max>min) {
-      val labelDiv = {<div style="height: 10px"><span id="value1" class="sliderLabel">{min}</span><span id="value2" class="sliderLabel" style="left: 96%">{max}</span></div>}
-      val sliderDiv = {<div style="margin-top: 10px;" id={id}></div>}
-      {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
-    } else {
-      <i> {min} </i>
-    }
+    val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
+    val sliderDiv = <div id={id}></div>
+    {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
   }
 
   def updateThresh(cs: Int) = {
