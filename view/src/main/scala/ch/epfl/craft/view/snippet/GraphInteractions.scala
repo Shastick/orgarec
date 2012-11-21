@@ -42,15 +42,12 @@ class GraphInteractions extends StatefulSnippet {
   def render =  {
     UserDisplay.reset(nodes,links.filter(_.coStudents > coStudThreshold))
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
-    "#threshold-updater *" #>
-      (/*<head><script>{"$(document).ready(customSlider(threshold-slider,0, "+graph.maxCostuds +", false, updateThreholdSlider))"}</script></head ++ */
-      <span>Update Threshold</span> ++
-      updateLinkThreshold)
+    "#threshold-updater *" #> ( <span>Update Threshold</span> ++ sliderThresh )
   }
-    
+  /*
   def updateLinkThreshold = {
     SHtml.ajaxSelectElem[Int](Range(0,graph.maxCostuds,10).toList, Full(coStudThreshold))(updateThresh(_))
-  }
+  } */
 
   def updateThresholdSlider = JsRaw(
     "function updateThreholdSlider(value) {" +
@@ -65,26 +62,25 @@ class GraphInteractions extends StatefulSnippet {
     val id= "threshold-slider"
     val min =0
     val max = graph.maxCostuds
-    val cb = SHtml.ajaxCall(JsRaw("ui.values[0]"), value => updateThresh(value.toInt))
+    val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updateThresh(value.toInt))
     val script = Script(new JsCmd {
       def toJsCmd = "$(function() {"+
         "$(\"#"+ id +"\").slider({ "+
-          "range: false, "+
+          //"range: false, "+
           "min: "+ 0 +", "+
           "max: "+ graph.maxCostuds +", " +
-          "values: ["+ min +"," + max + "], " +
+          "value: " + coStudThreshold + ", " +
           "change: function(event, ui) {" +
-            "updateValues(event,ui);" +
+            //"updateValues(event,ui);" +
             cb._2.toJsCmd +
           "}," +
           "slide: function(event, ui) {" +
-            "updateValues(event,ui);" +
+            //"updateValues(event,ui);" +
           "}" +
         "});" +
         "});"
     })
     if (max>min) {
-      //{script} ++ <div style="margin-top: 10px;"><input id={inputHtmlId} type="slider" value={init} /></div>
       val labelDiv = {<div style="height: 10px"><span id="value1" class="sliderLabel">{min}</span><span id="value2" class="sliderLabel" style="left: 96%">{max}</span></div>}
       val sliderDiv = {<div style="margin-top: 10px;" id={id}></div>}
       {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
@@ -92,10 +88,6 @@ class GraphInteractions extends StatefulSnippet {
       <i> {min} </i>
     }
   }
-
-
-
-
 
   def updateThresh(cs: Int) = {
     val commands =
@@ -111,9 +103,6 @@ class GraphInteractions extends StatefulSnippet {
     coStudThreshold = cs
     commands
   }
-
-
-
 
   def getGraph = JsRaw(
     "function getGraph(succName) {" +

@@ -1,21 +1,4 @@
-$(function customSlider(id, min, max, isRange, callback) {
-    $(id).slider({
-        range: true,
-        min: min,
-        max: max,
-        values: [min, max],
-        change: function(event, ui) {
-            updateValues(event,ui);
-            if(isRange){
-                callback(ui.values[0], ui.values[1])
-            }else {
-                callback(ui.values[0])
-            }
-        },
-        slide: function(event, ui) {
-            updateValues(event,ui);
-        }
-    });
+$(
     function updateDoubleSliderValues(event, ui) {
         var offset1 = $('.ui-slider-handle:first').css('left');
         var offset2 = $('.ui-slider-handle:last').css('left');
@@ -38,5 +21,4 @@ $(function customSlider(id, min, max, isRange, callback) {
         var correctedOffset2 = offset2Int - widthInt - 8 + specialOffsetMax;
         $('#value1').text(value1).css({'left':correctedOffset1 +'px'});
         $('#value2').text(value2).css({'left':correctedOffset2 +'px'});
-    }
 });
