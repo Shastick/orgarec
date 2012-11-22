@@ -65,27 +65,25 @@ function drawBarPlot(csvStr,selector,w,h) {
 };
 
 function drawBarPlot2(csvStr,selector,w,h){
-    var data = d3.csv.parse(csvStr);
-    data.forEach(function(d) {
-        d.ratio = +d.ratio;
-    });
+
+    var data = [{key: "Cumulative Return",values: d3.csv.parse(csvStr)}];
 
     nv.addGraph(function() {
-        console.log(data)
         var chart = nv.models.discreteBarChart()
-            .x(function(d) { return d.name; })
-            .y(function(d) { return d.ratio; })
+            .x(function(d) { return d.name })
+            .y(function(d) { return d.ratio })
+            .forceY([0,1])
             .staggerLabels(true)
-            .tooltips(false)
+            .tooltips(true)
             .showValues(true)
 
-        d3.select(selector)
-            .data(data)
+        d3.select(selector).append("svg")
+            .datum(data)
             .transition().duration(500)
             .call(chart);
 
         nv.utils.windowResize(chart.update);
+
         return chart;
     });
-
 }

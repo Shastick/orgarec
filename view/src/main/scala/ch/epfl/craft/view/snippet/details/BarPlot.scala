@@ -8,7 +8,7 @@ import scala.xml.NodeSeq
 
 class BarPlot(csv: String, elemSelector: String, w: Int, h: Int) {
   
-  lazy val draw = Script(OnLoad(Call("drawBarPlot",
+  lazy val draw = Script(OnLoad(Call("drawBarPlot2",
          "name,ratio\n"+csv,
     	elemSelector,w,h)))
 }
