@@ -13,7 +13,10 @@ function drawBarPlot(csvStr,selector,w,h) {
 
   var xAxis = d3.svg.axis()
     .scale(x)
-    .orient("bottom");
+    .orient("bottom")
+    .tickFormat(function(d){
+          return d.substring(0, 9);
+    });
 
   var yAxis = d3.svg.axis()
     .scale(y)
@@ -31,7 +34,7 @@ function drawBarPlot(csvStr,selector,w,h) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  x.domain(data.map(function(d) { return d.name; }));
+  x.domain(data.map(function(d) { return d.name;}));
   //y.domain([0, d3.max(data, function(d) { return d.ratio; })]);
   y.domain([0,1]);
 
@@ -60,3 +63,29 @@ function drawBarPlot(csvStr,selector,w,h) {
       .attr("height", function(d) { return height - y(d.ratio); });
 
 };
+
+function drawBarPlot2(csvStr,selector,w,h){
+    var data = d3.csv.parse(csvStr);
+    data.forEach(function(d) {
+        d.ratio = +d.ratio;
+    });
+
+    nv.addGraph(function() {
+        console.log(data)
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.name; })
+            .y(function(d) { return d.ratio; })
+            .staggerLabels(true)
+            .tooltips(false)
+            .showValues(true)
+
+        d3.select(selector)
+            .data(data)
+            .transition().duration(500)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+
+}

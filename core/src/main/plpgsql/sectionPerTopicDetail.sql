@@ -73,8 +73,8 @@ BEGIN
         WHERE studPerSec.tid = topicTotStuds.tid
         GROUP BY
 		studPerSec.isa_id, tname, cname, scount
-		
-	
+	ORDER BY
+		studPerSec.isa_id
   LOOP
 	o_isa_id:= retval.isa_id ;
 	o_name:= retval.tname ;
