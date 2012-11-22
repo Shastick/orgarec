@@ -51,4 +51,10 @@ trait Processer {
    * considered courses.
    */
   def readTopicSectionRatio(id: Topic.TopicID, r: SemesterRange): Iterable[(Section, Double, Int)]
+  /**
+   * Get the the list of topics given by a section, the sections taking these topics with per section and 
+   * total student count, plus the number of considered courses.
+   */
+  def readSectionPerTopicDetail(s: Set[Section.Identifier], r: SemesterRange, as: Set[AcademicSemester.Identifier]):
+	  Iterable[(Topic.TopicID, String, Section, Double, Double, Int)]
 }
