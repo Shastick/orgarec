@@ -60,3 +60,28 @@ function drawBarPlot(csvStr,selector,w,h) {
       .attr("height", function(d) { return height - y(d.ratio); });
 
 };
+
+function drawBarPlot2(csvStr,selector,w,h){
+    nv.addGraph(function() {
+        var data = d3.csv.parse(csvStr);
+        data.forEach(function(d) {
+            d.ratio = +d.ratio;
+        });
+        console.log(data)
+        var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.name })
+            .y(function(d) { return d.ratio })
+            .staggerLabels(true)
+            .tooltips(false)
+            .showValues(true)
+
+        d3.select(selector)
+            .data(data)
+            .transition().duration(500)
+            .call(chart);
+
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+
+}

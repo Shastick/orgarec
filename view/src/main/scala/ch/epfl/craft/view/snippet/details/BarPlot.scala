@@ -17,9 +17,9 @@ object BarPlot {
   
   val includes: NodeSeq = {
         <script language="javascript" type="text/javascript"
-		    src="/static/scripts/jquery-1.8.3.min.js"></script>
+		    src="/static/scripts/jquery-1.8.3.min.js"></script> ++
         <script language="javascript" type="text/javascript"
-		    src="/static/scripts/d3/d3.v2.min.js"></script>
+		    src="/static/scripts/d3/d3.v2.min.js"></script>  ++
         <script language="javascript" type="text/javascript"
 		  	src="/static/scripts/barPlotter.js"></script>
   }
@@ -34,7 +34,7 @@ object BarPlot {
 		      (t._1 match{
 		        case "" => "_"
 		        case s: String => s
-		      }) + "," +  Math.min(1.0,t._2/norm).toString)
+		      }) + "," +  scala.math.min(1.0,t._2/norm).toString)
 		    .reduce(_ + "\n" +_)
 		    else ""
 	new BarPlot(csv, sel, w, h)
@@ -50,7 +50,7 @@ object BarPlot {
 			      (t._1 match{
 			        case "" => "_"
 			        case s: String => s
-			      }) + "," +  Math.min(1.0,t._2/norm).toString)
+			      }) + "," +  scala.math.min(1.0,t._2/norm).toString)
 			    .reduce(_ + "\n" +_)
 			else ""
 	new BarPlot(csv, sel, w, h)
