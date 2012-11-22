@@ -104,13 +104,11 @@ function myGraph(el) {
     vis.append('svg:rect')
         .attr('width', w)
         .attr('height', h)
-        .on("click", function(d){d3.select('#context_menu').style("display", "none")})
         .attr('fill', 'transparent');
 
     function redraw() {
         trans=d3.event.translate;
         scale=d3.event.scale;
-        d3.select('#context_menu').style("display", "none")
         vis.attr("transform",
             "translate(" + trans + ")"
                 + " scale(" + scale + ")");
@@ -154,7 +152,6 @@ function myGraph(el) {
             .on("dragend", dragend);
 
         function dragstart(d, i) {
-            d3.select('#context_menu').style("display", "none")
             d.fixed =true;
         }
 
@@ -192,15 +189,6 @@ function myGraph(el) {
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
-            .on("contextmenu", function(d) {
-                updateContextMenu(d.id)
-                d3.select('#context_menu')
-                    .style('position', 'absolute')
-                    .style('left', d3.event.x + "px")
-                    .style('top', d3.event.y + "px")
-                    .style('display', 'block');
-                d3.event.preventDefault();
-            })
             .on("mouseover", function(d){
                 getDetails(d.id)
             });
