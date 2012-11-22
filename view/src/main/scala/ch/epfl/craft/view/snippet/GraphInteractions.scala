@@ -3,7 +3,6 @@ package ch.epfl.craft.view.snippet
 import scala.xml.NodeSeq
 import ch.epfl.craft.recom.graph.{TopicMeta, StudentsQuantity}
 import ch.epfl.craft.view.model._
-import ch.epfl.craft.view.util.ViewUtils
 import net.liftweb.http.SHtml
 import net.liftweb.http.StatefulSnippet
 import net.liftweb.util.Helpers._
@@ -12,8 +11,6 @@ import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js.JE.JsVar
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
-import net.liftweb.common.Full
-import scala.xml.Elem
 import ch.epfl.craft.view.model.UserDisplay
 import ch.epfl.craft.view.snippet.details.BarPlot
 import ch.epfl.craft.recom.storage.db.DBFactory
@@ -44,49 +41,48 @@ class GraphInteractions extends StatefulSnippet {
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
     "#threshold-updater *" #> ( <span>Update Threshold</span> ++ sliderThresh )
   }
-  /*
-  def updateLinkThreshold = {
-    SHtml.ajaxSelectElem[Int](Range(0,graph.maxCostuds,10).toList, Full(coStudThreshold))(updateThresh(_))
-  } */
 
   def updateThresholdSlider = JsRaw(
     "function updateThreholdSlider(value) {" +
       SHtml.ajaxCall(JsVar("value"), value =>
-        //SetHtml("context_menu", contextMenuContent(value)))._2.toJsCmd
         updateThresh(value.toInt)
       )
       + "}"
   )
 
   def sliderThresh = {
-    val id= "threshold-slider"
+    val id= "thresholdSlider"
+    val valueID = "threshVal"
     val min =0
     val max = graph.maxCostuds
     val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updateThresh(value.toInt))
     val script = Script(new JsCmd {
       def toJsCmd = "$(function() {"+
-        "$(\"#"+ id +"\").slider({ "+
+        "var thresholdSlider = $(\"#"+id+"\");"+
+        "var updateValue = function (event, ui) { "+
+          "var slider = $('.ui-slider-handle:first');"+
+          "var position = slider.offset(); "+
+          "var value = $('#"+id+"').slider('value');  "+
+          "var val = $('#"+valueID+"');  "+
+          "val.text(value).css({'left':position.left - ((slider.width() + val.width()) /2), 'top':position.top -35 }); "+
+         "};"+
+        "thresholdSlider.slider({ "+
           //"range: false, "+
-          "min: "+ 0 +", "+
-          "max: "+ graph.maxCostuds +", " +
+          "min: "+ min +", "+
+          "max: "+ max +", " +
           "value: " + coStudThreshold + ", " +
           "change: function(event, ui) {" +
-            //"updateValues(event,ui);" +
+            "updateValue(event,ui);" +
             cb._2.toJsCmd +
           "}," +
-          "slide: function(event, ui) {" +
-            //"updateValues(event,ui);" +
-          "}" +
+          "slide: updateValue,"+
+          "create: updateValue"+
         "});" +
         "});"
     })
-    if (max>min) {
-      val labelDiv = {<div style="height: 10px"><span id="value1" class="sliderLabel">{min}</span><span id="value2" class="sliderLabel" style="left: 96%">{max}</span></div>}
-      val sliderDiv = {<div style="margin-top: 10px;" id={id}></div>}
-      {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
-    } else {
-      <i> {min} </i>
-    }
+    val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
+    val sliderDiv = {<div id={id}></div>}
+    {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
   }
 
   def updateThresh(cs: Int) = {

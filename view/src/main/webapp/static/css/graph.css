@@ -123,6 +123,17 @@ select {
     color: black;
 }
 
-#subgraph-container .ui-tabs-panel {
+#thresholdSlider {
+    margin-top: 17px;
+}
 
+.sliderBarContainer {
+    height: 30px;
+}
+
+.sliderLabel {
+    border:0;
+    color:black;
+    font-weight:bold;
+    position:absolute;
 }
