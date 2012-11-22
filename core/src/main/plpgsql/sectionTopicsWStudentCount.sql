@@ -1,5 +1,5 @@
 -- return the topics teached by the specified sections
--- usage: sectionTopics('{IN,SC}'::varchar[])
+-- usage: sectionTopics('{IN,SC}'::varchar[],'2011-07-01','2012-07-01')
 CREATE OR REPLACE FUNCTION sectionTopicsWStudentCount(
 	IN i_sname character varying[],
 	IN from_sem timestamp without time zone,
