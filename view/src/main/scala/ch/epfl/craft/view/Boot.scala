@@ -20,6 +20,7 @@ class Boot extends Bootable {
     // Build SiteMap
     def sitemap = SiteMap(
       Menu.i("Home") / "index",
+      Menu.i("SHS Explorer") / "shs",
       Site.topicDetail
     )
 

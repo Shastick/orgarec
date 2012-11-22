@@ -12,7 +12,8 @@ import net.liftweb.json._
 
 case class D3Graph(nodes:List[Node], links:List[Link]) {
   def toJson = {
-    val Jnodes = JArray(nodes.map(_.toJObject))
+    val t = nodes.map(_.toJObject)
+    val Jnodes = JArray(t)
     val Jlinks = JArray(links.map(_.toJObject))
     val JGraph = JObject(JField("nodes", Jnodes)::JField("links", Jlinks)::Nil)
     JGraph
