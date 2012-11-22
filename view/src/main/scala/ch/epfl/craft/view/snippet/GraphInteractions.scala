@@ -83,7 +83,8 @@ class GraphInteractions extends StatefulSnippet {
             "updateValue(event,ui);" +
             cb._2.toJsCmd +
           "}," +
-          "slide: updateValue"+
+          "slide: updateValue,"+
+          "create: updateValue"+
         "});" +
         "});"
     })
