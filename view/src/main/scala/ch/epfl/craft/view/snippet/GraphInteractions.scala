@@ -3,7 +3,6 @@ package ch.epfl.craft.view.snippet
 import scala.xml.NodeSeq
 import ch.epfl.craft.recom.graph.{TopicMeta, StudentsQuantity}
 import ch.epfl.craft.view.model._
-import ch.epfl.craft.view.util.ViewUtils
 import net.liftweb.http.SHtml
 import net.liftweb.http.StatefulSnippet
 import net.liftweb.util.Helpers._
@@ -12,8 +11,6 @@ import net.liftweb.http.js.JE.JsRaw
 import net.liftweb.http.js.JE.JsVar
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
-import net.liftweb.common.Full
-import scala.xml.Elem
 import ch.epfl.craft.view.model.UserDisplay
 import ch.epfl.craft.view.snippet.details.BarPlot
 import ch.epfl.craft.recom.storage.db.DBFactory
@@ -44,15 +41,10 @@ class GraphInteractions extends StatefulSnippet {
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
     "#threshold-updater *" #> ( <span>Update Threshold</span> ++ sliderThresh )
   }
-  /*
-  def updateLinkThreshold = {
-    SHtml.ajaxSelectElem[Int](Range(0,graph.maxCostuds,10).toList, Full(coStudThreshold))(updateThresh(_))
-  } */
 
   def updateThresholdSlider = JsRaw(
     "function updateThreholdSlider(value) {" +
       SHtml.ajaxCall(JsVar("value"), value =>
-        //SetHtml("context_menu", contextMenuContent(value)))._2.toJsCmd
         updateThresh(value.toInt)
       )
       + "}"
