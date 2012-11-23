@@ -25,6 +25,6 @@ class CourseExplorer extends ControlPanel {
   var endSem: Option[Semester] = ls.semesterRange.to
   var levels: Seq[AcademicSemester] = ls.levels.toSeq
 		  		
-  def refresh() = LandscapeHolder.build(SemesterRange(startSem, endSem),
+  def update = LandscapeHolder.build(SemesterRange(startSem, endSem),
       sections.toSet, levels.toSet)
 }

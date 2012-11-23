@@ -1,35 +1,39 @@
 package ch.epfl.craft.view.snippet
 
-import net.liftweb.http.StatefulSnippet
-import scala.xml.NodeSeq
-import ch.epfl.craft.recom.graph.Landscape
+import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.recom.model.administration.Semester
-import net.liftweb.json._
-import net.liftweb.http.js.JsCmds._
-import net.liftweb.http.js.JE.Call
-import net.liftweb.util.Helpers._
-import net.liftweb.http.SHtml
 import ch.epfl.craft.view.snippet.details.SankeyPlot
+import net.liftweb.util.Helpers.strToCssBindPromoter
+import ch.epfl.craft.recom.model.administration.Section
+import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 
-class SectionExplorer extends StatefulSnippet {
+class SectionExplorer extends ControlPanel {
 
-  def proc = DBFactory.processer
-
-  var data = proc.readSectionPerTopicDetail(Set("SHS"),
-		  						SemesterRange(Some(Semester(2012, "fall")),
-    						    Some(Semester(2012, "fall"))),
-    						    Set("MA1","MA3")).toList
-
-  def dispatch = {	case "render" => render
-  					case "shs" => shs
-    			}
+  var sections: Seq[Section] = Seq(Section("SHS"))
+  var startSem: Option[Semester] = Some(Semester(2012, "fall"))
+  var endSem: Option[Semester] = Some(Semester(2012, "fall"))
+  var levels: Seq[AcademicSemester] = Seq(AcademicSemester("MA1"),AcademicSemester("MA2"))
   
-  def render =	"#section-selector" #> "" &
-		  		"#semester-selector" #> "" &
-		  		"#script" #> SankeyPlot.fromSectionPerTopicDetail(data).draw
+  var data = extract
+
+  override def dispatch = {
+    case "render" => subRender
+  	case "shs" => shs
+  }
   
   lazy val shs = "#script" #> SankeyPlot.fromSectionPerTopicDetail(data).draw
+  
+  def subRender = {
+    render &
+    refresh
+  }
+  
+  def update = {data = extract}
+  
+  def refresh = "#script" #> SankeyPlot.fromSectionPerTopicDetail(data).draw
+    
+  private def extract = proc.readSectionPerTopicDetail(sections.map(_.name).toSet,
+		  						range,levels.map(_.level).toSet).toList
 }

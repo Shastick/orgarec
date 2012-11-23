@@ -9,15 +9,19 @@ import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.storage.db.DBFactory
+import ch.epfl.craft.recom.util.SemesterRange
 
 trait ControlPanel extends StatefulSnippet {
 
   def store = DBFactory.store
+  def proc = DBFactory.processer
   
   var sections: Seq[Section]
   var startSem: Option[Semester]
   var endSem: Option[Semester]
   var levels: Seq[AcademicSemester]
+  
+  def range = SemesterRange(startSem,endSem)
   
   def dispatch = {case "render" => render}
   
@@ -26,9 +30,9 @@ trait ControlPanel extends StatefulSnippet {
 		"#start-semester *" #> startSemester _ &
 		"#end-semester *" #> endSemester _ &
 		"#level-choice *" #> levelChoice _ &
-		"#update-graph" #> SHtml.onSubmitUnit(refresh)
+		"#update-graph" #> SHtml.onSubmitUnit(update)
 
-  def refresh(): Any
+  def update(): Any
 		
   def sectionChoice(n: NodeSeq) = {
     val secSeq = store.readAllSections.map(s => (s, s.name)).toSeq.sortBy(_._2)
