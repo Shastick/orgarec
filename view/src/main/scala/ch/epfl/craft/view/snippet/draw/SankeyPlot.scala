@@ -1,4 +1,4 @@
-package ch.epfl.craft.view.snippet.details
+package ch.epfl.craft.view.snippet.draw
 
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js.JE.Call

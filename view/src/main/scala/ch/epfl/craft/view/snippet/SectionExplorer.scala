@@ -3,7 +3,7 @@ package ch.epfl.craft.view.snippet
 import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.storage.db.DBFactory
 import ch.epfl.craft.recom.util.SemesterRange
-import ch.epfl.craft.view.snippet.details.SankeyPlot
+import ch.epfl.craft.view.snippet.draw.SankeyPlot
 import net.liftweb.util.Helpers.strToCssBindPromoter
 import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.AcademicSemester

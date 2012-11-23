@@ -1,5 +1,8 @@
 package ch.epfl.craft.view.model
 import net.liftweb.http.SessionVar
+import ch.epfl.craft.view.snippet.draw.D3Graph
+import ch.epfl.craft.view.snippet.draw.Node
+import ch.epfl.craft.view.snippet.draw.Link
 
 /**
  * Session variable holding what nodes the user has on his screen.

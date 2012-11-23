@@ -1,4 +1,4 @@
-package ch.epfl.craft.view.model
+package ch.epfl.craft.view.snippet.draw
 
 import net.liftweb.json._
 
