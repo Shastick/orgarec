@@ -13,10 +13,10 @@ var sankey = d3.sankey()
 
 var path = sankey.link();
 
-function drawSankeyPlot(students,selector){
+function drawSankeyPlot(flowgraph,selector){
   sankey
-      .nodes(students.nodes)
-      .links(students.links)
+      .nodes(flowgraph.nodes)
+      .links(flowgraph.links)
       .layout(32);
 
   var svg = d3.select(selector).append("svg")
@@ -26,7 +26,7 @@ function drawSankeyPlot(students,selector){
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var link = svg.append("g").selectAll(".link")
-      .data(students.links)
+      .data(flowgraph.links)
     .enter().append("path")
       .attr("class", "link")
       .attr("d", path)
@@ -37,7 +37,7 @@ function drawSankeyPlot(students,selector){
       .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
 
   var node = svg.append("g").selectAll(".node")
-      .data(students.nodes)
+      .data(flowgraph.nodes)
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
