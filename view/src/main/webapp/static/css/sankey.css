@@ -34,3 +34,7 @@ body {
 	text-align: center;
 }
 
+#level-choice select{
+	height: 240px;
+}
+
