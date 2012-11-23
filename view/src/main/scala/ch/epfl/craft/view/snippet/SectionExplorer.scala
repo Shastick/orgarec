@@ -20,14 +20,17 @@ class SectionExplorer extends ControlPanel {
 
   override def dispatch = {
     case "render" => subRender
-  	case "shs" => shs
+    case "shs" => shs
   }
-  
-  lazy val shs = "#script" #> SankeyPlot.fromSectionPerTopicDetail(data).draw
   
   def subRender = {
     render &
     refresh
+  }
+  
+  def shs = {
+    var sections = Seq(Section("SHS"))
+    subRender
   }
   
   def update = {data = extract}
