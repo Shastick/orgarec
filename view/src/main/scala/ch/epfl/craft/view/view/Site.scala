@@ -11,25 +11,18 @@ import net.liftweb.common.Empty
 
 
 object Site {
-	/*
-  val topicDetailSimple = Menu.param[String](
-    "Topic Details",
-	LinkText(x => Text("Details for topic %s".format(x))),
-	Some(_), _.toString) / "topicdetail"
-	*/
   
   val topicDetail = Menu.params[(Topic.TopicID, Landscape)](
 	"Topic Details",
 	LinkText(x => Text("Details for topic %s".format(x))),
 	detailParamExt(_), detailParamMk(_)) / "topicdetail" 
 
-
-  def detailParamExt(args: List[String]): Box[(Topic.TopicID, Landscape)] =
+  private def detailParamExt(args: List[String]): Box[(Topic.TopicID, Landscape)] =
 	if(args.size==1) LandscapeHolder.is.map(l => (args(0),l._1))
 	else Empty
   
     
-  def detailParamMk(arg: (Topic.TopicID, Landscape)) = {
+  private def detailParamMk(arg: (Topic.TopicID, Landscape)) = {
     val (id,ls) = arg
     List(id)
   }

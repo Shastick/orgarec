@@ -1,12 +1,14 @@
--- get details about section participation in each topic given by a section. 
--- usage : select sectionPerTopicDetail('{SHS}'::varchar[],'2012-07-01','2012-07-01')
+-- get details about section participation in each topic given by a section and during which academic level.
+-- usage : select sectionPerTopicDetail('{SHS}'::varchar[],'{MA1,MA3}'::varchar[],'2012-07-01','2012-07-01')
 -- Returns the topic isa_id and name, the section participating in this topic (NOT the one teaching it),
 -- the average participating students from the section and the total number of students in this topic.
 -- these two last numbers are averaged over the number of courses that were considered in the query
 -- (if a span greater that 1 semester is provided, several occurences of the same topic will be counted.) 
+-- students not in the specified academic leves (here: MA1, MA3) are not counted.
 
 CREATE OR REPLACE FUNCTION sectionPerTopicDetail(
         IN in_secname character varying[],
+        IN in_acadsem character varying[],
         IN from_sem timestamp without time zone,
         IN to_sem timestamp without time zone,
         OUT o_isa_id character varying,
@@ -21,7 +23,7 @@ $$
 DECLARE
         retval RECORD;
 BEGIN
-  FOR retval IN
+   FOR retval IN
 	SELECT studPerSec.isa_id, tname, cname, scount/COUNT(topicTotStuds.cid) as secavg,
 		SUM(topicTotStuds.count)/COUNT(topicTotStuds.cid) as totavg,
 		COUNT(topicTotStuds.cid) items
@@ -34,7 +36,8 @@ BEGIN
 		studentmap sm,
 		sectionmap scm1,
 		sectionmap scm2,
-		semestermap sem
+		semestermap sem,
+		academicsemestermap asm
 	WHERE	
 		cm.topic = tm.id
 		AND tm.section_c = scm1.id
@@ -47,6 +50,8 @@ BEGIN
 		AND sem.year >= from_sem
 		AND sem.year <= to_sem
 
+		AND s.academicsemester = asm.id
+		AND asm.level_c ilike any(in_acadsem)
 	GROUP BY
 		tm.id, tm.isa_id, tm.name, scm2.name
 		) AS studPerSec,

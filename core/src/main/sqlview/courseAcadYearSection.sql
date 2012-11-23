@@ -1,3 +1,4 @@
+-- Show which courses where taken during what academic level and the section giving the course.
 SELECT DISTINCT
 		sub.course AS course,
 		asm.level_c AS level_c,

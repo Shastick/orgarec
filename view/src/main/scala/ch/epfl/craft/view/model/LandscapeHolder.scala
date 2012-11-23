@@ -9,6 +9,7 @@ import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.model.administration._
 import ch.epfl.craft.recom.graph._
 import ch.epfl.craft.view.util.ViewUtils
+import ch.epfl.craft.view.snippet.draw.D3Graph
 
 object LandscapeHolder extends SessionVar[Option[(Landscape, D3Graph)]](None) {
 

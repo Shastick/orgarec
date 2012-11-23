@@ -16,7 +16,7 @@ import net.liftweb.http.js.JsCmds.jsExpToJsCmd
 import ch.epfl.craft.view.util.ViewUtils
 import ch.epfl.craft.recom.processing.Processer
 import ch.epfl.craft.recom.storage.db.DBFactory
-import ch.epfl.craft.view.snippet.details.BarPlot
+import ch.epfl.craft.view.snippet.draw.BarPlot
 
 /**
  * Get the details of a topic in the context of a given landscape
@@ -37,7 +37,6 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
     .toList.sortBy(_._2).reverse
   			
   def render = {
-    ".includes *" #> <head>{BarPlot.includes}</head> &
     "#topic-name *" #> t.map(_.name) &
     "#student-count *" #> studCount.map(_.toString) &
     "#costudents-bar-plot *" #> costudsPlot _ &

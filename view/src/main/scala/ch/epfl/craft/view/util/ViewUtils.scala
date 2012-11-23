@@ -2,13 +2,13 @@ package ch.epfl.craft.view.util
 
 import net.liftweb.json.JsonAST.JArray
 import net.liftweb.json.JsonAST.JObject
-import ch.epfl.craft.view.model.D3Graph
 import net.liftweb.json.JsonAST.JField
 import ch.epfl.craft.recom.graph.Landscape
 import ch.epfl.craft.recom.graph.CoStudents
-import ch.epfl.craft.view.model.Node
-import ch.epfl.craft.view.model.Link
 import ch.epfl.craft.recom.graph._
+import ch.epfl.craft.view.snippet.draw.D3Graph
+import ch.epfl.craft.view.snippet.draw.Node
+import ch.epfl.craft.view.snippet.draw.Link
 
 object ViewUtils {
 

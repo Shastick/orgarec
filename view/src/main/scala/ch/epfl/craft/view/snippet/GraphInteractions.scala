@@ -12,7 +12,7 @@ import net.liftweb.http.js.JE.JsVar
 import net.liftweb.http.js.JsCmds._
 import net.liftweb.http.js._
 import ch.epfl.craft.view.model.UserDisplay
-import ch.epfl.craft.view.snippet.details.BarPlot
+import ch.epfl.craft.view.snippet.draw.BarPlot
 import ch.epfl.craft.recom.storage.db.DBFactory
 
 /**

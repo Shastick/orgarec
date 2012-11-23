@@ -89,5 +89,5 @@ function drawBarPlot(data,selector) {
       .attr("height", function(d) { return height - y(d.frequency); });
 
 };
-draw(d3.csv.parse(str),"#drawMe");
+drawBarPlot(json.parse(str),"#drawMe");
 </script>
