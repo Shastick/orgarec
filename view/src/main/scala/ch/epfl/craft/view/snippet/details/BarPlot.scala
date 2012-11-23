@@ -15,15 +15,6 @@ class BarPlot(csv: String, elemSelector: String, w: Int, h: Int) {
 
 object BarPlot {
   
-  val includes: NodeSeq = {
-        <script language="javascript" type="text/javascript"
-		    src="/static/scripts/jquery-1.8.3.min.js"></script> ++
-        <script language="javascript" type="text/javascript"
-		    src="/static/scripts/d3/d3.v2.min.js"></script>  ++
-        <script language="javascript" type="text/javascript"
-		  	src="/static/scripts/barPlotter.js"></script>
-  }
-  
   def ratioFromDoubleTup(norm: Double,
       tl: List[(String, Double)],
       sel: String,

@@ -37,7 +37,6 @@ class TopicDetail(a: (Topic.TopicID, Landscape)) {
     .toList.sortBy(_._2).reverse
   			
   def render = {
-    ".includes *" #> <head>{BarPlot.includes}</head> &
     "#topic-name *" #> t.map(_.name) &
     "#student-count *" #> studCount.map(_.toString) &
     "#costudents-bar-plot *" #> costudsPlot _ &
