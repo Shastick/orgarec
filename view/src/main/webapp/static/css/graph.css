@@ -74,6 +74,7 @@ select {
     left:20px;
     width: 500px;
     height: 230px;
+    padding-bottom:30px;
     z-index: 2;
     background-color: rgba(248,248,248,0.7);
 }
