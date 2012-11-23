@@ -52,7 +52,6 @@ function myGraph(el) {
         update();
     };
 
-
     this.removeAllLinks = function(){
         links.splice(0,links.length);
         update();
@@ -85,7 +84,7 @@ function myGraph(el) {
         };
     };
 
-// set up the D3 visualisation in the specified element
+    // set up the D3 visualisation in the specified element
     var w = 4000,
         h = 3000;
     var vis = d3.select(el)
@@ -114,7 +113,6 @@ function myGraph(el) {
                 + " scale(" + scale + ")");
     }
 
-
     var force = d3.layout.force();
 
     var nodes = force.nodes(),
@@ -136,7 +134,6 @@ function myGraph(el) {
                 else return "transparent";
             })
             .attr("stroke-width", function(d){return 20 - d.distance/5});
-
 
         linkEnter.append("title")
             .text(function(d){
@@ -192,12 +189,14 @@ function myGraph(el) {
             .on("mouseover", function(d){
                 getDetails(d.id)
             });
+
         /* Add text in middle of circle */
         nodeEnter.append("text")
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
             .text(function(d) { return d.name.substring(0, d.radius / 3); });
+
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
@@ -227,8 +226,7 @@ function myGraph(el) {
             .start();
     };
 
-
-// Make it all go
+    // Make it all go
     update();
 }
 
