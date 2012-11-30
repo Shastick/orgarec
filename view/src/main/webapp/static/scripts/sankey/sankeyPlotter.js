@@ -28,7 +28,7 @@ function drawSankeyPlot(flowgraph,selector){
   var link = svg.append("g").selectAll(".link")
       .data(flowgraph.links)
     .enter().append("path")
-      .attr("class", "link")
+      .attr("class", function(d){return "link " + d.source.id + " " + d.target.id })
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
       .sort(function(a, b) { return b.dy - a.dy; });
@@ -40,7 +40,18 @@ function drawSankeyPlot(flowgraph,selector){
       .data(flowgraph.nodes)
     .enter().append("g")
       .attr("class", "node")
+      .attr("id", function(n){ return n.id })
       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      .on("mouseover", function(d) {
+    	  d3.selectAll(".link." + d.id).style("stroke-opacity",0.7)
+    	  	.style("stroke", "red")
+    	  	.style("z-index", 1)
+    	  })
+      .on("mouseout", function(d) {
+    	  d3.selectAll(".link." + d.id).style("stroke-opacity",0.2)
+    	  	.style("stroke", "#000000")
+    	  	.style("z-index",0)
+      	  })
     .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
