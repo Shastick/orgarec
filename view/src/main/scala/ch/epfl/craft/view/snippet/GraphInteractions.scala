@@ -39,7 +39,7 @@ class GraphInteractions extends StatefulSnippet {
   def render =  {
     UserDisplay.reset(nodes,links.filter(_.coStudents > coStudThreshold))
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
-    "#threshold-updater *" #> ( <span>Update Threshold</span> ++ sliderThresh )
+    "#threshold-updater *" #> ( <span>Update Threshold: </span><span class="sliderLanel" id="threshLabel" ></span> ++ sliderThresh )
   }
 
   def updateThresholdSlider = JsRaw(
@@ -60,11 +60,9 @@ class GraphInteractions extends StatefulSnippet {
       def toJsCmd = "$(function() {"+
         "var thresholdSlider = $(\"#"+id+"\");"+
         "var updateValue = function (event, ui) { "+
-          "var slider = $('.ui-slider-handle:first');"+
-          "var position = slider.offset(); "+
           "var value = $('#"+id+"').slider('value');  "+
-          "var val = $('#"+valueID+"');  "+
-          "val.text(value).css({'left':position.left - ((slider.width() + val.width()) /2), 'top':position.top -35 }); "+
+          "var val = $('#threshLabel');  "+
+          "val.text(value)"+
          "};"+
         "thresholdSlider.slider({ "+
           //"range: false, "+
@@ -80,10 +78,12 @@ class GraphInteractions extends StatefulSnippet {
         "});" +
         "});"
     })
-    val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
+    //val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
     val sliderDiv = {<div id={id}></div>}
-    {script} ++ <div class="sliderBarContainer">{labelDiv}{sliderDiv}</div>
+    {script} ++ <div class="sliderBarContainer"><!--{labelDiv}-->{sliderDiv}</div>
   }
+
+
 
   def updateThresh(cs: Int) = {
     val commands =
