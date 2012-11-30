@@ -19,10 +19,6 @@ body {
 	z-index:0;
 }
 
-.link {
-	
-}
-
 .nodetext {
     pointer-events: none;
     font: 10px sans-serif;
@@ -37,12 +33,10 @@ circle.node {
 	position: relative;
 	float:left;
     width: 160px;
-    margin:20px;
+    /*margin:20px;*/
     z-index: 2;
 }
 
-.input_container{
-}
 .input{
     width: 150px;
 }

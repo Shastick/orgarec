@@ -186,12 +186,12 @@ function myGraph(el) {
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
-            .on("mouseover", function(d){
-                getDetails(d.id)
-            });
+            .on("mouseover", actionsOnMouseOver)
+            .on("mouseout", actionsOnMouseOut);
 
         /* Add text in middle of circle */
         nodeEnter.append("text")
+            .attr("id", function(d){"text-node-"+ d.id})
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
@@ -200,8 +200,6 @@ function myGraph(el) {
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
-
-
 
         node.exit().transition().remove();
 
@@ -228,6 +226,19 @@ function myGraph(el) {
 
     // Make it all go
     update();
+}
+
+function actionsOnMouseOver(node, index){
+    $("#circle-node-"+ node.id)
+        .attr("r", node.radius*2 + "px");
+    $("#text-node-"+ node.id)
+        .text(node.name);
+    getDetails(node.id);
+}
+
+
+function actionsOnMouseOut(node, index){
+    $("#circle-node-"+ node.id).attr("r", node.radius + "px");
 }
 
 function makeGraph(json){
