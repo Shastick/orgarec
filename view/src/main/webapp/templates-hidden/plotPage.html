@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift='http://liftweb.net'>
+    <head>
+        <script type="text/javascript" src="/static/scripts/d3/d3.v2.js"></script>
+        <script type="text/javascript" src="/static/scripts/jquery/jquery-1.8.3.js"></script>
+        <script type="text/javascript" src="/static/scripts/jquery/jquery-ui-1.9.1.custom.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="/static/css/misc.css" />
+        <link rel="stylesheet" type="text/css" href="/static/css/smoothness/jquery-ui-1.9.1.custom.css" />
+    </head>
+    <body>
+
+        <div id="buttons">
+            <div id="button-menu" title="App menu">&sect;</div>
+            <div id="button-settings" title="Settings">&#9881;</div>
+        </div>
+
+        <lift:bind name="content" />
+
+        <div class="panel-container" id="menu-panel" style="display: none">
+            <span class="lift:Menu.builder"></span>
+        </div>
+
+        <script>
+            // toggle tools visibility
+            var menu_active = false;
+            d3.select("#button-menu").on("click", function() {
+                menu_active = !menu_active;
+                if(menu_active) {
+                    settings_active=false;
+                    d3.select("#settings-panel").style("display","none" );
+                    d3.select("#button-settings").classed("active", false);
+                }
+                d3.select("#menu-panel").style("display", function() { return menu_active ? "block" : "none" });
+                d3.select(this).classed("active", menu_active);
+            });
+            var settings_active= false
+            d3.select("#button-settings").on("click", function() {
+                settings_active = !settings_active;
+                if(settings_active) {
+                    menu_active=false;
+                    d3.select("#menu-panel").style("display","none" );
+                    d3.select("#button-menu").classed("active", false);
+                }
+                d3.select("#settings-panel").style("display", function() { return settings_active ? "block" : "none" });
+                d3.select(this).classed("active", settings_active);
+            });
+        </script>
+    </body>
+</html>
