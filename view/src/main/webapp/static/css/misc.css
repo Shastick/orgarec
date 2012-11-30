@@ -9,8 +9,8 @@ body {
 	position: relative;
 	width: 300px;
 	top:300px;
-	margin-left: auto;
-	margin-right: auto;
+	/*margin-left: auto;
+	margin-right: auto;*/
 }
 
 /* Content Stuff */
@@ -43,10 +43,6 @@ body {
     text-align: center;
 }
 
-.menu {
-
-}
-
 .menu ul {
 	font-size: 1.1em;
 	padding: 0;
@@ -74,10 +70,20 @@ body {
 }
 
 /* Panel stuff */
-.panel {
-    padding: 5px;
+.panel-container{
+    padding:5px;
+    position: fixed;
+    top: 50px;
+    left: 12px;
     background-color: rgba(248,248,248,0.7);
     border-radius: 5px;
+    z-index: 200;
+}
+
+.panel {
+    /*margin-top: 50px; */
+    /*padding: 5px;*/
+
 }
 .panel h1 {
 	font-size:1em;
@@ -95,4 +101,54 @@ body {
 	font-weight: normal;
 	padding: 0;
 	margin: 0;
+}
+
+
+/* New gui stuff*/
+#buttons {
+    /*float:left;*/
+    margin:12px;
+    top: 12px;
+    left: 12px;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#buttons div {
+    position:relative;
+    float: left;
+    width: 24px;
+    /*background: rgba(0,0,0,0.6);*/
+    border-radius: 4px;
+    margin-right: 4px;
+    padding: 2px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.2);
+    z-index:100;
+}
+#buttons div:hover {
+    cursor: pointer;
+    /*background: rgba(0,0,0,1);*/
+    color: rgba(255,255,255,1);
+}
+#buttons div.active {
+    color: inherit;
+    background: rgba(0,0,0,0.6);
+}
+
+#menu-panel ul {
+    list-style-type: none;
+    padding-left:0;
+    margin: 0;
+}
+#menu-panel li {
+    display: block;
 }
