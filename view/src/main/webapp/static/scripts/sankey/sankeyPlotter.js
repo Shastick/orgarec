@@ -1,6 +1,6 @@
 var margin = {top: 1, right: 1, bottom: 6, left: 1},
-    width = 1000 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " students"; },
