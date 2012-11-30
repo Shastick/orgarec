@@ -1,62 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Organic Representation of Study Plan</title>
-    <script type="text/javascript" src="/static/scripts/d3/d3.v2.js"></script>
-    <script type="text/javascript" src="/static/scripts/jquery/jquery-1.8.3.js"></script>
-    <script language="javascript" type="text/javascript" src="/static/scripts/sankey/sankey.js"></script>
-    <script language="javascript" type="text/javascript" src="/static/scripts/sankey/sankeyPlotter.js"></script>
-	
-	<link rel="stylesheet" type="text/css" href="static/css/sankey.css" />
-	<link rel="stylesheet" type="text/css" href="static/css/graph.css" />
-	<link rel="stylesheet" type="text/css" href="/static/css/misc.css" />
-</head>
-<body>
-<div id="maincont">
-    <div id="buttons">
-        <div id="button-menu" title="App menu">&sect;</div>
-        <div id="button-settings" title="Settings">&#9881;</div>
-    </div>
+<lift:surround with="plotPage" at="content">
+    <head>
+        <title>Organic Representation of Study Plan</title>
+        <script language="javascript" type="text/javascript" src="/static/scripts/sankey/sankey.js"></script>
+        <script language="javascript" type="text/javascript" src="/static/scripts/sankey/sankeyPlotter.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="static/css/sankey.css" />
+        <link rel="stylesheet" type="text/css" href="static/css/graph.css" />
+    </head>
+
     <div id="sankey-container">
         <div id="drawMe"></div>
     </div>
     <div class="panel-container" id="settings-panel" style="display: none">
         <div class="lift:embed?what=boxes/section-explorer-panel"></div>
     </div>
-    <div class="panel-container" id="menu-panel" style="display: none">
-        <span class="lift:Menu.builder"></span>
-    </div>
-
-    <div id="sankey-container">
-        <div id="drawMe"></div>
-    </div>
-
-    <script>
-        // toggle tools visibility
-        var menu_active = false;
-        d3.select("#button-menu").on("click", function() {
-            menu_active = !menu_active;
-            if(menu_active) {
-                settings_active=false;
-                d3.select("#settings-panel").style("display","none" );
-                d3.select("#button-settings").classed("active", false);
-            }
-            d3.select("#menu-panel").style("display", function() { return menu_active ? "block" : "none" });
-            d3.select(this).classed("active", menu_active);
-        });
-        var settings_active= false
-        d3.select("#button-settings").on("click", function() {
-            settings_active = !settings_active;
-            if(settings_active) {
-                menu_active=false;
-                d3.select("#menu-panel").style("display","none" );
-                d3.select("#button-menu").classed("active", false);
-            }
-            d3.select("#settings-panel").style("display", function() { return settings_active ? "block" : "none" });
-            d3.select(this).classed("active", settings_active);
-        });
-    </script>
-
-</div>
-</body>
-</html>
+</lift:surround>
