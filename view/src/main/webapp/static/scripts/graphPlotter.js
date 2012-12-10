@@ -178,7 +178,7 @@ function myGraph(el) {
             .call(node_drag)
 
         /* append circle */
-        nodeEnter.append("circle")
+        var circle = nodeEnter.append("circle")
             .attr("id", function(d){return "circle-node-"+ d.id})
             .attr("class", "circle-node")
             .attr("cursor","pointer")
@@ -190,13 +190,22 @@ function myGraph(el) {
             .on("mouseout", actionsOnMouseOut);
 
         /* Add text in middle of circle */
-        nodeEnter.append("text")
+        /*nodeEnter.append('text')
             .attr("id", function(d){"text-node-"+ d.id})
             .attr("class", "nodetext")
             .attr("text-anchor", "middle")
             .attr("dy", ".3em")
-            .text(function(d) { return d.name.substring(0, d.radius / 3); });
-
+            .attr("width", "50px")
+            .attr("height", "50px")
+            .text(function(d) { return d.name; });    */
+        //nodeEnter.append("foreignObject") .attr("width", 50) .attr("height", 200) .append("xhtml:div") .style("font", "14px 'Helvetica Neue'") .html(function(d) { return d.name /*.substring(0, d.radius / 3)*/; });
+        nodeEnter.append("g").append("foreignObject")
+            .attr("dx", "-10em")
+            .attr("width", 130)
+            .attr("height", 200)
+            .append("xhtml:div")
+            .attr("class", "nodetext")
+            .html(function(d) {return d.name;});
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
