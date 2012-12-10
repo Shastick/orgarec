@@ -13,6 +13,14 @@ body {
 	margin-right: auto;
 }
 
+#about-container{
+	position: relative;
+	width: 300px;
+	top:200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* Content Stuff */
 .content {
     padding: 5px;
@@ -54,6 +62,7 @@ ul li img {
 
 .content a {
 	text-decoration: none;
+	color: #AE0010;
 }
 
 /* Menu Stuff*/
