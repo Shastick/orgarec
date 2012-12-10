@@ -104,6 +104,11 @@ select {
     color: black;
 }
 
+.subgraph {
+    width: 500px;
+    height: 200px;
+}
+
 #thresholdSlider {
     margin-top: 17px;
 }

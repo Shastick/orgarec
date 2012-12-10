@@ -11,6 +11,7 @@ import net.liftweb.json._
  */
 
 case class D3Graph(nodes:List[Node], links:List[Link]) {
+
   def toJson = {
     val t = nodes.map(_.toJObject)
     val Jnodes = JArray(t)
@@ -19,8 +20,7 @@ case class D3Graph(nodes:List[Node], links:List[Link]) {
     JGraph
   }
   
-  lazy val maxCostuds = if(links.length > 0) links.maxBy(_.coStudents).coStudents
-		  				else 0
+  lazy val maxCostuds = if(links.length > 0) links.maxBy(_.coStudentsN).coStudentsN else 0
 }
 
 /**
@@ -30,15 +30,15 @@ case class D3Graph(nodes:List[Node], links:List[Link]) {
  * @param name the complete name of the node
  * @param radius the radius of the circle representing the node
  * @param fill the color of the inside of the node
- * @param strokeWidthCategory the stroke category (Integers between 1 and 3 will be treated)
+ * @param numberOfStudents The number of students registered for the class
  */
-case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 255,255), strokeWidthCategory:Int=1){
+case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 255,255), numberOfStudents:Int=0){
   val toJObject = JObject(List(
     JField("id", JString(id)),
     JField("name", JString(name)),
     JField("radius", JInt(radius)),
     JField("fill", fill.toJString),
-    JField("strokeWidthCategory", JInt(strokeWidthCategory))
+    JField("numberOfStudents", JInt(numberOfStudents))
   ))
 }
 
@@ -49,15 +49,16 @@ case class Node(id:String, name:String, radius:Int, fill:RGBColor=RGBColor(255, 
  * @param distance the distance between nodes (length of the link)
  * @param showLink To know if the link has to be shown or not (default is true), this is just related to the visualisation,
  *                 in computation, as soon as the link is created it will be computed (distance constraint)
- * @param coStudents The number of co-students of both nodes. This variable is for now somehow similar to the distance.
+ * @param coStudentsN The number of co-students of both nodes. This variable is for now somehow similar to the distance.
  */
-case class Link(sourceID:String, targetID:String, distance:Int, val coStudents:Int, showLink:Boolean=true){
+case class Link(sourceID:String, targetID:String, distance:Int, val coStudentsN:Int, coStudentsPercentage:Int, showLink:Boolean=true){
   val toJObject = JObject(List(
     JField("source", JString(sourceID)),
     JField("target", JString(targetID)),
     JField("distance", JInt(distance)),
     JField("showLink", JBool(showLink)),
-    JField("coStudents", JInt(coStudents))
+    JField("coStudents", JInt(coStudentsN)),
+    JField("coStudentsPercentage", JInt(coStudentsPercentage))
   ))
 }
 

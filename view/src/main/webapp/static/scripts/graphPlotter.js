@@ -185,7 +185,7 @@ function myGraph(el) {
             .style("fill",function(d){return d.fill})
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
-            .attr("stroke-width",function(d){return d.strokeWidthCategory+"px";})
+            .attr("stroke-width",function(d){return 1+"px";})
             .on("mouseover", actionsOnMouseOver)
             .on("mouseout", actionsOnMouseOut);
 
@@ -199,6 +199,7 @@ function myGraph(el) {
             .attr("height", "50px")
             .text(function(d) { return d.name; });    */
         //nodeEnter.append("foreignObject") .attr("width", 50) .attr("height", 200) .append("xhtml:div") .style("font", "14px 'Helvetica Neue'") .html(function(d) { return d.name /*.substring(0, d.radius / 3)*/; });
+
         nodeEnter.append("g").append("foreignObject")
             .attr("dx", "-10em")
             .attr("width", 130)
@@ -211,6 +212,18 @@ function myGraph(el) {
             .text(function(d){ return d.id + ' - ' + d.name});
 
         node.exit().transition().remove();
+
+        function actionsOnMouseOver(node){
+            //$("#circle-node-"+ node.id).transition().attr("r", node.radius*2 + "px");
+            //$("#text-node-"+ node.id).text(node.name);
+            getDetails(node.id);
+        }
+
+        function actionsOnMouseOut(node){
+            //$("#circle-node-"+ node.id).attr("r", node.radius + "px");
+        }
+
+
 
         function tick() {
             link.attr("x1", function(d) { return d.source.x; })
@@ -235,19 +248,6 @@ function myGraph(el) {
 
     // Make it all go
     update();
-}
-
-function actionsOnMouseOver(node, index){
-    $("#circle-node-"+ node.id)
-        .attr("r", node.radius*2 + "px");
-    $("#text-node-"+ node.id)
-        .text(node.name);
-    getDetails(node.id);
-}
-
-
-function actionsOnMouseOut(node, index){
-    $("#circle-node-"+ node.id).attr("r", node.radius + "px");
 }
 
 function makeGraph(json){

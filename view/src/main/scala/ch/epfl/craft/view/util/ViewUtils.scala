@@ -35,13 +35,11 @@ object ViewUtils {
   def LandscapeToD3Graph(ls: Landscape) = {
 	  val nodes = ls.nodes.values.map(n =>
       Node(n.node.id,n.node.name, 4*n.node.credits.getOrElse(4),
-	      strokeWidthCategory = {
+        numberOfStudents = {
 	        val number = n.metadata.collectFirst {
 	          case StudentsQuantity(c) => c
 	        }.getOrElse(0.0)
-	        if(number > 100) 3
-	        else if (number>50) 2
-	        else 1
+          number.toInt
 	      })
     ).toList
     
@@ -49,7 +47,15 @@ object ViewUtils {
       val coStudentsN = e.relations.collectFirst {
         case CoStudents(c) => c
       }.getOrElse(0)
-      Link(e.from, e.to, Math.max(0,100-coStudentsN), coStudentsN)
+      val fromNode = nodes.find(_.id == e.from)
+      val toNode = nodes.find(_.id == e.to)
+      val coStudentsPercentage = if (fromNode.isDefined && toNode.isDefined)
+          if(fromNode.get.numberOfStudents > toNode.get.numberOfStudents)
+            100*coStudentsN/toNode.get.numberOfStudents
+          else
+            100*coStudentsN/fromNode.get.numberOfStudents
+        else 0
+      Link(e.from, e.to, Math.max(0,100-coStudentsN), coStudentsN, coStudentsPercentage)
     }).toList
 
     D3Graph(nodes, links)

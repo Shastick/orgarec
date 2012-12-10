@@ -33,23 +33,18 @@ class GraphInteractions extends StatefulSnippet {
   
   var coStudThreshold = 80
 
+  var percentageThreshold = 50
+
 
   def dispatch = {case "render" => render}
   
   def render =  {
-    UserDisplay.reset(nodes,links.filter(_.coStudents > coStudThreshold))
+    UserDisplay.reset(nodes,links.filter(_.coStudentsPercentage > percentageThreshold))
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
-    "#threshold-updater *" #> ( <span>Update Threshold: </span><span class="sliderLanel" id="threshLabel" ></span> ++ sliderThresh )
+    //"#threshold-updater *" #> ( <span>Update Threshold: </span><span class="sliderLanel" id="threshLabel" ></span> ++ sliderThresh )
+    "#threshold-updater *" #> ( <span>Minimum percentage of co-students: </span><span class="sliderLanel" id="threshLabel" ></span> ++ percentageSlider )
   }
-
-  def updateThresholdSlider = JsRaw(
-    "function updateThreholdSlider(value) {" +
-      SHtml.ajaxCall(JsVar("value"), value =>
-        updateThresh(value.toInt)
-      )
-      + "}"
-  )
-
+  /*
   def sliderThresh = {
     val id= "thresholdSlider"
     val valueID = "threshVal"
@@ -88,17 +83,71 @@ class GraphInteractions extends StatefulSnippet {
   def updateThresh(cs: Int) = {
     val commands =
       if(cs > coStudThreshold) {
-        val toDelete = UserDisplay.links.filter(_.coStudents < cs)
+        val toDelete = UserDisplay.links.filter(_.coStudentsN < cs)
         UserDisplay.removeLinks(toDelete)
         toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
       } else {
-        val toAdd = links.filter(_.coStudents > cs).diff(UserDisplay.links)
+        val toAdd = links.filter(_.coStudentsN > cs).diff(UserDisplay.links)
         UserDisplay.addLinks(toAdd)
         toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
       }
     coStudThreshold = cs
     commands
   }
+  */
+
+  /* All methods for percentage slider */
+
+  def percentageSlider = {
+    val id= "mySlider"
+    val min =0
+    val max = 100
+    val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updatePercentage(value.toInt))
+    val script = Script(new JsCmd {
+      def toJsCmd = "$(function() {"+
+        "var thresholdSlider = $(\"#"+id+"\");"+
+        "var updateValue = function (event, ui) { "+
+        "var value = $('#"+id+"').slider('value');  "+
+        "var val = $('#threshLabel');  "+
+        "val.text(value)"+
+        "};"+
+        "thresholdSlider.slider({ "+
+        //"range: false, "+
+        "min: "+ min +", "+
+        "max: "+ max +", " +
+        "value: " + percentageThreshold + ", " +
+        "change: function(event, ui) {" +
+        "updateValue(event,ui);" +
+        cb._2.toJsCmd +
+        "}," +
+        "slide: updateValue,"+
+        "create: updateValue"+
+        "});" +
+        "});"
+    })
+    //val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
+    val sliderDiv = {<div id={id}></div>}
+    {script} ++ <div class="sliderBarContainer"><!--{labelDiv}-->{sliderDiv}</div>
+  }
+
+
+
+  def updatePercentage(cs: Int) = {
+    val commands =
+      if(cs > percentageThreshold) {
+        val toDelete = UserDisplay.links.filter(link => link.coStudentsPercentage < cs)
+        UserDisplay.removeLinks(toDelete)
+        toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
+      } else {
+        val toAdd = links.filter(_.coStudentsPercentage > cs).diff(UserDisplay.links)
+        UserDisplay.addLinks(toAdd)
+        toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
+      }
+    percentageThreshold = cs
+    commands
+  }
+
+
 
   def getGraph = JsRaw(
     "function getGraph(succName) {" +
@@ -110,11 +159,11 @@ class GraphInteractions extends StatefulSnippet {
 
   /* Get Json data to include on left side of screen, details about nodes for now */
   def nodeDetails(id:String): NodeSeq = {
-    ls.nodes.get(id).map{ n => 
+    ls.nodes.get(id).map( n =>
     <h1>{n.node.name}</h1>
     <span>{n.node.section.name} section</span><br/>
     ++ n.node.credits.map(c => <span>{c} Credits</span>)
-    }.getOrElse(NodeSeq.Empty)
+    ).getOrElse(NodeSeq.Empty)
   }
   
   def coStudSubGraph(id: String): NodeSeq = {
@@ -148,9 +197,9 @@ class GraphInteractions extends StatefulSnippet {
   def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => {
-        SetHtml("detail-data", nodeDetails(id)) &
-        SetHtml("costudents-subgraph-data", coStudSubGraph(id))  &
-        SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
+        SetHtml("detail-data", nodeDetails(id))
+        SetHtml("costudents-subgraph-data", coStudSubGraph(id)) //  &
+        //SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
         })._2.toJsCmd
       + "}"
   )
