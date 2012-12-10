@@ -189,27 +189,17 @@ function myGraph(el) {
             .on("mouseover", actionsOnMouseOver)
             .on("mouseout", actionsOnMouseOut);
 
-        /* Add text in middle of circle */
-        /*nodeEnter.append('text')
-            .attr("id", function(d){"text-node-"+ d.id})
-            .attr("class", "nodetext")
-            .attr("text-anchor", "middle")
-            .attr("dy", ".3em")
-            .attr("width", "50px")
-            .attr("height", "50px")
-            .text(function(d) { return d.name; });    */
-        //nodeEnter.append("foreignObject") .attr("width", 50) .attr("height", 200) .append("xhtml:div") .style("font", "14px 'Helvetica Neue'") .html(function(d) { return d.name /*.substring(0, d.radius / 3)*/; });
-
-        nodeEnter.append("g").append("foreignObject")
-            .attr("x", -65)
-            .attr("y", -25)
-            .attr("width", 130)
-            .attr("height", 50)
-            /*.attr("class", "textContainer") */
+        nodeEnter.append("foreignObject")
+            .attr("id", function(d){return "text-node-"+ d.id})
+            .attr("x", function(d){return -d.radius+"px";})
+            .attr("y", function(d){return -0.3*d.radius+"px";})
+            .attr("width", function(d){return 2*d.radius+"px";})
+            .attr("height", function(d){return 2*d.radius+"px";})
             .append("xhtml:div")
             .attr("dx", "-10em")
             .attr("class", "textContainer")
             .html(function(d) {return d.name;});
+
         /* Add title */
         nodeEnter.append("title")
             .text(function(d){ return d.id + ' - ' + d.name});
@@ -217,16 +207,23 @@ function myGraph(el) {
         node.exit().transition().remove();
 
         function actionsOnMouseOver(node){
-            //$("#circle-node-"+ node.id).transition().attr("r", node.radius*2 + "px");
-            //$("#text-node-"+ node.id).text(node.name);
+            $("#circle-node-"+ node.id).attr("r", 2*node.radius + "px");
+            $("#text-node-"+ node.id)
+                .attr("x", function(d){return -2*node.radius+"px";})
+                .attr("y", function(d){return -0.6*node.radius+"px";})
+                .attr("width", function(d){return 4*node.radius+"px";})
+                .attr("height", function(d){return 4*node.radius+"px";})
             getDetails(node.id);
         }
 
         function actionsOnMouseOut(node){
-            //$("#circle-node-"+ node.id).attr("r", node.radius + "px");
+            $("#text-node-"+ node.id)
+                .attr("x", function(d){return -node.radius+"px";})
+                .attr("y", function(d){return -0.3*node.radius+"px";})
+                .attr("width", function(d){return 2*node.radius+"px";})
+                .attr("height", function(d){return 2*node.radius+"px";})
+            $("#circle-node-"+ node.id).attr("r", node.radius + "px");
         }
-
-
 
         function tick() {
             link.attr("x1", function(d) { return d.source.x; })

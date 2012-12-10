@@ -32,6 +32,21 @@ body {
     text-align:center;
 }
 
+.paragraph {
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    border-radius:50%;
+    background: white;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    font: 10px sans-serif;
+}
+
+.paragraph div {
+    vertical-align: middle;
+    display: block;
+}
 
 circle.node {
     cursor: pointer;
