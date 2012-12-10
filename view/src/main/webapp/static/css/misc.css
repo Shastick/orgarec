@@ -146,14 +146,14 @@ ul li img {
 #buttons div {
     position:relative;
     float: left;
-    width: 24px;
+    width: 75px;
     /*background: rgba(0,0,0,0.6);*/
     border-radius: 4px;
     margin-right: 4px;
     padding: 2px;
     font-size: 16px;
-    color: rgba(255,255,255,0.3);
-    background: rgba(0,0,0,0.2);
+    color: rgba(255,255,255,1);
+    background: rgba(0,0,0,0.3);
     z-index:100;
 }
 #buttons div:hover {
@@ -173,4 +173,5 @@ ul li img {
 }
 #menu-panel li {
     display: block;
+    text-align:left
 }

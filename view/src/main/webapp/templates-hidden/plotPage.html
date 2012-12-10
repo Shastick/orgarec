@@ -8,10 +8,10 @@
         <link rel="stylesheet" type="text/css" href="/static/css/smoothness/jquery-ui-1.9.1.custom.css" />
     </head>
     <body>
-
+    <div id="maincont">
         <div id="buttons">
-            <div id="button-menu" title="App menu">&sect;</div>
-            <div id="button-settings" title="Settings">&#9881;</div>
+            <div id="button-menu" title="App menu">Menu</div>
+            <div id="button-settings" title="Settings">Settings</div>
         </div>
 
         <lift:bind name="content" />
@@ -45,5 +45,6 @@
                 d3.select(this).classed("active", settings_active);
             });
         </script>
+        </div>
     </body>
 </html>
