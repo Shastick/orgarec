@@ -20,12 +20,12 @@ body {
 }
 
 .textContainer {
-    width:70px;
-    height: 200px;
-    position: absolute;
-    left: 50%;
-    right: 50%;
+    pointer-events: none;
+    font: 16px;
+    text-align:center;
+    z-index: 100;
 }
+
 .nodetext {
     pointer-events: none;
     font: 16 sans-serif;

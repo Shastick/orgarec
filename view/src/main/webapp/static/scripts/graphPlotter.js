@@ -201,11 +201,14 @@ function myGraph(el) {
         //nodeEnter.append("foreignObject") .attr("width", 50) .attr("height", 200) .append("xhtml:div") .style("font", "14px 'Helvetica Neue'") .html(function(d) { return d.name /*.substring(0, d.radius / 3)*/; });
 
         nodeEnter.append("g").append("foreignObject")
-            .attr("dx", "-10em")
+            .attr("x", -65)
+            .attr("y", -25)
             .attr("width", 130)
-            .attr("height", 200)
+            .attr("height", 50)
+            /*.attr("class", "textContainer") */
             .append("xhtml:div")
-            .attr("class", "nodetext")
+            .attr("dx", "-10em")
+            .attr("class", "textContainer")
             .html(function(d) {return d.name;});
         /* Add title */
         nodeEnter.append("title")
