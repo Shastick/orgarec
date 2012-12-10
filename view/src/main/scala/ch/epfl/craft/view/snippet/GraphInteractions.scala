@@ -198,8 +198,8 @@ class GraphInteractions extends StatefulSnippet {
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => {
         SetHtml("detail-data", nodeDetails(id))
-        SetHtml("costudents-subgraph-data", coStudSubGraph(id)) //  &
-        //SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
+        SetHtml("costudents-subgraph-data", coStudSubGraph(id))   &
+        SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
         })._2.toJsCmd
       + "}"
   )

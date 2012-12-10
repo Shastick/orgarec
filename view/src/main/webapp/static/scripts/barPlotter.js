@@ -43,11 +43,11 @@ function drawBarPlot(csvStr,selector,w,h) {
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis)
-        .append("text")
+        /*.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end");
+        .attr("dy", "0.71em")
+        .style("text-anchor", "end");  */
     /*.text("Proportion");*/
 
     svg.selectAll(".bar")
