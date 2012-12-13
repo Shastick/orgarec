@@ -41,60 +41,8 @@ class GraphInteractions extends StatefulSnippet {
   def render =  {
     UserDisplay.reset(nodes,links.filter(_.coStudentsPercentage > percentageThreshold))
     "#generated-ajax *" #> <head>{getInteractions}</head>   &
-    //"#threshold-updater *" #> ( <span>Update Threshold: </span><span class="sliderLanel" id="threshLabel" ></span> ++ sliderThresh )
     "#threshold-updater *" #> ( <span>Minimum percentage of co-students: </span><span class="sliderLanel" id="threshLabel" ></span> ++ percentageSlider )
   }
-  /*
-  def sliderThresh = {
-    val id= "thresholdSlider"
-    val valueID = "threshVal"
-    val min =0
-    val max = graph.maxCostuds
-    val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updateThresh(value.toInt))
-    val script = Script(new JsCmd {
-      def toJsCmd = "$(function() {"+
-        "var thresholdSlider = $(\"#"+id+"\");"+
-        "var updateValue = function (event, ui) { "+
-          "var value = $('#"+id+"').slider('value');  "+
-          "var val = $('#threshLabel');  "+
-          "val.text(value)"+
-         "};"+
-        "thresholdSlider.slider({ "+
-          //"range: false, "+
-          "min: "+ min +", "+
-          "max: "+ max +", " +
-          "value: " + coStudThreshold + ", " +
-          "change: function(event, ui) {" +
-            "updateValue(event,ui);" +
-            cb._2.toJsCmd +
-          "}," +
-          "slide: updateValue,"+
-          "create: updateValue"+
-        "});" +
-        "});"
-    })
-    //val labelDiv = {<div id={valueID} class="sliderLabel"></div>}
-    val sliderDiv = {<div id={id}></div>}
-    {script} ++ <div class="sliderBarContainer"><!--{labelDiv}-->{sliderDiv}</div>
-  }
-
-
-
-  def updateThresh(cs: Int) = {
-    val commands =
-      if(cs > coStudThreshold) {
-        val toDelete = UserDisplay.links.filter(_.coStudentsN < cs)
-        UserDisplay.removeLinks(toDelete)
-        toDelete.map(link => JE.JsFunc("graph.removeLink", link.sourceID, link.targetID).cmd)
-      } else {
-        val toAdd = links.filter(_.coStudentsN > cs).diff(UserDisplay.links)
-        UserDisplay.addLinks(toAdd)
-        toAdd.map(link => JE.JsFunc("graph.addLink", link.toJObject).cmd)
-      }
-    coStudThreshold = cs
-    commands
-  }
-  */
 
   /* All methods for percentage slider */
 
@@ -112,7 +60,6 @@ class GraphInteractions extends StatefulSnippet {
         "val.text(value)"+
         "};"+
         "thresholdSlider.slider({ "+
-        //"range: false, "+
         "min: "+ min +", "+
         "max: "+ max +", " +
         "value: " + percentageThreshold + ", " +
@@ -177,7 +124,6 @@ class GraphInteractions extends StatefulSnippet {
   def sectionSubGraph(id: String): NodeSeq = {
     val tid = ls.nodes(id).node.id
     val l = ls
-    //val (tid,l) = a
     val (t,meta) = l.nodes.get(tid).map(ln => (Some(ln.node),ln.metadata))
       .getOrElse((None,Set.empty[TopicMeta]))
     val proc = DBFactory.processer
