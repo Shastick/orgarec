@@ -168,10 +168,6 @@ function myGraph(el) {
         var node = vis.selectAll("g.node")
             .data(nodes, function(d) {return d.id;});
 
-        node.selectAll("circle")
-            .transition()
-            .attr("r", function(d){return d.radius+"px";})
-            .attr("fill", function(d){return d.fill});
 
         var nodeEnter = node.enter().append("g")
             .attr("class", "node")
@@ -182,7 +178,7 @@ function myGraph(el) {
             .attr("id", function(d){return "circle-node-"+ d.id})
             .attr("class", "circle-node")
             .attr("cursor","pointer")
-            .style("fill",function(d){return d.fill})
+            .attr("fill",function(d){return d.fill})
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return 1+"px";})
@@ -245,6 +241,28 @@ function myGraph(el) {
             .size([w, h])
             .start();
     };
+
+    $(function() {
+        $( "#tags" ).autocomplete({
+            minLength: 0,
+            source: function(request, resolve) {
+                var availableTags1 = $.map(nodes, function(node){return {value: node.id, label: node.name}})
+                resolve(availableTags1.filter(function(node){return node.label.toLowerCase().indexOf(request.term.toLowerCase())!==-1}));
+            },
+            focus: function( event, ui ) {
+                $( "#tags" ).val( ui.item.label );
+                return false;
+            },
+            select: function( event, ui){
+                $( "#tags" ).val( ui.item.label );
+                vis.selectAll("#circle-node-"+ui.item.value)
+                    .transition()
+                    .attr("r", function(n){console.log("plop"); return "200px"})
+                    .attr("fill", "rgba(255,0,0,1)")
+            }
+
+        })
+    });
 
     // Make it all go
     update();

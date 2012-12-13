@@ -138,3 +138,15 @@ select {
     font-weight:bold;
     position:absolute;
 }
+
+#search-panel {
+    height:43px;
+    width: 173px;
+    padding:5px;
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(248,248,248,0.7);
+    border-radius: 5px;
+    z-index: 200;
+}

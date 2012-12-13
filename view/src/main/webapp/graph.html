@@ -8,13 +8,22 @@
         <link rel="stylesheet" type="text/css" href="/static/css/barPlot.css" />
         <link rel="stylesheet" type="text/css" href="/static/css/nv.d3.css"/>
         <link rel="stylesheet" type="text/css" href="/static/css/graph.css" />
-    </head>
-        <div id="graph-container">
-            <script type="text/javascript" src="static/scripts/graphPlotter.js"></script>
-        </div>
-        <div class="panel-container" id="settings-panel" style="display: none">
-            <div class="lift:embed?what=boxes/course-explorer-panel"></div>
-        </div>
 
-        <div class="lift:embed?what=subgraph-panel"></div>
+
+    </head>
+    <div id="graph-container">
+        <script type="text/javascript" src="static/scripts/graphPlotter.js"></script>
+    </div>
+    <div class="panel-container" id="settings-panel" style="display: none">
+        <div class="lift:embed?what=boxes/course-explorer-panel"></div>
+    </div>
+
+    <div id="search-panel">
+        <div class="ui-widget">
+            <label for="tags">Search Course: </label>
+            <input id="tags" />
+        </div>
+    </div>
+
+    <div class="lift:embed?what=subgraph-panel"></div>
 </lift:surround>
