@@ -11,6 +11,13 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.model.Topic
 
+/**
+ * [[ch.epfl.craft.recom.processing.Processer]] implementation for PostgreSQL.
+ * 
+ * It is assumed the database has already been populated with the correct stored procedures.
+ * 
+ * The structure should already have been set by the [[ch.epfl.craft.recom.storage.db.PGDBFactory]]
+ */
 class PGProcesser(ci: ConnectionIdentifier, db: ConnectionManager)
  extends Processer with SQLCallable{
 	

@@ -6,6 +6,9 @@ import net.liftweb.common.Empty
 import java.sql.DriverManager
 import java.sql.Connection
 
+/**
+ * ConnectionManager for Postgres
+ */
 class PostgresDB(host: String, db: String, usr: String, pwd: String)
 extends ConnectionManager {
 	Class.forName("org.postgresql.Driver")

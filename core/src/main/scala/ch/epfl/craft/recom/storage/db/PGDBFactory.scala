@@ -10,6 +10,9 @@ import ch.epfl.craft.recom.processing.maps.CourseRelationMap
 import ch.epfl.craft.recom.processing.maps.TopicRelationMap
 import net.liftweb.mapper.MapperRules
 
+/**
+ * DBFactory implementation for Postgres.
+ */
 class PGDBFactory (
 		host: 	String,
 		dbname:	String,

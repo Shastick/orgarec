@@ -15,7 +15,11 @@ import ch.epfl.craft.recom.util.SemesterRange
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 import net.liftweb.mapper.Distinct
 
-
+/**
+ * Storage implementation for a Postgres database.
+ * 
+ * The factory should handle the schema establishment through mapper's schemify method.
+ */
 class PGStorage(ci: ConnectionIdentifier, db: ConnectionManager) extends Storage {
 	
     /* Topics & Courses */

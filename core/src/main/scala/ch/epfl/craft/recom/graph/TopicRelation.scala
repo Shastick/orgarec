@@ -1,6 +1,9 @@
 package ch.epfl.craft.recom.graph
 import ch.epfl.craft.recom.model.administration.Semester
 
+/**
+ * Trait regrouping the informations held by [[ch.epfl.craft.recom.graphLandscapeEdge]]'s
+ */
 sealed trait TopicRelation
 sealed trait DirectedRelation extends TopicRelation
 sealed trait CourseRelation extends TopicRelation

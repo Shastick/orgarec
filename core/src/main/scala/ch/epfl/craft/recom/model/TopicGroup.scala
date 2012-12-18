@@ -1,5 +1,8 @@
 package ch.epfl.craft.recom.model
 
+/**
+ * Represent groups of topics (Blocks, Specialisations, Minors,...)
+ */
 trait TopicGroup {
   val topics: Set[Topic]
 }

@@ -6,8 +6,6 @@ import org.scala_tools.time.Imports._
 /**
  * As everything at EPFL revolves around semesters, lets have a case class representing it...
  */
-
-
 sealed trait Semester extends Ordered[Semester]{
   val year: DateTime
   
@@ -19,7 +17,7 @@ sealed trait Semester extends Ordered[Semester]{
     		this.year_int == s.year_int
     } else false
 }
-  /*
+  /**
    * Compare will give the 'semester' distance between two semesters :
    * 	eg: Fall(2012) - Spring(2012) will be 1,
    * 		Fall(2012) - Fall(2013) will be -1
@@ -49,7 +47,9 @@ sealed trait Semester extends Ordered[Semester]{
 case class Spring(val year: DateTime) extends Semester
 case class Fall(val year: DateTime) extends Semester
 
-
+/**
+ * Semester builder.
+ */
 object Semester {
   
   type Identifier = String

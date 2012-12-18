@@ -1,5 +1,8 @@
 package ch.epfl.craft.recom.model.administration
 
+/**
+ * Represent staff (teachers, assistants,...)
+ */
 sealed trait Staff {
   val name: String
   val section: Option[Section]

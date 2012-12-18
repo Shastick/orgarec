@@ -7,7 +7,7 @@ import net.liftweb.mapper.MappedDouble
 import net.liftweb.mapper.MappedString
 
 /**
- * 'Meta' relation class to hold any relation fitting in one value between two topics.
+ * 'Meta' relation class to store (in the database) any relation fitting in one value between two topics.
  */
 class TopicRelationMap extends Mapper[TopicRelationMap]{
 	def getSingleton = TopicRelationMap

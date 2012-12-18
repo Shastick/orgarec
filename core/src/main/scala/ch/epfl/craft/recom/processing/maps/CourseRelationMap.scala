@@ -10,7 +10,7 @@ import net.liftweb.mapper.MetaMapper
 
 
 /**
- * 'Meta' relation class to hold any relation fitting in one value between two topics.
+ * 'Meta' relation class to store (in the database) any relation fitting in one value between two topics.
  */
 class CourseRelationMap extends Mapper[CourseRelationMap] {
 	def getSingleton = CourseRelationMap

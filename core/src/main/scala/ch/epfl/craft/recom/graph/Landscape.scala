@@ -9,8 +9,8 @@ import ch.epfl.craft.recom.model.Topic
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 
 /**
- * Represents the picture of the topics and what we can learn from the student's history and 
- * evaluations.
+ * A Landscape object is a ''snapshot'' of the database with the point of view defined by the parameters.
+ * 
  */
 class Landscape(
     val semesterRange: SemesterRange, /* From when to when we want to observe data */
@@ -34,7 +34,10 @@ class Landscape(
       					.toList.sortBy(_._2).reverse
   
 }
-    
+
+/**
+ * Companion object used to build Landscapes.
+ */
 object Landscape{
   
 	def empty = new Landscape(SemesterRange.all, Set.empty, Set.empty, Map.empty, Map.empty)

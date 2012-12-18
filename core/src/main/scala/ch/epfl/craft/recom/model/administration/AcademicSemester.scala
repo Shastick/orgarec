@@ -2,6 +2,13 @@ package ch.epfl.craft.recom.model.administration
 
 import org.scala_tools.time.Imports._
 
+/**
+ * Represent an Academic Semester, that is, if it is Bachelor 1 (BA1) to Master 3 (MA3)
+ * 
+ * Exchange students, students from outside Epfl, Master Projects semesters are also represented.
+ * 
+ * The semester is optional, to allow the representation of levels without referring to any particular time.
+ */
 sealed trait AcademicSemester {
   val semester: Option[Semester]
   val year = semester.map(_.year)
@@ -31,14 +38,19 @@ case class PME(semester: Option[Semester]) extends AcademicSemester
 case class E(semester: Option[Semester]) extends AcademicSemester
 case class Undef(semester: Option[Semester]) extends AcademicSemester
 
-
+/**
+ * Academic Semester builder.
+ */
 object AcademicSemester {
   
   type Identifier = String
   
   def apply(lvl: String, year: String, season: String): AcademicSemester = 
     apply(lvl, Semester(year,season))
-  
+    
+  /**
+   * Build a level from its three letter identifier, with a semester set to `None`.
+   */
   def apply(lvl: String): AcademicSemester = apply(lvl, None)
   def apply(lvl: String, sem: Semester): AcademicSemester = apply(lvl, Some(sem))
   def apply(lvl: String, sem: Option[Semester]): AcademicSemester = lvl.toUpperCase match {

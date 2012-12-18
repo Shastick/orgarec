@@ -10,6 +10,8 @@ import ch.epfl.craft.recom.model.administration.Teacher
 import ch.epfl.craft.recom.model.administration.Assistant
 
 /**
+ * Defines how a Staff is stored.
+ * 
  * Regroups both teachers and assistants for simplicity's sake.
  */
 class StaffMap extends LongKeyedMapper[StaffMap] with IdPK {

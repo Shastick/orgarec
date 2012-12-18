@@ -4,10 +4,9 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.Head
 
 /**
- * A course is the instantiation of a topic. That is, it also contains information about the year,
+ * A course is the instantiation of a [[ch.epfl.craft.recom.model.Topic]]. That is, it also contains information about the year,
  * the teacher and any 'concrete' contextual information.
  */
-
 class Course(
     id: String,
     name: String,

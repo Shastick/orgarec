@@ -7,6 +7,9 @@ import net.liftweb.mapper.MappedString
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 import net.liftweb.mapper.By
 
+/**
+ * Defines how an AcademicSemester is stored in the database
+ */
 class AcademicSemesterMap extends LongKeyedMapper[AcademicSemesterMap] with IdPK {
 	def getSingleton = AcademicSemesterMap
 	

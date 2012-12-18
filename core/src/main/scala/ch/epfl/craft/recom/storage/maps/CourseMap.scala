@@ -16,6 +16,9 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.Head
 import ch.epfl.craft.recom.model.administration.Semester
 
+/**
+ * Defines how a Course is stored in the database
+ */
 class CourseMap extends LongKeyedMapper[CourseMap] with IdPK {
 	
 	def getSingleton = CourseMap

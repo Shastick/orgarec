@@ -10,6 +10,9 @@ import net.liftweb.mapper.LongKeyedMetaMapper
 import net.liftweb.mapper.MappedString
 import net.liftweb.mapper.MappedDate
 
+/**
+ * Defines how a Semester is stored in the database
+ */
 class SemesterMap extends LongKeyedMapper[SemesterMap] with IdPK {
 	def getSingleton = SemesterMap
 	

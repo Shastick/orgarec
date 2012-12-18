@@ -11,6 +11,9 @@ import net.liftweb.mapper.MappedInt
 import net.liftweb.mapper.MappedLongForeignKey
 import net.liftweb.mapper.MappedString
 
+/**
+ * Defines how a Student is stored in the database
+ */
 class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 	def getSingleton = StudentMap
 	
@@ -29,10 +32,11 @@ class StudentMap extends LongKeyedMapper[StudentMap] with IdPK{
 	  override def dbIndexed_? = true
 	}
 	
-	// Passed and current subscriptions to courses
-	// The semester history can be rebuilt from here,
-	// so unless we have performance issues we won't do an extra relation for
-	// that
+	/** Passed and current subscriptions to courses
+	  * The semester history can be rebuilt from here,
+	  * so unless we have performance issues we won't do an extra relation for
+	  * that
+	  */
 	object subscriptions extends HasManyThrough(this, CourseMap, Subscribed,
 	    Subscribed.course, Subscribed.student)
 	

@@ -3,6 +3,9 @@ import ch.epfl.craft.recom.model.administration.Section
 import ch.epfl.craft.recom.model.administration.Semester
 import ch.epfl.craft.recom.model.administration.AcademicSemester
 
+/**
+ * Represent a single student, with his section and full course history until now.
+ */
 class Student(
     val id: Student.StudentID,
     val arrival: AcademicSemester,
@@ -31,6 +34,9 @@ object Student {
   type StudentID = String
 }
 
+/**
+ * A TakenCourse links a student to a course and holds relevant meta-data.
+ */
 case class TakenCourse(course: Course,
 					   count: Int,
 					   grade: Option[Int],

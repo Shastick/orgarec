@@ -6,7 +6,7 @@ import ch.epfl.craft.recom.model.administration.AcademicSemester
 import ch.epfl.craft.recom.model.Topic
 
 /** 
- * The processer trait holds everything that 'will probably take some time' to be done and, generally,
+ * The processer trait defines the operations that 'will probably take some time' to be done and, generally,
  * what is not computed/analyzed/processed at insert or view time.
  */
 trait Processer {

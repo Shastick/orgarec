@@ -11,6 +11,9 @@ import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.administration.Section
 import net.liftweb.mapper.MappedInt
 
+/**
+ * Defines how a Topic is stored in the database
+ */
 class TopicMap extends LongKeyedMapper[TopicMap] with IdPK {
 	def getSingleton = TopicMap
 	

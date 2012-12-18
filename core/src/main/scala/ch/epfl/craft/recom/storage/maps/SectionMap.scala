@@ -6,6 +6,9 @@ import net.liftweb.mapper.MappedString
 import net.liftweb.mapper.By
 import ch.epfl.craft.recom.model.administration.Section
 
+/**
+ * Defines how a Section is stored in the database
+ */
 class SectionMap extends LongKeyedMapper[SectionMap] with IdPK {
 	def getSingleton = SectionMap
 	
