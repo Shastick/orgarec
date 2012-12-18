@@ -32,9 +32,29 @@
 
 <p>This is an EPFL semester project exploring what kind of visualisations could be suitable to explore study plans, based on which students took what course.</p>
 
-<p>It is Scala/Lift based.</p>
+<p>It is Scala/Lift based. Depending on your interest, you might want to only consider one of the two following parts of the project:</p>
 
-<p>Documentation for the <a href="doc/core/">core</a> and the <a href="doc/view/">view</a>.</p>
+<h2>View</h2>
+
+<p>The view sub-project holds everything related to visualization: if you like plotting and drawing stuff, start here.</p>
+
+<p>However, if you want to plot the data of some very specific queries, you'll have to dive into the core and write your own cute stored procedure(s).</p>
+
+<h2>Core</h2>
+
+<p>The core holds the storage, model and computation layer.</p>
+
+<p>If you're only interested in raw data, want to represent study-plans or course histories for students, forget about the view and its nasty JavaScript and go directly for the core.</p>
+
+<h2>Documentation</h2>
+
+<p>The automatically generated scaladoc can be browsed for <a href="doc/core/">the core</a> and <a href="doc/view/">the view</a>.</p>
+
+<p>You may also generate it yourself by checking out the project and running <code>sbt doc</code> to be sure to have the latest (hopefully helpful) comments.</p>
+
+<p>And of course, if you have any unresolved question, try an e-mail ! (I can't guarantee a timely reply if we are currently running around the globe...)</p>
+
+<h3>J. &amp; C. -- 21.12.2012</h3>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/Shastick">Shastick</a></p>
