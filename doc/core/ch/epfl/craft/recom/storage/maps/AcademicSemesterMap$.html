@@ -1,0 +1,2446 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>ch.epfl.craft.recom.storage.maps.AcademicSemesterMap</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../../../../lib/template.css" />
+      <script type="text/javascript" src="../../../../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <a title="Go to companion" href="AcademicSemesterMap.html"><img src="../../../../../../lib/object_to_class_big.png" /></a>
+        <p id="owner"><a name="ch" class="extype" href="../../../../../package.html">ch</a>.<a name="ch.epfl" class="extype" href="../../../../package.html">epfl</a>.<a name="ch.epfl.craft" class="extype" href="../../../package.html">craft</a>.<a name="ch.epfl.craft.recom" class="extype" href="../../package.html">recom</a>.<a name="ch.epfl.craft.recom.storage" class="extype" href="../package.html">storage</a>.<a name="ch.epfl.craft.recom.storage.maps" class="extype" href="package.html">maps</a></p>
+        <h1><a title="Go to companion" href="AcademicSemesterMap.html">AcademicSemesterMap</a></h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <span class="name">AcademicSemesterMap</span>
+        
+        <span class="result"> extends <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a> with <span name="net.liftweb.mapper.LongKeyedMetaMapper" class="extype">LongKeyedMetaMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      
+          <div class="fullcommenttop" id="comment"><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span name="net.liftweb.mapper.LongKeyedMetaMapper" class="extype">LongKeyedMetaMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.KeyedMetaMapper" class="extype">KeyedMetaMapper</span>[<span name="scala.Long" class="extype">Long</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.MetaMapper" class="extype">MetaMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.BaseMetaMapper" class="extype">BaseMetaMapper</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>, <span name="net.liftweb.mapper.IdPK" class="extype">IdPK</span>, <span name="net.liftweb.mapper.LongKeyedMapper" class="extype">LongKeyedMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.BaseLongKeyedMapper" class="extype">BaseLongKeyedMapper</span>, <span name="net.liftweb.mapper.KeyedMapper" class="extype">KeyedMapper</span>[<span name="scala.Long" class="extype">Long</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.BaseKeyedMapper" class="extype">BaseKeyedMapper</span>, <span name="net.liftweb.mapper.Mapper" class="extype">Mapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="net.liftweb.mapper.BaseMapper" class="extype">BaseMapper</span>, <span name="net.liftweb.util.FieldContainer" class="extype">FieldContainer</span>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
+        </div></div>
+        
+
+      <div id="template">
+
+        <div id="mbrsel">
+          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+          <div id="order">
+                <span class="filtertype">Ordering</span>
+                <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
+              </div>
+          <div id="ancestors">
+                <span class="filtertype">Inherited</span>
+                <ol><li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show all</span></li></ol>
+                <ol id="linearization"><li name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="in"><span>AcademicSemesterMap</span></li><li name="net.liftweb.mapper.LongKeyedMetaMapper" class="in"><span>LongKeyedMetaMapper</span></li><li name="net.liftweb.mapper.KeyedMetaMapper" class="in"><span>KeyedMetaMapper</span></li><li name="net.liftweb.mapper.MetaMapper" class="in"><span>MetaMapper</span></li><li name="net.liftweb.mapper.BaseMetaMapper" class="in"><span>BaseMetaMapper</span></li><li name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="in"><span>AcademicSemesterMap</span></li><li name="net.liftweb.mapper.IdPK" class="in"><span>IdPK</span></li><li name="net.liftweb.mapper.LongKeyedMapper" class="in"><span>LongKeyedMapper</span></li><li name="net.liftweb.mapper.BaseLongKeyedMapper" class="in"><span>BaseLongKeyedMapper</span></li><li name="net.liftweb.mapper.KeyedMapper" class="in"><span>KeyedMapper</span></li><li name="net.liftweb.mapper.BaseKeyedMapper" class="in"><span>BaseKeyedMapper</span></li><li name="net.liftweb.mapper.Mapper" class="in"><span>Mapper</span></li><li name="net.liftweb.mapper.BaseMapper" class="in"><span>BaseMapper</span></li><li name="net.liftweb.util.FieldContainer" class="in"><span>FieldContainer</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+              </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+
+        
+
+        <div class="types members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="net.liftweb.mapper.MetaMapper#AnyBound" data-isabs="false">
+      <a id="AnyBound:AnyBound"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">AnyBound</span>
+        
+        <span class="result"> = T forSome { type T }</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#FieldPF" data-isabs="false">
+      <a id="FieldPF:FieldPF"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">FieldPF</span>
+        
+        <span class="result"> = <span name="scala.PartialFunction" class="extype">PartialFunction</span>[String, (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#KeyedMapperType" data-isabs="false">
+      <a id="KeyedMapperType:KeyedMapperType"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">KeyedMapperType</span>
+        
+        <span class="result"> = <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper → BaseKeyedMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#MapperType" data-isabs="false">
+      <a id="MapperType:MapperType"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">MapperType</span>
+        
+        <span class="result"> = <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper → BaseMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#OtherMapper" data-isabs="false">
+      <a id="OtherMapper:OtherMapper"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">OtherMapper</span>
+        
+        <span class="result"> = net.liftweb.mapper.KeyedMapper[_, _]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#OtherMetaMapper" data-isabs="false">
+      <a id="OtherMetaMapper:OtherMetaMapper"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">OtherMetaMapper</span>
+        
+        <span class="result"> = net.liftweb.mapper.KeyedMetaMapper[_, _]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#Q" data-isabs="false">
+      <a id="Q:Q"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">Q</span>
+        
+        <span class="result"> = net.liftweb.mapper.MappedForeignKey[ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.AnyBound,ch.epfl.craft.recom.storage.maps.AcademicSemesterMap,OO] with net.liftweb.mapper.MappedField[ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.AnyBound,ch.epfl.craft.recom.storage.maps.AcademicSemesterMap] forSome { type OO &lt;: net.liftweb.mapper.KeyedMapper[ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.AnyBound,OO] }</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#RealType" data-isabs="false">
+      <a id="RealType:RealType"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">RealType</span>
+        
+        <span class="result"> = <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.BaseLongKeyedMapper#TheKeyType" data-isabs="false">
+      <a id="TheKeyType:TheKeyType"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">TheKeyType</span>
+        
+        <span class="result"> = <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseLongKeyedMapper → BaseKeyedMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#_$1" data-isabs="true">
+      <a id="_$1:_$1"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">_$1</span>
+        
+        
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#_$1" data-isabs="true">
+      <a id="_$1:_$1"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">_$1</span>
+        
+        
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#_$15" data-isabs="true">
+      <a id="_$15:_$15"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">_$15</span>
+        
+        
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#_$15" data-isabs="true">
+      <a id="_$15:_$15"></a>
+      <h4 class="signature">
+      <span class="kind">type</span>
+      <span class="symbol"> 
+        <span class="name">_$15</span>
+        
+        
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li></ol>
+            </div>
+        
+        
+
+        <div class="values members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="scala.AnyRef#!=" data-isabs="false">
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#!=" data-isabs="false">
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">!=</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef###" data-isabs="false">
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">##</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#==" data-isabs="false">
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#==" data-isabs="false">
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">==</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#_dbTableNameLC" data-isabs="false">
+      <a id="_dbTableNameLC:String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">_dbTableNameLC</span>
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#addEndStuffs" data-isabs="false">
+      <a id="addEndStuffs(String,List[QueryParam[AcademicSemesterMap]],SuperConnection):(String, Box[Long], Box[Long])"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">addEndStuffs</span>
+        
+        <span class="params">(<span name="in">in: String</span>, <span name="params">params: List[<span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>, <span name="conn">conn: SuperConnection</span>)</span><span class="result">: (String, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>], <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>])</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#addSnippet" data-isabs="false">
+      <a id="addSnippet(NodeSeq):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">addSnippet</span>
+        
+        <span class="params">(<span name="xhtml">xhtml: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#addSnippetCallback" data-isabs="false">
+      <a id="addSnippetCallback(AcademicSemesterMap):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">addSnippetCallback</span>
+        
+        <span class="params">(<span name="obj">obj: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#addSnippetSetup" data-isabs="false">
+      <a id="addSnippetSetup:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">addSnippetSetup</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterCommit" data-isabs="false">
+      <a id="afterCommit:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterCommit</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterCreate" data-isabs="false">
+      <a id="afterCreate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterCreate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterDelete" data-isabs="false">
+      <a id="afterDelete:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterDelete</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterSave" data-isabs="false">
+      <a id="afterSave:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterSave</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#afterSchemifier" data-isabs="false">
+      <a id="afterSchemifier:Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterSchemifier</span>
+        
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper → MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterUpdate" data-isabs="false">
+      <a id="afterUpdate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterUpdate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterValidation" data-isabs="false">
+      <a id="afterValidation:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterValidation</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterValidationOnCreate" data-isabs="false">
+      <a id="afterValidationOnCreate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterValidationOnCreate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#afterValidationOnUpdate" data-isabs="false">
+      <a id="afterValidationOnUpdate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">afterValidationOnUpdate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#allFields" data-isabs="false">
+      <a id="allFields:Seq[BaseField]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">allFields</span>
+        
+        <span class="result">: <span name="scala.collection.Seq" class="extype">Seq</span>[<span name="net.liftweb.util.BaseField" class="extype">BaseField</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper → FieldContainer</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#appendField" data-isabs="false">
+      <a id="appendField(FieldPF):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">appendField</span>
+        
+        <span class="params">(<span name="pf">pf: FieldPF</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#appendFieldToStrings" data-isabs="false">
+      <a id="appendFieldToStrings(AcademicSemesterMap):String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">appendFieldToStrings</span>
+        
+        <span class="params">(<span name="in">in: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#asHtml" data-isabs="false">
+      <a id="asHtml(AcademicSemesterMap):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asHtml</span>
+        
+        <span class="params">(<span name="toLine">toLine: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#asHtml" data-isabs="false">
+      <a id="asHtml:NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asHtml</span>
+        
+        <span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="result">: T0</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#asJs" data-isabs="false">
+      <a id="asJs(AcademicSemesterMap):JsExp"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asJs</span>
+        
+        <span class="params">(<span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="net.liftweb.http.js.JsExp" class="extype">JsExp</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#asJs" data-isabs="false">
+      <a id="asJs:JsExp"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asJs</span>
+        
+        <span class="result">: <span name="net.liftweb.http.js.JsExp" class="extype">JsExp</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#asSafeJs" data-isabs="false">
+      <a id="asSafeJs(AcademicSemesterMap,KeyObfuscator):JsExp"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asSafeJs</span>
+        
+        <span class="params">(<span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="f">f: <span name="net.liftweb.mapper.KeyObfuscator" class="extype">KeyObfuscator</span></span>)</span><span class="result">: <span name="net.liftweb.http.js.JsExp" class="extype">JsExp</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#asSafeJs" data-isabs="false">
+      <a id="asSafeJs(KeyObfuscator):JsExp"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asSafeJs</span>
+        
+        <span class="params">(<span name="f">f: <span name="net.liftweb.mapper.KeyObfuscator" class="extype">KeyObfuscator</span></span>)</span><span class="result">: <span name="net.liftweb.http.js.JsExp" class="extype">JsExp</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#asValid" data-isabs="false">
+      <a id="asValid:Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asValid</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeCreate" data-isabs="false">
+      <a id="beforeCreate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeCreate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeDelete" data-isabs="false">
+      <a id="beforeDelete:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeDelete</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeSave" data-isabs="false">
+      <a id="beforeSave:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeSave</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeSchemifier" data-isabs="false">
+      <a id="beforeSchemifier:Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeSchemifier</span>
+        
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeUpdate" data-isabs="false">
+      <a id="beforeUpdate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeUpdate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeValidation" data-isabs="false">
+      <a id="beforeValidation:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeValidation</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeValidationOnCreate" data-isabs="false">
+      <a id="beforeValidationOnCreate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeValidationOnCreate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#beforeValidationOnUpdate" data-isabs="false">
+      <a id="beforeValidationOnUpdate:List[(AcademicSemesterMap) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">beforeValidationOnUpdate</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#boundedFieldToItem" data-isabs="false">
+      <a id="boundedFieldToItem((MappedField[String, AcademicSemesterMap], Int)):BoundedIndexField[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">implicit def</span>
+      <span class="symbol"> 
+        <span class="name">boundedFieldToItem</span>
+        
+        <span class="params">(<span name="in">in: (<span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[String, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>], <span name="scala.Int" class="extype">Int</span>)</span>)</span><span class="result">: <span name="net.liftweb.mapper.BoundedIndexField" class="extype">BoundedIndexField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>implicit </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#buildMapper" data-isabs="false">
+      <a id="buildMapper(ResultSet):List[Box[(ResultSet, Int, AcademicSemesterMap) ⇒ Unit]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">buildMapper</span>
+        
+        <span class="params">(<span name="rs">rs: <span name="java.sql.ResultSet" class="extype">ResultSet</span></span>)</span><span class="result">: List[<span name="net.liftweb.common.Box" class="extype">Box</span>[(<span name="java.sql.ResultSet" class="extype">ResultSet</span>, <span name="scala.Int" class="extype">Int</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#buildSelectString" data-isabs="false">
+      <a id="buildSelectString(Seq[SelectableField],SuperConnection,QueryParam[AcademicSemesterMap]*):(String, Box[Long], Box[Long], List[QueryParam[AcademicSemesterMap]])"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">buildSelectString</span>
+        
+        <span class="params">(<span name="fields">fields: Seq[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="conn">conn: SuperConnection</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: (String, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>], <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>], List[<span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]])</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#bulkDelete_!!" data-isabs="false">
+      <a id="bulkDelete_!!(ConnectionIdentifier,QueryParam[AcademicSemesterMap]*):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">bulkDelete_!!</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#bulkDelete_!!" data-isabs="false">
+      <a id="bulkDelete_!!(QueryParam[AcademicSemesterMap]*):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">bulkDelete_!!</span>
+        
+        <span class="params">(<span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#checkNames" data-isabs="false">
+      <a id="checkNames:Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">checkNames</span>
+        
+        <span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#clean_?" data-isabs="false">
+      <a id="clean_?(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">clean_?</span>
+        
+        <span class="params">(<span name="toCheck">toCheck: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">clone</span>
+        
+        <span class="params">()</span><span class="result">: AnyRef</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#columnNamesForInsert" data-isabs="false">
+      <a id="columnNamesForInsert:String"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">columnNamesForInsert</span>
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#columnPrimaryKey_?" data-isabs="false">
+      <a id="columnPrimaryKey_?(String):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">columnPrimaryKey_?</span>
+        
+        <span class="params">(<span name="name">name: String</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#columnQueriesForInsert" data-isabs="false">
+      <a id="columnQueriesForInsert:String"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">columnQueriesForInsert</span>
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#comparePrimaryKeys" data-isabs="false">
+      <a id="comparePrimaryKeys(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">comparePrimaryKeys</span>
+        
+        <span class="params">(<span name="other">other: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper → Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#connectionIdentifier" data-isabs="false">
+      <a id="connectionIdentifier:ConnectionIdentifier"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">connectionIdentifier</span>
+        
+        <span class="result">: ConnectionIdentifier</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#connectionIdentifier" data-isabs="false">
+      <a id="connectionIdentifier(ConnectionIdentifier):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">connectionIdentifier</span>
+        
+        <span class="params">(<span name="id">id: ConnectionIdentifier</span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#count" data-isabs="false">
+      <a id="count(QueryParam[AcademicSemesterMap]*):Long"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">count</span>
+        
+        <span class="params">(<span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#count" data-isabs="false">
+      <a id="count:Long"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">count</span>
+        
+        <span class="result">: <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#countByInsecureSql" data-isabs="false">
+      <a id="countByInsecureSql(String,IHaveValidatedThisSQL):Long"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">countByInsecureSql</span>
+        
+        <span class="params">(<span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="result">: <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#countByInsecureSqlDb" data-isabs="false">
+      <a id="countByInsecureSqlDb(ConnectionIdentifier,String,IHaveValidatedThisSQL):Long"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">countByInsecureSqlDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="result">: <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#countDb" data-isabs="false">
+      <a id="countDb(ConnectionIdentifier,QueryParam[AcademicSemesterMap]*):Long"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">countDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="scala.Long" class="extype">Long</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#countryField" data-isabs="false">
+      <a id="countryField:Box[MappedCountry[AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">countryField</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedCountry" class="extype">MappedCountry</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#create" data-isabs="false">
+      <a id="create:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">create</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#createInstance" data-isabs="false">
+      <a id="createInstance:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">createInstance</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#createInstance" data-isabs="false">
+      <a id="createInstance(ConnectionIdentifier,ResultSet,List[Box[(ResultSet, Int, AcademicSemesterMap) ⇒ Unit]]):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">createInstance</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="rs">rs: <span name="java.sql.ResultSet" class="extype">ResultSet</span></span>, <span name="mapFuncs">mapFuncs: List[<span name="net.liftweb.common.Box" class="extype">Box</span>[(<span name="java.sql.ResultSet" class="extype">ResultSet</span>, <span name="scala.Int" class="extype">Int</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]]</span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#createInstances" data-isabs="false">
+      <a id="createInstances[T](ConnectionIdentifier,ResultSet,Box[Long],Box[Long],(AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">createInstances</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="rs">rs: <span name="java.sql.ResultSet" class="extype">ResultSet</span></span>, <span name="start">start: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>]</span>, <span name="omax">omax: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>]</span>, <span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#createInstances" data-isabs="false">
+      <a id="createInstances(ConnectionIdentifier,ResultSet,Box[Long],Box[Long]):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">createInstances</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="rs">rs: <span name="java.sql.ResultSet" class="extype">ResultSet</span></span>, <span name="start">start: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>]</span>, <span name="omax">omax: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>]</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#crudSnippets" data-isabs="false">
+      <a id="crudSnippets:SnippetPF"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">crudSnippets</span>
+        
+        <span class="result">: SnippetPF</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#crudSnippets_?" data-isabs="false">
+      <a id="crudSnippets_?:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">crudSnippets_?</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dbAddTable" data-isabs="false">
+      <a id="dbAddTable:Box[() ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbAddTable</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[() ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#dbCalculateConnectionIdentifier" data-isabs="false">
+      <a id="dbCalculateConnectionIdentifier:PartialFunction[AcademicSemesterMap, ConnectionIdentifier]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbCalculateConnectionIdentifier</span>
+        
+        <span class="result">: <span name="scala.PartialFunction" class="extype">PartialFunction</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>, ConnectionIdentifier]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dbDefaultConnectionIdentifier" data-isabs="false">
+      <a id="dbDefaultConnectionIdentifier:ConnectionIdentifier"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbDefaultConnectionIdentifier</span>
+        
+        <span class="result">: ConnectionIdentifier</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dbIndexes" data-isabs="false">
+      <a id="dbIndexes:List[BaseIndex[AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbIndexes</span>
+        
+        <span class="result">: List[<span name="net.liftweb.mapper.BaseIndex" class="extype">BaseIndex</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dbName" data-isabs="false">
+      <a id="dbName:String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbName</span>
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → Mapper → BaseMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#dbSelectDBConnectionForFind" data-isabs="false">
+      <a id="dbSelectDBConnectionForFind:PartialFunction[Long, ConnectionIdentifier]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbSelectDBConnectionForFind</span>
+        
+        <span class="result">: <span name="scala.PartialFunction" class="extype">PartialFunction</span>[<span name="scala.Long" class="extype">Long</span>, ConnectionIdentifier]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#dbStringToKey" data-isabs="false">
+      <a id="dbStringToKey(String):Box[Long]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbStringToKey</span>
+        
+        <span class="params">(<span name="in">in: String</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.Long" class="extype">Long</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dbTableName" data-isabs="false">
+      <a id="dbTableName:String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dbTableName</span>
+        
+        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#db_can_delete_?" data-isabs="false">
+      <a id="db_can_delete_?:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">db_can_delete_?</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#decodeFromJSON_!" data-isabs="false">
+      <a id="decodeFromJSON_!(JObject,Boolean):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">decodeFromJSON_!</span>
+        
+        <span class="params">(<span name="json">json: <span name="net.liftweb.json.JsonAST.JObject" class="extype">JObject</span></span>, <span name="markFieldsAsDirty">markFieldsAsDirty: <span name="scala.Boolean" class="extype">Boolean</span></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#delete_!" data-isabs="false">
+      <a id="delete_!(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">delete_!</span>
+        
+        <span class="params">(<span name="toDelete">toDelete: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#delete_!" data-isabs="false">
+      <a id="delete_!:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">delete_!</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#dirty_?" data-isabs="false">
+      <a id="dirty_?(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dirty_?</span>
+        
+        <span class="params">(<span name="toTest">toTest: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#dirty_?" data-isabs="false">
+      <a id="dirty_?:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">dirty_?</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#displayFieldAsLineElement" data-isabs="false">
+      <a id="displayFieldAsLineElement:(NodeSeq) ⇒ NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">var</span>
+      <span class="symbol"> 
+        <span class="name">displayFieldAsLineElement</span>
+        
+        <span class="result">: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#displayNameToHeaderElement" data-isabs="false">
+      <a id="displayNameToHeaderElement:(String) ⇒ NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">var</span>
+      <span class="symbol"> 
+        <span class="name">displayNameToHeaderElement</span>
+        
+        <span class="result">: (String) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#doHtmlLine" data-isabs="false">
+      <a id="doHtmlLine(AcademicSemesterMap):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">doHtmlLine</span>
+        
+        <span class="params">(<span name="toLine">toLine: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#doPostCommit" data-isabs="false">
+      <a id="doPostCommit(() ⇒ Unit):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">doPostCommit</span>
+        
+        <span class="params">(<span name="func">func: () ⇒ <span name="scala.Unit" class="extype">Unit</span></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#editSnippet" data-isabs="false">
+      <a id="editSnippet(NodeSeq):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">editSnippet</span>
+        
+        <span class="params">(<span name="xhtml">xhtml: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#editSnippetCallback" data-isabs="false">
+      <a id="editSnippetCallback(AcademicSemesterMap):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">editSnippetCallback</span>
+        
+        <span class="params">(<span name="obj">obj: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#editSnippetSetup" data-isabs="false">
+      <a id="editSnippetSetup:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">editSnippetSetup</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#elemName" data-isabs="false">
+      <a id="elemName:String"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">elemName</span>
+        
+        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#encodeAsJSON_!" data-isabs="false">
+      <a id="encodeAsJSON_!(AcademicSemesterMap):JObject"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">encodeAsJSON_!</span>
+        
+        <span class="params">(<span name="toEncode">toEncode: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="net.liftweb.json.JsonAST.JObject" class="extype">JObject</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">eq</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#equals" data-isabs="false">
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">equals</span>
+        
+        <span class="params">(<span name="other">other: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper → AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#fieldByName" data-isabs="false">
+      <a id="fieldByName[T](String,AcademicSemesterMap):Box[MappedField[T, AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldByName</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="fieldName">fieldName: String</span>, <span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[T, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#fieldByName" data-isabs="false">
+      <a id="fieldByName[T](String):Box[MappedField[T, AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldByName</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="fieldName">fieldName: String</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[T, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#fieldMapperPF" data-isabs="false">
+      <a id="fieldMapperPF((BaseOwnedMappedField[AcademicSemesterMap]) ⇒ NodeSeq,AcademicSemesterMap):PartialFunction[String, (NodeSeq) ⇒ NodeSeq]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldMapperPF</span>
+        
+        <span class="params">(<span name="transform">transform: (<span name="net.liftweb.mapper.BaseOwnedMappedField" class="extype">BaseOwnedMappedField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>, <span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.PartialFunction" class="extype">PartialFunction</span>[String, (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#fieldMapperPF" data-isabs="false">
+      <a id="fieldMapperPF((BaseOwnedMappedField[AcademicSemesterMap]) ⇒ NodeSeq):FieldPF"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldMapperPF</span>
+        
+        <span class="params">(<span name="transform">transform: (<span name="net.liftweb.mapper.BaseOwnedMappedField" class="extype">BaseOwnedMappedField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>)</span><span class="result">: FieldPF</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#fieldMatcher" data-isabs="false">
+      <a id="fieldMatcher:PartialFunction[(AcademicSemesterMap, String), MappedField[Any, AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">lazy val</span>
+      <span class="symbol"> 
+        <span class="name">fieldMatcher</span>
+        
+        <span class="result">: <span name="scala.PartialFunction" class="extype">PartialFunction</span>[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>, String), <span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[<span name="scala.Any" class="extype">Any</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#fieldOrder" data-isabs="false">
+      <a id="fieldOrder:List[BaseOwnedMappedField[AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldOrder</span>
+        
+        <span class="result">: List[<span name="net.liftweb.mapper.BaseOwnedMappedField" class="extype">BaseOwnedMappedField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#fieldPF" data-isabs="false">
+      <a id="fieldPF:FieldPF"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fieldPF</span>
+        
+        <span class="result">: FieldPF</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#fieldToItem" data-isabs="false">
+      <a id="fieldToItem[T](MappedField[T, AcademicSemesterMap]):IndexItem[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">implicit def</span>
+      <span class="symbol"> 
+        <span class="name">fieldToItem</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="in">in: <span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[T, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>)</span><span class="result">: <span name="net.liftweb.mapper.IndexItem" class="extype">IndexItem</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>implicit </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap#fill" data-isabs="false">
+      <a id="fill(AcademicSemesterMap):AcademicSemester"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fill</span>
+        
+        <span class="params">(<span name="m">m: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.model.administration.AcademicSemester" class="extype" href="../../model/administration/AcademicSemester.html">AcademicSemester</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap#fill" data-isabs="false">
+      <a id="fill(AcademicSemester):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">fill</span>
+        
+        <span class="params">(<span name="in">in: <a name="ch.epfl.craft.recom.model.administration.AcademicSemester" class="extype" href="../../model/administration/AcademicSemester.html">AcademicSemester</a></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      
+    </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">finalize</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#find" data-isabs="false">
+      <a id="find(QueryParam[AcademicSemesterMap]*):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">find</span>
+        
+        <span class="params">(<span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#find" data-isabs="false">
+      <a id="find(ConnectionIdentifier,String):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">find</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="key">key: String</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#find" data-isabs="false">
+      <a id="find(String):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">find</span>
+        
+        <span class="params">(<span name="key">key: String</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#find" data-isabs="false">
+      <a id="find(List[String]):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">find</span>
+        
+        <span class="params">(<span name="key">key: List[String]</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#find" data-isabs="false">
+      <a id="find(Any):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">find</span>
+        
+        <span class="params">(<span name="key">key: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAll" data-isabs="false">
+      <a id="findAll(QueryParam[AcademicSemesterMap]*):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAll</span>
+        
+        <span class="params">(<span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAll" data-isabs="false">
+      <a id="findAll():List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAll</span>
+        
+        <span class="params">()</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllByInsecureSql" data-isabs="false">
+      <a id="findAllByInsecureSql(String,IHaveValidatedThisSQL):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllByInsecureSql</span>
+        
+        <span class="params">(<span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllByInsecureSqlDb" data-isabs="false">
+      <a id="findAllByInsecureSqlDb(ConnectionIdentifier,String,IHaveValidatedThisSQL):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllByInsecureSqlDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllByPreparedStatement" data-isabs="false">
+      <a id="findAllByPreparedStatement(ConnectionIdentifier,PreparedStatement):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllByPreparedStatement</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="stmt">stmt: <span name="java.sql.PreparedStatement" class="extype">PreparedStatement</span></span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllByPreparedStatement" data-isabs="false">
+      <a id="findAllByPreparedStatement((SuperConnection) ⇒ PreparedStatement):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllByPreparedStatement</span>
+        
+        <span class="params">(<span name="f">f: (SuperConnection) ⇒ <span name="java.sql.PreparedStatement" class="extype">PreparedStatement</span></span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllByPreparedStatementDb" data-isabs="false">
+      <a id="findAllByPreparedStatementDb[T](ConnectionIdentifier,PreparedStatement)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllByPreparedStatementDb</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="stmt">stmt: <span name="java.sql.PreparedStatement" class="extype">PreparedStatement</span></span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllDb" data-isabs="false">
+      <a id="findAllDb(ConnectionIdentifier,QueryParam[AcademicSemesterMap]*):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllDb" data-isabs="false">
+      <a id="findAllDb(ConnectionIdentifier):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllFields" data-isabs="false">
+      <a id="findAllFields(Seq[SelectableField],QueryParam[AcademicSemesterMap]*):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllFields</span>
+        
+        <span class="params">(<span name="fields">fields: <span name="scala.collection.Seq" class="extype">Seq</span>[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findAllFieldsDb" data-isabs="false">
+      <a id="findAllFieldsDb(ConnectionIdentifier,Seq[SelectableField],QueryParam[AcademicSemesterMap]*):List[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findAllFieldsDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="fields">fields: Seq[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: List[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#findApplier" data-isabs="false">
+      <a id="findApplier(String,AnyRef):Box[(AcademicSemesterMap, AnyRef) ⇒ Unit]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findApplier</span>
+        
+        <span class="params">(<span name="name">name: String</span>, <span name="inst">inst: AnyRef</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>, AnyRef) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findByKey" data-isabs="false">
+      <a id="findByKey(Long):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findByKey</span>
+        
+        <span class="params">(<span name="key">key: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findDb" data-isabs="false">
+      <a id="findDb(ConnectionIdentifier,Seq[SelectableField],QueryParam[AcademicSemesterMap]*):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="fields">fields: Seq[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findDb" data-isabs="false">
+      <a id="findDb(ConnectionIdentifier,QueryParam[AcademicSemesterMap]*):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findDb" data-isabs="false">
+      <a id="findDb(ConnectionIdentifier,Any):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findDb</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="key">key: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findDbByKey" data-isabs="false">
+      <a id="findDbByKey(ConnectionIdentifier,Seq[SelectableField],Long):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findDbByKey</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="fields">fields: Seq[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="key">key: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findDbByKey" data-isabs="false">
+      <a id="findDbByKey(ConnectionIdentifier,Long):Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findDbByKey</span>
+        
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="key">key: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findMap" data-isabs="false">
+      <a id="findMap[T](QueryParam[AcademicSemesterMap]*)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findMap</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findMapByInsecureSql" data-isabs="false">
+      <a id="findMapByInsecureSql[T](String,IHaveValidatedThisSQL)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findMapByInsecureSql</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findMapByInsecureSqlDb" data-isabs="false">
+      <a id="findMapByInsecureSqlDb[T](ConnectionIdentifier,String,IHaveValidatedThisSQL)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findMapByInsecureSqlDb</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="query">query: String</span>, <span name="checkedBy">checkedBy: <span name="net.liftweb.mapper.IHaveValidatedThisSQL" class="extype">IHaveValidatedThisSQL</span></span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findMapDb" data-isabs="false">
+      <a id="findMapDb[T](ConnectionIdentifier,QueryParam[AcademicSemesterMap]*)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findMapDb</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#findMapFieldDb" data-isabs="false">
+      <a id="findMapFieldDb[T](ConnectionIdentifier,Seq[SelectableField],QueryParam[AcademicSemesterMap]*)((AcademicSemesterMap) ⇒ Box[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findMapFieldDb</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="dbId">dbId: ConnectionIdentifier</span>, <span name="fields">fields: Seq[<span name="net.liftweb.mapper.SelectableField" class="extype">SelectableField</span>]</span>, <span name="by">by: <span name="net.liftweb.mapper.QueryParam" class="extype">QueryParam</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]*</span>)</span><span class="params">(<span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="net.liftweb.common.Box" class="extype">Box</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findOrCreate" data-isabs="false">
+      <a id="findOrCreate(List[String]):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findOrCreate</span>
+        
+        <span class="params">(<span name="key">key: List[String]</span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#findOrCreate" data-isabs="false">
+      <a id="findOrCreate(Any):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">findOrCreate</span>
+        
+        <span class="params">(<span name="key">key: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#flatMapFieldTitleForm" data-isabs="false">
+      <a id="flatMapFieldTitleForm[T](AcademicSemesterMap,(NodeSeq, Box[NodeSeq], NodeSeq) ⇒ Seq[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">flatMapFieldTitleForm</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ Seq[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#flatMapFieldTitleForm" data-isabs="false">
+      <a id="flatMapFieldTitleForm[T]((NodeSeq, Box[NodeSeq], NodeSeq) ⇒ Seq[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">flatMapFieldTitleForm</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.collection.Seq" class="extype">Seq</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#flatMapFieldTitleForm2" data-isabs="false">
+      <a id="flatMapFieldTitleForm2[T](AcademicSemesterMap,(NodeSeq, net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap], NodeSeq) ⇒ Seq[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">flatMapFieldTitleForm2</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ Seq[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#flatMapFieldTitleForm2" data-isabs="false">
+      <a id="flatMapFieldTitleForm2[T]((NodeSeq, net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap], NodeSeq) ⇒ Seq[T]):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">flatMapFieldTitleForm2</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.collection.Seq" class="extype">Seq</span>[T]</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#formFields" data-isabs="false">
+      <a id="formFields(AcademicSemesterMap):List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">formFields</span>
+        
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#formFields" data-isabs="false">
+      <a id="formFields:List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">formFields</span>
+        
+        <span class="result">: List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#formatFormElement" data-isabs="false">
+      <a id="formatFormElement:(NodeSeq, NodeSeq) ⇒ NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">var</span>
+      <span class="symbol"> 
+        <span class="name">formatFormElement</span>
+        
+        <span class="result">: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#formatFormLine" data-isabs="false">
+      <a id="formatFormLine(NodeSeq,NodeSeq):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">formatFormLine</span>
+        
+        <span class="params">(<span name="displayName">displayName: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>, <span name="form">form: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#getActualBaseField" data-isabs="false">
+      <a id="getActualBaseField(AcademicSemesterMap,BaseOwnedMappedField[AcademicSemesterMap]):BaseOwnedMappedField[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">getActualBaseField</span>
+        
+        <span class="params">(<span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="protoField">protoField: <span name="net.liftweb.mapper.BaseOwnedMappedField" class="extype">BaseOwnedMappedField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>)</span><span class="result">: <span name="net.liftweb.mapper.BaseOwnedMappedField" class="extype">BaseOwnedMappedField</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#getActualField" data-isabs="false">
+      <a id="getActualField[T](AcademicSemesterMap,MappedField[T, AcademicSemesterMap]):MappedField[T, AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">getActualField</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="actual">actual: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="protoField">protoField: <span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[T, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>)</span><span class="result">: <span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[T, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
+      <a id="getClass():java.lang.Class[_]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">getClass</span>
+        
+        <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap#getSingleton" data-isabs="false">
+      <a id="getSingleton:ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.type"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">getSingleton</span>
+        
+        <span class="result">: ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.type</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a> → KeyedMapper → Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#hashCode" data-isabs="false">
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">hashCode</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper → AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#htmlHeaders" data-isabs="false">
+      <a id="htmlHeaders:NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">htmlHeaders</span>
+        
+        <span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#htmlLine" data-isabs="false">
+      <a id="htmlLine:NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">htmlLine</span>
+        
+        <span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#indexedField" data-isabs="false">
+      <a id="indexedField(AcademicSemesterMap):Box[MappedField[Any, AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">indexedField</span>
+        
+        <span class="params">(<span name="toSave">toSave: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedField" class="extype">MappedField</span>[<span name="scala.Any" class="extype">Any</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">isInstanceOf</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.level" data-isabs="false">
+      <a id="level:level"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="AcademicSemesterMap$level$.html"><span class="name">level</span></a>
+        
+        <span class="result"> extends MappedString[AcademicSemesterMap]</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#localeField" data-isabs="false">
+      <a id="localeField:Box[MappedLocale[AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">localeField</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedLocale" class="extype">MappedLocale</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap#lvl_str_len" data-isabs="false">
+      <a id="lvl_str_len:Int"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">lvl_str_len</span>
+        
+        <span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#mapFieldTitleForm" data-isabs="false">
+      <a id="mapFieldTitleForm[T](AcademicSemesterMap,(NodeSeq, Box[NodeSeq], NodeSeq) ⇒ T):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">mapFieldTitleForm</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ T</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#mapFieldTitleForm" data-isabs="false">
+      <a id="mapFieldTitleForm[T]((NodeSeq, Box[NodeSeq], NodeSeq) ⇒ T):List[T]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">mapFieldTitleForm</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="func">func: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>, <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>], <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ T</span>)</span><span class="result">: List[T]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#mappedFields" data-isabs="false">
+      <a id="mappedFields:Seq[BaseMappedField]"></a>
+      <h4 class="signature">
+      <span class="kind">lazy val</span>
+      <span class="symbol"> 
+        <span class="name">mappedFields</span>
+        
+        <span class="result">: Seq[<span name="net.liftweb.mapper.BaseMappedField" class="extype">BaseMappedField</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper → BaseMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#mappedFieldsForModel" data-isabs="false">
+      <a id="mappedFieldsForModel:List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">lazy val</span>
+      <span class="symbol"> 
+        <span class="name">mappedFieldsForModel</span>
+        
+        <span class="result">: List[net.liftweb.mapper.MappedField[_, ch.epfl.craft.recom.storage.maps.AcademicSemesterMap]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#modSnippet" data-isabs="false">
+      <a id="modSnippet(NodeSeq,AcademicSemesterMap,(AcademicSemesterMap) ⇒ Unit):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">modSnippet</span>
+        
+        <span class="params">(<span name="xhtml">xhtml: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>, <span name="obj">obj: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="cleanup">cleanup: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">ne</span>
+        
+        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">notify</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#notifyAll" data-isabs="false">
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">notifyAll</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#objFromIndexedParam" data-isabs="false">
+      <a id="objFromIndexedParam:Box[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">objFromIndexedParam</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#prependField" data-isabs="false">
+      <a id="prependField(FieldPF):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">prependField</span>
+        
+        <span class="params">(<span name="pf">pf: FieldPF</span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.IdPK#primaryKeyField" data-isabs="false">
+      <a id="primaryKeyField:ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.id.type"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">primaryKeyField</span>
+        
+        <span class="result">: ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.id.type</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>IdPK</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap#read" data-isabs="false">
+      <a id="read:AcademicSemester"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">read</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.model.administration.AcademicSemester" class="extype" href="../../model/administration/AcademicSemester.html">AcademicSemester</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMapper#reload" data-isabs="false">
+      <a id="reload:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">reload</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#rootClass" data-isabs="false">
+      <a id="rootClass:java.lang.Class[_ &gt;: ?0]"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">rootClass</span>
+        
+        <span class="result">: java.lang.Class[_ &gt;: ?0]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#runSafe" data-isabs="false">
+      <a id="runSafe[T](⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">runSafe</span>
+        <span class="tparams">[<span name="T">T</span>]</span>
+        <span class="params">(<span name="f">f: ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#runValidationList" data-isabs="false">
+      <a id="runValidationList(AcademicSemesterMap):List[FieldError]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">runValidationList</span>
+        
+        <span class="params">(<span name="toValidate">toValidate: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: List[<span name="net.liftweb.util.FieldError" class="extype">FieldError</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#safe_?" data-isabs="false">
+      <a id="safe_?:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">safe_?</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#save" data-isabs="false">
+      <a id="save(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">save</span>
+        
+        <span class="params">(<span name="toSave">toSave: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#save" data-isabs="false">
+      <a id="save():Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">save</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper → BaseMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#saveMe" data-isabs="false">
+      <a id="saveMe():AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">saveMe</span>
+        
+        <span class="params">()</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#saved_?" data-isabs="false">
+      <a id="saved_?(AcademicSemesterMap):Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">saved_?</span>
+        
+        <span class="params">(<span name="toSave">toSave: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#saved_?" data-isabs="false">
+      <a id="saved_?:Boolean"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">saved_?</span>
+        
+        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap.semester" data-isabs="false">
+      <a id="semester:semester"></a>
+      <h4 class="signature">
+      <span class="kind">object</span>
+      <span class="symbol"> 
+        <a href="AcademicSemesterMap$semester$.html"><span class="name">semester</span></a>
+        
+        <span class="result"> extends MappedLongForeignKey[AcademicSemesterMap, SemesterMap]</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#suplementalJs" data-isabs="false">
+      <a id="suplementalJs(Box[KeyObfuscator]):List[(String, JsExp)]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">suplementalJs</span>
+        
+        <span class="params">(<span name="ob">ob: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.KeyObfuscator" class="extype">KeyObfuscator</span>]</span>)</span><span class="result">: List[(String, <span name="net.liftweb.http.js.JsExp" class="extype">JsExp</span>)]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
+      <a id="synchronized[T0](⇒ T0):T0"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">synchronized</span>
+        <span class="tparams">[<span name="T0">T0</span>]</span>
+        <span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#thisToMappee" data-isabs="false">
+      <a id="thisToMappee(Mapper[AcademicSemesterMap]):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">implicit def</span>
+      <span class="symbol"> 
+        <span class="name">thisToMappee</span>
+        
+        <span class="params">(<span name="in">in: <span name="net.liftweb.mapper.Mapper" class="extype">Mapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>implicit </dd><dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#timeZoneField" data-isabs="false">
+      <a id="timeZoneField:Box[MappedTimeZone[AcademicSemesterMap]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">timeZoneField</span>
+        
+        <span class="result">: <span name="net.liftweb.common.Box" class="extype">Box</span>[<span name="net.liftweb.mapper.MappedTimeZone" class="extype">MappedTimeZone</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#toForm" data-isabs="false">
+      <a id="toForm(AcademicSemesterMap):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toForm</span>
+        
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toForm" data-isabs="false">
+      <a id="toForm(Box[String],(NodeSeq) ⇒ NodeSeq,(AcademicSemesterMap) ⇒ Unit):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toForm</span>
+        
+        <span class="params">(<span name="button">button: <span name="net.liftweb.common.Box" class="extype">Box</span>[String]</span>, <span name="redoSnippet">redoSnippet: (<span name="scala.xml.NodeSeq" class="extype">NodeSeq</span>) ⇒ <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>, <span name="onSuccess">onSuccess: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Unit" class="extype">Unit</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toForm" data-isabs="false">
+      <a id="toForm(Box[String],(AcademicSemesterMap) ⇒ Any):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toForm</span>
+        
+        <span class="params">(<span name="button">button: <span name="net.liftweb.common.Box" class="extype">Box</span>[String]</span>, <span name="f">f: (<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toForm" data-isabs="false">
+      <a id="toForm(Box[String],String):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toForm</span>
+        
+        <span class="params">(<span name="button">button: <span name="net.liftweb.common.Box" class="extype">Box</span>[String]</span>, <span name="onSuccess">onSuccess: String</span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#toHtml" data-isabs="false">
+      <a id="toHtml(AcademicSemesterMap):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toHtml</span>
+        
+        <span class="params">(<span name="toMap">toMap: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toHtml" data-isabs="false">
+      <a id="toHtml:NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toHtml</span>
+        
+        <span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toString" data-isabs="false">
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toString</span>
+        
+        <span class="params">()</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper → AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#toXml" data-isabs="false">
+      <a id="toXml(AcademicSemesterMap):Elem"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toXml</span>
+        
+        <span class="params">(<span name="what">what: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: <span name="scala.xml.Elem" class="extype">Elem</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#toXml" data-isabs="false">
+      <a id="toXml:Elem"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">toXml</span>
+        
+        <span class="result">: <span name="scala.xml.Elem" class="extype">Elem</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#unapply" data-isabs="false">
+      <a id="unapply(Any):Option[AcademicSemesterMap]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">unapply</span>
+        
+        <span class="params">(<span name="key">key: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="prt" name="net.liftweb.mapper.MetaMapper#updateFromJSON_!" data-isabs="false">
+      <a id="updateFromJSON_!(AcademicSemesterMap,JObject):AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">updateFromJSON_!</span>
+        
+        <span class="params">(<span name="toUpdate">toUpdate: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>, <span name="json">json: <span name="net.liftweb.json.JsonAST.JObject" class="extype">JObject</span></span>)</span><span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#validate" data-isabs="false">
+      <a id="validate(AcademicSemesterMap):List[FieldError]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">validate</span>
+        
+        <span class="params">(<span name="toValidate">toValidate: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: List[<span name="net.liftweb.util.FieldError" class="extype">FieldError</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.Mapper#validate" data-isabs="false">
+      <a id="validate:List[FieldError]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">validate</span>
+        
+        <span class="result">: List[<span name="net.liftweb.util.FieldError" class="extype">FieldError</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Mapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#validation" data-isabs="false">
+      <a id="validation:List[(AcademicSemesterMap) ⇒ List[FieldError]]"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">validation</span>
+        
+        <span class="result">: List[(<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>) ⇒ List[<span name="net.liftweb.util.FieldError" class="extype">FieldError</span>]]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#viewSnippet" data-isabs="false">
+      <a id="viewSnippet(NodeSeq):NodeSeq"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">viewSnippet</span>
+        
+        <span class="params">(<span name="xhtml">xhtml: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>)</span><span class="result">: <span name="scala.xml.NodeSeq" class="extype">NodeSeq</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.KeyedMetaMapper#viewSnippetSetup" data-isabs="false">
+      <a id="viewSnippetSetup:AcademicSemesterMap"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">viewSnippetSetup</span>
+        
+        <span class="result">: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>KeyedMetaMapper</dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">wait</span>
+        
+        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">wait</span>
+        
+        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li visbl="pub" name="net.liftweb.mapper.MetaMapper#whatToSet" data-isabs="false">
+      <a id="whatToSet(AcademicSemesterMap):String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">whatToSet</span>
+        
+        <span class="params">(<span name="toSave">toSave: <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></span>)</span><span class="result">: String</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MetaMapper</dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        <div name="net.liftweb.mapper.LongKeyedMetaMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.LongKeyedMetaMapper" class="extype">LongKeyedMetaMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.KeyedMetaMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.KeyedMetaMapper" class="extype">KeyedMetaMapper</span>[<span name="scala.Long" class="extype">Long</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.MetaMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.MetaMapper" class="extype">MetaMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.BaseMetaMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.BaseMetaMapper" class="extype">BaseMetaMapper</span></h3>
+            </div><div name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="parent">
+              <h3>Inherited from <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a></h3>
+            </div><div name="net.liftweb.mapper.IdPK" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.IdPK" class="extype">IdPK</span></h3>
+            </div><div name="net.liftweb.mapper.LongKeyedMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.LongKeyedMapper" class="extype">LongKeyedMapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.BaseLongKeyedMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.BaseLongKeyedMapper" class="extype">BaseLongKeyedMapper</span></h3>
+            </div><div name="net.liftweb.mapper.KeyedMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.KeyedMapper" class="extype">KeyedMapper</span>[<span name="scala.Long" class="extype">Long</span>, <a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.BaseKeyedMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.BaseKeyedMapper" class="extype">BaseKeyedMapper</span></h3>
+            </div><div name="net.liftweb.mapper.Mapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.Mapper" class="extype">Mapper</span>[<a name="ch.epfl.craft.recom.storage.maps.AcademicSemesterMap" class="extype" href="AcademicSemesterMap.html">AcademicSemesterMap</a>]</h3>
+            </div><div name="net.liftweb.mapper.BaseMapper" class="parent">
+              <h3>Inherited from <span name="net.liftweb.mapper.BaseMapper" class="extype">BaseMapper</span></h3>
+            </div><div name="net.liftweb.util.FieldContainer" class="parent">
+              <h3>Inherited from <span name="net.liftweb.util.FieldContainer" class="extype">FieldContainer</span></h3>
+            </div><div name="scala.AnyRef" class="parent">
+              <h3>Inherited from AnyRef</h3>
+            </div><div name="scala.Any" class="parent">
+              <h3>Inherited from <span name="scala.Any" class="extype">Any</span></h3>
+            </div>
+
+      </div>
+      
+      <div id="tooltip"></div>
+      
+    </body>
+      </html>
