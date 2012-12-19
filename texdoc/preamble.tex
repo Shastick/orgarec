@@ -1,0 +1,98 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template for LCA-EPFL Students Report
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt, a4paper, twoside]{report}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[applemac]{inputenc}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{epsfig}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{nomencl}
+% For customizing header and footers
+\usepackage{fancyhdr}
+\usepackage{lscape}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{color}
+\usepackage{dirtree}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Customizing headers and footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancyplain}
+
+%\fancypagestyle{plain}{  }
+
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\tit}{}
+\newcommand{\aut}{FirstName LastNAme}
+\renewcommand{\sectionmark}[1]{ \markright{\thesection.\ #1}}
+
+% Header
+\rhead[\fancyplain{}{} ] {\textbf{\fancyplain{ \nouppercase{\rightmark} \hspace{1cm} \thepage } { \nouppercase{\rightmark}\hspace{1cm} \thepage } }}
+\chead[\fancyplain{}{} ] {\fancyplain{}{} }
+\lhead[\textbf{\fancyplain{\thepage \hspace{1cm} \nouppercase{\leftmark} }{\thepage \hspace{1cm} \nouppercase{\leftmark}} }]{\fancyplain{}{} }
+%Footer
+\lfoot[\fancyplain{\tit}{\tit}] {\fancyplain{}{}}
+\cfoot[\fancyplain{}{}] {\fancyplain{}{}}
+\rfoot[\fancyplain{}{}] {\fancyplain{\tit}{\tit}}
+
+\setlength{\headsep}{0.6cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For code insertion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "define" Scala
+\lstdefinelanguage{scala}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,if,implicit,import,match,mixin,%
+    new,null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,%
+    type,val,var,while,with,yield},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+ 
+% Default settings for code listings
+\lstset{frame=tb,
+  language=scala,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+\makeglossary
+\renewcommand{\nomname}{List of Acronyms}
+
+%makeindex PDMReport.glo -s nomencl.ist -o PDMReport.gls

@@ -1,0 +1,73 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble for defining document properties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{preamble}
+
+% begin latex document
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{cover}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dedication page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{dedication}
+
+% Start roman numbering
+\pagenumbering{roman} \setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION : TABLE OF CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\clearpage
+\thispagestyle{empty}
+\cleardoublepage
+
+% Set to arabic numbering after this
+\pagenumbering{arabic} \setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION : INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+\subsection{Project Directory Structure}
+We use sbt to build the code, and hence stick to its structure. Furthermore, the \verb|view|, \verb|core| and \verb|import| segments of the application each live in their own sbt sub-project.
+
+The relevant directories are listed hereafter:
+
+\dirtree{%
+.0 .
+.1 core/.
+.2 src/main/scala/.
+.3 ch/epfl/recom.
+.4 graph/.
+.4 model/.
+.5 administration/.
+.4 processing/.
+.5 maps/.
+.6 assist/.
+.4 storage/.
+.5 db/.
+.5 maps/.
+.4 util/.
+.1 import/.
+.2 src/main/scala/.
+.3 ch/epfl/craft/recom/dimport/isa/.
+.1 view/.
+.2 src/main/scala.
+.3 ch/epfl/craft/view.
+.4 model/.
+.4 snippet/.
+.5 draw/.
+.4 util/.
+.4 view/.
+}
+
+
+\end{document}
