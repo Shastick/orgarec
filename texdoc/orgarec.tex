@@ -35,8 +35,18 @@
 % SECTION : INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
+\section{About}
+This project's original motivation was to explore the study plans proposed by each section based on actual student choices -- analysing what course students took -- instead of the standard course prerequisites and descriptions that are generally available, and to offer a tool to allow anybody to take a look at the data for himself.
 
-\subsection{Project Directory Structure}
+To do so required two important steps:
+\begin{itemize}
+\item Represent the students study history with a useful model;
+\item Find good visual representations for the available data.
+\end{itemize}
+
+Both steps were achieved and solid foundations were lain to enable the implementation of new visualisations.
+
+\section{Project Directory Structure}
 We use sbt to build the code, and hence stick to its structure. Furthermore, the \verb|view|, \verb|core| and \verb|import| segments of the application each live in their own sbt sub-project.
 
 The relevant directories are listed hereafter:
@@ -68,6 +78,21 @@ The relevant directories are listed hereafter:
 .4 util/.
 .4 view/.
 }
+
+\chapter{Model}
+The model is built around the students and their course history, and this is reflected at the database level. Whenever going through the model is useless (most of the cases that were implemented), the data is accessed and processed directly through stored procedures.
+
+For further in-depth data-mining where individual course histories must be analysed, we believe the model will prove useful.
+\section{Structure}
+
+\section{Database}
+\subsection{Stored Procedures}
+
+\chapter{Visualisation}
+
+\section{Technology}
+
+\section{Implemented}
 
 
 \end{document}
