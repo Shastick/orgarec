@@ -54,18 +54,21 @@ The relevant directories are listed hereafter:
 \dirtree{%
 .0 .
 .1 core/.
-.2 src/main/scala/.
-.3 ch/epfl/recom.
-.4 graph/.
-.4 model/.
-.5 administration/.
-.4 processing/.
-.5 maps/.
-.6 assist/.
-.4 storage/.
-.5 db/.
-.5 maps/.
-.4 util/.
+.2 src/main/.
+.3 scala/.
+.4 ch/epfl/recom.
+.5 graph/.
+.5 model/.
+.6 administration/.
+.5 processing/.
+.6 maps/.
+.7 assist/.
+.5 storage/.
+.6 db/.
+.6 maps/.
+.5 util/.
+.3 plpgsql/.
+.3 sqlview/.
 .1 import/.
 .2 src/main/scala/.
 .3 ch/epfl/craft/recom/dimport/isa/.
@@ -89,17 +92,46 @@ For further in-depth data-mining where individual course histories must be analy
 
 \subsection{Stored Procedures}
 The following stored procedures are already available:
+\paragraph{computeCostudents}
+Populates the \verb|courserelationmap| table with the co-students count between any two courses.
 
-\begin{description}
-\item\verb|plop|
-\end{description}
+\paragraph{sectionperTopicDetail} Gets details about section participation in each topic given by a section and during which academic level.
+
+Example: \verb|SELECT sectionPerTopicDetail| ('{SHS}'::varchar[],'{MA1,MA3}'::varchar[],\\'2012-07-01','2012-07-01')
+
+Returns: the topic isa\_id and name, the section participating in this topic (NOT the one teaching it),
+the average participating students from the section and the total number of students in this topic.
+these two last numbers are averaged over the number of courses that were considered in the query
+(if a span greater that 1 semester is provided, several occurences of the same topic will be counted.) 
+students not in the specified academic leves (here: MA1, MA3) are not counted.
+
+\paragraph{sectionTopics} Returns the topics teached by the specified sections
+
+usage: \verb|sectionTopics('{IN,SC}'::varchar[])|
+
+\paragraph{sectionTopicsWStudentCount} Return the topics teached by the specified sections, and the quantity of students that attended during the specified period.
+
+usage: \verb|sectionTopics('{IN,SC}'::varchar[],'2011-07-01','2012-07-01')|
+
+\paragraph{topicCostudentsSemFilter} get the costudents quantity between any two topics taught by the specified sections during the specified time interval and at the specified academic level.
+
+usage : select \verb|topicCostudents|('{SC,IN}'::varchar[],'{BA1}'::varchar[],
+'2011-07-01','2012-07-01)
+
+\paragraph{topicCostudents} Get the costudents quantity between two topics taught by the specified section during the specified time interval
+
+usage : select topicCostudents('{SC,IN}'::varchar[],'2011-07-01','2012-07-01)
+
+\paragraph{topicSectionRatio} Returns the sections present in this course and the corresponding ratio. The ratio is averaged over the number of courses that occurred in the given time interval.
+
+usage: select \verb|topicsectionratio(<isa_id>,'2011-07-01','2012-07-01)|
 
 \chapter{Visualisation}
 
 \section{Technology}
-The web application is written in Lift, which is also Scala based, enabling an easy integration with the core.
+The web application and data serving is done in Lift, which is also Scala based, enabling an easy integration with the core.
 
-JavaScript is also extensively used for the visualisation part.
+JavaScript is extensively used for the actual visualisation part in the browser.
 
 \section{Implemented visualisations}
 
