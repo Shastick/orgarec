@@ -88,9 +88,60 @@ The relevant directories are listed hereafter:
 The model is built around the students and their course history, and this is reflected at the database level. Whenever going through the model is useless (most of the cases that were implemented), the data is accessed and processed directly through stored procedures.
 
 For further in-depth data-mining where individual course histories must be analysed, we believe the model will prove useful.
-\section{Structure}
 
-\section{Database}
+\section{Classes}
+A few of the main classes are mentioned hereafter. They are meant to give you a glimpse of the model: for any of the classes referenced within, please refer to the project's Scaladoc\footnote{\url{http://shastick.github.com/orgarec/doc/core/\#package}}.
+
+\begin{multicols}{2}
+\begin{lstlisting}[language=Scala]
+class Topic(
+    val id: String,
+    val name: String,
+    val section: Section,
+    val prerequisites_id: Set[Topic.TopicID],
+    val description: 
+    	Option[String],
+    val credits: Option[Int]
+)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Scala]
+class Student(
+    val id: Student.StudentID,
+    val arrival: AcademicSemester,
+    val section: Option[Section],
+    val currentSemester: Option[AcademicSemester],
+    val semesterHistory: Set[AcademicSemester],
+    val courses: Set[TakenCourse]   
+)
+\end{lstlisting}
+
+\columnbreak
+\begin{lstlisting}[language=Scala]
+class Course(
+    id: String,
+    name: String,
+    section: Section,
+    prerequisites_id: Set[Topic.TopicID],
+    description: Option[String],
+    credits: Option[Int],
+    val semester: Semester,
+    val head: Head
+) extends Topic
+\end{lstlisting}
+\begin{lstlisting}[language=Scala]
+case class TakenCourse(course: Course,
+    count: Int,
+    grade: Option[Int],
+    evaluation: Option[Int],
+    semester: AcademicSemester
+)
+\end{lstlisting}
+
+\end{multicols}
+
+\section{Database Structure}
+The storage layer and structure are mainly defined through Lift's Mapper. Only for the processing and data extraction have stored procedures been written, and tables added manually.
 
 \subsection{Stored Procedures}
 The following stored procedures are already available:
