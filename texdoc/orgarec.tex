@@ -3,6 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{preamble}
 
+\graphicspath{{images/}}
+
 % begin latex document
 \begin{document}
 
@@ -141,7 +143,12 @@ case class TakenCourse(course: Course,
 \end{multicols}
 
 \section{Database Structure}
-The storage layer and structure are mainly defined through Lift's Mapper. Only for the processing and data extraction have stored procedures been written, and tables added manually.
+The storage layer and structure are mainly defined through Lift's Mapper. Only for the processing and data extraction have stored procedures been written, and tables added manually. Figure~\ref{fig:db_schema} shows the database schema.
+
+\begin{figure}
+\center
+\includegraphics[]{schema_ext}
+\end{figure}
 
 \subsection{Stored Procedures}
 The following stored procedures are already available:
