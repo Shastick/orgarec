@@ -145,9 +145,13 @@ case class TakenCourse(course: Course,
 \section{Database Structure}
 The storage layer and structure are mainly defined through Lift's Mapper. Only for the processing and data extraction have stored procedures been written, and tables added manually. Figure~\ref{fig:db_schema} shows the database schema.
 
+To avoid confusion with class names, the database entities representing objects are suffixed with \verb|map|: a \verb|Student| object is stored in the \verb|studentmap| table.
+
 \begin{figure}
 \center
-\includegraphics[]{schema_ext}
+\includegraphics[angle=-90, width=.85\columnwidth]{schema_extended.png}
+\caption{database schema}
+\label{fig:db_schema}
 \end{figure}
 
 \subsection{Stored Procedures}
@@ -191,9 +195,16 @@ usage: select \verb|topicsectionratio(<isa_id>,'2011-07-01','2012-07-01)|
 \section{Technology}
 The web application and data serving is done in Lift, which is also Scala based, enabling an easy integration with the core.
 
-JavaScript is extensively used for the actual visualisation part in the browser.
+JavaScript is extensively used for the actual browser-side visualisation.
 
 \section{Implemented visualisations}
 
+\chapter{Import}
+The \verb|import| project is quite small, but holds a few key urls where data can be obtained from is-academia. As the interface to access the data is currently evolving, a straightforward importation method has not been implemented.
 
+Scala allows easy basic XML manipulation, and examples can be found in the \verb|ISAxmlImporter| object.
+
+\chapter{Improvements}
+\section{Core}
+The following points could 
 \end{document}
