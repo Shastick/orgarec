@@ -244,6 +244,19 @@ No proper import procedure exists at the moment. Once IS-Academia proposes a sta
 Another solution could be to work directly with ISA to access their data without the need of an import step.
 \chapter{Resources}
 
+\section{Quick Start}
+\begin{enumerate}
+\item Clone the \verb|orgarec| repository: \\\verb|git clone https://github.com/Shastick/orgarec.git|
+\item Set the database access information in a property file, located in \\ \verb|view/src/main/resources/props|, (ie: the \verb|orgarec| database on \verb|craftsrv5.epfl.ch|'s Postgres database -- for which you will need access right)
+\item Run sbt, compile the sources and start the application: \\
+\$ \verb|./run|  \\
+$>$ \verb|compile| \\
+$>$ \verb|project view| \\
+$>$ \verb|development:start|
+\item access the application through \verb|http://localhost:8080|
+\end{enumerate}
+We used chromium for our tests, and we recommend to use it to view the application. Other standard-abiding browser seem to do well, but they do not handle the intensive JavaScript usage equally.
+\section{Links}
 \begin{description}
 \item[Documentation] :
 \begin{description}
