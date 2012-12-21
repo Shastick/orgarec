@@ -204,7 +204,40 @@ The \verb|import| project is quite small, but holds a few key urls where data ca
 
 Scala allows easy basic XML manipulation, and examples can be found in the \verb|ISAxmlImporter| object.
 
+\section{ISA interfaces}
+The current interface IS-Academia is actually working on can be found here: \url{https://isanwww1.epfl.ch:8443/site-1.0/}. This is currently a Beta and might hence change quite rapidly.
+
+\subsection{Legacy URLs}
+These URLs were used at the beginning of the semester to build the first database draft. It is unclear if they will still be available in the future, and they are available even from the outside of EPFL's network.
+
+\begin{description}
+\item[Course list] \url{http://isa.epfl.ch/wsa/cles/ClesInscr}. When called with an argument like "2012-2013", it returns the list of all courses. Example: 
+\url{http://isa.epfl.ch/wsa/cles/ClesInscr?invoke=getlistec
+les&wwXAnneeacad=2012-2013}
+
+\item[Course information] Data about a specific course can be obtained through \url{http://isa.epfl.ch/wsa/fiches/FichesCours}. Course keys obtained from the course list are of the form \textbf{M}784635267\_\textbf{G}1378361727\_\textbf{P}100304\_\textbf{P}106177\_\textbf{P}132574
+where the M stands for \emph{Matiere}, the G for \emph{Groupe} and P for \emph{Professeur}. Such a key is used to grab a \emph{Fiche de cours}: \url{http://isa.epfl.ch/wsa/fiches/FichesCours?invoke=getfiches&wwXMatiere=&wwXAnneeacad=&wwCSection=&wwCNiveau=&wwXCle=M784635267_G1378361727_P100304_P106177_P132574}
+\item[Course subscriptions] This interface shows the students subscribed to a given course: \url{http://isa.epfl.ch/wsa/inscr/inscriptions}. Example: \url{http://isa.epfl.ch/wsa/inscr/inscriptions?invoke=getinscriptionsbymatiere&wwXMatiere=&wwXAnneeacad=&wwXSection=&wwXTypesem=&wwXCle=M784635267_G1378361727_P100304_P106177_P132574}
+\end{description}
+
+
 \chapter{Improvements}
 \section{Core}
-The following points could 
+The following parts of the project would deserve further improvements:
+
+\subsection{Database schema}
+The schema contains entities that could be merged, namely:
+
+\begin{description}
+\item \verb|prerequisite| could be merged into \verb|topicrelationmap|
+\item \verb|teaches| and \verb|assists| could be merged into a single entity
+\end{description}
+
+\subsection{Data insertion}
+Currently, the insertion is done via the Mapper object's \verb|fill()| methods. As objects generally contain many other objects that may also require database insertions or updates, many calls go back and forth between the application and the storage, introducing sensible delays.
+
+This is not a problem as long as import operations do not happen too often: should this requirement change, stored procedures would speed up batch-import operations.
+
+\section{Import}
+No proper import procedure exists at the moment. Once IS-Academia proposes a stable and well-defined interface to the required information, a \emph{click-to-import} interface will be a good improvement. 
 \end{document}
