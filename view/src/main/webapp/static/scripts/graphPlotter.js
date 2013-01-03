@@ -239,6 +239,7 @@ function myGraph(el) {
             .attr("y", function(d){return -0.6*node.radius+"px";})
             .attr("width", function(d){return 4*node.radius+"px";})
             .attr("height", function(d){return 4*node.radius+"px";})
+        $( "#tags" ).val(node.name);
 
         getDetails(node.id);
     }
@@ -261,11 +262,11 @@ function myGraph(el) {
                 resolve(availableTags1.filter(function(node){return node.label.toLowerCase().indexOf(request.term.toLowerCase())!==-1}));
             },
             focus: function( event, ui ) {
-                $( "#tags" ).val( ui.item.label );
+                $( "#tags" ).val(ui.item.label );
                 return false;
             },
             select: function( event, ui){
-                $( "#tags" ).val( ui.item.label );
+                $( "#tags" ).val(ui.item.label );
                 actionsOnMouseOver(findNode(ui.item.value))
                 //vis.selectAll('[id^="circle-node-"]')
                     //.transition()
@@ -273,7 +274,7 @@ function myGraph(el) {
                     //.attr("r", function(n){return n.radius + "px"})
                     //.attr("fill", function(d){return d.fill})
                 vis.selectAll("#circle-node-"+ui.item.value)
-
+                return false;
                  //   .transition()
                  //   .attr("r", function(n){return "200px"})
                  //   .attr("fill", "rgba(255,0,0,1)")
