@@ -182,6 +182,8 @@ function myGraph(el) {
             .attr("r", function(d){return d.radius+"px";})
             .attr("stroke", function(d){return "black";})
             .attr("stroke-width",function(d){return 1+"px";})
+            .attr("fill-opacity", "80%")
+            .attr("stroke-opacity", "80%")
             .on("mouseover", actionsOnMouseOver)
             .on("mouseout", actionsOnMouseOut);
 
@@ -191,6 +193,7 @@ function myGraph(el) {
             .attr("y", function(d){return -0.3*d.radius+"px";})
             .attr("width", function(d){return 2*d.radius+"px";})
             .attr("height", function(d){return 2*d.radius+"px";})
+            .attr("line-height", function(d){return d.radius + "px"})
             .append("xhtml:div")
             .attr("dx", "-10em")
             .attr("class", "textContainer")
@@ -202,24 +205,7 @@ function myGraph(el) {
 
         node.exit().transition().remove();
 
-        function actionsOnMouseOver(node){
-            $("#circle-node-"+ node.id).attr("r", 2*node.radius + "px");
-            $("#text-node-"+ node.id)
-                .attr("x", function(d){return -2*node.radius+"px";})
-                .attr("y", function(d){return -0.6*node.radius+"px";})
-                .attr("width", function(d){return 4*node.radius+"px";})
-                .attr("height", function(d){return 4*node.radius+"px";})
-            getDetails(node.id);
-        }
 
-        function actionsOnMouseOut(node){
-            $("#text-node-"+ node.id)
-                .attr("x", function(d){return -node.radius+"px";})
-                .attr("y", function(d){return -0.3*node.radius+"px";})
-                .attr("width", function(d){return 2*node.radius+"px";})
-                .attr("height", function(d){return 2*node.radius+"px";})
-            $("#circle-node-"+ node.id).attr("r", node.radius + "px");
-        }
 
         function tick() {
             link.attr("x1", function(d) { return d.source.x; })
@@ -242,6 +228,31 @@ function myGraph(el) {
             .start();
     };
 
+    function actionsOnMouseOver(node){
+        nodes.forEach(function(node){actionsOnMouseOut(node)})
+        vis.selectAll('[id^="circle-node-"]')
+            .attr("fill", function(d){return d.fill});
+        $("#circle-node-"+ node.id).attr("r", 2*node.radius + "px")
+            .attr("fill", "steelBlue");
+        $("#text-node-"+ node.id)
+            .attr("x", function(d){return -2*node.radius+"px";})
+            .attr("y", function(d){return -0.6*node.radius+"px";})
+            .attr("width", function(d){return 4*node.radius+"px";})
+            .attr("height", function(d){return 4*node.radius+"px";})
+
+        getDetails(node.id);
+    }
+
+    function actionsOnMouseOut(node){
+        $("#text-node-"+ node.id)
+            .attr("x", function(d){return -node.radius+"px";})
+            .attr("y", function(d){return -0.3*node.radius+"px";})
+            .attr("width", function(d){return 2*node.radius+"px";})
+            .attr("height", function(d){return 2*node.radius+"px";})
+            .attr("fill")
+        $("#circle-node-"+ node.id).attr("r", node.radius + "px");
+    }
+
     $(function() {
         $( "#tags" ).autocomplete({
             minLength: 0,
@@ -255,10 +266,17 @@ function myGraph(el) {
             },
             select: function( event, ui){
                 $( "#tags" ).val( ui.item.label );
+                actionsOnMouseOver(findNode(ui.item.value))
+                //vis.selectAll('[id^="circle-node-"]')
+                    //.transition()
+                    //.call(actionsO)
+                    //.attr("r", function(n){return n.radius + "px"})
+                    //.attr("fill", function(d){return d.fill})
                 vis.selectAll("#circle-node-"+ui.item.value)
-                    .transition()
-                    .attr("r", function(n){console.log("plop"); return "200px"})
-                    .attr("fill", "rgba(255,0,0,1)")
+
+                 //   .transition()
+                 //   .attr("r", function(n){return "200px"})
+                 //   .attr("fill", "rgba(255,0,0,1)")
             }
 
         })
