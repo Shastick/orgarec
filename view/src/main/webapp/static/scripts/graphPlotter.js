@@ -185,7 +185,7 @@ function myGraph(el) {
             .attr("fill-opacity", "80%")
             .attr("stroke-opacity", "80%")
             .on("mouseover", actionsOnMouseOver)
-            .on("mouseout", actionsOnMouseOut);
+            //.on("mouseout", );
 
         nodeEnter.append("foreignObject")
             .attr("id", function(d){return "text-node-"+ d.id})
@@ -228,10 +228,14 @@ function myGraph(el) {
             .start();
     };
 
+    var selectedNode = null;
+
     function actionsOnMouseOver(node){
-        nodes.forEach(function(node){actionsOnMouseOut(node)})
-        vis.selectAll('[id^="circle-node-"]')
-            .attr("fill", function(d){return d.fill});
+        if(selectedNode !== null){
+            unselectNode(selectedNode)
+        }
+        selectedNode = node
+
         $("#circle-node-"+ node.id).attr("r", 2*node.radius + "px")
             .attr("fill", "steelBlue");
         $("#text-node-"+ node.id)
@@ -241,17 +245,31 @@ function myGraph(el) {
             .attr("height", function(d){return 4*node.radius+"px";})
         $( "#tags" ).val(node.name);
 
+        vis.selectAll('[class=link][id*='+ node.id+']')
+           .attr("stroke", "rgba(255, 0, 0, 0.7)")
+
         getDetails(node.id);
     }
 
-    function actionsOnMouseOut(node){
+    function unselectNode(node){
+        vis.selectAll('[class=link][id*='+ node.id+']')
+            .attr("stroke", function(d){
+                if (d.showLink)
+                    return "rgba(200, 50, 255, 0.2)";
+                else return "transparent";
+            })
+
         $("#text-node-"+ node.id)
             .attr("x", function(d){return -node.radius+"px";})
             .attr("y", function(d){return -0.3*node.radius+"px";})
             .attr("width", function(d){return 2*node.radius+"px";})
             .attr("height", function(d){return 2*node.radius+"px";})
-            .attr("fill")
-        $("#circle-node-"+ node.id).attr("r", node.radius + "px");
+
+        $("#circle-node-"+ node.id)
+            .attr("fill", node.fill)
+            .attr("r", node.radius + "px");
+
+        selectedNode = null;
     }
 
     $(function() {
