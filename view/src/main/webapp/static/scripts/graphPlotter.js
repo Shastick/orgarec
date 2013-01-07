@@ -12,6 +12,7 @@ function myGraph(el) {
     */
     this.addNode = function (node) {
         if(findNode(node.id) ==null){
+            node.radius = 2*node.radius;
             nodes.push(node);
             update();
         }
@@ -192,13 +193,15 @@ function myGraph(el) {
         nodeEnter.append("foreignObject")
             .attr("id", function(d){return "text-node-"+ d.id})
             .attr("x", function(d){return -d.radius+"px";})
-            .attr("y", function(d){return -0.3*d.radius+"px";})
+            .attr("y", function(d){return -d.radius+"px";})
             .attr("width", function(d){return 2*d.radius+"px";})
             .attr("height", function(d){return 2*d.radius+"px";})
-            .attr("line-height", function(d){return d.radius + "px"})
             .append("xhtml:div")
-            .attr("dx", "-10em")
             .attr("class", "textContainer")
+            .style("line-height", function(d){return 2*d.radius+"px";} )
+            .append("xhtml:div")
+            //.attr("dx", "-10em")
+            .attr("class", "textCentered")
             .html(function(d) {return d.name;});
 
         /* Add title */
@@ -238,13 +241,17 @@ function myGraph(el) {
         }
         selectedNode = node
 
-        $("#circle-node-"+ node.id).attr("r", 2*node.radius + "px")
+        vis.select("#circle-node-"+ node.id)
+            .attr("r", 2*node.radius + "px")
             .attr("fill", "steelBlue");
-        $("#text-node-"+ node.id)
+
+        vis.select("#text-node-"+ node.id)
             .attr("x", function(d){return -2*node.radius+"px";})
-            .attr("y", function(d){return -0.6*node.radius+"px";})
+            .attr("y", function(d){return -2*node.radius+"px";})
             .attr("width", function(d){return 4*node.radius+"px";})
             .attr("height", function(d){return 4*node.radius+"px";})
+            .select(".textContainer")
+            .style("line-height", function(d){return 4*d.radius+"px";} )
         $( "#tags" ).val(node.name);
 
         vis.selectAll('[class=link][id*='+ node.id+']')
@@ -261,13 +268,15 @@ function myGraph(el) {
                 else return "transparent";
             })
 
-        $("#text-node-"+ node.id)
+        vis.select("#text-node-"+ node.id)
             .attr("x", function(d){return -node.radius+"px";})
-            .attr("y", function(d){return -0.3*node.radius+"px";})
+            .attr("y", function(d){return -node.radius+"px";})
             .attr("width", function(d){return 2*node.radius+"px";})
             .attr("height", function(d){return 2*node.radius+"px";})
+            .select(".textContainer")
+            .style("line-height", function(d){return 2*d.radius+"px";} )
 
-        $("#circle-node-"+ node.id)
+        vis.select("#circle-node-"+ node.id)
             .attr("fill", node.fill)
             .attr("r", node.radius + "px");
 

@@ -24,6 +24,13 @@ body {
     font: 16px;
     text-align:center;
     z-index: 100;
+    vertical-align: middle;
+}
+
+.textCentered {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.2em;
 }
 
 .nodetext {
