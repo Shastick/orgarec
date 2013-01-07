@@ -129,6 +129,8 @@ function myGraph(el) {
             .attr("id",function(d){return d.source.id + "-" + d.target.id;})
             .attr("class","link")
             .attr("stroke", function(d){
+                if (selectedNode !== null && (d.source == selectedNode || d.target == selectedNode) )
+                    return "rgba(255,0,0, 0.7)"
                 if (d.showLink)
                     return "rgba(200, 50, 255, 0.2)";
                 else return "transparent";
