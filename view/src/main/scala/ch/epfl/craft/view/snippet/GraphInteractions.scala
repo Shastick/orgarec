@@ -52,11 +52,11 @@ class GraphInteractions extends StatefulSnippet {
     val max = 100
     val cb = SHtml.ajaxCall(JsRaw("ui.value"), value => updatePercentage(value.toInt))
     val script = Script(new JsCmd {
-      def toJsCmd = "$(function() {"+
-        "var thresholdSlider = $(\"#"+id+"\");"+
+      def toJsCmd = " jQuery(function() {"+
+        "var thresholdSlider = jQuery(\"#"+id+"\");"+
         "var updateValue = function (event, ui) { "+
-        "var value = $('#"+id+"').slider('value');  "+
-        "var val = $('#threshLabel');  "+
+        "var value = jQuery('#"+id+"').slider('value');  "+
+        "var val = jQuery('#threshLabel');  "+
         "val.text(value)"+
         "};"+
         "thresholdSlider.slider({ "+
@@ -65,7 +65,7 @@ class GraphInteractions extends StatefulSnippet {
         "value: " + percentageThreshold + ", " +
         "change: function(event, ui) {" +
         "updateValue(event,ui);" +
-        cb._2.toJsCmd +
+          cb._2.toJsCmd +
         "}," +
         "slide: updateValue,"+
         "create: updateValue"+
@@ -80,6 +80,8 @@ class GraphInteractions extends StatefulSnippet {
 
 
   def updatePercentage(cs: Int) = {
+    println("call received")
+
     val commands =
       if(cs > percentageThreshold) {
         val toDelete = UserDisplay.links.filter(link => link.coStudentsPercentage < cs)
