@@ -1,4 +1,4 @@
-function drawBarPlot(csvStr,selector,w,h) {
+function drawBarPlot2(csvStr,selector,w,h) {
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = w - margin.left - margin.right,
         height = h - margin.top - margin.bottom;
@@ -54,7 +54,7 @@ function drawBarPlot(csvStr,selector,w,h) {
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d) { return x(d.name); })
+        .attr("x", function(d) { return x(d.name)})
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.ratio); })
         .attr("height", function(d) { return height - y(d.ratio); });
@@ -64,7 +64,7 @@ function drawBarPlot(csvStr,selector,w,h) {
 
 
 
-function drawBarPlot2(csvStr,selector,w,h){
+function drawBarPlot(csvStr,selector,w,h){
 
     var data = [{key: "Cumulative Return",values: d3.csv.parse(csvStr)}];
 
@@ -74,10 +74,13 @@ function drawBarPlot2(csvStr,selector,w,h){
       var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.name })
             .y(function(d) { return d.ratio })
+            .width(w)
+            .height(h)
             .forceY([0,1])
             .staggerLabels(true)
-            .tooltips(true)
+            //.tooltips(true)
             .showValues(true)
+            .color(["blue"])
 
       d3.select(selector).append("svg")
             .datum(data)

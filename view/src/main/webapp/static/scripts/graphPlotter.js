@@ -2,6 +2,7 @@
  * Inspired by: http://stackoverflow.com/questions/11400241/updating-links-on-a-force-directed-graph-from-dynamic-json-data
  */
 
+jQuery.noConflict();
 
 var graph;
 
@@ -64,6 +65,7 @@ function myGraph(el) {
     };
 
     this.addLink = function (link) {
+        console.log("addlink called")
         if(findNode(link.source)!= null && findNode(link.target)!= null)  {
             links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink, "coStudents":link.coStudents});
             update();
@@ -138,6 +140,8 @@ function myGraph(el) {
             })
             .attr("stroke-width", function(d){return 20 - d.distance/5});
 
+
+        // TODO use following source for tooltips: http://bl.ocks.org/1212215
         linkEnter.append("title")
             .text(function(d){
                 return d.coStudents + " students followed both courses";
@@ -252,7 +256,7 @@ function myGraph(el) {
             .attr("height", function(d){return 4*node.radius+"px";})
             .select(".textContainer")
             .style("line-height", function(d){return 4*d.radius+"px";} )
-        $( "#tags" ).val(node.name);
+        jQuery( "#tags" ).val(node.name);
 
         vis.selectAll('[class=link][id*='+ node.id+']')
            .attr("stroke", "rgba(255, 0, 0, 0.7)")
@@ -283,30 +287,22 @@ function myGraph(el) {
         selectedNode = null;
     }
 
-    $(function() {
-        $( "#tags" ).autocomplete({
+    jQuery(function() {
+        jQuery( "#tags" ).autocomplete({
             minLength: 0,
             source: function(request, resolve) {
-                var availableTags1 = $.map(nodes, function(node){return {value: node.id, label: node.name}})
+                var availableTags1 = jQuery.map(nodes, function(node){return {value: node.id, label: node.name}})
                 resolve(availableTags1.filter(function(node){return node.label.toLowerCase().indexOf(request.term.toLowerCase())!==-1}));
             },
             focus: function( event, ui ) {
-                $( "#tags" ).val(ui.item.label );
+                jQuery( "#tags" ).val(ui.item.label );
                 return false;
             },
             select: function( event, ui){
-                $( "#tags" ).val(ui.item.label );
+                jQuery( "#tags" ).val(ui.item.label );
                 actionsOnMouseOver(findNode(ui.item.value))
-                //vis.selectAll('[id^="circle-node-"]')
-                    //.transition()
-                    //.call(actionsO)
-                    //.attr("r", function(n){return n.radius + "px"})
-                    //.attr("fill", function(d){return d.fill})
                 vis.selectAll("#circle-node-"+ui.item.value)
                 return false;
-                 //   .transition()
-                 //   .attr("r", function(n){return "200px"})
-                 //   .attr("fill", "rgba(255,0,0,1)")
             }
 
         })
@@ -329,7 +325,7 @@ function makeGraph(json){
     }
 }
 
-$(document).ready( function(){
+jQuery(document).ready( function(){
     getGraph("makeGraph");
     }
 )
