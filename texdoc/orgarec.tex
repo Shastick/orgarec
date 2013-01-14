@@ -89,7 +89,7 @@ The relevant directories are listed hereafter:
 \chapter{Model}
 The model is built around the students and their course history, and this is reflected at the database level. Whenever going through the model is useless (most of the cases that were implemented), the data is accessed and processed directly through stored procedures.
 
-For further in-depth data-mining where individual course histories must be analysed, we believe the model will prove useful.
+For further in-depth data-mining where individual course histories must be analyzed, we believe the model will prove useful.
 
 \section{Classes}
 A few of the main classes are mentioned hereafter. They are meant to give you a glimpse of the model: for any of the classes referenced within, please refer to the project's Scaladoc\footnote{\url{http://shastick.github.com/orgarec/doc/core/\#package}}.
@@ -193,41 +193,41 @@ usage: select \verb|topicsectionratio(<isa_id>,'2011-07-01','2012-07-01)|
 \chapter{Visualisation}
 
 \section{Technology}
-The web application and data serving is done using Lift, which is also Scala based, enabling an easy integration with the core.
+The web application and data serving use Lift, which is also Scala based, enabling an easy integration with the core.
 
 JavaScript is extensively used for the actual browser-side visualization. The D3.js\footnote{www.d3js.org} library provides advanced visualization tools. 
 
 \section{Implemented visualisations}
-The final version of our project includes two different visualization types. The first one, which was the goal of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of courses which are linked by their relations. The second type of representation, which was found to be really useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
+The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of courses which are linked by their relations. The second type of representation, which was found to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
 
 \subsection{Organic graph of courses}
-This visualization is meant to show easily the relationship between courses and the study plan links. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
+This visualization is meant to easily visualize the relationship between courses and the study plan links. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
 
 \paragraph{Key principles}
-In this visualizations courses are represented as nodes in a graph. Their relations are represented as links between nodes. 
+In this visualization, courses are represented as nodes in a graph, while their relations are represented as links between the nodes. 
 
 Here are the parameters we represent and how we represent them: 
-\begin{itemize}
-\item Number of credits of a class: Size of node
-\item Percentage of students following two classes: length and width of links
-\end{itemize}
+\begin{description}
+\item[Credits:] size of the node ;
+\item[Costudents] (The percentage of students following two classes): length and width of the link.
+\end{description}
 
 The settings tab enables to choose easily which study plans we want to represent using the following parameters: 
-\begin{itemize}
-\item Sections: the sections of courses we want to show
-\item Semesters: the range of semesters in which we want to represent the data
-\item Level: the level of courses (possible to select multiples)
-\end{itemize}
+\begin{description}
+\item[Sections:] the sections from which we want to show the courses;
+\item[Semesters:] the time range we want to consider;
+\item[Acedemic Semester:] the academic level (BA1, MA3,...) of the students taking the courses.
+\end{description}
 
-It is also possible in the settings tab to modify the minimum number of co-students to represent an edge between two classes in order to generate a lighter or more complete graph. 
+It is also possible to modify the minimum number of co-students required to show an edge between two classes in order to generate a lighter or more complete graph. 
 
 \paragraph{Displaying more information on courses}
-When a course is selected (either by putting the mouse on the node or by using the search tool), some additional information (if available) is displayed on the lower left corner of the screen. For now, in this additional information field there is a graph showing the most related classes (by number of co-students) and the sections of students following this class. Course links' are also highlighted in red and the size of the course node is doubled to make it more visible.
+When a course is selected (either by putting the mouse on the node or by using the search tool), some additional information (if available) is displayed on the lower left corner of the screen. For now, in this additional information field, there is a graph showing the most related classes (by number of co-students) and the sections of students following this class. Course links' are also highlighted in red and the size of the course node is doubled to improve its visibility.
 
-These bar plots give a more precise information on a specific class than the original graph but would be useless if we used only them. 
+These bar plots give a more precise information on a specific class than the original graph but would be less useful if we used only them. 
 
 \paragraph{Search tool}
-On the upper right corner of the page, there is a search tool which enables to find easily a class, it uses autocomplete so finding a class is really easy. This tool was implemented because the user study conducted in the end of the semester showed that it was the most requested feature. 
+On the upper right corner of the page, there is a search tool allowing for quick class lookups using auto-complete. This feature was implemented after the user study, conducted in the end of the semester, showed that it was the most requested feature. 
 
 \paragraph{What can be added}
 In the main graph it is possible to represent data using many parameters. 
@@ -246,10 +246,10 @@ For edges we have:
 \item Opacity
 \end{itemize}
 
-The length of an edge is an approximation since it is often impossible to generate a graph with arbitrary lengths for all relations, however, the force directed layout gives a great approximation. 
+The length of an edge is an approximation, as it is often impossible to generate a graph with arbitrary lengths for all relations. The force directed layout, however, provides a great replacement. 
 
 \subsection{SHS explorer/Section explorer}
-The section explorer considers the repartition of students from different sections in courses as a flow. The goal of this graph is to visualize easily which are the most popular courses depending on sections of students following them. 
+The section explorer considers the repartition of students from different sections in courses as a flow. The goal of this graph is to easily visualize which  courses are the most popular,  in terms of which sections the students following them are in.
 
 
 \section{User study}
