@@ -78,13 +78,18 @@ select {
 
 /* Details specific */
 #detail-container{
-	float: left;
-    position: relative;
-    width: 200px;
+	background-color: rgba(248,248,248,0.7);
+	border-radius: 5px;
+	float: right;
+    position: fixed;
+    width: 250px;
+    bottom: 20px;
+    right: 20px;
     margin: 20px;
     z-index:2;
     font-size: 1.1em;
     text-align: right;
+    padding: 5px;
 }
 
 #detail-container h1{
