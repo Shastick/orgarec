@@ -2,6 +2,7 @@
 % Preamble for defining document properties
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{preamble}
+\usepackage{multirow}
 
 \graphicspath{{images/}}
 
@@ -287,11 +288,70 @@ The section explorer considers the repartition of students from different sectio
 \end{figure}
 
 \section{User study}
-A user study was conducted among students of the IC faculty and particularly of the Computer Supported Cooperative Work course.  
+A user study was conducted among 16 students of the IC faculty and particularly of the Computer Supported Cooperative Work course.  
 
 The most recurrent remark was that it was really hard to find a particular course on the graph, that is why we implemented the autocomplete search tool.
 
+\subsection{Quantitative analysis}
+Table \ref{tab:userstudy} shows the results for quantitative questions. The first remark that we can make out of these results is that users did not see how this application could help them make decisions about their study plan and this even if they found the information displayed relevant and easy to access. We can also see that users did not find any use in the section/shs explorer. 
+\begin{table}[H]
+\center
+\begin{tabular}{|c|l|c|}
+\hline 
+Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
+\hline
+\multirow{2}{*}{General} 
+	& Does the presented information seem relevant to you? & 3.54 \\
+	& Did you find it easy to browse and use the app' & 3.54 \\
+\hline
+\multirow{4}{*}{Course explorer}
+	& Did you identify clusters representing your study experience? & 3.46 \\
+	& Was it easy to find a class? & 3.30 \\
+	& Would it help you choose a speciality/optional class & 2.77 \\
+	& Are the additional graphs related to specific classes useful? & 2.69\\
+\hline
+\multirow{4}{*}{Section explorer}
+	& Does the representation hold relevant information? & 3.62 \\
+	& Would it help you find an interesting SHS/optional class & 2.69 \\
+	& Would you choose your SHS based on this kind of graphs& 2.84 \\
+\hline
+\end{tabular}
+\label{tab:userstudy}
+\caption{Grades given by testers, from 1 (not a all) to 5 (strongly)}
+\end{table}
 
+\subsection{Qualitative analysis}
+
+\begin{description}
+\item[Course Explorer] \quad 
+	\begin{itemize}
+	\item \emph{Some data is wrong concerning the years where classes are given}
+	\item \emph{Nodes displayed as circles should be though again: not enough space for text}
+	\item \emph{I don't understand how it works. There is not enough information.}
+	\end{itemize}
+\item[Section Explorer] \quad 
+	\begin{itemize}
+	\item \emph{I don't really understand what it represents, some information would be great}
+	\item \emph{I can see where my colleagues from my section go}
+	\item \emph{I think that representing section versus courses is good, but I choose my courses given my interests, not given other peoples choices}
+	\item \emph{You should add the description of the class and the grading policy}
+	\item \emph{It would be interesting to have previously chosen SHS, bra size + Relationship status.}
+	\item \emph{Relation with hobbies and what people want to do after EPFL}
+	\end{itemize}
+\item[General remarks] \quad
+	\begin{itemize}
+	\item \emph{The visualizations are great but I am not sure that it is necessary}
+	\item \emph{Thi application would be more suited for the board and commissions than for students}
+	\end{itemize}
+\end{description}
+
+\subsection{Conclusion of the user study}
+
+This remarks show that the testers had a lot of difficulties to understand easily how the visualizations worked and what they represented. It is thus necessary to implement an \emph{help} button. 
+
+The course explorer is appreciated and representative of students experience but students don't see how it can help them in their use of the study plan. It would be interesting to get the feedback of board members to know if it can help them understand better the study plan structure in practice.
+
+The section explorer is less appreciated than the course explorer. When creating it we though that it would be the most helpful representation but the study showed us that we were wrong and that people, away from the fact that it represents some interesting relations, find it not useful. 
 
 \chapter{Import}
 The \verb|import| project is quite small, but holds a few key urls where data can be obtained from is-academia. As the interface to access the data is currently evolving, a straightforward importation method has not been implemented.
@@ -336,6 +396,13 @@ This is not a problem as long as import operations do not happen too often: shou
 No proper import procedure exists at the moment. Once IS-Academia proposes a stable and well-defined interface to the required information, a \emph{click-to-import} interface will be a good improvement. 
 
 Another solution could be to work directly with ISA to access their data without the need of an import step.
+
+\section{Visualisation}
+The user study showed that some tools to help users understand the way the application works are necessary. It would also be appreciated if the interface was globally simpler to lower the learning time. 
+
+The visualization is very powerful, it would now be interesting to try different improvements in order to match better user's needs. This, of course, will be possible when the target audience for this service will be decided between students, teachers and comity members. 
+
+
 \chapter{Resources}
 
 \section{Quick Start}
