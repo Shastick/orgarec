@@ -82,10 +82,10 @@ select {
 	border-radius: 5px;
 	float: right;
     position: fixed;
-    width: 250px;
-    bottom: 20px;
+    width: auto;
+    max-width: 250px;
+    bottom: 40px;
     right: 20px;
-    margin: 20px;
     z-index:2;
     font-size: 1.1em;
     text-align: right;
@@ -100,7 +100,7 @@ select {
     background: transparent;
     border: none;
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     left:20px;
     width: 500px;
     height: 230px;
