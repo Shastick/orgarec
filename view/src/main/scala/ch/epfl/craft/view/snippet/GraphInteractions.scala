@@ -112,6 +112,10 @@ class GraphInteractions extends StatefulSnippet {
     <h1>{n.node.name}</h1>
     <span>{n.node.section.name} section</span><br/>
     ++ n.node.credits.map(c => <span>{c} Credits</span>)
+    ++ <br/>
+    ++ n.metadata.collect{
+      case StudentsQuantity(q) => q
+    }.map(q => <span>{q.toInt} Students</span>)
     ).getOrElse(NodeSeq.Empty)
   }
   
@@ -145,7 +149,7 @@ class GraphInteractions extends StatefulSnippet {
   def getDetails = JsRaw(
     "function getDetails(nodeID) {" +
       SHtml.ajaxCall(JsVar("nodeID"), id => {
-        SetHtml("detail-data", nodeDetails(id))
+        SetHtml("detail-data", nodeDetails(id)) &
         SetHtml("costudents-subgraph-data", coStudSubGraph(id))   &
         SetHtml("sectionratio-subgraph-data", sectionSubGraph(id))
         })._2.toJsCmd
