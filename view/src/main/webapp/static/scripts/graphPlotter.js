@@ -8,6 +8,7 @@ var graph;
 
 function myGraph(el) {
 
+
    /* Add and remove elements on the graph object
     * Constraint: if a node with same id is already in the graph, the node is not added.
     */
@@ -65,7 +66,6 @@ function myGraph(el) {
     };
 
     this.addLink = function (link) {
-        console.log("addlink called")
         if(findNode(link.source)!= null && findNode(link.target)!= null)  {
             links.push({"source":findNode(link.source),"target":findNode(link.target),"distance":link.distance, "showLink": link.showLink, "coStudents":link.coStudents});
             update();
@@ -90,6 +90,10 @@ function myGraph(el) {
     // set up the D3 visualisation in the specified element
     var w = 4000,
         h = 3000;
+
+    //var zoomFactor = 4;
+    var zoom = d3.behavior.zoom();
+
     var vis = d3.select(el)
         .append("svg:svg")
         .attr("width", "100%")
@@ -99,7 +103,7 @@ function myGraph(el) {
         .attr("viewBox","0 0 "+w+" "+h)
         .attr("perserveAspectRatio","xMinYMid")
         .append('svg:g')
-        .call(d3.behavior.zoom().on("zoom", redraw))
+        .call(zoom.on("zoom", redraw))
         .append('svg:g');
 
     /* For zoom in non-occupied places */
@@ -246,6 +250,7 @@ function myGraph(el) {
         selectedNode = node
 
         vis.select("#circle-node-"+ node.id)
+            .transition()
             .attr("r", 2*node.radius + "px")
             .attr("fill", "steelBlue");
 
@@ -281,10 +286,22 @@ function myGraph(el) {
             .style("line-height", function(d){return 2*d.radius+"px";} )
 
         vis.select("#circle-node-"+ node.id)
-            .attr("fill", node.fill)
-            .attr("r", node.radius + "px");
+            .transition()
+            .attr("r", node.radius + "px")
+            .attr("fill", node.fill);
 
         selectedNode = null;
+    }
+
+    function zoomOnNode(node){
+        var zoomFactor = parseInt(vis.select("#circle-node-"+node.id).attr("r")) *0.25
+        var transx = (-node.x)*zoomFactor + w/2,
+            transy = (-node.y)*zoomFactor + h/2;
+        vis.transition().attr("transform", "translate(" + transx + "," + transy + ") scale(" + zoomFactor + ")");
+        zoom.scale(zoomFactor);
+        zoom.translate([transx, transy]);
+
+
     }
 
     jQuery(function() {
@@ -301,7 +318,7 @@ function myGraph(el) {
             select: function( event, ui){
                 jQuery( "#tags" ).val(ui.item.label );
                 actionsOnMouseOver(findNode(ui.item.value))
-                vis.selectAll("#circle-node-"+ui.item.value)
+                zoomOnNode(findNode(ui.item.value))
                 return false;
             }
 
