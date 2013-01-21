@@ -196,13 +196,13 @@ usage: select \verb|topicsectionratio(<isa_id>,'2011-07-01','2012-07-01)|
 \section{Technology}
 The web application and data serving use Lift, which is also Scala based, enabling an easy integration with the core.
 
-JavaScript is extensively used for the actual browser-side visualization. The D3.js\footnote{www.d3js.org} library provides advanced visualization tools. 
+JavaScript is extensively used for the actual browser-side visualization. The D3.js\footnote{www.d3js.org} library provides advanced and complete visualization tools. 
 
 \section{Implemented visualisations}
-The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of courses which are linked by their relations. The second type of representation, which was found to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
+The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of topics which are linked by their relations. The second type of representation, which was thought to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
 
 \subsection{Organic graph of courses}
-This visualization is meant to easily visualize the relationship between courses and the study plan links. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
+This visualization is meant to easily visualize the relationship between various courses and the study plan. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
 
 \paragraph{Key principles}
 In this visualization, courses are represented as nodes in a graph, while their relations are represented as links between the nodes. 
