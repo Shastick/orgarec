@@ -39,7 +39,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 \section{About}
-This project's original motivation was to explore the study plans proposed by each section based on actual student choices -- analysing what course students took -- instead of the standard course prerequisites and descriptions that are generally available, and to offer a tool to allow anybody to take a look at the data for himself.
+This project's original motivation was to explore the study plans proposed by each section based on actual student choices -- analysing what courses students took -- instead of the standard course prerequisites and descriptions that are generally available, and to offer a tool to allow anybody to take a look at the data for himself.
 
 To do so required two important steps:
 \begin{itemize}
@@ -199,7 +199,7 @@ The web application and data serving use Lift, which is also Scala based, enabli
 JavaScript is extensively used for the actual browser-side visualization. The D3.js\footnote{www.d3js.org} library provides advanced and complete visualization tools. 
 
 \section{Implemented visualisations}
-The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of topics which are linked by their relations. The second type of representation, which was thought to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
+The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of topics which are linked by their relations (co-students ratio for now). The second type of representation, which was thought to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
 
 \subsection{Organic graph of courses}
 This visualization is meant to easily visualize the relationship between various courses and the study plan. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
@@ -273,6 +273,7 @@ For edges we have:
 \item Length/Stroke width
 \item Color/Stroke color
 \item Opacity
+\item Shape of edge (using arrows and other signs)
 \end{itemize}
 
 The length of an edge is an approximation, as it is often impossible to generate a graph with arbitrary lengths for all relations. The force directed layout, however, provides a great replacement. 
@@ -310,7 +311,7 @@ Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
 	& Would it help you choose a speciality/optional class & 2.77 \\
 	& Are the additional graphs related to specific classes useful? & 2.69\\
 \hline
-\multirow{4}{*}{Section explorer}
+\multirow{3}{*}{Section explorer}
 	& Does the representation hold relevant information? & 3.62 \\
 	& Would it help you find an interesting SHS/optional class & 2.69 \\
 	& Would you choose your SHS based on this kind of graphs& 2.84 \\
@@ -341,7 +342,7 @@ Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
 \item[General remarks] \quad
 	\begin{itemize}
 	\item \emph{The visualizations are great but I am not sure that it is necessary}
-	\item \emph{This application would be more suited for the board and commissions than for students}
+	\item \emph{This application would be more suited for boards and commissions than for students}
 	\end{itemize}
 \end{description}
 
@@ -396,6 +397,8 @@ This is not a problem as long as import operations do not happen too often: shou
 No proper import procedure exists at the moment. Once IS-Academia proposes a stable and well-defined interface to the required information, a \emph{click-to-import} interface will be a good improvement. 
 
 Another solution could be to work directly with ISA to access their data without the need of an import step.
+
+Finally, it would be great to have a deeper access to is-academia's data in order to obtain more details such as course grades, students grades, success rates... This would require some anonymization, but would increase the value of our product. Moreover, it would interesting to compute the semantic distance between courses by using either their description or all the data available on Moodle. 
 
 \section{Visualisation}
 The user study showed that some tools to help users understand the way the application works are necessary. It would also be appreciated if the interface was globally simpler to lower the learning time. 
