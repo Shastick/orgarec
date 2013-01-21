@@ -202,7 +202,7 @@ JavaScript is extensively used for the actual browser-side visualization. The D3
 The final version of our project includes two different visualization types. The first one, which was the primary objective of the project, represents a force directed graph\footnote{https://github.com/mbostock/d3/wiki/Force-Layout} of topics which are linked by their relations (co-students ratio for now). The second type of representation, which was thought to be useful to explore SHS courses, helps representing the repartition of students in courses given their section using a Sankey diagram\footnote{https://github.com/d3/d3-plugins/tree/master/sankey}. 
 
 \subsection{Organic graph of courses}
-This visualization is meant to easily visualize the relationship between various courses and the study plan. In this project we use only the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
+This visualization is meant to easily visualize the relationship between various courses and the study plan. In this project we only use the percentage of students taking two courses to evaluate their distance, the more co-students they have, the closer they will be.  
 
 \paragraph{Key principles}
 In this visualization, courses are represented as nodes in a graph, while their relations are represented as links between the nodes. 
@@ -225,12 +225,11 @@ It is also possible to modify the minimum number of co-students required to show
 \paragraph{Displaying more information on courses}
 When a course is selected (either by putting the mouse on the node or by using the search tool), some additional information (if available) is displayed on the lower left corner of the screen. For now, in this additional information field, there is a graph showing the most related classes (by number of co-students) and the sections of students following this class. Course links' are also highlighted in red and the size of the course node is doubled to improve its visibility.
 
-These bar plots give a more precise information on a specific class than the original graph but would be less useful if we used only them. 
+These bar plots provide more precise informations on a specific class than the original graph but would be less useful if we used alone. 
 
 \paragraph{Search tool}
 On the upper right corner of the page, there is a search tool allowing for quick class lookups using auto-complete. This feature was implemented after the user study, conducted in the end of the semester, showed that it was the most requested feature. 
 
-\paragraph{Overview}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/view_orga_global}
@@ -264,19 +263,19 @@ In the main graph it is possible to represent data using many parameters.
 For nodes we have (if we consider that nodes are circles, but we can also change the shape):
 \begin{itemize}
 \item Radius/Stroke width
-\item Color/Stroke color
+\item Fill/Stroke color
 \item Opacity
 \end{itemize}
 
 For edges we have: 
 \begin{itemize}
 \item Length/Stroke width
-\item Color/Stroke color
+\item Fill/Stroke color
 \item Opacity
 \item Shape of edge (using arrows and other signs)
 \end{itemize}
 
-The length of an edge is an approximation, as it is often impossible to generate a graph with arbitrary lengths for all relations. The force directed layout, however, provides a great replacement. 
+The length of an edge is an approximation, as it is often impossible to generate a graph with arbitrary lengths for every edge. The force directed layout, however, provides a great replacement. 
 
 \subsection{SHS explorer/Section explorer}
 The section explorer considers the repartition of students from different sections in courses as a flow. The goal of this graph is to easily visualize which  courses are the most popular,  in terms of which sections the students following them are in.
@@ -289,12 +288,12 @@ The section explorer considers the repartition of students from different sectio
 \end{figure}
 
 \section{User study}
-A user study was conducted among 16 students of the IC faculty and particularly of the Computer Supported Cooperative Work course.  
+A user study was conducted among 16 students of the IC faculty, particularly from the Computer Supported Cooperative Work course.  
 
-The most recurrent remark was that it was really hard to find a particular course on the graph, that is why we implemented the autocomplete search tool.
+The most recurrent remark was that it was really hard to find a particular course on the graph, leading us to the implementation of the auto-complete search tool.
 
 \subsection{Quantitative analysis}
-Table \ref{tab:userstudy} shows the results for quantitative questions. The first remark that we can make out of these results is that users did not see how this application could help them make decisions about their study plan and this even if they found the information displayed relevant and easy to access. We can also see that users did not find any use in the section/shs explorer. 
+Table \ref{tab:userstudy} shows the results for quantitative questions. The first observation that we can make is that users did not see how this application could help them make decisions about their study plan, even if they found the information displayed relevant and easy to access. We can also see that users did not find any particular use in the section/shs explorer. 
 \begin{table}[H]
 \center
 \begin{tabular}{|c|l|c|}
@@ -303,18 +302,18 @@ Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
 \hline
 \multirow{2}{*}{General} 
 	& Does the presented information seem relevant to you? & 3.54 \\
-	& Did you find it easy to browse and use the app' & 3.54 \\
+	& Did you find it easy to browse and use the app'? & 3.54 \\
 \hline
 \multirow{4}{*}{Course explorer}
 	& Did you identify clusters representing your study experience? & 3.46 \\
 	& Was it easy to find a class? & 3.30 \\
-	& Would it help you choose a speciality/optional class & 2.77 \\
+	& Would it help you choose a speciality/optional class? & 2.77 \\
 	& Are the additional graphs related to specific classes useful? & 2.69\\
 \hline
 \multirow{3}{*}{Section explorer}
 	& Does the representation hold relevant information? & 3.62 \\
-	& Would it help you find an interesting SHS/optional class & 2.69 \\
-	& Would you choose your SHS based on this kind of graphs& 2.84 \\
+	& Would it help you find an interesting SHS/optional class? & 2.69 \\
+	& Would you choose your SHS based on this kind of graphs? & 2.84 \\
 \hline
 \end{tabular}
 \label{tab:userstudy}
@@ -336,7 +335,7 @@ Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
 	\item \emph{I can see where my colleagues from my section go}
 	\item \emph{I think that representing section versus courses is good, but I choose my courses given my interests, not given other peoples choices}
 	\item \emph{You should add the description of the class and the grading policy}
-	\item \emph{It would be interesting to have previously chosen SHS, bra size + Relationship status.}
+	\item \emph{It would be interesting to have previously chosen SHS, bra size + relationship status.}
 	\item \emph{Relation with hobbies and what people want to do after EPFL}
 	\end{itemize}
 \item[General remarks] \quad
@@ -350,7 +349,7 @@ Category & \multicolumn{1}{|c|}{Question} & Mean (1-5)\\
 
 The comments show that the testers had difficulties to understand how the visualizations worked and what they represented. It is thus necessary to implement a \emph{help} button. 
 
-The course explorer is appreciated and representative of students experience but students don't see how it can help them in their exploration of the study plan. It would be interesting to get the feedback of board members to know if it can help them better understand the study plan structure in practice.
+The course explorer is appreciated and representative of students experience but students don't see how it can help them in their exploration of the study plan. It would be interesting to get the feedback of board members to know if it can help them better understand the practical structure of the study plan.
 
 The section explorer is less appreciated than the course explorer. When creating it we thought that it would be the most helpful representation: the study however showed us that we were wrong and that people, aside from the fact that it represents some interesting relations, don't find it useful. 
 
@@ -403,7 +402,7 @@ Finally, it would be great to have a deeper access to is-academia's data in orde
 \section{Visualisation}
 The user study showed that some tools to help users understand the way the application works are necessary. It would also be appreciated if the interface was globally simpler to lower the learning time. 
 
-The visualization is very powerful, it would now be interesting to try different improvements in order to match better user's needs. This, of course, will be possible when the target audience for this service will be decided between students, teachers and comity members. 
+The visualization is very powerful, it would now be interesting to try different improvements in order to target the user's needs. This, of course, will be possible when the target audience for this service will be decided between students, teachers and comity members. 
 
 
 \chapter{Resources}
